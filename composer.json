@@ -24,7 +24,10 @@
         "behat/mink": "1.4.*@stable",
         "behat/mink-extension": "*",
         "behat/mink-goutte-driver": "*",
-        "behat/mink-selenium2-driver": "*"
+        "behat/mink-selenium2-driver": "*",
+
+        "slim/slim": "^3.0@RC",
+        "slim/csrf": "*"
     },
     "autoload": {
         "psr-4": {
