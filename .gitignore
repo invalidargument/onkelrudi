@@ -1,0 +1,6 @@
+bin/*
+!bin/.gitkeep
+vendor
+nbproject
+.vagrant
+composer.lock

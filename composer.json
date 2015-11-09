@@ -1,0 +1,35 @@
+{
+    "name": "rudibieller/onkelrudi",
+    "description": "Onkel Rudi",
+    "license": "MIT",
+    "keywords": ["playground"],
+    "authors": [
+        {
+            "name": "Rudi Bieller",
+            "email": "kontakt@rudi-bieller.de"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*",
+        "phpunit/php-invoker": "*",
+        "phpunit/dbunit": ">=1.2",
+        "phpunit/phpunit-selenium": ">=1.2",
+
+        "fabpot/php-cs-fixer": "*",
+
+        "mockery/mockery": "*",
+
+        "behat/behat": "2.5.*@stable",
+        "behat/mink": "1.4.*@stable",
+        "behat/mink-extension": "*",
+        "behat/mink-goutte-driver": "*",
+        "behat/mink-selenium2-driver": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "RudiBieller\\OnkelRudi\\": "src/"
+        }
+    }
+}
+
