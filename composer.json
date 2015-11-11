@@ -9,7 +9,10 @@
             "email": "kontakt@rudi-bieller.de"
         }
     ],
-    "require": {},
+    "require": {
+        "slim/slim": "^3.0@RC",
+        "slim/csrf": "*"
+    },
     "require-dev": {
         "phpunit/phpunit": "4.8.*",
         "phpunit/php-invoker": "*",
@@ -24,10 +27,7 @@
         "behat/mink": "1.4.*@stable",
         "behat/mink-extension": "*",
         "behat/mink-goutte-driver": "*",
-        "behat/mink-selenium2-driver": "*",
-
-        "slim/slim": "^3.0@RC",
-        "slim/csrf": "*"
+        "behat/mink-selenium2-driver": "*"
     },
     "autoload": {
         "psr-4": {
