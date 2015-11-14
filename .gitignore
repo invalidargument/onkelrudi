@@ -4,3 +4,4 @@ vendor
 nbproject
 .vagrant
 composer.lock
+config/settings_*
