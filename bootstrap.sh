@@ -14,7 +14,7 @@ apt-get install -y oracle-java8-set-default
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
 
 sudo pecl install xdebug
-cat /vagrant/config/xdebug.ini.dist > /etc/php5/mods-available/xdebug.ini
+cat /vagrant/deployment/xdebug.ini.dist > /etc/php5/mods-available/xdebug.ini
 php5enmod xdebug
 
 # see https://getcomposer.org/doc/articles/troubleshooting.md#proc-open-fork-failed-errors
