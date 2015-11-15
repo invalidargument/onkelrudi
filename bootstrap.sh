@@ -7,7 +7,7 @@ echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-
 echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
 apt-get update
 
-apt-get install -y curl php5-common php5-cli php5-curl dh-make-php php5-dev git ant
+apt-get install -y curl php5-common php5-cli php5-curl dh-make-php php5-dev php5-mysql git ant nginx
 apt-get install -y oracle-java8-installer
 apt-get install -y oracle-java8-set-default
 

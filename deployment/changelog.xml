@@ -5,14 +5,81 @@
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <changeSet id="1" author="Rudi Bieller">
-        <createTable tableName="foo">
+        <createTable tableName="fleamarkets_organizer">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(21844)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="street" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="streetno" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="city" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="zipcode" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="url" type="varchar(21844)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="Rudi Bieller">
+        <createTable tableName="fleamarkets">
             <column name="id" type="int">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="active" type="boolean" defaultValueBoolean="true"/>
+            <column name="organizer_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_organizer_fleamarket" references="fleamarkets_organizer(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="Rudi Bieller">
+        <createTable tableName="fleamarkets_details">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="fleamarket_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_details_fleamarket" references="fleamarkets(id)"/>
+            </column>
+            <column name="description" type="varchar(21844)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="street" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="streetno" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="city" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="zipcode" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="location" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="url" type="varchar(21844)">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>
