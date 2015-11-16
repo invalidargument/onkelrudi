@@ -14,7 +14,7 @@ class FleaMarketOrganizerInsertQueryTest extends \PHPUnit_Framework_TestCase
         $this->_sut->setPdo($this->_pdo);
     }
 
-    public function testFactoryCreatesFleaMarketQuery()
+    public function testQueryUsesGivenValuesForRunningInsertStatement()
     {
         $this->_sut
             ->setName('myname')
@@ -39,8 +39,7 @@ class FleaMarketOrganizerInsertQueryTest extends \PHPUnit_Framework_TestCase
                 ->with(array('myname', 'mystreet', 'mystreetno', 'mycity', 'myzipcode', 'myphone', 'myurl'))
                 ->andReturn($this->_pdo)
             ->shouldReceive('execute')
-                ->once()
-                ->andReturn(1);
+                ->once();
         $this->_sut->run();
     }
 }

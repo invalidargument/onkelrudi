@@ -1,10 +1,10 @@
 <?php
-namespace RudiBieller\OnkelRudi\FleaMarket\Query;
 
-use RudiBieller\OnkelRudi\Query\AbstractInsertQuery;
+namespace RudiBieller\OnkelRudi\FleaMarket;
 
-class FleaMarketOrganizerInsertQuery extends AbstractInsertQuery
+class Organizer implements OrganizerInterface
 {
+    private $_id;
     private $_name;
     private $_street;
     private $_streetNo;
@@ -13,7 +13,52 @@ class FleaMarketOrganizerInsertQuery extends AbstractInsertQuery
     private $_phone;
     private $_url;
 
-    public function setName($name)
+    public function setId($id)
+    {
+        $this->_id = $id;
+        return $this;
+    }
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    public function getName()
+    {
+        return $this->_name;
+    }
+
+    public function getStreet()
+    {
+        return $this->_street;
+    }
+
+    public function getStreetNo()
+    {
+        return $this->_streetNo;
+    }
+
+    public function getZipCode()
+    {
+        return $this->_zipCode;
+    }
+
+    public function getCity()
+    {
+        return $this->_city;
+    }
+
+    public function getPhone()
+    {
+        return $this->_phone;
+    }
+
+    public function getUrl()
+    {
+        return $this->_url;
+    }
+
+        public function setName($name)
     {
         $this->_name = $name;
         return $this;
@@ -53,19 +98,5 @@ class FleaMarketOrganizerInsertQuery extends AbstractInsertQuery
     {
         $this->_url = $url;
         return $this;
-    }
-
-    public function runQuery()
-    {
-        $insertStatement = $this->pdo
-            ->insert(
-                array('name', 'street', 'streetno', 'city', 'zipcode', 'phone', 'url')
-            )
-            ->into('fleamarkets_organizer')
-            ->values(
-                array($this->_name, $this->_street, $this->_streetNo, $this->_city, $this->_zipCode, $this->_phone, $this->_url)
-            );
-
-        return $insertStatement->execute();
     }
 }

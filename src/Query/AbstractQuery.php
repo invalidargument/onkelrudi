@@ -8,11 +8,14 @@ abstract class AbstractQuery
 {
     protected $pdo;
 
-    abstract protected function mapResult();
+    abstract protected function mapResult($result);
+    abstract protected function runQuery();
 
     public function run()
     {
-        $this->mapResult();
+        $this->getPdo();
+        $result = $this->runQuery();
+        return $this->mapResult($result);
     }
 
     public function setPdo(\PDO $pdo)
@@ -32,6 +35,6 @@ abstract class AbstractQuery
 
     private function _createPdoInstance()
     {
-        $this->pdo = new Database(Config::$dsn, Config::$user, Config::$password);
+        return new Database(Config::$dsn, Config::$user, Config::$password);
     }
 }
