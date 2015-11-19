@@ -1,0 +1,22 @@
+<project name="sampleproject_java" default="test" basedir=".">
+    <description>Build Onkel Rudi.</description>
+    <property name="build.dir" value="build/main" />
+    <property name="src.dir" value="src" />
+    <property name="test.report.dir" location="build/coverage" />
+
+    <target name="build">
+        <mkdir dir="${build.dir}" />
+        <!-- run command to tgz and copy to dir -->
+        <echo message="Build done" />
+    </target>
+
+    <target name="test" depends="clean, build">
+        <mkdir dir="${test.report.dir}" />
+        <!-- run command phpunit coverage-html -->
+    </target>
+
+    <target name="clean" description="clean up">
+        <delete dir="${build.dir}" />
+        <delete dir="${test.report.dir}" />
+    </target>
+</project>
