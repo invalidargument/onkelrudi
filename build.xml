@@ -82,6 +82,8 @@
         <exec dir="${basedir}" executable="vendor/bin/phpunit" failonerror="true" description="Unit tests">
             <env key="APPLICATION_ENV" value="testing"/>
             <arg line="--verbose --stderr" />
+            <arg value="--coverage-html" />
+            <arg value="${basedir}/build/coverage" />
         </exec>
     </target>
 </project>
