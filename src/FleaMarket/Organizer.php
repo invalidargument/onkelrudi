@@ -58,7 +58,7 @@ class Organizer implements OrganizerInterface
         return $this->_url;
     }
 
-        public function setName($name)
+    public function setName($name)
     {
         $this->_name = $name;
         return $this;
