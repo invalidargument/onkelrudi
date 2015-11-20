@@ -1,22 +1,87 @@
-<project name="sampleproject_java" default="test" basedir=".">
-    <description>Build Onkel Rudi.</description>
-    <property name="build.dir" value="build/main" />
-    <property name="src.dir" value="src" />
-    <property name="test.report.dir" location="build/coverage" />
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Onkel Rudi" default="build" basedir=".">
+    <description>Build and test Onkel Rudi.</description>
 
-    <target name="build">
-        <mkdir dir="${build.dir}" />
-        <!-- run command to tgz and copy to dir -->
-        <echo message="Build done" />
+    <target name="build"
+        depends="prepare, lint, phploc, phpmd, phpcpd, phpcs, phpunit"/>
+
+    <target name="build-parallel"
+        depends="prepare, lint, tools-parallel, phpcpd, phpunit"/>
+
+    <property environment="env"/>
+
+    <target name="tools-parallel" description="Run tools in parallel">
+        <parallel threadCount="2">
+            <sequential>
+                <antcall target="phpmd"/>
+            </sequential>
+            <antcall target="phpcpd"/>
+            <antcall target="phpcs"/>
+            <antcall target="phploc"/>
+        </parallel>
     </target>
 
-    <target name="test" depends="clean, build">
-        <mkdir dir="${test.report.dir}" />
-        <!-- run command phpunit coverage-html -->
+    <target name="clean" description="Cleanup artifacts">
+        <delete dir="${basedir}/build/coverage"/>
+        <delete dir="${basedir}/build/logs"/>
+        <delete dir="${basedir}/build/api"/>
+        <delete dir="${basedir}/src/cache"/>
     </target>
 
-    <target name="clean" description="clean up">
-        <delete dir="${build.dir}" />
-        <delete dir="${test.report.dir}" />
+    <target name="prepare" depends="clean" description="Prepare build">
+        <mkdir dir="${basedir}/build/coverage"/>
+        <mkdir dir="${basedir}/build/logs"/>
+        <mkdir dir="${basedir}/build/api"/>
+        <mkdir dir="${basedir}/src/cache"/>
+    </target>
+
+    <target name="lint" description="Syntax check">
+        <apply executable="php" failonerror="true">
+            <arg value="-l" />
+            <fileset dir="${basedir}/src">
+                <include name="**/*.php" />
+                <modified />
+            </fileset>
+        </apply>
+    </target>
+
+    <target name="phploc" description="Project size">
+        <exec executable="vendor/bin/phploc">
+            <arg value="--log-csv" />
+            <arg value="${basedir}/build/logs/phploc.csv" />
+            <arg path="${basedir}/src" />
+        </exec>
+    </target>
+
+    <target name="phpmd" description="Project mess detection">
+        <exec executable="vendor/bin/phpmd">
+            <arg path="${basedir}/src" />
+            <arg value="xml" />
+            <arg value="codesize,unusedcode,naming" />
+            <arg value="--reportfile" />
+            <arg value="${basedir}/build/logs/pmd.xml" />
+        </exec>
+    </target>
+
+    <target name="phpcpd" description="Duplicate code">
+        <exec executable="vendor/bin/phpcpd">
+            <arg value="--log-pmd" />
+            <arg value="${basedir}/build/logs/pmd-cpd.xml" />
+            <arg path="${basedir}/src" />
+        </exec>
+    </target>
+
+    <target name="phpcs" description="Code Sniffer">
+        <exec executable="vendor/bin/phpcs">
+            <arg value="-n" />
+            <arg path="${basedir}/src" />
+        </exec>
+    </target>
+
+    <target name="phpunit">
+        <exec dir="${basedir}" executable="vendor/bin/phpunit" failonerror="true" description="Unit tests">
+            <env key="APPLICATION_ENV" value="testing"/>
+            <arg line="--verbose --stderr" />
+        </exec>
     </target>
 </project>

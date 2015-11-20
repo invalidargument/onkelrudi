@@ -29,7 +29,12 @@
         "behat/mink": "1.4.*@stable",
         "behat/mink-extension": "*",
         "behat/mink-goutte-driver": "*",
-        "behat/mink-selenium2-driver": "*"
+        "behat/mink-selenium2-driver": "*",
+
+        "phploc/phploc": "*",
+        "phpmd/phpmd": "*",
+        "sebastian/phpcpd": "*",
+        "squizlabs/php_codesniffer": "2.*"
     },
     "autoload": {
         "psr-4": {
