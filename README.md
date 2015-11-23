@@ -5,3 +5,5 @@
 ./vendor/alcaeus/liquibase/liquibase --defaultsFile=deployment/liquibase.properties update
 
 ON DELETE CASCADE???!!!
+
+/var/log/apache2/error.log
