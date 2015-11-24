@@ -25,6 +25,6 @@ chmod 0755 /var/www/html/vendor/alcaeus/liquibase/liquibase
 
 apt-get install -y mysql-server libmysql-java
 
-cp deployment/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+cp /var/www/html/deployment/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 a2enmod rewrite
 service apache2 restart
