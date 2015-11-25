@@ -101,7 +101,20 @@ class FleaMarketService implements FleaMarketServiceInterface
 
     public function updateFleaMarket(FleaMarketInterface $fleaMarket, FleaMarketDetailsInterface $details, OrganizerInterface $organizer)
     {
+        // consider a transaction
+        $query = $this->_factory->createFleaMarketUpdateQuery();
+        $query->setFleaMarket($fleaMarket)
+            ->run();
 
+        $detailsQuery = $this->_factory->createFleaMarketDetailsUpdateQuery();
+        $detailsQuery->setDetails($details)
+            ->run();
+
+        $organizerQuery = $this->_factory->createFleaMarketOrganizerUpdateQuery();
+        $organizerQuery->setOrganizer($organizer)
+            ->run();
+
+        return 1;
     }
 
     public function updateOrganizer(OrganizerInterface $organizer)
@@ -111,5 +124,4 @@ class FleaMarketService implements FleaMarketServiceInterface
 
         return $query->run();
     }
-
 }

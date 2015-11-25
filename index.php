@@ -44,6 +44,12 @@ try {
     $id = $service->createFleaMarket($fleaMarket, $details, $organizer);
     var_dump('fleamarket id', $id, $fleaMarket->getId(), $details->getId());
 
+    $organizer->setCity('London');
+    $details->setDescription('Mind the gap');
+    $fleaMarket->setName('External Market');
+    $result = $service->updateFleaMarket($fleaMarket, $details, $organizer);
+    var_dump('fleamarket updated?', $result);
+
     $readMarket = $service->getFleaMarket($fleaMarket->getId());
     var_dump('read fleamarket', $readMarket);
 
@@ -58,7 +64,7 @@ try {
 
     $organizer->setId(3)->setName('Horst Ullrich')->setStreetNo(1);
     $updatedOrganizer = $service->updateOrganizer($organizer);
-    var_dump('organizer updated?', $updatedOrganizer); // 0 - no, 1- yes
+    var_dump('organizer updated?', $updatedOrganizer); // 0 - no affected rows, 1 - 1 affected row
 } catch (Exception $e) {
     var_dump($e->getMessage());
 }

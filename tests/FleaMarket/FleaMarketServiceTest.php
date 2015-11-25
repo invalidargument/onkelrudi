@@ -166,4 +166,31 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->_sut->updateOrganizer($organizer);
     }
+
+    public function testUpdateFleaMarket()
+    {
+        $this->_factory = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\Factory');
+        $this->_sut->setQueryFactory($this->_factory);
+
+        $fleaMarket = new FleaMarket();
+        $details = new FleaMarketDetails();
+        $organizer = new Organizer();
+
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketUpdateQuery');
+        $query->shouldReceive('setFleaMarket')->once()->with($fleaMarket)->andReturn($query)
+            ->shouldReceive('run')->once()->andReturn(1);
+        $this->_factory->shouldReceive('createFleaMarketUpdateQuery')->once()->andReturn($query);
+
+        $detailsQuery = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketDetailsUpdateQuery');
+        $detailsQuery->shouldReceive('setDetails')->once()->with($details)->andReturn($detailsQuery)
+            ->shouldReceive('run')->once()->andReturn(1);
+        $this->_factory->shouldReceive('createFleaMarketDetailsUpdateQuery')->once()->andReturn($detailsQuery);
+
+        $organizerQuery = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerUpdateQuery');
+        $organizerQuery->shouldReceive('setOrganizer')->once()->with($organizer)->andReturn($organizerQuery)
+            ->shouldReceive('run')->once()->andReturn(1);
+        $this->_factory->shouldReceive('createFleaMarketOrganizerUpdateQuery')->once()->andReturn($organizerQuery);
+
+        $this->_sut->updateFleaMarket($fleaMarket, $details, $organizer);
+    }
 }
