@@ -103,4 +103,20 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->_sut->deleteFleaMarket($fleaMarket);
     }
+
+    public function testDeleteOrganizerDeletesSelectedOrganizer()
+    {
+        $organizer = new Organizer();
+        $organizer->setId(23);
+
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerDeleteQuery');
+        $query->shouldReceive('setOrganizer')->once()->with($organizer)->andReturn($query)
+            ->shouldReceive('run');
+
+        $this->_factory->shouldReceive('createFleaMarketOrganizerDeleteQuery')
+            ->once()
+            ->andReturn($query);
+
+        $this->_sut->deleteOrganizer($organizer);
+    }
 }

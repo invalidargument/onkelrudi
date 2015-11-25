@@ -46,6 +46,9 @@ try {
 
     $deleted = $service->deleteFleaMarket($fleaMarket);
     var_dump('deleted fleamarket?', $deleted);
+
+    $deleted = $service->deleteOrganizer($organizer);
+    var_dump('deleted organizer?', $deleted);
 } catch (Exception $e) {
     var_dump($e->getMessage());
 }
