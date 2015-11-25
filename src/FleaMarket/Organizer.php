@@ -18,6 +18,7 @@ class Organizer implements OrganizerInterface
         $this->_id = $id;
         return $this;
     }
+
     public function getId()
     {
         return $this->_id;

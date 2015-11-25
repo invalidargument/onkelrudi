@@ -82,6 +82,33 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="4" author="Rudi Bieller">
+        <addAutoIncrement catalogName="onkelrudi"
+            columnDataType="int"
+            columnName="id"
+            incrementBy="1"
+            schemaName="public"
+            startWith="1"
+            tableName="fleamarkets_organizer"/>
+    </changeSet>
+    <changeSet id="5" author="Rudi Bieller">
+        <addAutoIncrement catalogName="onkelrudi"
+            columnDataType="int"
+            columnName="id"
+            incrementBy="1"
+            schemaName="public"
+            startWith="1"
+            tableName="fleamarkets_details"/>
+    </changeSet>
+    <changeSet id="6" author="Rudi Bieller">
+        <addAutoIncrement catalogName="onkelrudi"
+            columnDataType="int"
+            columnName="id"
+            incrementBy="1"
+            schemaName="public"
+            startWith="1"
+            tableName="fleamarkets"/>
+    </changeSet>
 </databaseChangeLog>
 
 

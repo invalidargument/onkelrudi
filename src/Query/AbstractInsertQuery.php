@@ -5,6 +5,6 @@ abstract class AbstractInsertQuery extends AbstractQuery
 {
     protected function mapResult($result)
     {
-        return true;
+        return $result;
     }
 }
