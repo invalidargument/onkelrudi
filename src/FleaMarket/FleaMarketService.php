@@ -85,12 +85,18 @@ class FleaMarketService implements FleaMarketServiceInterface
 
     public function getFleaMarket($id)
     {
+        $query = $this->_factory->createFleaMarketReadQuery();
+        $query->setFleaMarketId($id);
 
+        return $query->run();
     }
 
     public function getOrganizer($id)
     {
+        $query = $this->_factory->createFleaMarketOrganizerReadQuery();
+        $query->setOrganizerId($id);
 
+        return $query->run();
     }
 
     public function updateFleaMarket(FleaMarketInterface $fleaMarket, FleaMarketDetailsInterface $details, OrganizerInterface $organizer)

@@ -44,8 +44,11 @@ try {
     $id = $service->createFleaMarket($fleaMarket, $details, $organizer);
     var_dump('fleamarket id', $id, $fleaMarket->getId(), $details->getId());
 
+    $readMarket = $service->getFleaMarket($fleaMarket->getId());
+    var_dump('read fleamarket', $readMarket);
+
     $allMarkets = $service->getAllFleaMarkets();
-    var_dump('all fmarkets', $allMarkets);
+//    var_dump('all fmarkets', $allMarkets);
 
     $deleted = $service->deleteFleaMarket($fleaMarket);
     var_dump('deleted fleamarket?', $deleted);

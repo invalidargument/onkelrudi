@@ -119,4 +119,38 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->_sut->deleteOrganizer($organizer);
     }
+
+    public function testGetAllReturnsListWithAllMarkets()
+    {
+        $markets = array();
+
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketReadListQuery');
+        $query->shouldReceive('run')->once()->andReturn($markets);
+
+        $this->_factory->shouldReceive('createFleaMarketReadListQuery')->once()->andReturn($query);
+
+        $this->_sut->getAllFleaMarkets();
+    }
+
+    public function testGetFleaMarketReturnsRequestedMarket()
+    {
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketReadQuery');
+        $query->shouldReceive('setFleaMarketId')->once()->with(2)->andReturn($query)
+            ->shouldReceive('run')->once()->andReturn(new FleaMarket());
+
+        $this->_factory->shouldReceive('createFleaMarketReadQuery')->once()->andReturn($query);
+
+        $this->_sut->getFleaMarket(2);
+    }
+
+    public function testGetOrganizerReturnsRequestedOrganizer()
+    {
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerReadQuery');
+        $query->shouldReceive('setOrganizerId')->once()->with(23)->andReturn($query)
+            ->shouldReceive('run')->once()->andReturn(new Organizer());
+
+        $this->_factory->shouldReceive('createFleaMarketOrganizerReadQuery')->once()->andReturn($query);
+
+        $this->_sut->getOrganizer(23);
+    }
 }
