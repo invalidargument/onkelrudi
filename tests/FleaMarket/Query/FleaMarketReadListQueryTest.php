@@ -56,7 +56,7 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
         /**
          * @var \RudiBieller\OnkelRudi\FleaMarket\FleaMarket
          */
-        $fleaMarkets = $this->_sut->runQuery();
+        $fleaMarkets = $this->_sut->run();
 
         $this->assertInternalType('array', $fleaMarkets);
         $this->assertSame(2, count($fleaMarkets));

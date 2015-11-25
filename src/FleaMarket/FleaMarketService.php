@@ -78,7 +78,9 @@ class FleaMarketService implements FleaMarketServiceInterface
 
     public function getAllFleaMarkets()
     {
+        $query = $this->_factory->createFleaMarketReadListQuery();
 
+        return $query->run();
     }
 
     public function getFleaMarket($id)

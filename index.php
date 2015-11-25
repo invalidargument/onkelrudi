@@ -44,6 +44,9 @@ try {
     $id = $service->createFleaMarket($fleaMarket, $details, $organizer);
     var_dump('fleamarket id', $id, $fleaMarket->getId(), $details->getId());
 
+    $allMarkets = $service->getAllFleaMarkets();
+    var_dump('all fmarkets', $allMarkets);
+
     $deleted = $service->deleteFleaMarket($fleaMarket);
     var_dump('deleted fleamarket?', $deleted);
 

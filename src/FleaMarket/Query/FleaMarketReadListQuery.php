@@ -6,7 +6,7 @@ use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 
 class FleaMarketReadListQuery extends AbstractQuery
 {
-    private $_fleaMarkets;
+    private $_fleaMarkets = array();
     private $_offset = 0;
     private $_limit = 20;
 
@@ -22,7 +22,7 @@ class FleaMarketReadListQuery extends AbstractQuery
         return $this;
     }
 
-    public function runQuery()
+    protected function runQuery()
     {
         $selectStatement = $this->pdo
             ->select()
@@ -35,7 +35,7 @@ class FleaMarketReadListQuery extends AbstractQuery
          */
         $statement = $selectStatement->execute();
 
-        return $this->mapResult($statement->fetchAll());
+        return $statement->fetchAll();
     }
 
     protected function mapResult($result)

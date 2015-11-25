@@ -7,6 +7,8 @@ class FleaMarket implements FleaMarketInterface
     private $_id;
     private $_name;
     private $_organizerId;
+    private $_organizer;
+    private $_details;
 
     public function setId($id)
     {
@@ -39,5 +41,27 @@ class FleaMarket implements FleaMarketInterface
     public function getOrganizerId()
     {
         return $this->_organizerId;
+    }
+
+    public function getOrganizer()
+    {
+        return $this->_organizer;
+    }
+
+    public function getDetails()
+    {
+        return $this->_details;
+    }
+
+    public function setOrganizer(OrganizerInterface $organizer)
+    {
+        $this->_organizer = $organizer;
+        return $this;
+    }
+
+    public function setDetails(FleaMarketDetailsInterface $details)
+    {
+        $this->_details = $details;
+        return $this;
     }
 }
