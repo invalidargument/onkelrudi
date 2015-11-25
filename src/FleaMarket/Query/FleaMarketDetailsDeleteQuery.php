@@ -24,7 +24,7 @@ class FleaMarketDetailsDeleteQuery extends AbstractInsertQuery
         return $this;
     }
 
-    public function runQuery()
+    protected function runQuery()
     {
         $id = $this->_fleaMarketDetailsId ? $this->_fleaMarketDetailsId : $this->_fleaMarketDetails->getId();
 

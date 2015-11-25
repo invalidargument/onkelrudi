@@ -17,7 +17,7 @@ class FleaMarketOrganizerUpdateQuery extends AbstractInsertQuery
         return $this;
     }
 
-    public function runQuery()
+    protected function runQuery()
     {
         $updateStatement = $this->pdo
             ->update(

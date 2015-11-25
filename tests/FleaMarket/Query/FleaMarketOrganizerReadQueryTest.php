@@ -38,7 +38,7 @@ class FleaMarketOrganizerReadQueryTest extends \PHPUnit_Framework_TestCase
         /**
          * @var \RudiBieller\OnkelRudi\FleaMarket\Organizer
          */
-        $organizer = $this->_sut->runQuery();
+        $organizer = $this->_sut->run();
 
         $this->assertEquals(null, $organizer->getId());
     }
@@ -81,7 +81,7 @@ class FleaMarketOrganizerReadQueryTest extends \PHPUnit_Framework_TestCase
         /**
          * @var \RudiBieller\OnkelRudi\FleaMarket\Organizer
          */
-        $organizer = $this->_sut->runQuery();
+        $organizer = $this->_sut->run();
 
         $this->assertEquals(42, $organizer->getId());
         $this->assertEquals('Rudi Bieller', $organizer->getName());

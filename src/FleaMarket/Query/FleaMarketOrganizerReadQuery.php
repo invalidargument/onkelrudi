@@ -18,7 +18,7 @@ class FleaMarketOrganizerReadQuery extends AbstractQuery
         return $this;
     }
 
-    public function runQuery()
+    protected function runQuery()
     {
         $selectStatement = $this->pdo
             ->select()
@@ -30,7 +30,7 @@ class FleaMarketOrganizerReadQuery extends AbstractQuery
          */
         $statement = $selectStatement->execute();
 
-        return $this->mapResult($statement->fetch(\PDO::FETCH_ASSOC));
+        return $statement->fetch(\PDO::FETCH_ASSOC);
     }
 
     protected function mapResult($result)

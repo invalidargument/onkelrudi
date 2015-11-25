@@ -20,7 +20,7 @@ class FleaMarketInsertQuery extends AbstractInsertQuery
         return $this;
     }
 
-    public function runQuery()
+    protected function runQuery()
     {
         $insertStatement = $this->pdo
             ->insert(

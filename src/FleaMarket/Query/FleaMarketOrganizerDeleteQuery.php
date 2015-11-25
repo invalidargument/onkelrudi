@@ -24,7 +24,7 @@ class FleaMarketOrganizerDeleteQuery extends AbstractInsertQuery
         return $this;
     }
 
-    public function runQuery()
+    protected function runQuery()
     {
         $id = $this->_organizerId ? $this->_organizerId : $this->_organizer->getId();
 

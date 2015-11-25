@@ -22,7 +22,7 @@ class FleaMarketDetailsReadListQuery extends AbstractQuery
         return $this;
     }
 
-    public function runQuery()
+    protected function runQuery()
     {
         $selectStatement = $this->pdo
             ->select()
@@ -35,7 +35,7 @@ class FleaMarketDetailsReadListQuery extends AbstractQuery
          */
         $statement = $selectStatement->execute();
 
-        return $this->mapResult($statement->fetchAll());
+        return $statement->fetchAll();
     }
 
     protected function mapResult($result)

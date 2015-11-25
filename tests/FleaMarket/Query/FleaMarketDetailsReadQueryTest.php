@@ -38,7 +38,7 @@ class FleaMarketDetailsReadQueryTest extends \PHPUnit_Framework_TestCase
         /**
          * @var \RudiBieller\OnkelRudi\FleaMarket\FleaMarket
          */
-        $fleaMarket = $this->_sut->runQuery();
+        $fleaMarket = $this->_sut->run();
 
         $this->assertEquals(null, $fleaMarket->getId());
     }
@@ -84,7 +84,7 @@ class FleaMarketDetailsReadQueryTest extends \PHPUnit_Framework_TestCase
         /**
          * @var \RudiBieller\OnkelRudi\FleaMarket\FleaMarket
          */
-        $details = $this->_sut->runQuery();
+        $details = $this->_sut->run();
 
         $this->assertEquals(42, $details->getId());
         $this->assertEquals('222', $details->getFleaMarketId());

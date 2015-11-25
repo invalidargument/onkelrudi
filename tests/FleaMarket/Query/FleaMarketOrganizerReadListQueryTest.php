@@ -66,7 +66,7 @@ class FleaMarketOrganizerReadListQueryTest extends \PHPUnit_Framework_TestCase
         /**
          * @var \RudiBieller\OnkelRudi\FleaMarket\Organizer
          */
-        $organizers = $this->_sut->runQuery();
+        $organizers = $this->_sut->run();
 
         $this->assertInternalType('array', $organizers);
         $this->assertSame(2, count($organizers));
