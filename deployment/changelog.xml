@@ -41,7 +41,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="organizer_id" type="int">
-                <constraints nullable="false" foreignKeyName="fk_organizer_fleamarket" references="fleamarkets_organizer(id)"/>
+                <constraints nullable="false" foreignKeyName="fk_organizer_fleamarket" references="fleamarkets_organizer(id)" deleteCascade="true"/>
             </column>
         </createTable>
     </changeSet>
@@ -51,7 +51,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="fleamarket_id" type="int">
-                <constraints nullable="false" foreignKeyName="fk_details_fleamarket" references="fleamarkets(id)"/>
+                <constraints nullable="false" foreignKeyName="fk_details_fleamarket" references="fleamarkets(id)" deleteCascade="true"/>
             </column>
             <column name="description" type="varchar(21844)">
                 <constraints nullable="false"/>
