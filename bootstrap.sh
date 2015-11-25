@@ -28,3 +28,6 @@ apt-get install -y mysql-server libmysql-java
 cp /var/www/html/deployment/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 a2enmod rewrite
 service apache2 restart
+
+git config --global user.name "Rudi Bieller"
+git config --global user.email "kontakt@rudi-bieller.de"
