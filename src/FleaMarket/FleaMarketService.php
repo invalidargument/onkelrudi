@@ -22,6 +22,7 @@ class FleaMarketService implements FleaMarketServiceInterface
             ->setOrganizerId($organizer->getId());
 
         $fleaMarketId = $query->run();
+        $fleaMarket->setId($fleaMarketId);
 
         $deteailsQuery->setFleaMarketId($fleaMarketId)
             ->setDescription($details->getDescription())
@@ -35,6 +36,8 @@ class FleaMarketService implements FleaMarketServiceInterface
             ->setUrl($details->getUrl());
 
         $detailsId = $deteailsQuery->run();
+        $details->setId($detailsId)
+            ->setFleaMarketId($fleaMarketId);
 
         return $fleaMarketId;
     }
@@ -51,7 +54,10 @@ class FleaMarketService implements FleaMarketServiceInterface
             ->setPhone($organizer->getPhone())
             ->setUrl($organizer->getUrl());
 
-        return $query->run();
+        $id = $query->run();
+        $organizer->setId($id);
+
+        return $id;
     }
 
     public function deleteFleaMarket(FleaMarketInterface $fleaMarket)

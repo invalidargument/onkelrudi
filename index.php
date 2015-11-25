@@ -42,7 +42,7 @@ try {
         ->setUrl('http://www.example.com/foo');
 
     $id = $service->createFleaMarket($fleaMarket, $details, $organizer);
-    var_dump('fleamarket id', $id);
+    var_dump('fleamarket id', $id, $fleaMarket->getId(), $details->getId());
 } catch (Exception $e) {
     var_dump($e->getMessage());
 }
@@ -102,14 +102,6 @@ $app->group('/api', function ($request, $response, $args) use ($app, $service) {
 
         // POST route, for creating a fleamarket
         $app->post('/fleamarkets', function ($request, $response, $args) use ($app, $service) {
-            $organizer = new Organizer();
-            $created = $service->createOrganizer($organizer);
-
-            $details = new FleaMarketDetails();
-
-            $fleaMarket = new FleaMarket();
-            $created = $service->createFleaMarket($fleaMarket, $details, $organizer);
-
             return $app->response->withHeader(
                 'Content-Type',
                 'application/json'
