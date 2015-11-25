@@ -55,6 +55,10 @@ try {
 
     $deleted = $service->deleteOrganizer($organizer);
     var_dump('deleted organizer?', $deleted);
+
+    $organizer->setId(3)->setName('Horst Ullrich')->setStreetNo(1);
+    $updatedOrganizer = $service->updateOrganizer($organizer);
+    var_dump('organizer updated?', $updatedOrganizer); // 0 - no, 1- yes
 } catch (Exception $e) {
     var_dump($e->getMessage());
 }

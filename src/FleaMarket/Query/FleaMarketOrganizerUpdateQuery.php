@@ -11,7 +11,7 @@ class FleaMarketOrganizerUpdateQuery extends AbstractInsertQuery
      */
     private $_organizer;
 
-    public function setorganizer(OrganizerInterface $orgnizer)
+    public function setOrganizer(OrganizerInterface $orgnizer)
     {
         $this->_organizer = $orgnizer;
         return $this;

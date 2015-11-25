@@ -153,4 +153,17 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->_sut->getOrganizer(23);
     }
+
+    public function testUpdateOrganizer()
+    {
+        $organizer = new Organizer();
+
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerUpdateQuery');
+        $query->shouldReceive('setOrganizer')->once()->with($organizer)->andReturn($query)
+            ->shouldReceive('run')->once()->andReturn(1);
+
+        $this->_factory->shouldReceive('createFleaMarketOrganizerUpdateQuery')->once()->andReturn($query);
+
+        $this->_sut->updateOrganizer($organizer);
+    }
 }
