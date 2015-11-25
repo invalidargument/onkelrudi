@@ -62,7 +62,10 @@ class FleaMarketService implements FleaMarketServiceInterface
 
     public function deleteFleaMarket(FleaMarketInterface $fleaMarket)
     {
+        $query = $this->_factory->createFleaMarketDeleteQuery();
+        $query->setFleaMarket($fleaMarket);
 
+        return $query->run();
     }
 
     public function deleteOrganizer(OrganizerInterface $organizer)

@@ -87,4 +87,20 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->_sut->createFleaMarket($fleaMarket, $details, $organizer);
     }
+
+    public function testDeleteFleaMarketsDeletesSelectedFleaMarket()
+    {
+        $fleaMarket = new FleaMarket();
+        $fleaMarket->setId(23);
+
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketDeleteQuery');
+        $query->shouldReceive('setFleaMarket')->once()->with($fleaMarket)->andReturn($query)
+            ->shouldReceive('run');
+
+        $this->_factory->shouldReceive('createFleaMarketDeleteQuery')
+            ->once()
+            ->andReturn($query);
+
+        $this->_sut->deleteFleaMarket($fleaMarket);
+    }
 }
