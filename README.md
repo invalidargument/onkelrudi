@@ -4,6 +4,9 @@
 
 ./vendor/alcaeus/liquibase/liquibase --defaultsFile=deployment/liquibase.properties update
 
-ON DELETE CASCADE???!!!
-
 /var/log/apache2/error.log
+
+/etc/mysql/my.conf
+general_log_file        = /var/log/mysql/mysql.log
+general_log             = 1
+tail -f /var/log/mysql
