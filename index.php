@@ -21,8 +21,28 @@ try {
         ->setStreet('foo')
         ->setStreetNo('2000')
         ->setUrl('http://www.example.com');
-    $created = $service->createOrganizer($organizer);
-    var_dump($created);
+    $id = $service->createOrganizer($organizer);
+    $organizer->setId($id);
+    var_dump('organizer id', $id);
+
+    $fleaMarket = new FleaMarket();
+    $details = new FleaMarketDetails();
+
+    $fleaMarket->setName('Der erste Flohmarkt von Rudi')
+        ->setOrganizerId($id);
+
+    $details->setDescription('Ein toller Flohmarkt')
+        ->setCity('Cologne')
+        ->setZipCode('5000')
+        ->setStreet('Venloer')
+        ->setStreetNo('20000')
+        ->setStart('2015-12-12 00:00:12')
+        ->setEnd('2015-12-12 00:00:33')
+        ->setLocation('Daheim')
+        ->setUrl('http://www.example.com/foo');
+
+    $id = $service->createFleaMarket($fleaMarket, $details, $organizer);
+    var_dump('fleamarket id', $id);
 } catch (Exception $e) {
     var_dump($e->getMessage());
 }

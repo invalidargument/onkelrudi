@@ -15,7 +15,28 @@ class FleaMarketService implements FleaMarketServiceInterface
 
     public function createFleaMarket(FleaMarketInterface $fleaMarket, FleaMarketDetailsInterface $details, OrganizerInterface $organizer)
     {
+        $deteailsQuery = $this->_factory->createFleaMarketDetailsInsertQuery();
+        $query = $this->_factory->createFleaMarketInsertQuery();
 
+        $query->setName($fleaMarket->getName())
+            ->setOrganizerId($organizer->getId());
+
+        $fleaMarketId = $query->run();
+
+        $deteailsQuery->setFleaMarketId($fleaMarketId)
+            ->setDescription($details->getDescription())
+            ->setStart($details->getStart())
+            ->setEnd($details->getEnd())
+            ->setStreet($details->getStreet())
+            ->setStreetNo($details->getStreetNo())
+            ->setCity($details->getCity())
+            ->setZipCode($details->getZipCode())
+            ->setLocation($details->getLocation())
+            ->setUrl($details->getUrl());
+
+        $detailsId = $deteailsQuery->run();
+
+        return $fleaMarketId;
     }
 
     public function createOrganizer(OrganizerInterface $organizer)
