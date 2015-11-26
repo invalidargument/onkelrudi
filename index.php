@@ -4,8 +4,7 @@ include_once 'vendor/autoload.php';
 use RudiBieller\OnkelRudi\FleaMarket\Query\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketService;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer,
-    RudiBieller\OnkelRudi\FleaMarket\FleaMarket,
-    RudiBieller\OnkelRudi\FleaMarket\FleaMarketDetails;
+    RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 
 $app = new \Slim\App;
 $factory = new Factory();
@@ -26,12 +25,10 @@ try {
     var_dump('organizer id', $id);
 
     $fleaMarket = new FleaMarket();
-    $details = new FleaMarketDetails();
-
-    $fleaMarket->setName('Der erste Flohmarkt von Rudi')
-        ->setOrganizerId($id);
-
-    $details->setDescription('Ein toller Flohmarkt')
+    $fleaMarket
+        ->setName('Der erste Flohmarkt von Rudi')
+        ->setOrganizer($organizer)
+        ->setDescription('Ein toller Flohmarkt')
         ->setCity('Cologne')
         ->setZipCode('5000')
         ->setStreet('Venloer')
@@ -41,13 +38,13 @@ try {
         ->setLocation('Daheim')
         ->setUrl('http://www.example.com/foo');
 
-    $id = $service->createFleaMarket($fleaMarket, $details, $organizer);
-    var_dump('fleamarket id', $id, $fleaMarket->getId(), $details->getId());
+    $id = $service->createFleaMarket($fleaMarket, $organizer);
+    var_dump('fleamarket id', $id, $fleaMarket->getId());
 
     $organizer->setCity('London');
-    $details->setDescription('Mind the gap');
+    $fleaMarket->setDescription('Mind the gap');
     $fleaMarket->setName('External Market');
-    $result = $service->updateFleaMarket($fleaMarket, $details, $organizer);
+    $result = $service->updateFleaMarket($fleaMarket, $organizer);
     var_dump('fleamarket updated?', $result);
 
     $readMarket = $service->getFleaMarket($fleaMarket->getId());
