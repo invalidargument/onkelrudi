@@ -14,11 +14,6 @@ class Factory
     private $_fleaMarketOrganizerReadListQuery;
     private $_fleaMarketOrganizerReadQuery;
     private $_fleaMarketOrganizerUpdateQuery;
-    private $_fleaMarketDetailsDeleteQuery;
-    private $_fleaMarketDetailsInsertQuery;
-    private $_fleaMarketDetailsReadListQuery;
-    private $_fleaMarketDetailsReadQuery;
-    private $_fleaMarketDetailsUpdateQuery;
 
     /**
      * @return \RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketDeleteQuery
@@ -138,65 +133,5 @@ class Factory
         }
 
         return $this->_fleaMarketOrganizerUpdateQuery;
-    }
-
-    /**
-     * @return \RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketDetailsDeleteQuery
-     */
-    public function createFleaMarketDetailsDeleteQuery()
-    {
-        if (is_null($this->_fleaMarketDetailsDeleteQuery)) {
-            $this->_fleaMarketDetailsDeleteQuery = new FleaMarketDetailsDeleteQuery();
-        }
-
-        return $this->_fleaMarketDetailsDeleteQuery;
-    }
-
-    /**
-     * @return \RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketDetailsInsertQuery
-     */
-    public function createFleaMarketDetailsInsertQuery()
-    {
-        if (is_null($this->_fleaMarketDetailsInsertQuery)) {
-            $this->_fleaMarketDetailsInsertQuery = new FleaMarketDetailsInsertQuery();
-        }
-
-        return $this->_fleaMarketDetailsInsertQuery;
-    }
-
-    /**
-     * @return \RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketDetailsReadListQuery
-     */
-    public function createFleaMarketDetailsReadListQuery()
-    {
-        if (is_null($this->_fleaMarketDetailsReadListQuery)) {
-            $this->_fleaMarketDetailsReadListQuery = new FleaMarketDetailsReadListQuery();
-        }
-
-        return $this->_fleaMarketDetailsReadListQuery;
-    }
-
-    /**
-     * @return \RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketDetailsReadQuery
-     */
-    public function createFleaMarketDetailsReadQuery()
-    {
-        if (is_null($this->_fleaMarketDetailsReadQuery)) {
-            $this->_fleaMarketDetailsReadQuery = new FleaMarketDetailsReadQuery();
-        }
-
-        return $this->_fleaMarketDetailsReadQuery;
-    }
-
-    /**
-     * @return \RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketDetailsUpdateQuery
-     */
-    public function createFleaMarketDetailsUpdateQuery()
-    {
-        if (is_null($this->_fleaMarketDetailsUpdateQuery)) {
-            $this->_fleaMarketDetailsUpdateQuery = new FleaMarketDetailsUpdateQuery();
-        }
-
-        return $this->_fleaMarketDetailsUpdateQuery;
     }
 }

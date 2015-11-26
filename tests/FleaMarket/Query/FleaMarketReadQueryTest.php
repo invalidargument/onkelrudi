@@ -43,14 +43,23 @@ class FleaMarketReadQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $fleaMarket->getId());
     }
 
-    public function testQueryReadsUserByIdIfFound()
+    public function testQueryReadsMarketByIdIfFound()
     {
         $this->_sut->setFleaMarketId(23);
 
         $result = array(
             'id' => 42,
+            'organizer_id' => '55',
             'name' => 'Rudi Bieller',
-            'organizer_id' => '55'
+            'description' => 'foo',
+            'start' => '2015-12-12 00:00:00',
+            'end' => '2015-12-13 00:00:00',
+            'street' => 'bar',
+            'streetno' => '1',
+            'city' => 'baz',
+            'zipcode' => '12345',
+            'location' => 'somewhereovertherainbow',
+            'url' => 'http://www.example.com'
         );
 
         $statement = \Mockery::mock('\PDOStatement');
@@ -80,6 +89,14 @@ class FleaMarketReadQueryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(42, $fleaMarket->getId());
         $this->assertEquals('Rudi Bieller', $fleaMarket->getName());
-        $this->assertEquals('55', $fleaMarket->getOrganizerId());
+        $this->assertEquals('foo', $fleaMarket->getDescription());
+        $this->assertEquals('2015-12-12 00:00:00', $fleaMarket->getStart());
+        $this->assertEquals('2015-12-13 00:00:00', $fleaMarket->getEnd());
+        $this->assertEquals('bar', $fleaMarket->getStreet());
+        $this->assertEquals('1', $fleaMarket->getStreetNo());
+        $this->assertEquals('baz', $fleaMarket->getCity());
+        $this->assertEquals('12345', $fleaMarket->getZipCode());
+        $this->assertEquals('somewhereovertherainbow', $fleaMarket->getLocation());
+        $this->assertEquals('http://www.example.com', $fleaMarket->getUrl());
     }
 }

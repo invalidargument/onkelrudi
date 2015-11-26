@@ -51,7 +51,15 @@ class FleaMarketReadListQuery extends AbstractQuery
             $fleaMarket
                 ->setId($item['id'])
                 ->setName($item['name'])
-                ->setOrganizerId($item['organizer_id']);
+                ->setDescription($item['description'])
+                ->setStart($item['start'])
+                ->setEnd($item['end'])
+                ->setStreet($item['street'])
+                ->setStreetNo($item['streetno'])
+                ->setCity($item['city'])
+                ->setZipCode($item['zipcode'])
+                ->setLocation($item['location'])
+                ->setUrl($item['url']);
 
             $this->_fleaMarkets[] = $fleaMarket;
         }

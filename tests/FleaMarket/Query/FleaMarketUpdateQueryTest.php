@@ -19,9 +19,18 @@ class FleaMarketUpdateQueryTest extends \PHPUnit_Framework_TestCase
     public function testQueryUsesGivenValuesForRunningUpdateStatement()
     {
         $fleaMarket = new FleaMarket();
-        $fleaMarket->setId(23)
+        $fleaMarket
+            ->setId(23)
             ->setName('foo')
-            ->setOrganizerId('77');
+            ->setDescription('fooobaaarbaaaz')
+            ->setStart('2015-12-22 00:00:00')
+            ->setEnd('2015-12-22 00:00:01')
+            ->setStreet('foooo')
+            ->setStreetNo('77')
+            ->setCity('Cologne')
+            ->setZipCode('50667')
+            ->setLocation('hall')
+            ->setUrl('http://www.exmple.com');
 
         $this->_sut
             ->setFleaMarket($fleaMarket);
@@ -31,7 +40,15 @@ class FleaMarketUpdateQueryTest extends \PHPUnit_Framework_TestCase
                 ->once()
                 ->with(array(
                     'name' => $fleaMarket->getName(),
-                    'organizer_id' => $fleaMarket->getOrganizerId()
+                    'description' => $fleaMarket->getDescription(),
+                    'start' => $fleaMarket->getStart(),
+                    'end' => $fleaMarket->getEnd(),
+                    'street' => $fleaMarket->getStreet(),
+                    'streetno' => $fleaMarket->getStreetNo(),
+                    'city' => $fleaMarket->getCity(),
+                    'zipcode' => $fleaMarket->getZipCode(),
+                    'location' => $fleaMarket->getLocation(),
+                    'url' => $fleaMarket->getUrl()
                 ))
                 ->andReturn($this->_pdo)
             ->shouldReceive('table')

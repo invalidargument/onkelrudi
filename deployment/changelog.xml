@@ -37,21 +37,11 @@
             <column name="id" type="int">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="varchar(50)">
-                <constraints nullable="false"/>
-            </column>
             <column name="organizer_id" type="int">
                 <constraints nullable="false" foreignKeyName="fk_organizer_fleamarket" references="fleamarkets_organizer(id)" deleteCascade="true"/>
             </column>
-        </createTable>
-    </changeSet>
-    <changeSet id="3" author="Rudi Bieller">
-        <createTable tableName="fleamarkets_details">
-            <column name="id" type="int">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="fleamarket_id" type="int">
-                <constraints nullable="false" foreignKeyName="fk_details_fleamarket" references="fleamarkets(id)" deleteCascade="true"/>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
             </column>
             <column name="description" type="varchar(21844)">
                 <constraints nullable="false"/>
@@ -82,7 +72,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="4" author="Rudi Bieller">
+    <changeSet id="3" author="Rudi Bieller">
         <addAutoIncrement catalogName="onkelrudi"
             columnDataType="int"
             columnName="id"
@@ -91,16 +81,7 @@
             startWith="1"
             tableName="fleamarkets_organizer"/>
     </changeSet>
-    <changeSet id="5" author="Rudi Bieller">
-        <addAutoIncrement catalogName="onkelrudi"
-            columnDataType="int"
-            columnName="id"
-            incrementBy="1"
-            schemaName="public"
-            startWith="1"
-            tableName="fleamarkets_details"/>
-    </changeSet>
-    <changeSet id="6" author="Rudi Bieller">
+    <changeSet id="4" author="Rudi Bieller">
         <addAutoIncrement catalogName="onkelrudi"
             columnDataType="int"
             columnName="id"

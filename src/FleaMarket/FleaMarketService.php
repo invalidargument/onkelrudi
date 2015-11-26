@@ -13,31 +13,25 @@ class FleaMarketService implements FleaMarketServiceInterface
         $this->_factory = $factory;
     }
 
-    public function createFleaMarket(FleaMarketInterface $fleaMarket, FleaMarketDetailsInterface $details, OrganizerInterface $organizer)
+    public function createFleaMarket(FleaMarketInterface $fleaMarket, OrganizerInterface $organizer)
     {
-        $deteailsQuery = $this->_factory->createFleaMarketDetailsInsertQuery();
         $query = $this->_factory->createFleaMarketInsertQuery();
 
-        $query->setName($fleaMarket->getName())
-            ->setOrganizerId($organizer->getId());
+        $query
+            ->setOrganizerId($organizer->getId())
+            ->setName($fleaMarket->getName())
+            ->setDescription($fleaMarket->getDescription())
+            ->setStart($fleaMarket->getStart())
+            ->setEnd($fleaMarket->getEnd())
+            ->setStreet($fleaMarket->getStreet())
+            ->setStreetNo($fleaMarket->getStreetNo())
+            ->setCity($fleaMarket->getCity())
+            ->setZipCode($fleaMarket->getZipCode())
+            ->setLocation($fleaMarket->getLocation())
+            ->setUrl($fleaMarket->getUrl());
 
         $fleaMarketId = $query->run();
         $fleaMarket->setId($fleaMarketId);
-
-        $deteailsQuery->setFleaMarketId($fleaMarketId)
-            ->setDescription($details->getDescription())
-            ->setStart($details->getStart())
-            ->setEnd($details->getEnd())
-            ->setStreet($details->getStreet())
-            ->setStreetNo($details->getStreetNo())
-            ->setCity($details->getCity())
-            ->setZipCode($details->getZipCode())
-            ->setLocation($details->getLocation())
-            ->setUrl($details->getUrl());
-
-        $detailsId = $deteailsQuery->run();
-        $details->setId($detailsId)
-            ->setFleaMarketId($fleaMarketId);
 
         return $fleaMarketId;
     }
@@ -99,15 +93,11 @@ class FleaMarketService implements FleaMarketServiceInterface
         return $query->run();
     }
 
-    public function updateFleaMarket(FleaMarketInterface $fleaMarket, FleaMarketDetailsInterface $details, OrganizerInterface $organizer)
+    public function updateFleaMarket(FleaMarketInterface $fleaMarket, OrganizerInterface $organizer)
     {
         // consider a transaction
         $query = $this->_factory->createFleaMarketUpdateQuery();
         $query->setFleaMarket($fleaMarket)
-            ->run();
-
-        $detailsQuery = $this->_factory->createFleaMarketDetailsUpdateQuery();
-        $detailsQuery->setDetails($details)
             ->run();
 
         $organizerQuery = $this->_factory->createFleaMarketOrganizerUpdateQuery();

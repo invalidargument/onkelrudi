@@ -46,8 +46,11 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
         $organizer = new Organizer();
         $organizer->setId(42);
 
-        $details = new FleaMarketDetails();
-        $details->setDescription('Ein toller Flohmarkt')
+        $fleaMarket = new FleaMarket();
+        $fleaMarket
+            ->setOrganizer($organizer)
+            ->setName('Der erste Flohmarkt von Rudi')
+            ->setDescription('Ein toller Flohmarkt')
             ->setCity('Cologne')
             ->setZipCode('5000')
             ->setStreet('Venloer')
@@ -57,35 +60,25 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
             ->setLocation('Daheim')
             ->setUrl('http://www.example.com/foo');
 
-        $fleaMarket = new FleaMarket();
-        $fleaMarket->setName('Der erste Flohmarkt von Rudi')
-            ->setOrganizerId($organizer->getId());
-
-        $detailsQuery = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketDetailsInsertQuery');
-        $detailsQuery->shouldReceive('setFleaMarketId')->once()->with('123')->andReturn($detailsQuery)
-            ->shouldReceive('setDescription')->once()->with('Ein toller Flohmarkt')->andReturn($detailsQuery)
-            ->shouldReceive('setStart')->once()->with('2015-12-12 00:00:12')->andReturn($detailsQuery)
-            ->shouldReceive('setEnd')->once()->with('2015-12-12 00:00:33')->andReturn($detailsQuery)
-            ->shouldReceive('setStreet')->once()->with('Venloer')->andReturn($detailsQuery)
-            ->shouldReceive('setStreetNo')->once()->with('20000')->andReturn($detailsQuery)
-            ->shouldReceive('setZipCode')->once()->with('5000')->andReturn($detailsQuery)
-            ->shouldReceive('setCity')->once()->with('Cologne')->andReturn($detailsQuery)
-            ->shouldReceive('setLocation')->once()->with('Daheim')->andReturn($detailsQuery)
-            ->shouldReceive('setUrl')->once()->with('http://www.example.com/foo')->andReturn($detailsQuery)
-            ->shouldReceive('run')->once()->andReturn('1984');
-        $this->_factory->shouldReceive('createFleaMarketDetailsInsertQuery')
-            ->once()
-            ->andReturn($detailsQuery);
-
         $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketInsertQuery');
-        $query->shouldReceive('setName')->once()->with('Der erste Flohmarkt von Rudi')->andReturn($query)
+        $query
             ->shouldReceive('setOrganizerId')->once()->with('42')->andReturn($query)
+            ->shouldReceive('setName')->once()->with('Der erste Flohmarkt von Rudi')->andReturn($query)
+            ->shouldReceive('setDescription')->once()->with('Ein toller Flohmarkt')->andReturn($query)
+            ->shouldReceive('setStart')->once()->with('2015-12-12 00:00:12')->andReturn($query)
+            ->shouldReceive('setEnd')->once()->with('2015-12-12 00:00:33')->andReturn($query)
+            ->shouldReceive('setStreet')->once()->with('Venloer')->andReturn($query)
+            ->shouldReceive('setStreetNo')->once()->with('20000')->andReturn($query)
+            ->shouldReceive('setZipCode')->once()->with('5000')->andReturn($query)
+            ->shouldReceive('setCity')->once()->with('Cologne')->andReturn($query)
+            ->shouldReceive('setLocation')->once()->with('Daheim')->andReturn($query)
+            ->shouldReceive('setUrl')->once()->with('http://www.example.com/foo')->andReturn($query)
             ->shouldReceive('run')->once()->andReturn('123');
         $this->_factory->shouldReceive('createFleaMarketInsertQuery')
             ->once()
             ->andReturn($query);
 
-        $this->_sut->createFleaMarket($fleaMarket, $details, $organizer);
+        $this->_sut->createFleaMarket($fleaMarket, $organizer);
     }
 
     public function testDeleteFleaMarketsDeletesSelectedFleaMarket()
@@ -173,7 +166,6 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
         $this->_sut->setQueryFactory($this->_factory);
 
         $fleaMarket = new FleaMarket();
-        $details = new FleaMarketDetails();
         $organizer = new Organizer();
 
         $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketUpdateQuery');
@@ -181,16 +173,11 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('run')->once()->andReturn(1);
         $this->_factory->shouldReceive('createFleaMarketUpdateQuery')->once()->andReturn($query);
 
-        $detailsQuery = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketDetailsUpdateQuery');
-        $detailsQuery->shouldReceive('setDetails')->once()->with($details)->andReturn($detailsQuery)
-            ->shouldReceive('run')->once()->andReturn(1);
-        $this->_factory->shouldReceive('createFleaMarketDetailsUpdateQuery')->once()->andReturn($detailsQuery);
-
         $organizerQuery = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerUpdateQuery');
         $organizerQuery->shouldReceive('setOrganizer')->once()->with($organizer)->andReturn($organizerQuery)
             ->shouldReceive('run')->once()->andReturn(1);
         $this->_factory->shouldReceive('createFleaMarketOrganizerUpdateQuery')->once()->andReturn($organizerQuery);
 
-        $this->_sut->updateFleaMarket($fleaMarket, $details, $organizer);
+        $this->_sut->updateFleaMarket($fleaMarket, $organizer);
     }
 }

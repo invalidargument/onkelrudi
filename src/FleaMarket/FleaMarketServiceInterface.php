@@ -8,11 +8,11 @@ interface FleaMarketServiceInterface
 
     function getFleaMarket($id);
 
-    function updateFleaMarket(FleaMarketInterface $fleaMarket, FleaMarketDetailsInterface $details, OrganizerInterface $organizer);
+    function updateFleaMarket(FleaMarketInterface $fleaMarket, OrganizerInterface $organizer);
 
     function deleteFleaMarket(FleaMarketInterface $fleaMarket);
 
-    function createFleaMarket(FleaMarketInterface $fleaMarket, FleaMarketDetailsInterface $details, OrganizerInterface $organizer);
+    function createFleaMarket(FleaMarketInterface $fleaMarket, OrganizerInterface $organizer);
 
     function createOrganizer(OrganizerInterface $organizer);
 

@@ -22,8 +22,17 @@ class FleaMarketUpdateQuery extends AbstractInsertQuery
         $updateStatement = $this->pdo
             ->update(
                 array(
+                    // TODO: organizer id
                     'name' => $this->_fleaMarket->getName(),
-                    'organizer_id' => $this->_fleaMarket->getOrganizerId()
+                    'description' => $this->_fleaMarket->getDescription(),
+                    'start' => $this->_fleaMarket->getStart(),
+                    'end' => $this->_fleaMarket->getEnd(),
+                    'street' => $this->_fleaMarket->getStreet(),
+                    'streetno' => $this->_fleaMarket->getStreetNo(),
+                    'city' => $this->_fleaMarket->getCity(),
+                    'zipcode' => $this->_fleaMarket->getZipCode(),
+                    'location' => $this->_fleaMarket->getLocation(),
+                    'url' => $this->_fleaMarket->getUrl()
                 )
             )
             ->table('fleamarkets')

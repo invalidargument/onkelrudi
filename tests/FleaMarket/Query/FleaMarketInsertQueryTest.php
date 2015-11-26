@@ -17,13 +17,22 @@ class FleaMarketInsertQueryTest extends \PHPUnit_Framework_TestCase
     public function testQueryUsesGivenValuesForRunningInsertStatement()
     {
         $this->_sut
+            ->setOrganizerId('42')
             ->setName('myname')
-            ->setOrganizerId('42');
+            ->setDescription('foo')
+            ->setStart('2015-12-12 00:00:00')
+            ->setEnd('2015-12-13 00:00:00')
+            ->setStreet('bar')
+            ->setStreetNo('42')
+            ->setCity('baz')
+            ->setZipCode('12345')
+            ->setLocation('somewhere')
+            ->setUrl('http://www.example.com');
 
         $this->_pdo
             ->shouldReceive('insert')
                 ->once()
-                ->with(array('name', 'organizer_id'))
+                ->with(array('organizer_id', 'name', 'description', 'start', 'end', 'street', 'streetno', 'city', 'zipcode', 'location', 'url'))
                 ->andReturn($this->_pdo)
             ->shouldReceive('into')
                 ->once()
@@ -31,7 +40,7 @@ class FleaMarketInsertQueryTest extends \PHPUnit_Framework_TestCase
                 ->andReturn($this->_pdo)
             ->shouldReceive('values')
                 ->once()
-                ->with(array('myname', '42'))
+            ->with(array('42', 'myname', 'foo', '2015-12-12 00:00:00', '2015-12-13 00:00:00', 'bar', '42', 'baz', '12345', 'somewhere', 'http://www.example.com'))
                 ->andReturn($this->_pdo)
             ->shouldReceive('execute')
                 ->once();

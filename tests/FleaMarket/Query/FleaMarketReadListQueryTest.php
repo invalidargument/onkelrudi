@@ -19,13 +19,31 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
         $result = array(
             array(
                 'id' => 42,
+                'organizer_id' => '1',
                 'name' => 'Rudi Bieller',
-                'organizer_id' => '1'
+                'description' => 'foo',
+                'start' => '2015-12-12 00:00:00',
+                'end' => '2015-12-13 00:00:00',
+                'street' => 'bar',
+                'streetno' => '1',
+                'city' => 'baz',
+                'zipcode' => '12345',
+                'location' => 'somewhereovertherainbow',
+                'url' => 'http://www.example.com'
             ),
             array(
                 'id' => 23,
-                'name' => 'Rudi',
-                'organizer_id' => '2'
+                'organizer_id' => '1',
+                'name' => 'Rudi Bieller',
+                'description' => 'foo',
+                'start' => '2015-12-12 00:00:00',
+                'end' => '2015-12-13 00:00:00',
+                'street' => 'bar',
+                'streetno' => '1',
+                'city' => 'baz',
+                'zipcode' => '12345',
+                'location' => 'somewhereovertherainbow',
+                'url' => 'http://www.example.com'
             )
         );
 
