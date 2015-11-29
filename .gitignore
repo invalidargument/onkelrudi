@@ -1,7 +1,12 @@
 bin/*
 !bin/.gitkeep
+build/*
+!build/.gitkeep
 vendor
 nbproject
 .vagrant
 composer.lock
 deployment/settings_*
+bower_components
+cache.properties
+wordpress

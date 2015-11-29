@@ -1,0 +1,27 @@
+{
+  "name": "onkelrudi",
+  "homepage": "https://github.com/invalidargument/onkelrudi",
+  "authors": [
+    "Rudi Bieller <kontakt@rudi-bieller.de>"
+  ],
+  "description": "Onkel Rudi",
+  "main": "public/css/main.css",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "Onkel Rudi Playground"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "pure": "~0.6.0"
+  }
+}

@@ -12,6 +12,10 @@ apt-get install -y curl php5 php5-curl php5-xdebug php5-mysql git ant
 apt-get install -y oracle-java8-installer
 apt-get install -y oracle-java8-set-default
 
+apt-get install -y npm
+npm install -g bower
+ln -s /usr/bin/nodejs /usr/bin/node
+
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
 
 # see https://getcomposer.org/doc/articles/troubleshooting.md#proc-open-fork-failed-errors
