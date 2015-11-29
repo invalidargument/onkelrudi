@@ -1,5 +1,5 @@
 <?php
-include_once 'vendor/autoload.php';
+include_once '../vendor/autoload.php';
 
 use RudiBieller\OnkelRudi\FleaMarket\Query\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketService;
