@@ -12,7 +12,7 @@ class Builder
         return $this;
     }
 
-    public function setOrganizer($organizer)
+    public function setOrganizer(OrganizerInterface $organizer)
     {
         $this->_properties['organizer'] = $organizer;
         return $this;
