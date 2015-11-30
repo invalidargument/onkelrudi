@@ -13,6 +13,8 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
 
     public function testBuilderReturnsConfiguredFleaMarket()
     {
+        $organizer = new Organizer();
+
         $expected = new FleaMarket();
         $expected
             ->setCity('cologne')
@@ -22,7 +24,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
             ->setId(2)
             ->setLocation('bar')
             ->setName('baz')
-            ->setOrganizer('me')
+            ->setOrganizer($organizer)
             ->setStreet('Venloer')
             ->setStreetNo(23)
             ->setUrl('http://example.com')
@@ -36,7 +38,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
             ->setId(2)
             ->setLocation('bar')
             ->setName('baz')
-            ->setOrganizer('me')
+            ->setOrganizer($organizer)
             ->setStreet('Venloer')
             ->setStreetNo(23)
             ->setUrl('http://example.com')
