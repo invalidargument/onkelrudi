@@ -92,7 +92,7 @@
     </target>
 
     <target name="grunt">
-        <echo message="waiting for a frontend to work on...!"/>
+        <echo message="waiting for a frontend to work on...! ${env}"/>
     </target>
 
     <target name="archive" depends="grunt">
