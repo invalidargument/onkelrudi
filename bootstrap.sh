@@ -3,6 +3,8 @@
 apt-get update
 apt-get install -y software-properties-common python-software-properties
 add-apt-repository ppa:webupd8team/java
+apt-get update
+
 debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password root'
 debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again password root'
 echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
