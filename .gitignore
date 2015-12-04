@@ -4,6 +4,7 @@ build/*
 !build/.gitkeep
 vendor
 nbproject
+.idea
 .vagrant
 composer.lock
 deployment/settings_*
