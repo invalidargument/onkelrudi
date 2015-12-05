@@ -2,7 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\FleaMarket;
 
-class FleaMarket implements FleaMarketInterface
+class FleaMarket implements FleaMarketInterface, \JsonSerializable
 {
     private $_id;
     private $_organizer;
@@ -147,5 +147,23 @@ class FleaMarket implements FleaMarketInterface
     {
         $this->_url = $url;
         return $this;
+    }
+
+    function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId(),
+            'organizer' => $this->getOrganizer(),
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
+            'start' => $this->getStart(),
+            'end' => $this->getEnd(),
+            'street' => $this->getStreet(),
+            'streetNo' => $this->getStreetNo(),
+            'city' => $this->getCity(),
+            'zipcode' => $this->getZipCode(),
+            'location' => $this->getLocation(),
+            'url' => $this->getUrl()
+        ];
     }
 }

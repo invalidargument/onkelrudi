@@ -2,7 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\FleaMarket;
 
-class Organizer implements OrganizerInterface
+class Organizer implements OrganizerInterface, \JsonSerializable
 {
     private $_id;
     private $_name;
@@ -99,5 +99,19 @@ class Organizer implements OrganizerInterface
     {
         $this->_url = $url;
         return $this;
+    }
+
+    function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'street' => $this->getStreet(),
+            'streetNo' => $this->getStreetNo(),
+            'zipcode' => $this->getZipCode(),
+            'city' => $this->getCity(),
+            'phone' => $this->getPhone(),
+            'url' => $this->getUrl()
+        ];
     }
 }
