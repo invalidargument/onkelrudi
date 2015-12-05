@@ -84,13 +84,9 @@ $app->get('/', function ($request, $response, $args) use ($app, $controllerFacto
     $action($app->request, $app->response, array());
 });
 
+$app->group('/api', function ($request, $response, $args) use ($app, $controllerFactory) {
 
-
-
-
-$app->group('/api', function ($request, $response, $args) use ($app) {
-
-    $app->group('/v1', function ($request, $response, $args) use ($app) {
+    $app->group('/v1', function ($request, $response, $args) use ($app, $controllerFactory) {
 
         // GET list a specific fleamarket
         $app->get('/fleamarkets/{id}', function ($request, $response, $args) use ($app) {
@@ -101,11 +97,9 @@ $app->group('/api', function ($request, $response, $args) use ($app) {
         });
 
         // GET list all fleamarkets
-        $app->get('/fleamarkets', function ($request, $response, $args) use ($app) {
-            return $response->withHeader(
-                'Content-Type',
-                'application/json'
-            )->write(json_encode(array('fleamarkets' => 'show all')));
+        $app->get('/fleamarkets', function ($request, $response, $args) use ($app, $controllerFactory) {
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketAction');
+            $action($request, $response, $args);
         });
 
         // PUT route, for updating a fleamarket

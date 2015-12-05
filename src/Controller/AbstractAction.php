@@ -10,6 +10,9 @@ abstract class AbstractAction implements ActionInterface
 {
     protected $app;
     protected $service;
+    protected $request;
+    protected $response;
+    protected $args;
 
     public function setApp(\Slim\App $app)
     {
@@ -23,6 +26,10 @@ abstract class AbstractAction implements ActionInterface
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, $args)
     {
+        $this->request = $request;
+        $this->response = $response;
+        $this->args = $args;
+
         return $this->app->response->withHeader(
             'Content-Type',
             'application/json'
