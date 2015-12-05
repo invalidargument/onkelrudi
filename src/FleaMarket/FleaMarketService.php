@@ -6,6 +6,9 @@ use RudiBieller\OnkelRudi\FleaMarket\Query\Factory;
 
 class FleaMarketService implements FleaMarketServiceInterface
 {
+    /**
+     * @var \RudiBieller\OnkelRudi\FleaMarket\Query\Factory
+     */
     private $_factory;
 
     public function setQueryFactory(Factory $factory)

@@ -6,10 +6,14 @@ use RudiBieller\OnkelRudi\FleaMarket\FleaMarketService;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer,
     RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 
+use RudiBieller\OnkelRudi\Controller\Factory as ControllerFactory;
+
 $app = new \Slim\App;
 $factory = new Factory();
 $service = new FleaMarketService();
 $service->setQueryFactory($factory);
+$controllerFactory = new ControllerFactory($app);
+$controllerFactory->setService($service);
 
 try {
     $organizer = new Organizer();
@@ -53,11 +57,11 @@ try {
     $allMarkets = $service->getAllFleaMarkets();
 //    var_dump('all fmarkets', $allMarkets);
 
-    $deleted = $service->deleteFleaMarket($fleaMarket);
-    var_dump('deleted fleamarket?', $deleted);
+    //$deleted = $service->deleteFleaMarket($fleaMarket);
+    //var_dump('deleted fleamarket?', $deleted);
 
-    $deleted = $service->deleteOrganizer($organizer);
-    var_dump('deleted organizer?', $deleted);
+    //$deleted = $service->deleteOrganizer($organizer);
+    //var_dump('deleted organizer?', $deleted);
 
     $organizer->setId(3)->setName('Horst Ullrich')->setStreetNo(1);
     $updatedOrganizer = $service->updateOrganizer($organizer);
@@ -66,7 +70,7 @@ try {
     var_dump($e->getMessage());
 }
 
-die("END TEST");
+//die("END TEST");
 
 
 
@@ -75,20 +79,21 @@ die("END TEST");
 
 
 
-$app->get('/', function ($request, $response, $args) use ($app) {
-//    return $response->write("<h1>It works!</h1>" . $args['name']);
-    return $response->withHeader(
-        'Content-Type',
-        'application/json'
-    )->write(json_encode(array('foo' => 'bar')));
+$app->get('/', function ($request, $response, $args) use ($app, $controllerFactory) {
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketAction');
+    $action($app->request, $app->response, array());
 });
 
-$app->group('/api', function ($request, $response, $args) use ($app, $service) {
 
-    $app->group('/v1', function ($request, $response, $args) use ($app, $service) {
+
+
+
+$app->group('/api', function ($request, $response, $args) use ($app) {
+
+    $app->group('/v1', function ($request, $response, $args) use ($app) {
 
         // GET list a specific fleamarket
-        $app->get('/fleamarkets/{id}', function ($request, $response, $args) use ($app, $service) {
+        $app->get('/fleamarkets/{id}', function ($request, $response, $args) use ($app) {
             return $app->response->withHeader(
                 'Content-Type',
                 'application/json'
@@ -96,7 +101,7 @@ $app->group('/api', function ($request, $response, $args) use ($app, $service) {
         });
 
         // GET list all fleamarkets
-        $app->get('/fleamarkets', function ($request, $response, $args) use ($app, $service) {
+        $app->get('/fleamarkets', function ($request, $response, $args) use ($app) {
             return $response->withHeader(
                 'Content-Type',
                 'application/json'
@@ -104,7 +109,7 @@ $app->group('/api', function ($request, $response, $args) use ($app, $service) {
         });
 
         // PUT route, for updating a fleamarket
-        $app->put('/fleamarkets/{id}', function ($request, $response, $args) use ($app, $service) {
+        $app->put('/fleamarkets/{id}', function ($request, $response, $args) use ($app) {
             return $response->withHeader(
                 'Content-Type',
                 'application/json'
@@ -112,7 +117,7 @@ $app->group('/api', function ($request, $response, $args) use ($app, $service) {
         });
 
         // DELETE route, for deleting a fleamarket
-        $app->delete('/fleamarkets/{id}', function ($request, $response, $args) use ($app, $service) {
+        $app->delete('/fleamarkets/{id}', function ($request, $response, $args) use ($app) {
             return $response->withHeader(
                 'Content-Type',
                 'application/json'
@@ -120,7 +125,7 @@ $app->group('/api', function ($request, $response, $args) use ($app, $service) {
         });
 
         // POST route, for creating a fleamarket
-        $app->post('/fleamarkets', function ($request, $response, $args) use ($app, $service) {
+        $app->post('/fleamarkets', function ($request, $response, $args) use ($app) {
             return $app->response->withHeader(
                 'Content-Type',
                 'application/json'

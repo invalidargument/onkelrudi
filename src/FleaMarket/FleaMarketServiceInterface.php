@@ -2,7 +2,9 @@
 
 namespace RudiBieller\OnkelRudi\FleaMarket;
 
-interface FleaMarketServiceInterface
+use RudiBieller\OnkelRudi\ServiceInterface;
+
+interface FleaMarketServiceInterface extends ServiceInterface
 {
     function getAllFleaMarkets();
 
