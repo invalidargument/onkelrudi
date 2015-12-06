@@ -10,7 +10,7 @@ interface FleaMarketServiceInterface extends ServiceInterface
 
     function getFleaMarket($id);
 
-    function updateFleaMarket(FleaMarketInterface $fleaMarket, OrganizerInterface $organizer);
+    function updateFleaMarket(FleaMarketInterface $fleaMarket);
 
     function deleteFleaMarket(FleaMarketInterface $fleaMarket);
 

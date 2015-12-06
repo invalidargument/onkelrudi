@@ -6,6 +6,6 @@ class FleaMarketAction extends AbstractAction
 {
     protected function getData()
     {
-        return $this->service->getAllFleaMarkets();
+        return $this->service->getFleaMarket($this->args['id']);
     }
 }

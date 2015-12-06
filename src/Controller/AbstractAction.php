@@ -4,12 +4,14 @@ namespace RudiBieller\OnkelRudi\Controller;
 
 use Psr\Http\Message\ServerRequestInterface,
     Psr\Http\Message\ResponseInterface,
-    RudiBieller\OnkelRudi\ServiceInterface;
+    RudiBieller\OnkelRudi\ServiceInterface,
+    RudiBieller\OnkelRudi\BuilderFactoryInterface;
 
 abstract class AbstractAction implements ActionInterface
 {
     protected $app;
     protected $service;
+    protected $builderFactory;
     protected $request;
     protected $response;
     protected $args;
@@ -17,11 +19,19 @@ abstract class AbstractAction implements ActionInterface
     public function setApp(\Slim\App $app)
     {
         $this->app = $app;
+        return $this;
     }
 
     public function setService(ServiceInterface $service)
     {
         $this->service = $service;
+        return $this;
+    }
+
+    public function setBuilderFactory(BuilderFactoryInterface $factory)
+    {
+        $this->builderFactory = $factory;
+        return $this;
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, $args)

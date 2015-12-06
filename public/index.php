@@ -89,16 +89,14 @@ $app->group('/api', function ($request, $response, $args) use ($app, $controller
     $app->group('/v1', function ($request, $response, $args) use ($app, $controllerFactory) {
 
         // GET list a specific fleamarket
-        $app->get('/fleamarkets/{id}', function ($request, $response, $args) use ($app) {
-            return $app->response->withHeader(
-                'Content-Type',
-                'application/json'
-            )->write(json_encode(array('fleamarkets' => 'show id ' . $args['id'])));
+        $app->get('/fleamarkets/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketAction');
+            $action($request, $response, $args);
         });
 
         // GET list all fleamarkets
         $app->get('/fleamarkets', function ($request, $response, $args) use ($app, $controllerFactory) {
-            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketAction');
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketsAction');
             $action($request, $response, $args);
         });
 
