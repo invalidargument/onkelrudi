@@ -81,7 +81,7 @@ try {
 
 $app->get('/', function ($request, $response, $args) use ($app, $controllerFactory) {
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketAction');
-    $action($app->request, $app->response, array());
+    $action($app->request, $app->response, array('id' => 40));
 });
 
 $app->group('/api', function ($request, $response, $args) use ($app, $controllerFactory) {

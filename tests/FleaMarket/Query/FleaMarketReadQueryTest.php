@@ -14,7 +14,7 @@ class FleaMarketReadQueryTest extends \PHPUnit_Framework_TestCase
         $this->_sut->setPdo($this->_pdo);
     }
 
-    public function testQueryReadsDefaultEmptyFleaMarketsByIdIfNotFoundInDb()
+    public function testQueryReturnsNullIfNotFoundInDb()
     {
         $this->_sut->setFleaMarketId(23);
 
@@ -40,7 +40,7 @@ class FleaMarketReadQueryTest extends \PHPUnit_Framework_TestCase
          */
         $fleaMarket = $this->_sut->run();
 
-        $this->assertEquals(null, $fleaMarket->getId());
+        $this->assertEquals(null, $fleaMarket);
     }
 
     public function testQueryReadsMarketByIdIfFound()

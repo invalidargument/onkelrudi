@@ -35,11 +35,11 @@ class FleaMarketReadQuery extends AbstractQuery
 
     protected function mapResult($result)
     {
-        $this->_fleaMarket = new FleaMarket();
-
         if ($result === false) {
             return $this->_fleaMarket;
         }
+
+        $this->_fleaMarket = new FleaMarket();
 
         $this->_fleaMarket
             ->setId($result['id'])
