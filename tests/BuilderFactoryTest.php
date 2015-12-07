@@ -29,6 +29,14 @@ class BuilderFactoryTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testCreateReturnsAlreadyCreatedInstances()
+    {
+        $createdAction = $this->_sut->create('RudiBieller\OnkelRudi\FleaMarket\Builder');
+        $cachedAction = $this->_sut->create('RudiBieller\OnkelRudi\FleaMarket\Builder');
+
+        $this->assertSame($createdAction, $cachedAction);
+    }
+
     /**
      * @expectedException \InvalidArgumentException
      */
