@@ -16,12 +16,11 @@ class FleaMarketService implements FleaMarketServiceInterface
         $this->_factory = $factory;
     }
 
-    public function createFleaMarket(FleaMarketInterface $fleaMarket, OrganizerInterface $organizer)
+    public function createFleaMarket(FleaMarketInterface $fleaMarket)
     {
         $query = $this->_factory->createFleaMarketInsertQuery();
 
         $query
-            ->setOrganizerId($organizer->getId())
             ->setName($fleaMarket->getName())
             ->setDescription($fleaMarket->getDescription())
             ->setStart($fleaMarket->getStart())

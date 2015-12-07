@@ -14,7 +14,7 @@ interface FleaMarketServiceInterface extends ServiceInterface
 
     function deleteFleaMarket(FleaMarketInterface $fleaMarket);
 
-    function createFleaMarket(FleaMarketInterface $fleaMarket, OrganizerInterface $organizer);
+    function createFleaMarket(FleaMarketInterface $fleaMarket);
 
     function createOrganizer(OrganizerInterface $organizer);
 
