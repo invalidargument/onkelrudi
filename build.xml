@@ -39,6 +39,19 @@
         <mkdir dir="${basedir}/src/cache"/>
     </target>
 
+    <target name="composer" description="composer update">
+        <exec executable="composer" failonerror="true">
+            <arg value="update" />
+        </exec>
+    </target>
+
+    <target name="liquibase" description="liquibase update">
+        <exec executable="vendor/alcaeus/liquibase/liquibase" failonerror="true">
+            <arg value="--defaultsFile=deployment/liquibase.properties" />
+            <arg value="update" />
+        </exec>
+    </target>
+
     <target name="lint" description="Syntax check">
         <apply executable="php" failonerror="true">
             <arg value="-l" />
