@@ -6,6 +6,10 @@ class BuilderFactory implements BuilderFactoryInterface
 {
     private $_instances;
 
+    /**
+     * @param $name
+     * @return BuilderInterface
+     */
     public function create($name)
     {
         if (!class_exists($name)) {

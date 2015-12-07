@@ -98,27 +98,21 @@ $app->group('/api', function ($request, $response, $args) use ($app, $controller
         });
 
         // PUT route, for updating a fleamarket
-        $app->put('/fleamarkets/{id}', function ($request, $response, $args) use ($app) {
-            return $response->withHeader(
-                'Content-Type',
-                'application/json'
-            )->write(json_encode(array('fleamarkets' => 'update id' . $args['id'])));
+        $app->put('/fleamarkets/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketUpdateAction');
+            $action($request, $response, $args);
         });
 
         // DELETE route, for deleting a fleamarket
-        $app->delete('/fleamarkets/{id}', function ($request, $response, $args) use ($app) {
-            return $response->withHeader(
-                'Content-Type',
-                'application/json'
-            )->write(json_encode(array('fleamarkets' => 'delete id ' . $args['id'])));
+        $app->delete('/fleamarkets/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketDeleteAction');
+            $action($request, $response, $args);
         });
 
         // POST route, for creating a fleamarket
-        $app->post('/fleamarkets', function ($request, $response, $args) use ($app) {
-            return $app->response->withHeader(
-                'Content-Type',
-                'application/json'
-            )->write(json_encode(array('fleamarkets' => 'create new')));
+        $app->post('/fleamarkets', function ($request, $response, $args) use ($app, $controllerFactory) {
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketCreateAction');
+            $action($request, $response, $args);
         });
 
     });

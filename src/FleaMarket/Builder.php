@@ -2,79 +2,79 @@
 
 namespace RudiBieller\OnkelRudi\FleaMarket;
 
-class Builder
-{
-    private $_properties = array();
+use RudiBieller\OnkelRudi\AbstractBuilder;
 
+class Builder extends AbstractBuilder
+{
     public function setId($id)
     {
-        $this->_properties['id'] = $id;
+        $this->properties['id'] = $id;
         return $this;
     }
 
     public function setOrganizer(OrganizerInterface $organizer)
     {
-        $this->_properties['organizer'] = $organizer;
+        $this->properties['organizer'] = $organizer;
         return $this;
     }
 
     public function setName($name)
     {
-        $this->_properties['name'] = $name;
+        $this->properties['name'] = $name;
         return $this;
     }
 
     public function setDescription($description)
     {
-        $this->_properties['description'] = $description;
+        $this->properties['description'] = $description;
         return $this;
     }
 
     public function setStart($start)
     {
-        $this->_properties['start'] = $start;
+        $this->properties['start'] = $start;
         return $this;
     }
 
     public function setEnd($end)
     {
-        $this->_properties['end'] = $end;
+        $this->properties['end'] = $end;
         return $this;
     }
 
     public function setStreet($street)
     {
-        $this->_properties['street'] = $street;
+        $this->properties['street'] = $street;
         return $this;
     }
 
     public function setStreetNo($streetNo)
     {
-        $this->_properties['streetNo'] = $streetNo;
+        $this->properties['streetNo'] = $streetNo;
         return $this;
     }
 
     public function setCity($city)
     {
-        $this->_properties['city'] = $city;
+        $this->properties['city'] = $city;
         return $this;
     }
 
     public function setZipCode($zipCode)
     {
-        $this->_properties['zipCode'] = $zipCode;
+        $this->properties['zipCode'] = $zipCode;
         return $this;
     }
 
     public function setLocation($location)
     {
-        $this->_properties['location'] = $location;
+        $this->properties['location'] = $location;
         return $this;
     }
 
     public function setUrl($url)
     {
-        $this->_properties['url'] = $url;
+        $this->properties['url'] = $url;
         return $this;
     }
 
@@ -82,8 +82,8 @@ class Builder
     {
         $market = new FleaMarket();
 
-        foreach ($this->_properties as $name => $value) {
-            if (array_key_exists($name, $this->_properties) && !is_null($this->_properties[$name])) {
+        foreach ($this->properties as $name => $value) {
+            if (array_key_exists($name, $this->properties) && !is_null($this->properties[$name])) {
                 $method = 'set' . ucfirst($name);
                 $market->$method($value);
             }

@@ -11,6 +11,9 @@ abstract class AbstractAction implements ActionInterface
 {
     protected $app;
     protected $service;
+    /**
+     * @var BuilderFactoryInterface
+     */
     protected $builderFactory;
     protected $request;
     protected $response;

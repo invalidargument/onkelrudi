@@ -2,55 +2,55 @@
 
 namespace RudiBieller\OnkelRudi\FleaMarket;
 
-class OrganizerBuilder
-{
-    private $_properties = array();
+use RudiBieller\OnkelRudi\AbstractBuilder;
 
+class OrganizerBuilder extends AbstractBuilder
+{
     public function setId($id)
     {
-        $this->_properties['id'] = $id;
+        $this->properties['id'] = $id;
         return $this;
     }
 
     public function setName($name)
     {
-        $this->_properties['name'] = $name;
+        $this->properties['name'] = $name;
         return $this;
     }
 
     public function setStreet($street)
     {
-        $this->_properties['street'] = $street;
+        $this->properties['street'] = $street;
         return $this;
     }
 
     public function setStreetNo($streetNo)
     {
-        $this->_properties['streetNo'] = $streetNo;
+        $this->properties['streetNo'] = $streetNo;
         return $this;
     }
 
     public function setZipCode($zipCode)
     {
-        $this->_properties['zipCode'] = $zipCode;
+        $this->properties['zipCode'] = $zipCode;
         return $this;
     }
 
     public function setCity($city)
     {
-        $this->_properties['city'] = $city;
+        $this->properties['city'] = $city;
         return $this;
     }
 
     public function setPhone($phone)
     {
-        $this->_properties['phone'] = $phone;
+        $this->properties['phone'] = $phone;
         return $this;
     }
 
     public function setUrl($url)
     {
-        $this->_properties['url'] = $url;
+        $this->properties['url'] = $url;
         return $this;
     }
 
@@ -58,8 +58,8 @@ class OrganizerBuilder
     {
         $market = new Organizer();
 
-        foreach ($this->_properties as $name => $value) {
-            if (array_key_exists($name, $this->_properties) && !is_null($this->_properties[$name])) {
+        foreach ($this->properties as $name => $value) {
+            if (array_key_exists($name, $this->properties) && !is_null($this->properties[$name])) {
                 $method = 'set' . ucfirst($name);
                 $market->$method($value);
             }
