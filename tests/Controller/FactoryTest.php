@@ -41,4 +41,12 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->_sut->createActionByName('Foo');
     }
+
+    public function testCreateReturnsAlreadyCreatedInstances()
+    {
+        $createdAction = $this->_sut->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketAction');
+        $cachedAction = $this->_sut->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketAction');
+
+        $this->assertSame($createdAction, $cachedAction);
+    }
 }
