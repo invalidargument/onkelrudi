@@ -40,7 +40,7 @@ abstract class AbstractAction implements ActionInterface
         $this->response = $response;
         $this->args = $args;
 
-        return $this->app->response->withHeader(
+        return $this->app->getContainer()->get('response')->withHeader(
             'Content-Type',
             'application/json'
         )->write(json_encode(array('data' => $this->getData())));
