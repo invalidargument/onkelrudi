@@ -43,7 +43,7 @@ try {
         ->setUrl('http://www.example.com/foo');
 
     $id = $service->createFleaMarket($fleaMarket, $organizer);
-    var_dump('fleamarket id', $id, $fleaMarket->getId());
+    var_dump('created fleamarket id', $id, $fleaMarket->getId());
 
     $organizer->setCity('London');
     $fleaMarket->setDescription('Mind the gap');

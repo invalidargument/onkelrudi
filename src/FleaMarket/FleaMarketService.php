@@ -21,6 +21,7 @@ class FleaMarketService implements FleaMarketServiceInterface
         $query = $this->_factory->createFleaMarketInsertQuery();
 
         $query
+            ->setOrganizerId($fleaMarket->getOrganizer()->getId())
             ->setName($fleaMarket->getName())
             ->setDescription($fleaMarket->getDescription())
             ->setStart($fleaMarket->getStart())
