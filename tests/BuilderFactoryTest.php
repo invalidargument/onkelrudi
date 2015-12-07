@@ -4,14 +4,19 @@ namespace RudiBieller\OnkelRudi;
 
 class BuilderFactoryTest extends \PHPUnit_Framework_TestCase
 {
+    private $_sut;
+
+    protected function setUp()
+    {
+        $this->_sut = new BuilderFactory();
+    }
+
     /**
      * @dataProvider createDataProvider
      */
     public function testCreateReturnsDesiredBuilder($builder, $expectedType)
     {
-        $factory = new BuilderFactory();
-
-        $builder = $factory->create($builder);
+        $builder = $this->_sut->create($builder);
 
         $this->assertEquals($expectedType, get_class($builder));
     }
@@ -19,7 +24,16 @@ class BuilderFactoryTest extends \PHPUnit_Framework_TestCase
     public function createDataProvider()
     {
         return array(
-            array('RudiBieller\OnkelRudi\FleaMarket\Builder', 'RudiBieller\OnkelRudi\FleaMarket\Builder')
+            array('RudiBieller\OnkelRudi\FleaMarket\Builder', 'RudiBieller\OnkelRudi\FleaMarket\Builder'),
+            array('RudiBieller\OnkelRudi\FleaMarket\OrganizerBuilder', 'RudiBieller\OnkelRudi\FleaMarket\OrganizerBuilder')
         );
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testFactoryThrowsInvalidArgumentExceptionWhenBuilderNotFound()
+    {
+        $builder = $this->_sut->create('FooBuilder');
     }
 }

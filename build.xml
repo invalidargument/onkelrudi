@@ -113,6 +113,7 @@
             <tarfileset dir="." prefix=".">
                 <include name="src/**" />
                 <include name="public/**" />
+                <!-- TODO: exclude: src/cache -->
             </tarfileset>
         </tar>
     </target>

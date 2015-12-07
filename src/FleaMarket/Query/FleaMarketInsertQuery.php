@@ -29,51 +29,6 @@ class FleaMarketInsertQuery extends AbstractInsertQuery
         return $this;
     }
 
-    public function getDescription()
-    {
-        return $this->_description;
-    }
-
-    public function getStart()
-    {
-        return $this->_start;
-    }
-
-    public function getEnd()
-    {
-        return $this->_end;
-    }
-
-    public function getStreet()
-    {
-        return $this->_street;
-    }
-
-    public function getStreetNo()
-    {
-        return $this->_streetNo;
-    }
-
-    public function getCity()
-    {
-        return $this->_city;
-    }
-
-    public function getZipCode()
-    {
-        return $this->_zipCode;
-    }
-
-    public function getLocation()
-    {
-        return $this->_location;
-    }
-
-    public function getUrl()
-    {
-        return $this->_url;
-    }
-
     public function setDescription($description)
     {
         $this->_description = $description;

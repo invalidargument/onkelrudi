@@ -161,7 +161,7 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
             'street' => $this->getStreet(),
             'streetNo' => $this->getStreetNo(),
             'city' => $this->getCity(),
-            'zipcode' => $this->getZipCode(),
+            'zipCode' => $this->getZipCode(),
             'location' => $this->getLocation(),
             'url' => $this->getUrl()
         ];

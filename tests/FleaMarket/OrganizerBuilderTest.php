@@ -20,6 +20,7 @@ class OrganizerBuilderTest extends \PHPUnit_Framework_TestCase
             ->setName('baz')
             ->setStreet('Venloer')
             ->setStreetNo(23)
+            ->setPhone('020 123')
             ->setUrl('http://example.com')
             ->setZipCode('12345');
 
@@ -29,6 +30,7 @@ class OrganizerBuilderTest extends \PHPUnit_Framework_TestCase
             ->setName('baz')
             ->setStreet('Venloer')
             ->setStreetNo(23)
+            ->setPhone('020 123')
             ->setUrl('http://example.com')
             ->setZipCode('12345')
             ->build();
