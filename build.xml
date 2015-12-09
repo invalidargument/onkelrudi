@@ -7,10 +7,10 @@
     </tstamp>
 
     <target name="build"
-        depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, archive"/>
+        depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, grunt, archive"/>
 
     <target name="build-parallel"
-        depends="prepare, lint, composer, liquibase, tools-parallel, phpcpd, phpunit, archive"/>
+        depends="prepare, lint, composer, liquibase, tools-parallel, phpcpd, phpunit, grunt, archive"/>
 
     <property environment="env"/>
 
@@ -108,7 +108,7 @@
         <echo message="waiting for a frontend to work on...! ${env}"/>
     </target>
 
-    <target name="archive" depends="grunt">
+    <target name="archive">
         <tar compression="gzip" destfile="${basedir}/build/artifacts/onkelrudi_${buildtimestamp}.tar.gz">
             <tarfileset dir="." prefix=".">
                 <include name="src/**" />
