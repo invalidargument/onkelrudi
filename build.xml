@@ -7,10 +7,10 @@
     </tstamp>
 
     <target name="build"
-        depends="prepare, lint, phploc, phpmd, phpcpd, phpcs, phpunit, archive"/>
+        depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, archive"/>
 
     <target name="build-parallel"
-        depends="prepare, lint, tools-parallel, phpcpd, phpunit, archive"/>
+        depends="prepare, lint, composer, liquibase, tools-parallel, phpcpd, phpunit, archive"/>
 
     <property environment="env"/>
 
