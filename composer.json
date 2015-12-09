@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "slim/slim": "^3.0@RC",
+        "slim/slim": "3.0.*",
         "slim/pdo": "*",
         "slim/csrf": "*",
         "alcaeus/liquibase": "*"
