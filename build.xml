@@ -7,10 +7,10 @@
     </tstamp>
 
     <target name="build"
-        depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, grunt, archive"/>
+        depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, behat, grunt, archive"/>
 
     <target name="build-parallel"
-        depends="prepare, lint, composer, liquibase, tools-parallel, phpcpd, phpunit, grunt, archive"/>
+        depends="prepare, lint, composer, liquibase, tools-parallel, phpcpd, phpunit, behat, grunt, archive"/>
 
     <property environment="env"/>
 
@@ -101,6 +101,11 @@
             <arg line="--verbose --stderr" />
             <arg value="--coverage-html" />
             <arg value="${basedir}/build/coverage" />
+        </exec>
+    </target>
+    <target name="behat">
+        <exec dir="${basedir}" executable="vendor/bin/behat" failonerror="true" description="Unit tests">
+            <env key="APPLICATION_ENV" value="testing"/>
         </exec>
     </target>
 

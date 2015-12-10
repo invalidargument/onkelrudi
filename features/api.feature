@@ -1,5 +1,5 @@
-Feature: ls
-  In order to use the API for my Services
+Feature: API v1 fleamarkets
+  In order to use the API for my services
   As an API user
   I need to be able to use the API in a REST way
 
