@@ -14,4 +14,3 @@ bower install
 general_log_file        = /var/log/mysql/mysql.log
 general_log             = 1
 tail -f /var/log/mysql
-
