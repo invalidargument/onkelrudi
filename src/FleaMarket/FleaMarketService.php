@@ -111,4 +111,10 @@ class FleaMarketService implements FleaMarketServiceInterface
 
         return $query->run();
     }
+
+    public function truncateTablesForTestCases()
+    {
+        $query = $this->_factory->createFleaMarketTestCaseDeleteQuery();
+        return $query->run();
+    }
 }

@@ -34,24 +34,24 @@ class FeatureContext implements Context, SnippetAcceptingContext
         $curl = new \Buzz\Client\Curl();
         $curl->setOption(CURLOPT_FOLLOWLOCATION, false);
         $this->_browser = new \Buzz\Browser($curl);
+
+        $factory = new Factory();
+        $this->_service = new FleaMarketService();
+        $this->_service->setQueryFactory($factory);
     }
 
     /** @BeforeScenario */
     public function before(BeforeScenarioScope $scope)
     {
-        $factory = new Factory();
-        $this->_service = new FleaMarketService();
-        $this->_service->setQueryFactory($factory);
-
         $this->_cleanupDatabase();
-
         $this->_response = null;
     }
 
     /** @AfterScenario */
     public function after(AfterScenarioScope $scope)
     {
-        $this->_cleanupDatabase();
+        //$this->_cleanupDatabase();
+        //$this->_response = null;
     }
 
     /**
@@ -101,6 +101,15 @@ class FeatureContext implements Context, SnippetAcceptingContext
         }
     }
 
+    /**
+     * @Then the response should contain fleamarket with id :arg1
+     */
+    public function theResponseShouldContainFleamarketWithId($arg1)
+    {
+        var_dump($this->_response->getContent());
+        \PHPUnit_Framework_Assert::assertEquals($arg1, $this->_response->getContent()->data);
+    }
+
     private function _createFleaMarkets($num = 3)
     {
         for($i=0; $i<$num; $i++) {
@@ -127,15 +136,13 @@ class FeatureContext implements Context, SnippetAcceptingContext
                 ->setLocation('Daheim')
                 ->setUrl('http://www.example.com/foo');
 
-            $this->_service->createFleaMarket($fleaMarket, $organizer);
+            $id = $this->_service->createFleaMarket($fleaMarket, $organizer);
+            var_dump('created fleamarket ', $id);
         }
     }
 
     private function _cleanupDatabase()
     {
-        $allMarkets = $this->_service->getAllFleaMarkets();
-        foreach($allMarkets as $market) {
-            $this->_service->deleteFleaMarket($market);
-        }
+        $this->_service->truncateTablesForTestCases();
     }
 }

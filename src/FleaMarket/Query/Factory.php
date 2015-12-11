@@ -14,6 +14,7 @@ class Factory
     private $_fleaMarketOrganizerReadListQuery;
     private $_fleaMarketOrganizerReadQuery;
     private $_fleaMarketOrganizerUpdateQuery;
+    private $_fleaMarketTestCaseDeleteQuery;
 
     /**
      * @return \RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketDeleteQuery
@@ -133,5 +134,17 @@ class Factory
         }
 
         return $this->_fleaMarketOrganizerUpdateQuery;
+    }
+
+    /**
+     * @return \RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketTestCaseDeleteQuery
+     */
+    public function createFleaMarketTestCaseDeleteQuery()
+    {
+        if (is_null($this->_fleaMarketTestCaseDeleteQuery)) {
+            $this->_fleaMarketTestCaseDeleteQuery = new FleaMarketTestCaseDeleteQuery();
+        }
+
+        return $this->_fleaMarketTestCaseDeleteQuery;
     }
 }

@@ -11,103 +11,33 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->_sut = new Factory();
     }
 
-    public function testFactoryCreatesFleaMarketDeleteQuery()
+    /**
+     * @dataProvider dataProviderTestFactoryCreatesDesiredQuery
+     */
+    public function testFactoryCreatesDesiredQuery($method, $expectedQuery)
     {
-        $query = $this->_sut->createFleaMarketDeleteQuery();
+        $query = $this->_sut->$method();
 
         $this->assertInstanceOf(
-            'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketDeleteQuery',
+            $expectedQuery,
             $query
         );
     }
 
-    public function testFactoryCreatesFleaMarketInsertQuery()
+    public function dataProviderTestFactoryCreatesDesiredQuery()
     {
-        $query = $this->_sut->createFleaMarketInsertQuery();
-
-        $this->assertInstanceOf(
-            'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketInsertQuery',
-            $query
-        );
-    }
-
-    public function testFactoryCreatesFleaMarketReadListQuery()
-    {
-        $query = $this->_sut->createFleaMarketReadListQuery();
-
-        $this->assertInstanceOf(
-            'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketReadListQuery',
-            $query
-        );
-    }
-
-    public function testFactoryCreatesFleaMarketReadQuery()
-    {
-        $query = $this->_sut->createFleaMarketReadQuery();
-
-        $this->assertInstanceOf(
-            'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketReadQuery',
-            $query
-        );
-    }
-
-    public function testFactoryCreatesFleaMarketUpdateQuery()
-    {
-        $query = $this->_sut->createFleaMarketUpdateQuery();
-
-        $this->assertInstanceOf(
-            'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketUpdateQuery',
-            $query
-        );
-    }
-
-    public function testFactoryCreatesFleaMarketOrganizerDeleteQuery()
-    {
-        $query = $this->_sut->createFleaMarketOrganizerDeleteQuery();
-
-        $this->assertInstanceOf(
-            'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerDeleteQuery',
-            $query
-        );
-    }
-
-    public function testFactoryCreatesFleaMarketOrganizerInsertQuery()
-    {
-        $query = $this->_sut->createFleaMarketOrganizerInsertQuery();
-
-        $this->assertInstanceOf(
-            'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerInsertQuery',
-            $query
-        );
-    }
-
-    public function testFactoryCreatesFleaMarketOrganizerReadListQuery()
-    {
-        $query = $this->_sut->createFleaMarketOrganizerReadListQuery();
-
-        $this->assertInstanceOf(
-            'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerReadListQuery',
-            $query
-        );
-    }
-
-    public function testFactoryCreatesFleaOrganizerMarketReadQuery()
-    {
-        $query = $this->_sut->createFleaMarketOrganizerReadQuery();
-
-        $this->assertInstanceOf(
-            'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerReadQuery',
-            $query
-        );
-    }
-
-    public function testFactoryCreatesFleaMarketOrganizerUpdateQuery()
-    {
-        $query = $this->_sut->createFleaMarketOrganizerUpdateQuery();
-
-        $this->assertInstanceOf(
-            'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerUpdateQuery',
-            $query
+        return array(
+            array('createFleaMarketDeleteQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketDeleteQuery'),
+            array('createFleaMarketInsertQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketInsertQuery'),
+            array('createFleaMarketReadListQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketReadListQuery'),
+            array('createFleaMarketReadQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketReadQuery'),
+            array('createFleaMarketUpdateQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketUpdateQuery'),
+            array('createFleaMarketOrganizerDeleteQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerDeleteQuery'),
+            array('createFleaMarketOrganizerInsertQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerInsertQuery'),
+            array('createFleaMarketOrganizerReadListQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerReadListQuery'),
+            array('createFleaMarketOrganizerReadQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerReadQuery'),
+            array('createFleaMarketOrganizerUpdateQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerUpdateQuery'),
+            array('createFleaMarketTestCaseDeleteQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketTestCaseDeleteQuery')
         );
     }
 }

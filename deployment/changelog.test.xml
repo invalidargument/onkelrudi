@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="999999998" author="Rudi Bieller">
+        <sql dbms="mysql"
+             endDelimiter=";"
+             splitStatements="true"
+             stripComments="true">SET FOREIGN_KEY_CHECKS = 0; TRUNCATE TABLE fleamarkets_organizer; SET FOREIGN_KEY_CHECKS = 1;
+            <comment>Have a clean DB table for testing</comment>
+        </sql>
+    </changeSet>
+    <changeSet id="999999999" author="Rudi Bieller">
+        <sql dbms="mysql"
+             endDelimiter=";"
+             splitStatements="true"
+             stripComments="true">SET FOREIGN_KEY_CHECKS = 0; TRUNCATE TABLE fleamarkets; SET FOREIGN_KEY_CHECKS = 1;
+            <comment>Have a clean DB table for testing</comment>
+        </sql>
+    </changeSet>
+</databaseChangeLog>
+
+
