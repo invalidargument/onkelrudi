@@ -8,9 +8,8 @@ composer update
 bower install
 ```
 
-/var/log/apache2/error.log
-
+```
 /etc/mysql/my.conf
-general_log_file        = /var/log/mysql/mysql.log
-general_log             = 1
-tail -f /var/log/mysql
+/var/log/apache2/error.log
+/var/log/mysql/mysql.log
+```
