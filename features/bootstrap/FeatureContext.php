@@ -4,6 +4,7 @@ use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
+use Behat\Gherkin\Node\PyStringNode;
 use Behat\WebApiExtension\Context\WebApiContext;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketService;
@@ -91,23 +92,11 @@ class FeatureContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Then the response should contain all created fleamarkets
+     * @Then the response should be
      */
-    public function theResponseShouldContainAllCreatedFleamarkets()
+    public function theResponseShouldBe(PyStringNode $string)
     {
-        $markets = json_decode($this->_response->getContent())->data;
-        foreach ($markets as $key => $market) {
-            \PHPUnit_Framework_Assert::assertEquals('Der  #'.$key.' Flohmarkt von Rudi', $market->name);
-        }
-    }
-
-    /**
-     * @Then the response should contain fleamarket with id :arg1
-     */
-    public function theResponseShouldContainFleamarketWithId($arg1)
-    {
-        var_dump($this->_response->getContent());
-        \PHPUnit_Framework_Assert::assertEquals($arg1, $this->_response->getContent()->data);
+        \PHPUnit_Framework_Assert::assertEquals($string, (string)$this->_response->getContent());
     }
 
     private function _createFleaMarkets($num = 3)
@@ -137,7 +126,6 @@ class FeatureContext implements Context, SnippetAcceptingContext
                 ->setUrl('http://www.example.com/foo');
 
             $id = $this->_service->createFleaMarket($fleaMarket, $organizer);
-            var_dump('created fleamarket ', $id);
         }
     }
 
