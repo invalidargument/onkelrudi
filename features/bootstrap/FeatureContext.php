@@ -51,8 +51,8 @@ class FeatureContext implements Context, SnippetAcceptingContext
     /** @AfterScenario */
     public function after(AfterScenarioScope $scope)
     {
-        //$this->_cleanupDatabase();
-        //$this->_response = null;
+        $this->_cleanupDatabase();
+        $this->_response = null;
     }
 
     /**
@@ -68,11 +68,26 @@ class FeatureContext implements Context, SnippetAcceptingContext
     }
 
     /**
+     * @Given I have a default organizer
+     */
+    public function iHaveADefaultOrganizer()
+    {
+        $this->_createDefaultOrganizer();
+    }
+
+    /**
      * @Given I send a :arg1 request to :arg2
      */
     public function iSendARequestTo($arg1, $arg2)
     {
-        $this->_response = $this->_browser->get($arg2);
+        $allowed = array('GET', 'POST', 'DELETE', 'PUT');
+        if (!in_array($arg1, $allowed)) {
+            throw new \InvalidArgumentException('Unsupported request method '.$arg1.'. Must be one of '.implode($allowed));
+        }
+
+        $method = strtolower($arg1);
+
+        $this->_response = $this->_browser->$method($arg2);
     }
 
     /**
@@ -96,7 +111,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function theResponseShouldBe(PyStringNode $string)
     {
-        \PHPUnit_Framework_Assert::assertEquals($string, (string)$this->_response->getContent());
+        \PHPUnit_Framework_Assert::assertEquals((string)$string, (string)$this->_response->getContent());
     }
 
     private function _createFleaMarkets($num = 3)
@@ -127,6 +142,19 @@ class FeatureContext implements Context, SnippetAcceptingContext
 
             $id = $this->_service->createFleaMarket($fleaMarket, $organizer);
         }
+    }
+
+    private function _createDefaultOrganizer()
+    {
+        $organizer = new Organizer();
+        $organizer->setName('Max Power')
+            ->setPhone('23')
+            ->setCity('Köln')
+            ->setZipCode('50000')
+            ->setStreet('foo')
+            ->setStreetNo('2000')
+            ->setUrl('http://www.example.com');
+        $id = $this->_service->createOrganizer($organizer);
     }
 
     private function _cleanupDatabase()

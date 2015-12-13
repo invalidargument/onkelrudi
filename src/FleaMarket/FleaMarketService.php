@@ -6,6 +6,8 @@ use RudiBieller\OnkelRudi\FleaMarket\Query\Factory;
 
 class FleaMarketService implements FleaMarketServiceInterface
 {
+    const DEFAULT_ORGANIZER = 1;
+
     /**
      * @var \RudiBieller\OnkelRudi\FleaMarket\Query\Factory
      */
@@ -20,8 +22,12 @@ class FleaMarketService implements FleaMarketServiceInterface
     {
         $query = $this->_factory->createFleaMarketInsertQuery();
 
+        $organizerId = is_null($fleaMarket->getOrganizer())
+            ? self::DEFAULT_ORGANIZER
+            : $fleaMarket->getOrganizer()->getId();
+
         $query
-            ->setOrganizerId($fleaMarket->getOrganizer()->getId())
+            ->setOrganizerId($organizerId)
             ->setName($fleaMarket->getName())
             ->setDescription($fleaMarket->getDescription())
             ->setStart($fleaMarket->getStart())

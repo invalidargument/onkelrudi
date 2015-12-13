@@ -22,7 +22,7 @@
                 <constraints nullable="true"/>
             </column>
             <column name="zipcode" type="varchar(10)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="phone" type="varchar(255)">
                 <constraints nullable="true"/>
@@ -89,6 +89,9 @@
             schemaName="public"
             startWith="1"
             tableName="fleamarkets"/>
+    </changeSet>
+    <changeSet id="5" author="Rudi Bieller" failOnError="false">
+        <sql>INSERT INTO fleamarkets_organizer (id, name) VALUES (1, 'Rudi the Organizer');</sql>
     </changeSet>
 </databaseChangeLog>
 

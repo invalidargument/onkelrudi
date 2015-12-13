@@ -11,16 +11,18 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
     public function testActionCreatesNewFleaMarket()
     {
         $json = json_encode([
-            'name' => 'foo',
-            'city' => 'bar',
-            'zipCode' => '12345',
-            'description' => 'baz',
-            'start' => '2017-01-01 00:00:00',
-            'end' => '2018-01-01 00:00:00',
-            'location' => 'Cologne',
-            'street' => 'Venloer',
-            'streetNo' => 1,
-            'url' => 'foo.com'
+            'data' => [
+                'name' => 'foo',
+                'city' => 'bar',
+                'zipCode' => '12345',
+                'description' => 'baz',
+                'start' => '2017-01-01 00:00:00',
+                'end' => '2018-01-01 00:00:00',
+                'location' => 'Cologne',
+                'street' => 'Venloer',
+                'streetNo' => 1,
+                'url' => 'foo.com'
+            ]
         ]);
         $fleaMarket = new FleaMarket();
         $fleaMarket->setName('foo')
