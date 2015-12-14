@@ -32,3 +32,8 @@ Feature: API v1 fleamarkets
     """
     {"data":"1"}
     """
+    Given I send a "GET" request to "http://localhost/public/api/v1/fleamarkets/1"
+    Then the response should be
+    """
+    {"data":{"id":"1","organizer":null,"name":"Max Power","description":"Blue Pants","start":"2015-01-01 00:00:00","end":"2015-12-12 00:00:00","street":null,"streetNo":null,"city":null,"zipCode":"50667","location":null,"url":null}}
+    """
