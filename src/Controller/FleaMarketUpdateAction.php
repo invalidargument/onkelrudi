@@ -16,7 +16,7 @@ class FleaMarketUpdateAction extends AbstractAction
 
         $data = json_decode($this->args['data']);
 
-        foreach ($data as $key => $value) {
+        foreach ($data->data as $key => $value) {
             $method = 'set'.ucfirst($key);
             if (method_exists($builder, $method)) {
                 $builder->$method($value);

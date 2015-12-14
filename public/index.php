@@ -99,15 +99,16 @@ $app->group('/api', function () use ($app, $controllerFactory) {
         });
 
         // PUT route, for updating a fleamarket
-        $app->put('/fleamarkets/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
+        $app->put('/fleamarkets/{data}', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketUpdateAction');
+            $action->setBuilderFactory(new BuilderFactory());
             $action($app->getContainer()->get('request'), $app->getContainer()->get('response'), $args);
         });
 
         // DELETE route, for deleting a fleamarket
-        $app->delete('/fleamarkets/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
+        $app->delete('/fleamarkets/{data}', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketDeleteAction');
-            $action($app->getContainer()->get('request'), $app->getContainer()->get('response'), $args);
+            $action($request, $response, $args);
         });
 
         // POST route, for creating a fleamarket

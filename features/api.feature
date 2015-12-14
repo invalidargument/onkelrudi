@@ -37,3 +37,18 @@ Feature: API v1 fleamarkets
     """
     {"data":{"id":"1","organizer":null,"name":"Max Power","description":"Blue Pants","start":"2015-01-01 00:00:00","end":"2015-12-12 00:00:00","street":null,"streetNo":null,"city":null,"zipCode":"50667","location":null,"url":null}}
     """
+
+  Scenario: Update an existing fleamarket
+    Given I have some fleamarkets in my database
+    And I send a "PUT" request to "http://localhost/public/api/v1/fleamarkets/%7B%22data%22%3A%7B%22name%22%3A%22Max+UPDATED%22%2C+%22description%22%3A+%22Blue+Pants%22%2C+%22start%22%3A%222015-01-01+00%3A00%3A00%22%2C+%22end%22%3A%222015-12-12+00%3A00%3A00%22%2C+%22zipCode%22%3A%2250667%22%2C+%22id%22%3A+%221%22%7D%7D"
+    Then the response code should be "200"
+    And the response should be json
+    And the response should be
+    """
+    {"data":1}
+    """
+    Given I send a "GET" request to "http://localhost/public/api/v1/fleamarkets/1"
+    Then the response should be
+    """
+    {"data":{"id":"1","organizer":null,"name":"Max UPDATED","description":"Blue Pants","start":"2015-01-01 00:00:00","end":"2015-12-12 00:00:00","street":null,"streetNo":null,"city":null,"zipCode":"50667","location":null,"url":null}}
+    """
