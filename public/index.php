@@ -89,25 +89,26 @@ $app->group('/api', function () use ($app, $controllerFactory) {
         // GET list a specific fleamarket
         $app->get('/fleamarkets/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketAction');
-            $action($app->getContainer()->get('request'), $app->getContainer()->get('response'), $args);
+            $action($request, $response, $args);
         });
 
         // GET list all fleamarkets
         $app->get('/fleamarkets', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketsAction');
-            $action($app->getContainer()->get('request'), $app->getContainer()->get('response'), $args);
+            $action($request, $response, $args);
         });
 
         // PUT route, for updating a fleamarket
         $app->put('/fleamarkets/{data}', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketUpdateAction');
             $action->setBuilderFactory(new BuilderFactory());
-            $action($app->getContainer()->get('request'), $app->getContainer()->get('response'), $args);
+            $action($request, $response, $args);
         });
 
         // DELETE route, for deleting a fleamarket
-        $app->delete('/fleamarkets/{data}', function ($request, $response, $args) use ($app, $controllerFactory) {
+        $app->delete('/fleamarkets/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketDeleteAction');
+            $action->setBuilderFactory(new BuilderFactory());
             $action($request, $response, $args);
         });
 
@@ -115,7 +116,7 @@ $app->group('/api', function () use ($app, $controllerFactory) {
         $app->post('/fleamarkets/{data}', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketCreateAction');
             $action->setBuilderFactory(new BuilderFactory());
-            $action($app->getContainer()->get('request'), $app->getContainer()->get('response'), $args);
+            $action($request, $response, $args);
         });
     });
 
