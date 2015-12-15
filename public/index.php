@@ -99,7 +99,7 @@ $app->group('/api', function () use ($app, $controllerFactory) {
         });
 
         // PUT route, for updating a fleamarket
-        $app->put('/fleamarkets/{data}', function ($request, $response, $args) use ($app, $controllerFactory) {
+        $app->put('/fleamarkets/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketUpdateAction');
             $action->setBuilderFactory(new BuilderFactory());
             $action($request, $response, $args);
@@ -113,7 +113,7 @@ $app->group('/api', function () use ($app, $controllerFactory) {
         });
 
         // POST route, for creating a fleamarket
-        $app->post('/fleamarkets/{data}', function ($request, $response, $args) use ($app, $controllerFactory) {
+        $app->post('/fleamarkets', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketCreateAction');
             $action->setBuilderFactory(new BuilderFactory());
             $action($request, $response, $args);

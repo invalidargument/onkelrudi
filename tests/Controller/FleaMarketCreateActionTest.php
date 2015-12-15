@@ -10,20 +10,18 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
 {
     public function testActionCreatesNewFleaMarket()
     {
-        $json = json_encode([
-            'data' => [
-                'name' => 'foo',
-                'city' => 'bar',
-                'zipCode' => '12345',
-                'description' => 'baz',
-                'start' => '2017-01-01 00:00:00',
-                'end' => '2018-01-01 00:00:00',
-                'location' => 'Cologne',
-                'street' => 'Venloer',
-                'streetNo' => 1,
-                'url' => 'foo.com'
-            ]
-        ]);
+        $parsedJson = [
+            'name' => 'foo',
+            'city' => 'bar',
+            'zipCode' => '12345',
+            'description' => 'baz',
+            'start' => '2017-01-01 00:00:00',
+            'end' => '2018-01-01 00:00:00',
+            'location' => 'Cologne',
+            'street' => 'Venloer',
+            'streetNo' => 1,
+            'url' => 'foo.com'
+        ];
         $fleaMarket = new FleaMarket();
         $fleaMarket->setName('foo')
             ->setCity('bar')
@@ -42,6 +40,7 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
 
         $app = new App();
         $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
+        $request->shouldReceive('getParsedBody')->once()->andReturn($parsedJson);
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
 
         $action = new FleaMarketCreateAction();
@@ -49,7 +48,7 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
             ->setService($service)
             ->setBuilderFactory($builderFactory);
 
-        $return = $action($request, $response, array('data' => $json));
+        $return = $action($request, $response, array());
         $actual = (string)$return->getBody();
         $expected = json_encode(array('data' => 1));
 

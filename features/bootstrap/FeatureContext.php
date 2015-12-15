@@ -91,6 +91,21 @@ class FeatureContext implements Context, SnippetAcceptingContext
     }
 
     /**
+     * @Given I send a :arg1 request to :arg2 with body
+     */
+    public function iSendARequestToWithBody($arg1, $arg2, PyStringNode $string)
+    {
+        $allowed = array('POST', 'DELETE', 'PUT');
+        if (!in_array($arg1, $allowed)) {
+            throw new \InvalidArgumentException('Unsupported request method '.$arg1.' when sending content in body. Must be one of '.implode($allowed));
+        }
+
+        $method = strtolower($arg1);
+
+        $this->_response = $this->_browser->$method($arg2, array('Content-Type: application/json'), (string)$string);
+    }
+
+    /**
      * @Then the response code should be :arg1
      */
     public function theResponseCodeShouldBe($arg1)

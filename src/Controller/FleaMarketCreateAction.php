@@ -12,13 +12,11 @@ class FleaMarketCreateAction extends AbstractAction
         $builder = $this->builderFactory->create('RudiBieller\OnkelRudi\FleaMarket\Builder');
         $builder->reset();
 
-        $data = json_decode($this->args['data']);
+        $data = $this->request->getParsedBody();
 
-        if (!$this->_isValidJson()) {
-            throw new \InvalidArgumentException('Parameters for FleaMarketCreateAction results in invalid json.');
-        }
+        // if incomplete, return error
 
-        foreach ($data->data as $key => $value) {
+        foreach ($data as $key => $value) {
             $method = 'set'.ucfirst($key);
             if (method_exists($builder, $method)) {
                 $builder->$method($value);
@@ -26,10 +24,5 @@ class FleaMarketCreateAction extends AbstractAction
         }
 
         return $this->service->createFleaMarket($builder->build());
-    }
-
-    private function _isValidJson()
-    {
-        return (json_last_error() === JSON_ERROR_NONE);
     }
 }

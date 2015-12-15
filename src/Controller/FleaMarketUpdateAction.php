@@ -14,9 +14,15 @@ class FleaMarketUpdateAction extends AbstractAction
         $builder = $this->builderFactory->create('RudiBieller\OnkelRudi\FleaMarket\Builder');
         $builder->reset();
 
-        $data = json_decode($this->args['data']);
+        $fleaMarketId = $this->args['id'];
 
-        foreach ($data->data as $key => $value) {
+        // if not found, return 404
+
+        $builder->setId($fleaMarketId);
+
+        $data = $this->request->getParsedBody();
+
+        foreach ($data as $key => $value) {
             $method = 'set'.ucfirst($key);
             if (method_exists($builder, $method)) {
                 $builder->$method($value);
