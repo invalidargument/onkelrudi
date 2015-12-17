@@ -108,7 +108,7 @@ class Organizer implements OrganizerInterface, \JsonSerializable
             'name' => $this->getName(),
             'street' => $this->getStreet(),
             'streetNo' => $this->getStreetNo(),
-            'zipcode' => $this->getZipCode(),
+            'zipCode' => $this->getZipCode(),
             'city' => $this->getCity(),
             'phone' => $this->getPhone(),
             'url' => $this->getUrl()

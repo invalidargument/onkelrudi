@@ -77,14 +77,11 @@ $controllerFactory->setService($service);
 
 
 
-//$app->get('/', function ($args) use ($app, $controllerFactory) {
-//    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketsAction');
-//    $action($app->getContainer()->get('request'), $app->getContainer()->get('response'), array());
-//});
-
 $app->group('/api', function () use ($app, $controllerFactory) {
 
     $app->group('/v1', function () use ($app, $controllerFactory) {
+
+        // ############# FleaMarket #############
 
         // GET list a specific fleamarket
         $app->get('/fleamarkets/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
@@ -115,6 +112,41 @@ $app->group('/api', function () use ($app, $controllerFactory) {
         // POST route, for creating a fleamarket
         $app->post('/fleamarkets', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketCreateAction');
+            $action->setBuilderFactory(new BuilderFactory());
+            $action($request, $response, $args);
+        });
+
+        // ############# Organizer #############
+
+        // GET list a specific fleamarket
+        $app->get('/organizers/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\OrganizerAction');
+            $action($request, $response, $args);
+        });
+
+        // GET list all fleamarkets
+        $app->get('/organizers', function ($request, $response, $args) use ($app, $controllerFactory) {
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\OrganizersAction');
+            $action($request, $response, $args);
+        });
+
+        // PUT route, for updating a fleamarket
+        $app->put('/organizers/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\OrganizerUpdateAction');
+            $action->setBuilderFactory(new BuilderFactory());
+            $action($request, $response, $args);
+        });
+
+        // DELETE route, for deleting a fleamarket
+        $app->delete('/organizers/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\OrganizerDeleteAction');
+            $action->setBuilderFactory(new BuilderFactory());
+            $action($request, $response, $args);
+        });
+
+        // POST route, for creating a fleamarket
+        $app->post('/organizers', function ($request, $response, $args) use ($app, $controllerFactory) {
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\OrganizerCreateAction');
             $action->setBuilderFactory(new BuilderFactory());
             $action($request, $response, $args);
         });

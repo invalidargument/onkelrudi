@@ -56,9 +56,9 @@ class FeatureContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Given I have some fleamarkets in my database
+     * @Given I have some fleamarkets
      */
-    public function iHaveSomeFleamarketsInMyDatabase()
+    public function iHaveSomeFleamarkets()
     {
         try {
             $this->_createFleaMarkets();
