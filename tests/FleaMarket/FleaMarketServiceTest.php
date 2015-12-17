@@ -4,6 +4,9 @@ namespace RudiBieller\OnkelRudi\FleaMarket;
 
 class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var FleaMarketService
+     */
     private $_sut;
     private $_factory;
 
@@ -173,5 +176,17 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
         $this->_factory->shouldReceive('createFleaMarketUpdateQuery')->once()->andReturn($query);
 
         $this->_sut->updateFleaMarket($fleaMarket);
+    }
+
+    public function testGetAllOrganizersReturnsListWithAllOrganizers()
+    {
+        $organizers = array();
+
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerReadListQuery');
+        $query->shouldReceive('run')->once()->andReturn($organizers);
+
+        $this->_factory->shouldReceive('createFleaMarketOrganizerReadListQuery')->once()->andReturn($query);
+
+        $this->_sut->getAllOrganizers();
     }
 }

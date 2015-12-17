@@ -95,3 +95,13 @@ Feature: API v1 fleamarkets
     """
     {"data":{"id":"1","name":"Max Power","street":"foo","streetNo":"2000","zipCode":"50000","city":"K\u00f6ln","phone":"23","url":"http:\/\/www.example.com"}}
     """
+
+  Scenario: Get all existing organizers, limited by limit/offset
+    Given I have some organizers
+    And I send a "GET" request to "http://localhost/public/api/v1/organizers"
+    Then the response code should be "200"
+    And the response should be json
+    And the response should be
+    """
+    {"data":[{"id":"1","name":"Max Power #0","street":"foo","streetNo":"2000","zipCode":"50000","city":"K\u00f6ln","phone":"23","url":"http:\/\/www.example.com"},{"id":"2","name":"Max Power #1","street":"foo","streetNo":"2000","zipCode":"50000","city":"K\u00f6ln","phone":"23","url":"http:\/\/www.example.com"},{"id":"3","name":"Max Power #2","street":"foo","streetNo":"2000","zipCode":"50000","city":"K\u00f6ln","phone":"23","url":"http:\/\/www.example.com"}]}
+    """

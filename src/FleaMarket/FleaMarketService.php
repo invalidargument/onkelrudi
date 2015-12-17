@@ -118,6 +118,13 @@ class FleaMarketService implements FleaMarketServiceInterface
         return $query->run();
     }
 
+    public function getAllOrganizers()
+    {
+        $query = $this->_factory->createFleaMarketOrganizerReadListQuery();
+
+        return $query->run();
+    }
+
     public function truncateTablesForTestCases()
     {
         $query = $this->_factory->createFleaMarketTestCaseDeleteQuery();

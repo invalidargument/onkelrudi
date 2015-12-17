@@ -68,6 +68,14 @@ class FeatureContext implements Context, SnippetAcceptingContext
     }
 
     /**
+     * @Given I have some organizers
+     */
+    public function iHaveSomeOrganizers()
+    {
+        $this->_createOrganizers();
+    }
+
+    /**
      * @Given I have a default organizer
      */
     public function iHaveADefaultOrganizer()
@@ -155,7 +163,22 @@ class FeatureContext implements Context, SnippetAcceptingContext
                 ->setLocation('Daheim')
                 ->setUrl('http://www.example.com/foo');
 
-            $id = $this->_service->createFleaMarket($fleaMarket, $organizer);
+            $this->_service->createFleaMarket($fleaMarket, $organizer);
+        }
+    }
+
+    private function _createOrganizers($num = 3)
+    {
+        for ($i=0; $i<$num; $i++) {
+            $organizer = new Organizer();
+            $organizer->setName('Max Power #'.$i)
+                ->setPhone('23')
+                ->setCity('Köln')
+                ->setZipCode('50000')
+                ->setStreet('foo')
+                ->setStreetNo('2000')
+                ->setUrl('http://www.example.com');
+            $this->_service->createOrganizer($organizer);
         }
     }
 
