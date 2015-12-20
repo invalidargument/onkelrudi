@@ -105,3 +105,21 @@ Feature: API v1 fleamarkets
     """
     {"data":[{"id":"1","name":"Max Power #0","street":"foo","streetNo":"2000","zipCode":"50000","city":"K\u00f6ln","phone":"23","url":"http:\/\/www.example.com"},{"id":"2","name":"Max Power #1","street":"foo","streetNo":"2000","zipCode":"50000","city":"K\u00f6ln","phone":"23","url":"http:\/\/www.example.com"},{"id":"3","name":"Max Power #2","street":"foo","streetNo":"2000","zipCode":"50000","city":"K\u00f6ln","phone":"23","url":"http:\/\/www.example.com"}]}
     """
+
+  Scenario: Update an organizer by id
+    Given I have a default organizer
+    And I send a "PUT" request to "http://localhost/public/api/v1/organizers/1" with body
+    """
+    {"name":"MAX POWERRRRR!!!!","street":"fuu","streetNo":"2001","zipCode":"50001","city":"K\u00f6ln","phone":"23","url":"http:\/\/www.example.com"}
+    """
+    Then the response code should be "200"
+    And the response should be json
+    And the response should be
+    """
+    {"data":1}
+    """
+    When I send a "GET" request to "http://localhost/public/api/v1/organizers/1"
+    Then the response should be
+    """
+    {"data":{"id":"1","name":"MAX POWERRRRR!!!!","street":"fuu","streetNo":"2001","zipCode":"50001","city":"K\u00f6ln","phone":"23","url":"http:\/\/www.example.com"}}
+    """
