@@ -11,3 +11,4 @@ deployment/settings_*
 bower_components
 cache.properties
 wordpress
+.DS_Store
