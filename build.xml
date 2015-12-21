@@ -7,10 +7,10 @@
     </tstamp>
 
     <target name="build"
-        depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, behat, grunt, archive"/>
+        depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, behat, grunt, composer_optimize, archive"/>
 
     <target name="build-parallel"
-        depends="prepare, lint, composer, liquibase, tools-parallel, phpcpd, phpunit, behat, grunt, archive"/>
+        depends="prepare, lint, composer, liquibase, tools-parallel, phpcpd, phpunit, behat, grunt, composer_optimize, archive"/>
 
     <property environment="env"/>
 
@@ -42,6 +42,13 @@
     <target name="composer" description="composer update">
         <exec executable="composer" failonerror="true">
             <arg value="update" />
+        </exec>
+    </target>
+
+    <target name="composer_optimize" description="composer dump autoload">
+        <exec executable="composer" failonerror="true">
+            <arg value="dump-autoload" />
+            <arg value="--optimize" />
         </exec>
     </target>
 
