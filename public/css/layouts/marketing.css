@@ -206,6 +206,9 @@ a.pure-button-primary {
 .content-subhead {
     color: #1f8dd6;
 }
+.ribbon .content-subhead {
+    color: #FFFFFF;
+}
     .content-subhead i {
         margin-right: 7px;
     }
