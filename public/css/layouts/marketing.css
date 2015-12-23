@@ -191,24 +191,27 @@ a.pure-button-primary {
 
 /* This is the class used for the main content headers (<h2>) */
 .content-head {
+    color:#000000;
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin: 2em 0 1em;
 }
-
-/* This is a modifier class used when the content-head is inside a ribbon */
-.content-head-ribbon {
+.ribbon .content-head {
     color: white;
 }
 
 /* This is the class used for the content sub-headers (<h3>) */
 .content-subhead {
-    color: #1f8dd6;
+    color: #000000;
+    font-weight: normal;
 }
-.ribbon .content-subhead {
-    color: #FFFFFF;
-}
+    .ribbon .content-subhead {
+        color: #FFFFFF;
+    }
+    .ribbon a {
+        color: #FFFFFF;
+    }
     .content-subhead i {
         margin-right: 7px;
     }
