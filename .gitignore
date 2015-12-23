@@ -11,6 +11,7 @@ deployment/settings_*
 bower_components
 cache.properties
 wordpress
+!src/Wordpress
 .DS_Store
 public/templates/cache/*
 !public/templates/cache/.gitkeep
