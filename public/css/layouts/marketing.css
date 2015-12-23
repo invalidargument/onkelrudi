@@ -109,6 +109,7 @@ a.pure-button-primary {
     color: white;
     font-weight: 400;
     font-size: 120%;
+    float:left;
 }
 
 .home-menu .pure-menu-selected a {
@@ -137,7 +138,7 @@ a.pure-button-primary {
     overflow: hidden;
     /* The following styles are required for the "scroll-over" effect */
     width: 100%;
-    height: 88%;
+    height: 38%;
     top: 0;
     left: 0;
     position: fixed !important;
@@ -149,7 +150,7 @@ a.pure-button-primary {
     height: 50%;
     margin: auto;
     position: absolute;
-    top: 100px; left: 0; bottom: 0; right: 0;
+    top: 20px; left: 0; bottom: 0; right: 0;
     text-align: center;
     text-transform: uppercase;
 }
@@ -159,8 +160,8 @@ a.pure-button-primary {
     font-size: 20px;
     font-weight: bold;
     color: white;
-    border: 3px solid white;
-    padding: 1em 1.6em;
+    border: 0;
+    padding: 0 1.6em;
     font-weight: 100;
     border-radius: 5px;
     line-height: 1em;
@@ -180,7 +181,7 @@ a.pure-button-primary {
 .content-wrapper {
     /* These styles are required for the "scroll-over" effect */
     position: absolute;
-    top: 87%;
+    top: 37%;
     width: 100%;
     min-height: 12%;
     z-index: 2;
@@ -208,6 +209,17 @@ a.pure-button-primary {
     .content-subhead i {
         margin-right: 7px;
     }
+.content-subhead-listitem {
+    margin-bottom:0;
+    padding:0;
+}
+.content-subhead-listitem + p {
+    margin:0;
+    font-size: 0.94em;
+}
+.content-subhead-listitem + p time {
+    font-weight:bold;
+}
 
 /* This is the class used for the dark-background areas. */
 .ribbon {
@@ -279,4 +291,31 @@ a.pure-button-primary {
     .splash-head {
         font-size: 300%;
     }
+}
+
+
+
+/* taken from  Blog Styles */
+.post-category {
+    margin: 0 0.1em;
+    padding: 0.2em 0.4em;
+    color: #fff;
+    background: #999;
+    font-weight: normal;
+    letter-spacing: 3px;
+}
+.post-category-design {
+    background: #5aba59;
+}
+.post-category-pure {
+    background: #4d85d1;
+}
+.post-category-yui {
+    background: #8156a7;
+}
+.post-category-js {
+    background: #df2d4f;
+}
+a.post-category {
+    text-decoration: none;
 }

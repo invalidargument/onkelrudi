@@ -18,9 +18,13 @@ $controllerFactory->setService($service);
 
 $container = $app->getContainer();
 $container['view'] = function ($c) {
-    $view = new \Slim\Views\Twig('templates', [
-        'cache' => 'templates/cache'
-    ]);
+    $view = new \Slim\Views\Twig(
+        'templates',
+        [
+            //'cache' => 'templates/cache'
+            'cache' => false
+        ]
+    );
 
     $view->addExtension(new Slim\Views\TwigExtension(
         $c['router'],
@@ -30,10 +34,11 @@ $container['view'] = function ($c) {
     return $view;
 };
 
-$app->get('/', function ($request, $response, $args) {
+$app->get('/', function ($request, $response, $args) use ($service) {
+    $fleaMarkets = $service->getAllFleaMarkets();
     return $this->get('view')
         ->render($response, 'index.html', [
-            //'name' => $args['name']
+            'fleamarkets' => $fleaMarkets
         ]);
 })->setName('index');
 
