@@ -8,6 +8,8 @@ interface FleaMarketServiceInterface extends ServiceInterface
 {
     function getAllFleaMarkets();
 
+    function getFleaMarkets($limit, $offset);
+
     function getAllOrganizers();
 
     function getFleaMarket($id);

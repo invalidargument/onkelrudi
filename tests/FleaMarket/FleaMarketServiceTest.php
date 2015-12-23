@@ -128,6 +128,21 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
         $this->_sut->getAllFleaMarkets();
     }
 
+    public function testGetFleaMarketsReturnsListWithMarketsByLimitAndOffset()
+    {
+        $markets = array();
+
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketReadListQuery');
+        $query
+            ->shouldReceive('setLimit')->once()->with(42)->andReturn($query)
+            ->shouldReceive('setOffset')->once()->with(23)->andReturn($query)
+            ->shouldReceive('run')->once()->andReturn($markets);
+
+        $this->_factory->shouldReceive('createFleaMarketReadListQuery')->once()->andReturn($query);
+
+        $this->_sut->getFleaMarkets(42, 23);
+    }
+
     public function testGetFleaMarketReturnsRequestedMarket()
     {
         $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketReadQuery');

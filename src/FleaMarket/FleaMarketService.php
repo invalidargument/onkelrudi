@@ -86,6 +86,14 @@ class FleaMarketService implements FleaMarketServiceInterface
         return $query->run();
     }
 
+    public function getFleaMarkets($limit, $offset)
+    {
+        $query = $this->_factory->createFleaMarketReadListQuery();
+        $query->setLimit($limit)->setOffset($offset);
+
+        return $query->run();
+    }
+
     public function getFleaMarket($id)
     {
         $query = $this->_factory->createFleaMarketReadQuery();
