@@ -4,7 +4,7 @@ namespace RudiBieller\OnkelRudi\Query;
 use \Slim\PDO\Database;
 use RudiBieller\OnkelRudi\Config\Config;
 
-abstract class AbstractQuery
+abstract class AbstractQuery implements QueryInterface
 {
     protected $pdo;
 
@@ -35,6 +35,13 @@ abstract class AbstractQuery
 
     private function _createPdoInstance()
     {
-        return new Database(Config::$dsn, Config::$user, Config::$password);
+        $config = new Config();
+        $dbSettings = $config->getDatabaseConfiguration();
+
+        return new Database(
+            $dbSettings['dsn'],
+            $dbSettings['user'],
+            $dbSettings['password']
+        );
     }
 }
