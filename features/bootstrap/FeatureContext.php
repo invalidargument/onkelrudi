@@ -158,8 +158,8 @@ class FeatureContext implements Context, SnippetAcceptingContext
                 ->setZipCode('5000')
                 ->setStreet('Venloer')
                 ->setStreetNo('20000')
-                ->setStart('2015-12-12 00:00:12')
-                ->setEnd('2015-12-12 00:00:33')
+                ->setStart('2016-03-12 08:00:12')
+                ->setEnd('2016-03-12 19:30:33')
                 ->setLocation('Daheim')
                 ->setUrl('http://www.example.com/foo');
 
