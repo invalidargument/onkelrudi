@@ -8,7 +8,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->_sut = new Config();
+        $this->_sut = new Config('settings.yml.dist');
     }
 
     public function testConfigReturnsParsedConfiguration()

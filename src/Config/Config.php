@@ -6,9 +6,14 @@ use Symfony\Component\Yaml\Yaml;
 class Config
 {
     private static $_parsedConfig;
+    private $_settingsFilename = 'settings.yml';
 
-    public function __construct()
+    public function __construct($settingsFilename = null)
     {
+        if (!is_null($settingsFilename)) {
+            $this->_settingsFilename = $settingsFilename;
+        }
+
         $this->_parseConfig();
     }
 
@@ -30,11 +35,16 @@ class Config
     private function _parseConfig()
     {
         if (is_null(self::$_parsedConfig)) {
-            $configFile = dirname(__FILE__) . '/../../deployment/settings.yml';
+            $configFile = dirname(__FILE__) . '/../../deployment/' . $this->_getSettingsFilename();
             $yamlParser = new Yaml();
             self::$_parsedConfig = $yamlParser->parse(file_get_contents($configFile));
         }
 
         return self::$_parsedConfig;
+    }
+
+    private function _getSettingsFilename()
+    {
+        return $this->_settingsFilename;
     }
 }
