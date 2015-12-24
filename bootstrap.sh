@@ -3,6 +3,7 @@
 apt-get update
 apt-get install -y software-properties-common python-software-properties
 add-apt-repository ppa:webupd8team/java
+add-apt-repository ppa:chris-lea/node.js
 apt-get update
 
 debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password root'
@@ -13,10 +14,6 @@ echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-se
 apt-get install -y curl php5 php5-curl php5-xdebug php5-mysql git ant
 apt-get install -y oracle-java8-installer
 apt-get install -y oracle-java8-set-default
-
-apt-get install -y npm
-npm install -g bower
-ln -s /usr/bin/nodejs /usr/bin/node
 
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
 
@@ -37,3 +34,15 @@ service apache2 restart
 
 git config --global user.name "Rudi Bieller"
 git config --global user.email "kontakt@rudi-bieller.de"
+
+# install nodejs, bower and grunt
+apt-get install -y npm
+npm install -g bower
+ln -s /usr/bin/nodejs /usr/bin/node
+
+apt-get install -y nodejs
+npm install -g grunt-cli
+cd /var/www/html
+npm install grunt --save-dev
+npm install
+
