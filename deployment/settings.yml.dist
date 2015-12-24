@@ -1,0 +1,7 @@
+Database:
+  dsn: 'mysql:host=127.0.0.1;dbname=onkelrudi;charset=utf8';
+  user: 'root'
+  password: 'root'
+
+System:
+  environment: 'dev'
