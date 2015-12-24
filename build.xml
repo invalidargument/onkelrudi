@@ -12,7 +12,7 @@
     <target name="build-parallel"
         depends="prepare, lint, composer, liquibase, tools-parallel, phpcpd, phpunit, behat, grunt, composer_optimize, archive"/>
 
-    <property environment="env"/>
+    <property file="deployment/settings.yml"/>
 
     <target name="tools-parallel" description="Run tools in parallel">
         <parallel threadCount="2">
@@ -117,7 +117,11 @@
     </target>
 
     <target name="grunt">
-        <echo message="waiting for a frontend to work on...! ${env}"/>
+        <echo message="waiting for a frontend to work on...! ${environment}"/>
+    </target>
+
+    <target name="z0nk">
+        <echo message="HAHA! ${dsn} ${user}"/>
     </target>
 
     <target name="archive">
