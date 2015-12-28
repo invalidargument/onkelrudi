@@ -41,6 +41,6 @@ abstract class AbstractJsonReadQuery implements QueryInterface
         $headers = array('Content-Type: application/json');
         $body = '';
 
-        return $this->browser->get($url, $headers, $body);
+        return $this->browser->get($url, $headers, $body)->getContent();
     }
 }
