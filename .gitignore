@@ -16,3 +16,4 @@ wordpress
 public/templates/cache/*
 !public/templates/cache/.gitkeep
 deployment/settings.yml
+node_modules

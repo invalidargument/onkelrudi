@@ -5,37 +5,23 @@
     <tstamp>
         <format property="buildtimestamp" pattern="yyyyMMdd-HHmmss" locale="de,DE" />
     </tstamp>
-
-    <target name="build"
-        depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, behat, grunt, composer_optimize, archive"/>
-
-    <target name="build-parallel"
-        depends="prepare, lint, composer, liquibase, tools-parallel, phpcpd, phpunit, behat, grunt, composer_optimize, archive"/>
-
+    
     <property file="deployment/settings.yml"/>
 
-    <target name="tools-parallel" description="Run tools in parallel">
-        <parallel threadCount="2">
-            <sequential>
-                <antcall target="phpmd"/>
-            </sequential>
-            <antcall target="phpcpd"/>
-            <antcall target="phpcs"/>
-            <antcall target="phploc"/>
-        </parallel>
-    </target>
+    <target name="build"
+        depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, behat, composer_optimize, archive"/>
 
     <target name="clean" description="Cleanup artifacts">
         <delete dir="${basedir}/build/coverage"/>
         <delete dir="${basedir}/build/logs"/>
-        <delete dir="${basedir}/build/api"/>
+        <delete dir="${basedir}/build/onkelrudi"/>
         <delete dir="${basedir}/src/cache"/>
     </target>
 
     <target name="prepare" depends="clean" description="Prepare build">
         <mkdir dir="${basedir}/build/coverage"/>
         <mkdir dir="${basedir}/build/logs"/>
-        <mkdir dir="${basedir}/build/api"/>
+        <mkdir dir="${basedir}/build/onkelrudi"/>
         <mkdir dir="${basedir}/src/cache"/>
     </target>
 
@@ -116,20 +102,37 @@
         </exec>
     </target>
 
-    <target name="grunt">
-        <echo message="waiting for a frontend to work on...! ${environment}"/>
+    <target name="prepare-backend-for-deployment">
+        <echo message="Copy relevant PHP files to build/onkelrudi..."/>
+        <copy todir="${basedir}/build/onkelrudi/public">
+            <fileset dir="${basedir}/public">
+                <exclude name="bower_components/"/>
+            </fileset>
+        </copy>
+        <copy todir="${basedir}/build/onkelrudi/src">
+            <fileset dir="${basedir}/src">
+                <exclude name="src/cache"/>
+            </fileset>
+        </copy>
+        <copy todir="${basedir}/build/onkelrudi/vendor">
+            <fileset dir="${basedir}/vendor"/>
+        </copy>
     </target>
 
-    <target name="z0nk">
-        <echo message="HAHA! ${dsn} ${user}"/>
+    <target name="prepare-frontend-for-deployment">
+        <echo message="Copy relevant HTML/JS/CSS files to build/onkelrudi..."/>
+        <exec executable="grunt" dir="${basedir}" outputproperty="log"/>
+        <echo message="${log}"/>
+        <condition property="onSuccess">
+            <matches pattern="Done, without errors." string="${log}"/>
+        </condition>
+        <fail message="Grunt failed!" unless="onSuccess"/>
     </target>
 
-    <target name="archive">
-        <tar compression="gzip" destfile="${basedir}/build/artifacts/onkelrudi_${buildtimestamp}.tar.gz">
-            <tarfileset dir="." prefix=".">
-                <include name="src/**" />
-                <include name="public/**" />
-                <!-- TODO: exclude: src/cache -->
+    <target name="archive" depends="prepare-backend-for-deployment, prepare-frontend-for-deployment">
+        <tar compression="gzip" destfile="${basedir}/build/artifacts/onkelrudi_${buildtimestamp}.tar.gz" longfile="posix">
+            <tarfileset dir="${basedir}/build/onkelrudi" prefix=".">
+                <include name="**/*" />
             </tarfileset>
         </tar>
     </target>

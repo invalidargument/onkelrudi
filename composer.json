@@ -14,6 +14,7 @@
         "slim/pdo": "*",
         "slim/csrf": "*",
         "slim/twig-view": "*",
+        "kriswallsmith/buzz": "*",
         "alcaeus/liquibase": "*"
     },
     "require-dev": {
@@ -27,7 +28,6 @@
         "mockery/mockery": "*",
 
         "behat/behat": "3.0.*@stable",
-        "kriswallsmith/buzz": "*",
 
         "phploc/phploc": "*",
         "phpmd/phpmd": "*",
