@@ -5,7 +5,7 @@
     <tstamp>
         <format property="buildtimestamp" pattern="yyyyMMdd-HHmmss" locale="de,DE" />
     </tstamp>
-    
+
     <property file="deployment/settings.yml"/>
 
     <target name="build"
