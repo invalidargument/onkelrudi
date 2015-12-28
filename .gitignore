@@ -12,6 +12,7 @@ bower_components
 cache.properties
 wordpress
 !src/Wordpress
+!tests/Wordpress
 .DS_Store
 public/templates/cache/*
 !public/templates/cache/.gitkeep
