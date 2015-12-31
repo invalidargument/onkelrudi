@@ -4,40 +4,26 @@ namespace RudiBieller\OnkelRudi\Config;
 
 class ConfigTest extends \PHPUnit_Framework_TestCase
 {
-    private $_sut;
-
-    protected function setUp()
+    public function testConfigDatabaseConfiguration()
     {
-        $this->_sut = new Config('settings.yml.dist');
-    }
-
-    public function testConfigReturnsParsedConfiguration()
-    {
-        $result = $this->_sut->getConfiguration();
-
-        $this->assertArrayHasKey('Database', $result);
-        $this->assertArrayHasKey('System', $result);
-    }
-
-    public function testConfigReturnsParsedDatabaseConfiguration()
-    {
-        $result = $this->_sut->getDatabaseConfiguration();
+        $result = Config::$database;
 
         $this->assertArrayHasKey('dsn', $result);
         $this->assertArrayHasKey('user', $result);
         $this->assertArrayHasKey('password', $result);
     }
 
-    public function testConfigReturnsParsedSystemConfiguration()
+    public function testConfigSystemConfiguration()
     {
-        $result = $this->_sut->getSystemConfiguration();
+        $result = Config::$system;
 
         $this->assertArrayHasKey('environment', $result);
+        $this->assertArrayHasKey('domain', $result);
     }
 
-    public function testConfigReturnsParsedWordpressConfiguration()
+    public function testConfigWordpressConfiguration()
     {
-        $result = $this->_sut->getWordpressConfiguration();
+        $result = Config::$wordpress;
 
         $this->assertArrayHasKey('api-documentation', $result);
         $this->assertArrayHasKey('api-base-url', $result);

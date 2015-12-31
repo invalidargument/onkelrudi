@@ -35,8 +35,7 @@ abstract class AbstractQuery implements QueryInterface
 
     private function _createPdoInstance()
     {
-        $config = new Config();
-        $dbSettings = $config->getDatabaseConfiguration();
+        $dbSettings = Config::$database;
 
         return new Database(
             $dbSettings['dsn'],

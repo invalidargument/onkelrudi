@@ -5,9 +5,10 @@ Database:
 
 System:
   environment: "dev"
+  domain: "localhost"
   
 Wordpress:
   api-documentation: "http://v2.wp-api.org/"
-  api-base-url: "http://localhost/wordpress/wp-json/wp/v2/"
+  api-base-url: "/wordpress/wp-json/wp/v2/"
   api-get-posts: "posts"
   api-get-pages: "pages"

@@ -23,6 +23,13 @@
         <mkdir dir="${basedir}/build/logs"/>
         <mkdir dir="${basedir}/build/onkelrudi"/>
         <mkdir dir="${basedir}/src/cache"/>
+
+        <copy file="${basedir}/src/Config/Config.php.dist" tofile="${basedir}/src/Config/Config.php" overwrite="true"/>
+        <replace file="${basedir}/src/Config/Config.php" token="{{dsn}}" value="${dsn}"/>
+        <replace file="${basedir}/src/Config/Config.php" token="{{user}}" value="${user}"/>
+        <replace file="${basedir}/src/Config/Config.php" token="{{password}}" value="${password}"/>
+        <replace file="${basedir}/src/Config/Config.php" token="{{environment}}" value="${environment}"/>
+        <replace file="${basedir}/src/Config/Config.php" token="{{domain}}" value="${domain}"/>
     </target>
 
     <target name="composer" description="composer update">
