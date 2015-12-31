@@ -11,7 +11,8 @@ class Config
 
     public static $system = [
         'environment' => "dev",
-        'domain' => "localhost"
+        'domain' => "localhost",
+        'protocol' => 'http://'
     ];
 
     public static $wordpress = [
@@ -19,6 +20,6 @@ class Config
         'api-domain' => "localhost",
         'api-base-url' => '/wordpress/wp-json/wp/v2/',
         'api-get-posts' => 'posts',
-        'api-get-pages' => 'pages'
+        'api-get-categories' => 'categories'
     ];
 }

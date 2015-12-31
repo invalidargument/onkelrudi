@@ -28,6 +28,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('api-documentation', $result);
         $this->assertArrayHasKey('api-base-url', $result);
         $this->assertArrayHasKey('api-get-posts', $result);
-        $this->assertArrayHasKey('api-get-pages', $result);
+        $this->assertArrayHasKey('api-get-categories', $result);
     }
 }

@@ -2,11 +2,16 @@
 
 namespace RudiBieller\OnkelRudi\Wordpress;
 
+use RudiBieller\OnkelRudi\Config\Config;
 use RudiBieller\OnkelRudi\Query\AbstractJsonReadQuery;
 
 class CategoryReadListQuery extends AbstractJsonReadQuery
 {
-    protected $uri = 'http://localhost/wordpress/wp-json/wp/v2/categories';
+    protected function getUri()
+    {
+        return Config::$system['protocol'] . Config::$wordpress['api-domain'] .
+            Config::$wordpress['api-base-url'] . Config::$wordpress['api-get-categories'];
+    }
 
     protected function mapResult($result)
     {

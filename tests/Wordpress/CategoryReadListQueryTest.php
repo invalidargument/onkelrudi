@@ -16,7 +16,7 @@ class CategoryReadListQueryTest extends \PHPUnit_Framework_TestCase
         $categoriesJson = file_get_contents(dirname(__FILE__).'/data/categories.json');
 
         $browser = \Mockery::mock('Buzz\Browser');
-        $browser->shouldReceive('get')->andReturn($browser)
+        $browser->shouldReceive('get')->once()->with('http://localhost/wordpress/wp-json/wp/v2/categories', ['Content-Type: application/json'], '')->andReturn($browser)
             ->shouldReceive('getContent')->andReturn($categoriesJson);
 
         $sut = new CategoryReadListQuery();

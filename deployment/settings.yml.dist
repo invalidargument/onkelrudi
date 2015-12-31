@@ -11,4 +11,4 @@ Wordpress:
   api-documentation: "http://v2.wp-api.org/"
   api-base-url: "/wordpress/wp-json/wp/v2/"
   api-get-posts: "posts"
-  api-get-pages: "pages"
+  api-get-categories: "categories"

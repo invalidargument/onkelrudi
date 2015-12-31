@@ -12,7 +12,7 @@ abstract class AbstractJsonReadQuery implements QueryInterface
     /**
      * @return string
      */
-    public function getUri()
+    protected function getUri()
     {
         return $this->uri;
     }
@@ -20,7 +20,7 @@ abstract class AbstractJsonReadQuery implements QueryInterface
     /**
      * @param string $uri
      */
-    public function setUri($uri)
+    protected function setUri($uri)
     {
         $this->uri = $uri;
         return $this;

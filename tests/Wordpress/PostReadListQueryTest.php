@@ -18,7 +18,7 @@ class PostReadListQueryTest extends \PHPUnit_Framework_TestCase
         $postsJson = file_get_contents(dirname(__FILE__).'/data/posts.json');
 
         $browser = \Mockery::mock('Buzz\Browser');
-        $browser->shouldReceive('get')->andReturn($browser)
+        $browser->shouldReceive('get')->once()->with('http://localhost/wordpress/wp-json/wp/v2/posts', ['Content-Type: application/json'], '')->andReturn($browser)
             ->shouldReceive('getContent')->andReturn($postsJson);
 
         $sut = new PostReadListQuery();
