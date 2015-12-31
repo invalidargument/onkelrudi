@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "count": 1,
+    "description": "",
+    "link": "http:\/\/localhost:8089\/wordpress\/category\/allgemein\/",
+    "name": "Allgemein",
+    "slug": "allgemein",
+    "taxonomy": "category",
+    "parent": 0,
+    "_links": {
+      "self": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/categories\/1"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/taxonomies\/category"
+        }
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "count": 0,
+    "description": "",
+    "link": "http:\/\/localhost:8089\/wordpress\/category\/hahahahahhahahahhahahahha\/",
+    "name": "HAHAHAHAHHAHAHAHHAHAHAHHA",
+    "slug": "hahahahahhahahahhahahahha",
+    "taxonomy": "category",
+    "parent": 0,
+    "_links": {
+      "self": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/categories\/5"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/taxonomies\/category"
+        }
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "count": 1,
+    "description": "",
+    "link": "http:\/\/localhost:8089\/wordpress\/category\/testkategorie-1\/",
+    "name": "Testkategorie #1",
+    "slug": "testkategorie-1",
+    "taxonomy": "category",
+    "parent": 0,
+    "_links": {
+      "self": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/categories\/2"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/taxonomies\/category"
+        }
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "count": 1,
+    "description": "",
+    "link": "http:\/\/localhost:8089\/wordpress\/category\/testkategorie-2\/",
+    "name": "Testkategorie #2",
+    "slug": "testkategorie-2",
+    "taxonomy": "category",
+    "parent": 0,
+    "_links": {
+      "self": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/categories\/3"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/taxonomies\/category"
+        }
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "count": 1,
+    "description": "",
+    "link": "http:\/\/localhost:8089\/wordpress\/category\/testkategorie-3\/",
+    "name": "Testkategorie #3",
+    "slug": "testkategorie-3",
+    "taxonomy": "category",
+    "parent": 0,
+    "_links": {
+      "self": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/categories\/4"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/categories"
+        }
+      ],
+      "about": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/taxonomies\/category"
+        }
+      ]
+    }
+  }
+]

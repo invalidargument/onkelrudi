@@ -22,6 +22,11 @@ class Config
         return self::$_parsedConfig;
     }
 
+    public function getWordpressConfiguration()
+    {
+        return self::$_parsedConfig['Wordpress'];
+    }
+
     public function getDatabaseConfiguration()
     {
         return self::$_parsedConfig['Database'];

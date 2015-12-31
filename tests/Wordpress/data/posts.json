@@ -1,0 +1,92 @@
+[
+  {
+    "id": 6,
+    "date": "2015-11-29T21:24:49",
+    "date_gmt": "2015-11-29T20:24:49",
+    "guid": {
+      "rendered": "http:\/\/localhost:8089\/wordpress\/?p=6"
+    },
+    "modified": "2015-11-29T21:24:49",
+    "modified_gmt": "2015-11-29T20:24:49",
+    "slug": "beitrag-nummer-zwei",
+    "type": "post",
+    "link": "http:\/\/localhost:8089\/wordpress\/2015\/11\/29\/beitrag-nummer-zwei\/",
+    "title": {
+      "rendered": "Beitrag Nummer zwei"
+    },
+    "content": {
+      "rendered": "<p>bla bla bla bla bla bla\u00a0bla bla bla\u00a0bla bla bla\u00a0bla bla bla\u00a0bla bla bla\u00a0bla bla bla\u00a0bla bla bla\u00a0bla bla bla\u00a0bla bla bla<\/p>\n"
+    },
+    "excerpt": {
+      "rendered": "<p>bla bla bla<\/p>\n"
+    },
+    "author": 1,
+    "featured_image": 0,
+    "comment_status": "open",
+    "ping_status": "open",
+    "sticky": false,
+    "format": "standard",
+    "_links": {
+      "self": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/posts\/6"
+        }
+      ],
+      "collection": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/posts"
+        }
+      ],
+      "about": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/types\/post"
+        }
+      ],
+      "author": [
+        {
+          "embeddable": true,
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/users\/1"
+        }
+      ],
+      "replies": [
+        {
+          "embeddable": true,
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/comments?post=6"
+        }
+      ],
+      "version-history": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/posts\/6\/revisions"
+        }
+      ],
+      "https:\/\/onkelrudi.w.org\/attachment": [
+        {
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/media?parent=6"
+        }
+      ],
+      "https:\/\/onkelrudi.w.org\/term": [
+        {
+          "taxonomy": "category",
+          "embeddable": true,
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/posts\/6\/categories"
+        },
+        {
+          "taxonomy": "post_tag",
+          "embeddable": true,
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/posts\/6\/tags"
+        },
+        {
+          "taxonomy": "post_format",
+          "embeddable": true,
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/posts\/6\/post_format"
+        }
+      ],
+      "https:\/\/onkelrudi.w.org\/meta": [
+        {
+          "embeddable": true,
+          "href": "http:\/\/localhost:8089\/wordpress\/wp-json\/wp\/v2\/posts\/6\/meta"
+        }
+      ]
+    }
+  }
+]

@@ -34,4 +34,14 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('environment', $result);
     }
+
+    public function testConfigReturnsParsedWordpressConfiguration()
+    {
+        $result = $this->_sut->getWordpressConfiguration();
+
+        $this->assertArrayHasKey('api-documentation', $result);
+        $this->assertArrayHasKey('api-base-url', $result);
+        $this->assertArrayHasKey('api-get-posts', $result);
+        $this->assertArrayHasKey('api-get-pages', $result);
+    }
 }

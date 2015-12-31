@@ -33,14 +33,28 @@ abstract class AbstractJsonReadQuery implements QueryInterface
 
     protected function runQuery()
     {
-        $curl = new \Buzz\Client\Curl();
-        $curl->setOption(CURLOPT_FOLLOWLOCATION, false);
-        $this->browser = new \Buzz\Browser($curl);
-
         $url = $this->getUri();
         $headers = array('Content-Type: application/json');
         $body = '';
 
-        return $this->browser->get($url, $headers, $body)->getContent();
+        return $this->getBrowser()
+            ->get($url, $headers, $body)
+            ->getContent();
+    }
+
+    public function setBrowser($browser)
+    {
+        $this->browser = $browser;
+    }
+
+    public function getBrowser()
+    {
+        if (is_null($this->browser)) {
+            $curl = new \Buzz\Client\Curl();
+            $curl->setOption(CURLOPT_FOLLOWLOCATION, false);
+            $this->browser = new \Buzz\Browser($curl);
+        }
+
+        return $this->browser;
     }
 }
