@@ -4,27 +4,27 @@ namespace RudiBieller\OnkelRudi\FleaMarket;
 
 interface FleaMarketInterface
 {
-    function getId();
+    public function getId();
 
-    function getOrganizer();
+    public function getOrganizer();
 
-    function getName();
+    public function getName();
 
-    function getDescription();
+    public function getDescription();
 
-    function getStart();
+    public function getStart();
 
-    function getEnd();
+    public function getEnd();
 
-    function getStreet();
+    public function getStreet();
 
-    function getStreetNo();
+    public function getStreetNo();
 
-    function getCity();
+    public function getCity();
 
-    function getZipCode();
+    public function getZipCode();
 
-    function getLocation();
+    public function getLocation();
 
-    function getUrl();
+    public function getUrl();
 }

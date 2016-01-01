@@ -6,25 +6,25 @@ use RudiBieller\OnkelRudi\ServiceInterface;
 
 interface FleaMarketServiceInterface extends ServiceInterface
 {
-    function getAllFleaMarkets();
+    public function getAllFleaMarkets();
 
-    function getFleaMarkets($limit, $offset);
+    public function getFleaMarkets($limit, $offset);
 
-    function getAllOrganizers();
+    public function getAllOrganizers();
 
-    function getFleaMarket($id);
+    public function getFleaMarket($id);
 
-    function updateFleaMarket(FleaMarketInterface $fleaMarket);
+    public function updateFleaMarket(FleaMarketInterface $fleaMarket);
 
-    function deleteFleaMarket(FleaMarketInterface $fleaMarket);
+    public function deleteFleaMarket(FleaMarketInterface $fleaMarket);
 
-    function createFleaMarket(FleaMarketInterface $fleaMarket);
+    public function createFleaMarket(FleaMarketInterface $fleaMarket);
 
-    function createOrganizer(OrganizerInterface $organizer);
+    public function createOrganizer(OrganizerInterface $organizer);
 
-    function updateOrganizer(OrganizerInterface $organizer);
+    public function updateOrganizer(OrganizerInterface $organizer);
 
-    function deleteOrganizer(OrganizerInterface $organizer);
+    public function deleteOrganizer(OrganizerInterface $organizer);
 
-    function getOrganizer($id);
+    public function getOrganizer($id);
 }

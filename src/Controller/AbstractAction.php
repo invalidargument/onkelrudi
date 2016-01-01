@@ -2,10 +2,10 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
-use Psr\Http\Message\ServerRequestInterface,
-    Psr\Http\Message\ResponseInterface,
-    RudiBieller\OnkelRudi\ServiceInterface,
-    RudiBieller\OnkelRudi\BuilderFactoryInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use RudiBieller\OnkelRudi\ServiceInterface;
+use RudiBieller\OnkelRudi\BuilderFactoryInterface;
 
 abstract class AbstractAction implements ActionInterface
 {

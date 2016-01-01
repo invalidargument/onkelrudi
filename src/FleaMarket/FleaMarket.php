@@ -149,7 +149,7 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
         return $this;
     }
 
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         return [
             'id' => $this->getId(),

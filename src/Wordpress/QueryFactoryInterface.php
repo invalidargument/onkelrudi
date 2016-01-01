@@ -4,7 +4,7 @@ namespace RudiBieller\OnkelRudi\Wordpress;
 
 interface QueryFactoryInterface
 {
-    function createCategoryReadListQuery();
+    public function createCategoryReadListQuery();
 
-    function createPostReadListQuery();
+    public function createPostReadListQuery();
 }

@@ -7,7 +7,7 @@ class QueryFactory implements QueryFactoryInterface
     private $_categoriesReadQuery;
     private $_postsReadQuery;
 
-    function createCategoryReadListQuery()
+    public function createCategoryReadListQuery()
     {
         if (is_null($this->_categoriesReadQuery)) {
             $this->_categoriesReadQuery = new CategoryReadListQuery();
@@ -16,7 +16,7 @@ class QueryFactory implements QueryFactoryInterface
         return $this->_categoriesReadQuery;
     }
 
-    function createPostReadListQuery()
+    public function createPostReadListQuery()
     {
         if (is_null($this->_postsReadQuery)) {
             $this->_postsReadQuery = new PostReadListQuery();

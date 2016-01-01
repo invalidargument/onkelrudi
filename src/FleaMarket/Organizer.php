@@ -101,7 +101,7 @@ class Organizer implements OrganizerInterface, \JsonSerializable
         return $this;
     }
 
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         return [
             'id' => $this->getId(),

@@ -7,6 +7,7 @@
     </tstamp>
 
     <property file="deployment/settings.yml"/>
+    <property file="deployment/settings_live.yml"/>
 
     <target name="build"
         depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, behat, composer_optimize, archive"/>
@@ -89,24 +90,22 @@
     </target>
 
     <target name="phpcs" description="Code Sniffer">
-        <exec executable="vendor/bin/phpcs">
+        <exec executable="vendor/bin/phpcs" failonerror="true">
             <arg value="-n" />
             <arg path="${basedir}/src" />
+            <arg line="--standard=PSR2" />
         </exec>
     </target>
 
     <target name="phpunit">
         <exec dir="${basedir}" executable="vendor/bin/phpunit" failonerror="true" description="Unit tests">
-            <env key="APPLICATION_ENV" value="testing"/>
             <arg line="--verbose --stderr" />
             <arg value="--coverage-html" />
             <arg value="${basedir}/build/coverage" />
         </exec>
     </target>
     <target name="behat">
-        <exec dir="${basedir}" executable="vendor/bin/behat" failonerror="true" description="Unit tests">
-            <env key="APPLICATION_ENV" value="testing"/>
-        </exec>
+        <exec dir="${basedir}" executable="vendor/bin/behat" failonerror="true" description="Acceptance tests"/>
     </target>
 
     <target name="prepare-backend-for-deployment">
@@ -124,6 +123,12 @@
         <copy todir="${basedir}/build/onkelrudi/vendor">
             <fileset dir="${basedir}/vendor"/>
         </copy>
+        <copy file="${basedir}/src/Config/Config.php.dist" tofile="${basedir}/build/onkelrudi/src/Config/Config.php" overwrite="true"/>
+        <replace file="${basedir}/build/onkelrudi/src/Config/Config.php" token="{{dsn}}" value="${Live-dsn}"/>
+        <replace file="${basedir}/build/onkelrudi/src/Config/Config.php" token="{{user}}" value="${Live-user}"/>
+        <replace file="${basedir}/build/onkelrudi/src/Config/Config.php" token="{{password}}" value="${Live-password}"/>
+        <replace file="${basedir}/build/onkelrudi/src/Config/Config.php" token="{{environment}}" value="${Live-environment}"/>
+        <replace file="${basedir}/build/onkelrudi/src/Config/Config.php" token="{{domain}}" value="${Live-domain}"/>
     </target>
 
     <target name="prepare-frontend-for-deployment">

@@ -4,5 +4,5 @@ namespace RudiBieller\OnkelRudi\Query;
 
 interface QueryInterface
 {
-    function run();
+    public function run();
 }
