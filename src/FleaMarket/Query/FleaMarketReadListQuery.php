@@ -27,6 +27,8 @@ class FleaMarketReadListQuery extends AbstractQuery
         $selectStatement = $this->pdo
             ->select()
             ->from('fleamarkets')
+            ->where('start', '>=', date('Y-m-d 00:00:00'))
+            ->orderBy('start', 'ASC')
             ->limit($this->_limit)
             ->offset($this->_offset);
 
