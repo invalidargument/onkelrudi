@@ -55,19 +55,14 @@
                     <time datetime="{{item.start|date('c')}}">{{item.start|date("d.m.Y")}} von {{item.start|date("H:i")}} - {{item.end|date("H:i")}} Uhr</time> in <a href="" class="post-category post-category-design">{{item.city}}</a>
                 </p>
                 <p>
-                    {{item.description}}
+                    {{item.description|length > 533 ? item.description[:533] ~ '...' : item.description}}
                 </p>
                 <p>
-                    {{item.location}}<br>
-                    {{item.street}} {{item.streetNo}}<br>
-                    {{item.zipCode}} {{item.city}}<br>
-                    <a href="{{item.url}}" target="_blank">Flohmarktseite</a>
+                    {% if item.location %}{{item.location}}<br>{% endif %}
+                    {% if item.street %}{{item.street}} {{item.streetNo}}<br>{% endif %}
+                    {% if item.zipCode %}{{item.zipCode}} {{item.city}}<br>{% endif %}
+                    {% if item.url %}<a href="{{item.url}}" target="_blank">Flohmarktseite</a>{% endif %}
                 </p>
-                <!--
-                <p>
-                    Veranstalter: <a href="">Der Veranstalter</a>
-                </p>
-                //-->
             </div>
             {% endfor %}
         </div>

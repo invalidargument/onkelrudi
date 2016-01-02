@@ -18,7 +18,15 @@ curl -H "Content-Type: application/json" -X POST -d '{"name":"Max POWER", "descr
 ```
 
 ```
-curl -H "Content-Type: application/json" -X PUT -d '{"name":"Max UPDATED", "description": "Blue Pants", "start":"2015-01-01 00:00:00", "end":"2015-12-12 00:00:00", "zipCode":"50667"}' http://localhost/public/api/v1/fleamarkets/1
+curl -H "Content-Type: application/json" -X PUT -d '{"name":"Max Power", "description": "Ziel dieser Veranstaltung ist es, dass Kinder ihr nicht mehr
+                                                                                           benötigtes Spielzeug tauschen oder verkaufen können. Dabei
+                                                                                           können sie von ihren Eltern unterstützt werden. Junge Eltern
+                                                                                           erhalten die Möglichkeit ihre nicht mehr benötigten Babyausstattungen
+                                                                                           zu tauschen oder zu verkaufen.
+                                                                                           Zugelassen sind: gebrauchte Sachen wie Kinderspiele, Bücher,
+                                                                                           Steckspiele, Bauklötze, Kinder - CDs, Computerspiele, Kinderkleidung,
+                                                                                           Kinderwagen und Kinderfahrzeuge.
+                                                                                           Nicht zugelassen sind: Neuwaren und Trödel.", "start":"2016-01-03 00:00:00", "end":"2016-01-03 21:00:00", "zipCode":"50667", "city":"Köln", "street":"Hospeltstr.", "streetNo":"53"}' http://localhost/public/api/v1/fleamarkets/2
 ```
 
 ```
