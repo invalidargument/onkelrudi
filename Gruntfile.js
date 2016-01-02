@@ -3,20 +3,52 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         uglify: {
-            options: {
-                banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-            },
             build: {
-                src: 'public/bower_components/jquery/dist/jquery.js',
-                dest: 'public/js/jquery.min.js'
+                files: {
+                    'build/onkelrudi/public/js/jquery.min.js': [
+                        'public/bower_components/jquery/dist/jquery.js'
+                    ],
+                    'build/onkelrudi/public/js/onkelrudi.min.js': [
+                        'public/js/onkelrudi.js'
+                    ]
+                }
             }
+        },
+        cssmin: {
+            build: {
+                files: {
+                    'build/onkelrudi/public/css/onkelrudi.css': [
+                        'public/css/onkelrudi.css'
+                    ]
+                }
+            }
+        },
+        htmlmin: {
+            build: {
+                options: {
+                    removeComments: true,
+                    collapseWhitespace: true,
+                    minifyJS: true
+                },
+                files: {
+                    'build/onkelrudi/public/templates/index.html': [
+                        'public/templates/index.html'
+                    ]
+                }
+            },
         }
     });
 
-    // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
     // Default task(s).
-    grunt.registerTask('default', ['uglify']);
-
+    grunt.registerTask('default', 'Deploy onkelrudi frontend.', function() {
+        grunt.log.write('Starting build of frontend...').ok();
+        grunt.task.run('cssmin');
+        grunt.task.run('uglify');
+        grunt.task.run('htmlmin');
+        grunt.log.ok();
+    });
 };
