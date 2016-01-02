@@ -5,10 +5,10 @@ module.exports = function(grunt) {
         uglify: {
             build: {
                 files: {
-                    'build/onkelrudi/public/js/jquery.min.js': [
+                    'build/onkelrudi/public/js/jquery.js': [
                         'public/bower_components/jquery/dist/jquery.js'
                     ],
-                    'build/onkelrudi/public/js/onkelrudi.min.js': [
+                    'build/onkelrudi/public/js/onkelrudi.js': [
                         'public/js/onkelrudi.js'
                     ]
                 }
@@ -19,6 +19,9 @@ module.exports = function(grunt) {
                 files: {
                     'build/onkelrudi/public/css/onkelrudi.css': [
                         'public/css/onkelrudi.css'
+                    ],
+                    'build/onkelrudi/public/css/onkelrudi-old-ie.css': [
+                        'public/css/onkelrudi-old-ie.css'
                     ]
                 }
             }
@@ -45,7 +48,7 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('default', 'Deploy onkelrudi frontend.', function() {
-        grunt.log.write('Starting build of frontend...').ok();
+        grunt.log.write('Starting build of frontend...');
         grunt.task.run('cssmin');
         grunt.task.run('uglify');
         grunt.task.run('htmlmin');
