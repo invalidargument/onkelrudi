@@ -39,19 +39,42 @@ module.exports = function(grunt) {
                     ]
                 }
             },
+        },
+        replace: {
+            indexHtmlCssPath: {
+                src: ['build/onkelrudi/public/templates/index.html'],
+                dest: 'build/onkelrudi/public/templates/index.html',
+                replacements: [{
+                    from: 'bower_components/pure/',
+                    to: 'css/'
+                }]
+            }
         }
+    });
+
+    grunt.registerTask('copyCssFiles', 'Copy all relevant CSS files.', function() {
+        var sourceDir = 'public/bower_components/';
+        var targetDir = 'build/onkelrudi/public/';
+
+        grunt.file.copy(sourceDir + 'pure/pure-min.css', targetDir + 'css/pure-min.css');
+        grunt.file.copy(sourceDir + 'pure/grids-responsive-old-ie-min.css', targetDir + 'css/grids-responsive-old-ie-min.css');
+        grunt.file.copy(sourceDir + 'pure/grids-responsive-min.css', targetDir + 'css/grids-responsive-min.css');
+        grunt.log.ok();
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-text-replace');
 
     // Default task(s).
     grunt.registerTask('default', 'Deploy onkelrudi frontend.', function() {
         grunt.log.write('Starting build of frontend...');
+        grunt.task.run('copyCssFiles');
         grunt.task.run('cssmin');
         grunt.task.run('uglify');
         grunt.task.run('htmlmin');
+        grunt.task.run('replace');
         grunt.log.ok();
     });
 };

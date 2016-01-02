@@ -6,7 +6,8 @@
     "grunt-contrib-cssmin": "^0.14.0",
     "grunt-contrib-htmlmin": "^0.6.0",
     "grunt-contrib-jshint": "~0.10.0",
-    "grunt-contrib-uglify": "~0.5.0"
+    "grunt-contrib-uglify": "~0.5.0",
+    "grunt-text-replace": "~0.4.0"
   },
   "maybeLater": "addyosmani/grunt-uncss"
 }
