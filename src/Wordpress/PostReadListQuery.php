@@ -30,7 +30,8 @@ class PostReadListQuery extends AbstractJsonReadQuery
                 ->setDateModified($post->modified) //gmt???
                 ->setTitle($post->title->rendered)
                 ->setExcerpt($post->excerpt->rendered)
-                ->setContent($post->content->rendered);
+                ->setContent($post->content->rendered)
+                ->setSeoName($post->slug);
 
             $mappedPosts[] = $item;
         }

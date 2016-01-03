@@ -10,6 +10,7 @@ class Post
     private $_title;
     private $_content;
     private $_excerpt;
+    private $_seoName;
 
     /**
      * @return int
@@ -117,5 +118,21 @@ class Post
     {
         $this->_excerpt = $excerpt;
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSeoName()
+    {
+        return $this->_seoName;
+    }
+
+    /**
+     * @param mixed $seoName
+     */
+    public function setSeoName($seoName)
+    {
+        $this->_seoName = $seoName;
     }
 }
