@@ -52,7 +52,7 @@
                     {{item.name|length > 33 ? item.name[:33] ~ '...' : item.name}}
                 </h3>
                 <p>
-                    <time datetime="{{item.start|date('c')}}">{{item.start|date("d.m.Y")}} von {{item.start|date("H:i")}} - {{item.end|date("H:i")}} Uhr</time> in <a href="" class="post-category post-category-design">{{item.city}}</a>
+                    <time datetime="{{item.start|date('c')}}">{{item.start|date("d.m.Y")}} von {{item.start|date("H:i")}} - {{item.end|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{item.city}}</span>
                 </p>
                 <p>
                     {{item.description|length > 533 ? item.description[:533] ~ '...' : item.description}}
@@ -72,10 +72,13 @@
         <div class="pure-u-1">
             <h2 class="content-head">About.</h2>
             <p>
-                onkel-rudi.de ist eine private Seite, auf der ich verschiedene Informationen kompakt bereitstelle, nach denen ich selbst oft lange und umständlich gesucht habe.<br>
+                onkel-rudi.de ist eine private Seite, auf der ich verschiedene Informationen kompakt bereitstellen will, nach denen ich selbst oft lange und umständlich gesucht habe.<br>
+                Wenn Du selbst einen Flohmarkt oder Basar veranstaltest oder einen kennst, der hier noch nicht aufgelistet ist, kannst Du ihn hier bald auch selbst eintragen.<br>
+                Für Rückfragen schicke bitte eine E-Mail an <a href="mailto:info@onkel-rudi.de">info@onkel-rudi.de</a>.
             </p>
             <p>
-                Der Quellcode für diese Seite ist verfügbar auf <a href="https://github.com/invalidargument/onkelrudi" title="Quellcode von onkelrudi.de auf github">github</a> - für alle, die interessiert, wie die Seite funktioniert.
+                Der Quellcode für diese Seite ist verfügbar auf <a href="https://github.com/invalidargument/onkelrudi" title="Quellcode von onkelrudi.de auf github">github</a> - für alle, die interessiert, wie die Seite funktioniert.<br>
+                Die Seite wird &quot;agile&quot; entwickelt, Du darfst also permanent Erweiterungen und Verbesserungen hier erwarten!
             </p>
         </div>
     </div>
