@@ -29,7 +29,7 @@ class CategoryReadListQuery extends AbstractJsonReadQuery
                 ->setCount($cat->count)
                 ->setParent($cat->parent)
                 ->setName($cat->name)
-                ->setSeoName($cat->name);
+                ->setSeoName($cat->slug);
 
             $mappedCategories[] = $item;
         }

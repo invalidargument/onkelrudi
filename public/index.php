@@ -28,8 +28,7 @@ $container['view'] = function ($c) {
         'templates',
         [
             //'cache' => 'templates/cache'
-            'cache' => false,
-            'debug' => true
+            'cache' => false
         ]
     );
 

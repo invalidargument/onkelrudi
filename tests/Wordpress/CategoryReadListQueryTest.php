@@ -12,7 +12,7 @@ class CategoryReadListQueryTest extends \PHPUnit_Framework_TestCase
             ->setCount(1)
             ->setParent(0)
             ->setName('Allgemein')
-            ->setSeoName('Allgemein');
+            ->setSeoName('allgemein');
 
         $categoriesJson = file_get_contents(dirname(__FILE__).'/data/categories.json');
 
