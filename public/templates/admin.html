@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Onkel Rudi - Der Terminkalender zu Kinderflohmarkt und Kinderbasar.">
+
+    <title>Onkel Rudi - Administration.</title>
+
+    <link rel="stylesheet" href="bower_components/pure/pure-min.css">
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="bower_components/pure/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="bower_components/pure/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="css/onkelrudi-old-ie.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="css/onkelrudi.css">
+    <!--<![endif]-->
+</head>
+<body>
+<div class="header">
+    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+        <a class="pure-menu-heading" href="">Onkel Rudi</a>
+        <ul class="pure-menu-list">
+            <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">Babyflohmärkte, Kinderflohmärkte</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="splash-container">
+    <div class="splash">
+        <h1 class="splash-head">Onkel Rudi</h1>
+        <p class="splash-subhead">
+            Du suchst einen Kinderflohmarkt? Hier findest Du ihn!
+        </p>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <div class="content">
+        <h2 class="content-head is-center">Neuen Veranstalter anlegen</h2>
+        <div class="pure-g">
+            <form class="pure-form pure-form-stacked">
+                <fieldset>
+                    <label for="organizer_name">Name des Veranstalters</label>
+                    <input id="organizer_name" type="text" placeholder="Name des Veranstalters">
+
+                    <label for="organizer_street">Stra&szlig;e</label>
+                    <input id="organizer_street" type="text" placeholder="Stra&szlig;e">
+
+                    <label for="organizer_streetNo">Hausnummer</label>
+                    <input id="organizer_streetNo" type="text" placeholder="Hausnummer">
+
+                    <label for="organizer_zip">PLZ</label>
+                    <input id="organizer_zip" type="number" placeholder="PLZ">
+
+                    <label for="organizer_city">Ort</label>
+                    <input id="organizer_city" type="text" placeholder="Ort">
+
+                    <label for="organizer_phone">Telefonnummer</label>
+                    <input id="organizer_phone" type="tel" placeholder="Telefonnummer">
+
+                    <label for="organizer_email">E-Mail</label>
+                    <input id="organizer_email" type="email" placeholder="E-Mail">
+
+                    <label for="organizer_url">Website</label>
+                    <input id="organizer_url" type="text" placeholder="Website">
+
+                    <button type="submit" class="pure-button">Neuen Veranstalter anlegen - click hier!</button>
+                </fieldset>
+            </form>
+        </div>
+
+        <h2 class="content-head is-center">Neuen Termin anlegen</h2>
+        <div class="pure-g">
+            private $_id;
+            private $_organizer;
+            private $_name;
+            private $_description;
+            private $_start;
+            private $_end;
+            private $_street;
+            private $_streetNo;
+            private $_city;
+            private $_zipCode;
+            private $_location;
+            private $_url;
+            <form class="pure-form pure-form-stacked">
+                <fieldset>
+                    <label for="fleamarket_name">Name des Veranstaltung</label>
+                    <input id="fleamarket_name" type="text" placeholder="Name des Veranstaltung">
+
+                    <label for="fleamarket_description">Beschreibung der Veranstaltung</label>
+                    <textarea id="fleamarket_description" type="text" placeholder="Beschreibung der Veranstaltung">
+
+                    <label for="fleamarket_start">Beginn</label>
+                    <input id="fleamarket_start" type="datetime" placeholder="Beginn der Veranstaltung">
+
+                    <label for="fleamarket_end">Ende</label>
+                    <input id="fleamarket_end" type="datetime" placeholder="Ende der Veranstaltung">
+
+                    <label for="fleamarket_street">Stra&szlig;e</label>
+                    <input id="fleamarket_street" type="text" placeholder="Stra&szlig;e">
+
+                    <label for="fleamarket_streetNo">Hausnummer</label>
+                    <input id="fleamarket_streetNo" type="text" placeholder="Hausnummer">
+
+                    <label for="fleamarket_zipCode">PLZ</label>
+                    <input id="fleamarket_zipCode" type="number" placeholder="PLZ">
+
+                    <label for="fleamarket_city">Ort</label>
+                    <input id="fleamarket_city" type="text" placeholder="Ort">
+
+                    <label for="fleamarket_location">Name der Location der Veranstaltung</label>
+                    <input id="fleamarket_location" type="text" placeholder="Name der Location der Veranstaltung">
+
+                    <label for="fleamarket_url">Website</label>
+                    <input id="fleamarket_url" type="text" placeholder="Website">
+
+                    <button type="submit" class="pure-button">Neuen Termin anlegen - click hier!</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="footer l-box is-center">
+        {{"now"|date("Y")}} onkelrudi.de
+    </div>
+
+</div>
+
+</body>
+</html>

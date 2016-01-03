@@ -42,6 +42,11 @@ $app->get('/', function ($request, $response, $args) use ($service) {
         ]);
 })->setName('index');
 
+$app->get('/admin/', function ($request, $response, $args) use ($service) {
+    return $this->get('view')
+        ->render($response, 'admin.html', []);
+})->setName('index');
+
 $app->group('/api', function () use ($app, $controllerFactory) {
 
     $app->group('/v1', function () use ($app, $controllerFactory) {
