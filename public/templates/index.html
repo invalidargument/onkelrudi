@@ -28,6 +28,9 @@
         <a class="pure-menu-heading" href="">Onkel Rudi</a>
         <ul class="pure-menu-list">
             <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">Babyflohmärkte, Kinderflohmärkte</a></li>
+            {% for item in wpCategories %}
+            <li class="pure-menu-item"><a href="{{item.seoName}}/cat/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
+            {% endfor %}
         </ul>
     </div>
 </div>

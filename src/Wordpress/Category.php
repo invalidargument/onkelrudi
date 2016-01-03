@@ -8,6 +8,7 @@ class Category
     private $_count;
     private $_parent;
     private $_name;
+    private $_seoName;
 
     /**
      * @return int
@@ -78,6 +79,24 @@ class Category
     public function setName($name)
     {
         $this->_name = $name;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSeoName()
+    {
+        return $this->_seoName;
+    }
+
+    /**
+     * @param mixed $seoName
+     * @return Category
+     */
+    public function setSeoName($seoName)
+    {
+        $this->_seoName = $seoName;
         return $this;
     }
 }

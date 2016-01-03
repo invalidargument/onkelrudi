@@ -4,15 +4,21 @@ include_once '../vendor/autoload.php';
 use RudiBieller\OnkelRudi\BuilderFactory;
 use RudiBieller\OnkelRudi\FleaMarket\Query\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketService;
-use RudiBieller\OnkelRudi\FleaMarket\Organizer,
-    RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
-
 use RudiBieller\OnkelRudi\Controller\Factory as ControllerFactory;
+use RudiBieller\OnkelRudi\Wordpress\QueryFactory;
+use RudiBieller\OnkelRudi\Wordpress\Service as WpService;
 
 $app = new \Slim\App;
-$factory = new Factory();
+
+// fleaMarkets
 $service = new FleaMarketService();
-$service->setQueryFactory($factory);
+$service->setQueryFactory(new Factory());
+
+// wordpress
+$wpService = new WpService();
+$wpService->setQueryFactory(new QueryFactory());
+
+// controller
 $controllerFactory = new ControllerFactory($app);
 $controllerFactory->setService($service);
 
@@ -22,7 +28,8 @@ $container['view'] = function ($c) {
         'templates',
         [
             //'cache' => 'templates/cache'
-            'cache' => false
+            'cache' => false,
+            'debug' => true
         ]
     );
 
@@ -34,11 +41,13 @@ $container['view'] = function ($c) {
     return $view;
 };
 
-$app->get('/', function ($request, $response, $args) use ($service) {
+$app->get('/', function ($request, $response, $args) use ($service, $wpService) {
     $fleaMarkets = $service->getAllFleaMarkets();
+    $wpCategories = $wpService->getAllCategories();
     return $this->get('view')
         ->render($response, 'index.html', [
-            'fleamarkets' => $fleaMarkets
+            'fleamarkets' => $fleaMarkets,
+            'wpCategories' => $wpCategories
         ]);
 })->setName('index');
 
