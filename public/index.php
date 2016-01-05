@@ -9,19 +9,6 @@ use RudiBieller\OnkelRudi\Wordpress\QueryFactory;
 use RudiBieller\OnkelRudi\Wordpress\Service as WpService;
 
 $app = new \Slim\App;
-
-// fleaMarkets
-$service = new FleaMarketService();
-$service->setQueryFactory(new Factory());
-
-// wordpress
-$wpService = new WpService();
-$wpService->setQueryFactory(new QueryFactory());
-
-// controller
-$controllerFactory = new ControllerFactory($app);
-$controllerFactory->setService($service);
-
 $container = $app->getContainer();
 $container['view'] = function ($c) {
     $view = new \Slim\Views\Twig(
@@ -39,6 +26,18 @@ $container['view'] = function ($c) {
 
     return $view;
 };
+
+// fleaMarkets
+$service = new FleaMarketService();
+$service->setQueryFactory(new Factory());
+
+// wordpress
+$wpService = new WpService();
+$wpService->setQueryFactory(new QueryFactory());
+
+// controller
+$controllerFactory = new ControllerFactory($app);
+$controllerFactory->setService($service);
 
 // Index
 $app->get('/', function ($request, $response, $args) use ($service, $wpService, $app) {
