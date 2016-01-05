@@ -40,21 +40,39 @@ $container['view'] = function ($c) {
     return $view;
 };
 
-$app->get('/', function ($request, $response, $args) use ($service, $wpService) {
+// Index
+$app->get('/', function ($request, $response, $args) use ($service, $wpService, $app) {
     $fleaMarkets = $service->getAllFleaMarkets();
     $wpCategories = $wpService->getAllCategories();
+    $fleaMarketsDetailRoutes = [];
+    foreach($fleaMarkets as $fleaMarket) {
+        $fleaMarketsDetailRoutes[$fleaMarket->getId()] = $app->getContainer()->router->pathFor('event-date', [
+            'wildcard' => $fleaMarket->getName(),
+            'id' => $fleaMarket->getId()
+        ]);
+    }
+    // we need a middleware to convert links to url-compliant representation
     return $this->get('view')
         ->render($response, 'index.html', [
             'fleamarkets' => $fleaMarkets,
+            'fleamarketsDetailsRoutes' => $fleaMarketsDetailRoutes,
             'wpCategories' => $wpCategories
         ]);
 })->setName('index');
 
+// FleaMarket Detail View
+$app->get('/{wildcard}/termin/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketDetailAction');
+    $action($request, $response, $args);
+})->setName('event-date');
+
+// Admin View
 $app->get('/admin/', function ($request, $response, $args) use ($service) {
     return $this->get('view')
         ->render($response, 'admin.html', []);
 })->setName('admin');
 
+// API routes
 $app->group('/api', function () use ($app, $controllerFactory) {
 
     $app->group('/v1', function () use ($app, $controllerFactory) {

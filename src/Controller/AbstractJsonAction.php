@@ -7,7 +7,7 @@ use Psr\Http\Message\ResponseInterface;
 use RudiBieller\OnkelRudi\ServiceInterface;
 use RudiBieller\OnkelRudi\BuilderFactoryInterface;
 
-abstract class AbstractAction implements ActionInterface
+abstract class AbstractJsonAction implements ActionInterface
 {
     const DEFAULT_ERROR_RESPONSE_HTTP_STATUS_CODE = 404;
     const DEFAULT_ERROR_RESPONSE_MESSAGE = 'Resource not found';

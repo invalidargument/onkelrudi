@@ -4,7 +4,7 @@ namespace RudiBieller\OnkelRudi\Controller;
 
 use RudiBieller\OnkelRudi\FleaMarket\Builder;
 
-class FleaMarketUpdateAction extends AbstractAction
+class FleaMarketUpdateAction extends AbstractJsonAction
 {
     protected function getData()
     {

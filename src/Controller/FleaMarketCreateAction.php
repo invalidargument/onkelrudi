@@ -2,7 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
-class FleaMarketCreateAction extends AbstractAction
+class FleaMarketCreateAction extends AbstractJsonAction
 {
     protected function getData()
     {

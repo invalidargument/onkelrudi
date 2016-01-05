@@ -2,7 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
-class OrganizersAction extends AbstractAction
+class OrganizersAction extends AbstractJsonAction
 {
     protected function getData()
     {
