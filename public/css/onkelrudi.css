@@ -227,6 +227,13 @@ a.pure-button-primary {
     font-weight:bold;
 }
 
+/* content items that are linked */
+.content a.block {
+    display:block;
+    text-decoration: none;
+    color: inherit;
+}
+
 /* This is the class used for the dark-background areas. */
 .ribbon {
     background: #2d3e50;
@@ -324,4 +331,8 @@ a.pure-button-primary {
 }
 a.post-category {
     text-decoration: none;
+}
+
+.mapsLocation {
+    border:1px solid #000000;
 }

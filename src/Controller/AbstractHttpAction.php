@@ -4,6 +4,8 @@ namespace RudiBieller\OnkelRudi\Controller;
 
 abstract class AbstractHttpAction extends AbstractAction
 {
+    protected $template = 'index.html';
+
     protected function writeErrorResponse()
     {
         return $this->app->getContainer()->get('view')
@@ -25,6 +27,6 @@ abstract class AbstractHttpAction extends AbstractAction
         ]
          */
         return $this->app->getContainer()->get('view')
-            ->render($this->response, 'index.html', $this->result);
+            ->render($this->response, $this->template, ['data' => $this->result]);
     }
 }

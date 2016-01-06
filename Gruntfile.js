@@ -45,7 +45,7 @@ module.exports = function(grunt) {
                 src: ['build/onkelrudi/public/templates/index.html'],
                 dest: 'build/onkelrudi/public/templates/index.html',
                 replacements: [{
-                    from: 'bower_components/pure/',
+                    from: 'public/bower_components/pure/',
                     to: 'css/'
                 }]
             }
