@@ -31,7 +31,7 @@ class PostReadListQuery extends AbstractJsonReadQuery
                 ->setTitle($post->title->rendered)
                 ->setExcerpt($post->excerpt->rendered)
                 ->setContent($post->content->rendered)
-                ->setSeoName($post->slug);
+                ->setSlug($post->slug);
 
             $mappedPosts[] = $item;
         }

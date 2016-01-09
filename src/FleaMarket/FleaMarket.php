@@ -7,6 +7,7 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
     private $_id;
     private $_organizer;
     private $_name;
+    private $_slug;
     private $_description;
     private $_start;
     private $_end;
@@ -146,6 +147,23 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
     public function setUrl($url)
     {
         $this->_url = $url;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->_slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->_slug = $slug;
         return $this;
     }
 

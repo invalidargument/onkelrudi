@@ -1,6 +1,7 @@
 <?php
 namespace RudiBieller\OnkelRudi\FleaMarket\Query;
 
+use Cocur\Slugify\Slugify;
 use RudiBieller\OnkelRudi\Query\AbstractQuery;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 
@@ -51,6 +52,7 @@ class FleaMarketOrganizerReadListQuery extends AbstractQuery
             $organizer
                 ->setId($item['id'])
                 ->setName($item['name'])
+                ->setSlug((new Slugify())->slugify($item['name']))
                 ->setStreet($item['street'])
                 ->setStreetNo($item['streetno'])
                 ->setCity($item['city'])

@@ -14,7 +14,7 @@ class PostReadListQueryTest extends \PHPUnit_Framework_TestCase
             ->setContent("<p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla</p>\n")
             ->setExcerpt("<p>bla bla bla</p>\n")
             ->setTitle('Beitrag Nummer zwei')
-            ->setSeoName('beitrag-nummer-zwei');
+            ->setSlug('beitrag-nummer-zwei');
 
         $postsJson = file_get_contents(dirname(__FILE__).'/data/posts.json');
 

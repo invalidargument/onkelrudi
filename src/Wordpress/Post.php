@@ -10,7 +10,7 @@ class Post
     private $_title;
     private $_content;
     private $_excerpt;
-    private $_seoName;
+    private $_slug;
 
     /**
      * @return int
@@ -123,16 +123,16 @@ class Post
     /**
      * @return mixed
      */
-    public function getSeoName()
+    public function getSlug()
     {
-        return $this->_seoName;
+        return $this->_slug;
     }
 
     /**
-     * @param mixed $seoName
+     * @param mixed $slug
      */
-    public function setSeoName($seoName)
+    public function setSlug($slug)
     {
-        $this->_seoName = $seoName;
+        $this->_slug = $slug;
     }
 }

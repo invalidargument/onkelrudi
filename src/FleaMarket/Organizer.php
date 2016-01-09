@@ -6,6 +6,7 @@ class Organizer implements OrganizerInterface, \JsonSerializable
 {
     private $_id;
     private $_name;
+    private $_slug;
     private $_street;
     private $_streetNo;
     private $_zipCode;
@@ -98,6 +99,24 @@ class Organizer implements OrganizerInterface, \JsonSerializable
     public function setUrl($url)
     {
         $this->_url = $url;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->_slug;
+    }
+
+    /**
+     * @param mixed $slug
+     * @return Organizer
+     */
+    public function setSlug($slug)
+    {
+        $this->_slug = $slug;
         return $this;
     }
 

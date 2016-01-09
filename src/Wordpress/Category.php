@@ -8,7 +8,7 @@ class Category
     private $_count;
     private $_parent;
     private $_name;
-    private $_seoName;
+    private $_slug;
 
     /**
      * @return int
@@ -85,18 +85,18 @@ class Category
     /**
      * @return mixed
      */
-    public function getSeoName()
+    public function getSlug()
     {
-        return $this->_seoName;
+        return $this->_slug;
     }
 
     /**
-     * @param mixed $seoName
+     * @param mixed $slug
      * @return Category
      */
-    public function setSeoName($seoName)
+    public function setSlug($slug)
     {
-        $this->_seoName = $seoName;
+        $this->_slug = $slug;
         return $this;
     }
 }

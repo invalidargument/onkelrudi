@@ -1,6 +1,7 @@
 <?php
 namespace RudiBieller\OnkelRudi\FleaMarket\Query;
 
+use Cocur\Slugify\Slugify;
 use RudiBieller\OnkelRudi\Query\AbstractQuery;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 
@@ -44,6 +45,7 @@ class FleaMarketReadQuery extends AbstractQuery
         $this->_fleaMarket
             ->setId($result['id'])
             ->setName($result['name'])
+            ->setSlug((new Slugify())->slugify($result['name']))
             ->setDescription($result['description'])
             ->setStart($result['start'])
             ->setEnd($result['end'])

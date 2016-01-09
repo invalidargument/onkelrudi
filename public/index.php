@@ -46,7 +46,7 @@ $app->get('/', function ($request, $response, $args) use ($service, $wpService, 
     $fleaMarketsDetailRoutes = [];
     foreach($fleaMarkets as $fleaMarket) {
         $fleaMarketsDetailRoutes[$fleaMarket->getId()] = $app->getContainer()->router->pathFor('event-date', [
-            'wildcard' => $fleaMarket->getName(),
+            'wildcard' => $fleaMarket->getSlug(),
             'id' => $fleaMarket->getId()
         ]);
     }
