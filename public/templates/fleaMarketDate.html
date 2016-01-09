@@ -46,10 +46,12 @@
 
 <div class="content-wrapper">
     <div class="content">
-        <h2 class="content-head is-center">{{data.name}}</h2>
-        <h3 class="content-head is-center"><time datetime="{{data.start|date('c')}}">{{data.start|date("d.m.Y")}} von {{data.start|date("H:i")}} - {{data.end|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{data.city}}</span></h3>
         <div class="pure-g">
-            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-3">
+            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+            </div>
+            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-2-4">
+                <h2 class="content-head">{{data.name}}</h2>
+                <h3 class="content-head"><time datetime="{{data.start|date('c')}}">{{data.start|date("d.m.Y")}} von {{data.start|date("H:i")}} - {{data.end|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{data.city}}</span></h3>
                 <p>
                     {{data.description}}
                 </p>
@@ -60,8 +62,8 @@
                     {% if data.url %}<a href="{{data.url}}" target="_blank">Flohmarktseite</a>{% endif %}
                 </p>
             </div>
-            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-3 mapsLocation">
-                <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="400" height="400" src="https://maps.google.com/maps?hl=de&q={{data.street}} {{data.streetNo}}, {{data.zipCode}} {{data.city}}&ie=UTF8&t=roadmap&z=15&iwloc=B&output=embed"></iframe>
+            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4 mapsLocation">
+                <iframe style="width:100%;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="400" height="400" src="https://maps.google.com/maps?hl=de&q={{data.street}} {{data.streetNo}}, {{data.zipCode}} {{data.city}}&ie=UTF8&t=roadmap&z=15&iwloc=B&output=embed"></iframe>
             </div>
         </div>
     </div>
