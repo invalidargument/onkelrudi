@@ -99,20 +99,6 @@
     <changeSet id="5" author="Rudi Bieller" failOnError="false">
         <sql>INSERT INTO fleamarkets_organizer (id, name) VALUES (1, 'Rudi the Organizer');</sql>
     </changeSet>
-    <changeSet id="6" author="Rudi Bieller" failOnError="false">
-        <addColumn schemaName="onkelrudi"
-                    catalogName="onkelrudi"
-                    tableName="fleamarkets">
-            <column name="uuid" type="binary(16)"/>
-        </addColumn>
-    </changeSet>
-    <changeSet id="7" author="Rudi Bieller" failOnError="false">
-        <addColumn schemaName="onkelrudi"
-                    catalogName="onkelrudi"
-                    tableName="fleamarkets_organizer">
-            <column name="uuid" type="binary(16)"/>
-        </addColumn>
-    </changeSet>
 </databaseChangeLog>
 
 
