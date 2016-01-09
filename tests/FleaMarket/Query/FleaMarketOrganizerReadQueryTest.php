@@ -49,6 +49,7 @@ class FleaMarketOrganizerReadQueryTest extends \PHPUnit_Framework_TestCase
 
         $result = array(
             'id' => 42,
+            'uuid' => 'uuid',
             'name' => 'Rudi Bieller',
             'street' => 'Foo Street',
             'streetno' => 23,
@@ -84,6 +85,7 @@ class FleaMarketOrganizerReadQueryTest extends \PHPUnit_Framework_TestCase
         $organizer = $this->_sut->run();
 
         $this->assertEquals(42, $organizer->getId());
+        $this->assertEquals('uuid', $organizer->getUuid());
         $this->assertEquals('Rudi Bieller', $organizer->getName());
         $this->assertEquals('Foo Street', $organizer->getStreet());
         $this->assertEquals(23, $organizer->getStreetNo());

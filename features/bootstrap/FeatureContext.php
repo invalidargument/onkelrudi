@@ -141,7 +141,9 @@ class FeatureContext implements Context, SnippetAcceptingContext
     {
         for($i=0; $i<$num; $i++) {
             $organizer = new Organizer();
-            $organizer->setName('Rudi #'.$i)
+            $organizer
+                ->setUuid('uuid-'.$i)
+                ->setName('Rudi #'.$i)
                 ->setPhone('23')
                 ->setCity('Köln')
                 ->setZipCode('50000')
@@ -151,7 +153,9 @@ class FeatureContext implements Context, SnippetAcceptingContext
             $id = $this->_service->createOrganizer($organizer);
             $organizer->setId($id);
             $fleaMarket = new FleaMarket();
-            $fleaMarket->setName('Der  #'.$i.' Flohmarkt von Rudi')
+            $fleaMarket
+                ->setUuid('uuid-'.$i)
+                ->setName('Der  #'.$i.' Flohmarkt von Rudi')
                 ->setOrganizer($organizer)
                 ->setDescription('Ein toller Flohmarkt')
                 ->setCity('Cologne')
@@ -171,7 +175,9 @@ class FeatureContext implements Context, SnippetAcceptingContext
     {
         for ($i=0; $i<$num; $i++) {
             $organizer = new Organizer();
-            $organizer->setName('Max Power #'.$i)
+            $organizer
+                ->setUuid('uuid-'.$i)
+                ->setName('Max Power #'.$i)
                 ->setPhone('23')
                 ->setCity('Köln')
                 ->setZipCode('50000')
@@ -185,7 +191,9 @@ class FeatureContext implements Context, SnippetAcceptingContext
     private function _createDefaultOrganizer()
     {
         $organizer = new Organizer();
-        $organizer->setName('Max Power')
+        $organizer
+            ->setUuid('uuid-0')
+            ->setName('Max Power')
             ->setPhone('23')
             ->setCity('Köln')
             ->setZipCode('50000')

@@ -44,6 +44,7 @@ class FleaMarketReadQuery extends AbstractQuery
 
         $this->_fleaMarket
             ->setId($result['id'])
+            ->setUuid($result['uuid'])
             ->setName($result['name'])
             ->setSlug((new Slugify())->slugify($result['name']))
             ->setDescription($result['description'])

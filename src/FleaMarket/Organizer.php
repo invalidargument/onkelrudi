@@ -5,6 +5,7 @@ namespace RudiBieller\OnkelRudi\FleaMarket;
 class Organizer implements OrganizerInterface, \JsonSerializable
 {
     private $_id;
+    private $_uuid;
     private $_name;
     private $_slug;
     private $_street;
@@ -120,10 +121,29 @@ class Organizer implements OrganizerInterface, \JsonSerializable
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getUuid()
+    {
+        return $this->_uuid;
+    }
+
+    /**
+     * @param string $uuid
+     * @return Organizer
+     */
+    public function setUuid($uuid)
+    {
+        $this->_uuid = $uuid;
+        return $this;
+    }
+
     public function jsonSerialize()
     {
         return [
             'id' => $this->getId(),
+            'uuid' => $this->getUuid(),
             'name' => $this->getName(),
             'street' => $this->getStreet(),
             'streetNo' => $this->getStreetNo(),

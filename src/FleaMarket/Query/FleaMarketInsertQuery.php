@@ -1,10 +1,12 @@
 <?php
 namespace RudiBieller\OnkelRudi\FleaMarket\Query;
 
+use Ramsey\Uuid\Uuid;
 use RudiBieller\OnkelRudi\Query\AbstractInsertQuery;
 
 class FleaMarketInsertQuery extends AbstractInsertQuery
 {
+    private $_uuid;
     private $_organizerId;
     private $_name;
     private $_description;
@@ -16,6 +18,12 @@ class FleaMarketInsertQuery extends AbstractInsertQuery
     private $_zipCode;
     private $_location;
     private $_url;
+
+    public function setUuid($uuid)
+    {
+        $this->_uuid = $uuid;
+        return $this;
+    }
 
     public function setName($name)
     {
@@ -83,15 +91,23 @@ class FleaMarketInsertQuery extends AbstractInsertQuery
         return $this;
     }
 
+    public function getUuid()
+    {
+        return Uuid::uuid5(
+            Uuid::NAMESPACE_URL,
+            $this->_name.$this->_zipCode.$this->_url.$this->_street.$this->_streetNo.$this->_city.$this->_description.$this->_start.$this->_end.$this->_location.$this->_organizerId
+        )->toString();
+    }
+
     protected function runQuery()
     {
         $insertStatement = $this->pdo
             ->insert(
-                array('organizer_id', 'name', 'description', 'start', 'end', 'street', 'streetno', 'city', 'zipcode', 'location', 'url')
+                array('uuid', 'organizer_id', 'name', 'description', 'start', 'end', 'street', 'streetno', 'city', 'zipcode', 'location', 'url')
             )
             ->into('fleamarkets')
             ->values(
-                array($this->_organizerId, $this->_name, $this->_description, $this->_start, $this->_end, $this->_street, $this->_streetNo, $this->_city, $this->_zipCode, $this->_location, $this->_url)
+                array($this->getUuid(), $this->_organizerId, $this->_name, $this->_description, $this->_start, $this->_end, $this->_street, $this->_streetNo, $this->_city, $this->_zipCode, $this->_location, $this->_url)
             );
 
         return $insertStatement->execute();

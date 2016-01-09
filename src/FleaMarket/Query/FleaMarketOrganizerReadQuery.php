@@ -44,6 +44,7 @@ class FleaMarketOrganizerReadQuery extends AbstractQuery
 
         $this->_organizer
             ->setId($result['id'])
+            ->setUuid($result['uuid'])
             ->setName($result['name'])
             ->setSlug((new Slugify())->slugify($result['name']))
             ->setStreet($result['street'])

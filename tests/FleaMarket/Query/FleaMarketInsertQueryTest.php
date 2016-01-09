@@ -32,7 +32,7 @@ class FleaMarketInsertQueryTest extends \PHPUnit_Framework_TestCase
         $this->_pdo
             ->shouldReceive('insert')
                 ->once()
-                ->with(array('organizer_id', 'name', 'description', 'start', 'end', 'street', 'streetno', 'city', 'zipcode', 'location', 'url'))
+                ->with(array('uuid', 'organizer_id', 'name', 'description', 'start', 'end', 'street', 'streetno', 'city', 'zipcode', 'location', 'url'))
                 ->andReturn($this->_pdo)
             ->shouldReceive('into')
                 ->once()
@@ -40,7 +40,7 @@ class FleaMarketInsertQueryTest extends \PHPUnit_Framework_TestCase
                 ->andReturn($this->_pdo)
             ->shouldReceive('values')
                 ->once()
-            ->with(array('42', 'myname', 'foo', '2015-12-12 00:00:00', '2015-12-13 00:00:00', 'bar', '42', 'baz', '12345', 'somewhere', 'http://www.example.com'))
+            ->with(array('4d7d0a79-9138-5e6c-9383-88179850520b', '42', 'myname', 'foo', '2015-12-12 00:00:00', '2015-12-13 00:00:00', 'bar', '42', 'baz', '12345', 'somewhere', 'http://www.example.com'))
                 ->andReturn($this->_pdo)
             ->shouldReceive('execute')
                 ->once();

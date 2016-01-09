@@ -12,6 +12,12 @@ class Builder extends AbstractBuilder
         return $this;
     }
 
+    public function setUuid($uuid)
+    {
+        $this->properties['uuid'] = $uuid;
+        return $this;
+    }
+
     public function setOrganizer(OrganizerInterface $organizer)
     {
         $this->properties['organizer'] = $organizer;

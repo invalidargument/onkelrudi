@@ -49,6 +49,7 @@ class FleaMarketReadQueryTest extends \PHPUnit_Framework_TestCase
 
         $result = array(
             'id' => 42,
+            'uuid' => 'uuid',
             'organizer_id' => '55',
             'name' => 'Hänsel & Gretel warten in Dänemark',
             'description' => 'foo',
@@ -88,6 +89,7 @@ class FleaMarketReadQueryTest extends \PHPUnit_Framework_TestCase
         $fleaMarket = $this->_sut->run();
 
         $this->assertEquals(42, $fleaMarket->getId());
+        $this->assertEquals('uuid', $fleaMarket->getUuid());
         $this->assertEquals('Hänsel & Gretel warten in Dänemark', $fleaMarket->getName());
         $this->assertEquals('haensel-gretel-warten-in-daenemark', $fleaMarket->getSlug());
         $this->assertEquals('foo', $fleaMarket->getDescription());

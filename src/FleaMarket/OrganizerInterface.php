@@ -6,6 +6,8 @@ interface OrganizerInterface
 {
     public function getId();
 
+    public function getUuid();
+
     public function getName();
 
     public function getStreet();

@@ -5,6 +5,7 @@ namespace RudiBieller\OnkelRudi\FleaMarket;
 class FleaMarket implements FleaMarketInterface, \JsonSerializable
 {
     private $_id;
+    private $_uuid;
     private $_organizer;
     private $_name;
     private $_slug;
@@ -167,10 +168,29 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getUuid()
+    {
+        return $this->_uuid;
+    }
+
+    /**
+     * @param string $uuid
+     * @return FleaMarket
+     */
+    public function setUuid($uuid)
+    {
+        $this->_uuid = $uuid;
+        return $this;
+    }
+
     public function jsonSerialize()
     {
         return [
             'id' => $this->getId(),
+            'uuid' => $this->getUuid(),
             'organizer' => $this->getOrganizer(),
             'name' => $this->getName(),
             'description' => $this->getDescription(),

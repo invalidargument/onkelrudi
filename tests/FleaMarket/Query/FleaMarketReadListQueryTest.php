@@ -19,6 +19,7 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
         $result = array(
             array(
                 'id' => 42,
+                'uuid' => 'uuid',
                 'organizer_id' => '1',
                 'name' => 'Rudi Bieller',
                 'description' => 'foo',
@@ -33,6 +34,7 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 'id' => 23,
+                'uuid' => 'uuid-uuid',
                 'organizer_id' => '1',
                 'name' => 'Rudi Bieller',
                 'description' => 'foo',

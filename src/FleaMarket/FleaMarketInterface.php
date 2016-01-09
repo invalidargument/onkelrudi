@@ -6,6 +6,8 @@ interface FleaMarketInterface
 {
     public function getId();
 
+    public function getUuid();
+
     public function getOrganizer();
 
     public function getName();

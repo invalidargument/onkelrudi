@@ -27,6 +27,7 @@ class FleaMarketService implements FleaMarketServiceInterface
             : $fleaMarket->getOrganizer()->getId();
 
         $query
+            ->setUuid($fleaMarket->getUuid())
             ->setOrganizerId($organizerId)
             ->setName($fleaMarket->getName())
             ->setDescription($fleaMarket->getDescription())
@@ -49,7 +50,9 @@ class FleaMarketService implements FleaMarketServiceInterface
     {
         $query = $this->_factory->createFleaMarketOrganizerInsertQuery();
 
-        $query->setName($organizer->getName())
+        $query
+            ->setUuid($organizer->getUuid())
+            ->setName($organizer->getName())
             ->setStreet($organizer->getStreet())
             ->setStreetNo($organizer->getStreetNo())
             ->setZipCode($organizer->getZipCode())

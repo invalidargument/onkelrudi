@@ -20,7 +20,9 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
     public function testServiceCreatesNewOrganizer()
     {
         $organizer = new Organizer();
-        $organizer->setName('Rudi')
+        $organizer
+            ->setUuid('uuid')
+            ->setName('Rudi')
             ->setPhone('23')
             ->setCity('Köln')
             ->setZipCode('50000')
@@ -29,7 +31,9 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
             ->setUrl('http://www.example.com');
 
         $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerInsertQuery');
-        $query->shouldReceive('setName')->once()->with('Rudi')->andReturn($query)
+        $query
+            ->shouldReceive('setUuid')->once()->with('uuid')->andReturn($query)
+            ->shouldReceive('setName')->once()->with('Rudi')->andReturn($query)
             ->shouldReceive('setStreet')->once()->with('foo')->andReturn($query)
             ->shouldReceive('setStreetNo')->once()->with('2000')->andReturn($query)
             ->shouldReceive('setZipCode')->once()->with('50000')->andReturn($query)
@@ -51,6 +55,7 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
 
         $fleaMarket = new FleaMarket();
         $fleaMarket
+            ->setUuid('uuid')
             ->setOrganizer($organizer)
             ->setName('Der erste Flohmarkt von Rudi')
             ->setDescription('Ein toller Flohmarkt')
@@ -65,6 +70,7 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
 
         $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketInsertQuery');
         $query
+            ->shouldReceive('setUuid')->once()->with('uuid')->andReturn($query)
             ->shouldReceive('setOrganizerId')->once()->with('42')->andReturn($query)
             ->shouldReceive('setName')->once()->with('Der erste Flohmarkt von Rudi')->andReturn($query)
             ->shouldReceive('setDescription')->once()->with('Ein toller Flohmarkt')->andReturn($query)
