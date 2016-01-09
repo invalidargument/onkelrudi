@@ -9,6 +9,9 @@
             <column name="id" type="int">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="uuid" type="UUID">
+                <constraints nullable="false"/>
+            </column>
             <column name="name" type="varchar(21844)">
                 <constraints nullable="false"/>
             </column>
@@ -36,6 +39,9 @@
         <createTable tableName="fleamarkets">
             <column name="id" type="int">
                 <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="UUID">
+                <constraints nullable="false"/>
             </column>
             <column name="organizer_id" type="int">
                 <constraints nullable="false" foreignKeyName="fk_organizer_fleamarket" references="fleamarkets_organizer(id)" deleteCascade="true"/>
@@ -92,6 +98,20 @@
     </changeSet>
     <changeSet id="5" author="Rudi Bieller" failOnError="false">
         <sql>INSERT INTO fleamarkets_organizer (id, name) VALUES (1, 'Rudi the Organizer');</sql>
+    </changeSet>
+    <changeSet id="6" author="Rudi Bieller" failOnError="false">
+        <addColumn schemaName="onkelrudi"
+                    catalogName="onkelrudi"
+                    tableName="fleamarkets">
+            <column name="uuid" type="binary(16)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="7" author="Rudi Bieller" failOnError="false">
+        <addColumn schemaName="onkelrudi"
+                    catalogName="onkelrudi"
+                    tableName="fleamarkets_organizer">
+            <column name="uuid" type="binary(16)"/>
+        </addColumn>
     </changeSet>
 </databaseChangeLog>
 
