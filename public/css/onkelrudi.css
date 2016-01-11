@@ -336,17 +336,27 @@ a.pure-button-primary {
     color: #F17022;
 }
 .post-category-pure {
-    background: #4d85d1;
+    background: #E4F6F8;
 }
 .post-category-yui {
-    background: #8156a7;
+    background: #62C2CC;
 }
-.post-category-js {
-    background: #df2d4f;
+.post-category-organizer-url {
+    background-color: transparent;
+    border-bottom: 1px solid #F17022;
+    color:inherit;
 }
 a.post-category {
     text-decoration: none;
 }
+/*
+FDB813
+F68B1F
+F17022
+62C2CC
+E4F6F8
+EEF66C
+*/
 
 .mapsLocation {
     border:1px solid #000000;
