@@ -21,6 +21,73 @@
     <!--[if gt IE 8]><!-->
     <link rel="stylesheet" href="/public/css/onkelrudi.css">
     <!--<![endif]-->
+
+    <script src="/public/bower_components/jquery/dist/jquery.js"></script>
+    <script>
+        console.log('z0nk!');
+        $(function() {
+            $('#newOrganizer').on('submit', function(e) {
+                console.log('sending post with new organizer data..... will post json as body now.');
+                e.preventDefault();
+
+                var apiUrlOrganizers = '/public/api/v1/organizers';
+                var postData = JSON.stringify({
+                    name: $('#organizer_name').val(),
+                    street: $('#organizer_street').val(),
+                    streetNo: $('#organizer_streetNo').val(),
+                    zipCode: $('#organizer_zip').val(),
+                    city: $('#organizer_city').val(),
+                    phone: $('#organizer_phone').val(),
+                    email: $('#organizer_email').val(),
+                    url: $('#organizer_url').val()
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: apiUrlOrganizers,
+                    contentType: "application/json",
+                    data: postData,
+                    beforeSend: function() { console.log('beforeSend') },
+                    complete: function() { console.log('complete') },
+                    success: function(data) { console.log("ajax worked"); },
+                    error: function(data) { console.log("ajax error", data); },
+                    dataType: 'json'
+                });
+            });
+
+            $('#newFleaMarket').on('submit', function(e) {
+                console.log('sending post with new fleamarket data..... will post json as body now.');
+                e.preventDefault();
+
+                var apiUrlFleaMarkets = '/public/api/v1/fleamarkets';
+                var postData = JSON.stringify({
+                    organizerId: $('#fleamarket_organizer').val(),
+                    name: $('#fleamarket_name').val(),
+                    description: $('#fleamarket_description').val(),
+                    start: $('#fleamarket_start').val(),
+                    end: $('#fleamarket_end').val(),
+                    street: $('#fleamarket_street').val(),
+                    streetNo: $('#fleamarket_streetNo').val(),
+                    zipCode: $('#fleamarket_zipCode').val(),
+                    city: $('#fleamarket_city').val(),
+                    location: $('#fleamarket_location').val(),
+                    url: $('#fleamarket_url').val()
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: apiUrlFleaMarkets,
+                    contentType: "application/json",
+                    data: postData,
+                    beforeSend: function() { console.log('beforeSend') },
+                    complete: function() { console.log('complete') },
+                    success: function(data) { console.log("ajax worked"); },
+                    error: function(data) { console.log("ajax error", data); },
+                    dataType: 'json'
+                });
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="header">
@@ -45,7 +112,7 @@
     <div class="content">
         <h2 class="content-head is-center">Neuen Veranstalter anlegen</h2>
         <div>
-            <form class="pure-form pure-form-stacked">
+            <form id="newOrganizer" method="post" class="pure-form pure-form-stacked">
                 <fieldset>
                     <label for="organizer_name">Name des Veranstalters</label>
                     <input id="organizer_name" type="text" placeholder="Name des Veranstalters">
@@ -78,7 +145,7 @@
 
         <h2 class="content-head is-center">Neuen Termin anlegen</h2>
         <div>
-            <form class="pure-form pure-form-stacked">
+            <form id="newFleaMarket" method="post" class="pure-form pure-form-stacked">
                 <fieldset>
                     <label for="fleamarket_organizer">Zugeordneter Veranstalter</label>
                     <select id="fleamarket_organizer" style="width: 100%;">

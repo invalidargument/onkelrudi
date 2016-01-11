@@ -36,18 +36,58 @@ module.exports = function(grunt) {
                 files: {
                     'build/onkelrudi/public/templates/index.html': [
                         'public/templates/index.html'
+                    ],
+                    'build/onkelrudi/public/templates/admin.html': [
+                        'public/templates/admin.html'
+                    ],
+                    'build/onkelrudi/public/templates/fleaMarketDate.html': [
+                        'public/templates/fleaMarketDate.html'
                     ]
                 }
             },
         },
         replace: {
-            indexHtmlCssPath: {
+            indexHtmlPaths: {
                 src: ['build/onkelrudi/public/templates/index.html'],
                 dest: 'build/onkelrudi/public/templates/index.html',
-                replacements: [{
-                    from: 'public/bower_components/pure/',
-                    to: 'css/'
-                }]
+                replacements: [
+                    {
+                        from: '/public/bower_components/pure/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/bower_components/jquery/dist/',
+                        to: '/js/'
+                    }
+                ]
+            },
+            adminHtmlPaths: {
+                src: ['build/onkelrudi/public/templates/admin.html'],
+                dest: 'build/onkelrudi/public/templates/admin.html',
+                replacements: [
+                    {
+                        from: '/public/bower_components/pure/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/bower_components/jquery/dist/',
+                        to: '/js/'
+                    }
+                ]
+            },
+            fleaMarketDateHtmlPaths: {
+                src: ['build/onkelrudi/public/templates/fleaMarketDate.html'],
+                dest: 'build/onkelrudi/public/templates/fleaMarketDate.html',
+                replacements: [
+                    {
+                        from: '/public/bower_components/pure/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/bower_components/jquery/dist/',
+                        to: '/js/'
+                    }
+                ]
             }
         }
     });
