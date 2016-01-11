@@ -7,19 +7,19 @@
 
     <title>Onkel Rudi - Administration.</title>
 
-    <link rel="stylesheet" href="bower_components/pure/pure-min.css">
+    <link rel="stylesheet" href="/public/bower_components/pure/pure-min.css">
     <!--[if lte IE 8]>
-    <link rel="stylesheet" href="bower_components/pure/grids-responsive-old-ie-min.css">
+    <link rel="stylesheet" href="/public/bower_components/pure/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-    <link rel="stylesheet" href="bower_components/pure/grids-responsive-min.css">
+    <link rel="stylesheet" href="/public/bower_components/pure/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <!--[if lte IE 8]>
-    <link rel="stylesheet" href="css/onkelrudi-old-ie.css">
+    <link rel="stylesheet" href="/public/css/onkelrudi-old-ie.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-    <link rel="stylesheet" href="css/onkelrudi.css">
+    <link rel="stylesheet" href="/public/css/onkelrudi.css">
     <!--<![endif]-->
 </head>
 <body>
@@ -44,7 +44,7 @@
 <div class="content-wrapper">
     <div class="content">
         <h2 class="content-head is-center">Neuen Veranstalter anlegen</h2>
-        <div class="pure-g">
+        <div>
             <form class="pure-form pure-form-stacked">
                 <fieldset>
                     <label for="organizer_name">Name des Veranstalters</label>
@@ -77,26 +77,21 @@
         </div>
 
         <h2 class="content-head is-center">Neuen Termin anlegen</h2>
-        <div class="pure-g">
-            private $_id;
-            private $_organizer;
-            private $_name;
-            private $_description;
-            private $_start;
-            private $_end;
-            private $_street;
-            private $_streetNo;
-            private $_city;
-            private $_zipCode;
-            private $_location;
-            private $_url;
+        <div>
             <form class="pure-form pure-form-stacked">
                 <fieldset>
+                    <label for="fleamarket_organizer">Zugeordneter Veranstalter</label>
+                    <select id="fleamarket_organizer" style="width: 100%;">
+                        {% for item in fleamarket_organizers %}
+                        <option value="{{item.id}}">{{item.name}}</option>
+                        {% endfor %}
+                    </select>
+
                     <label for="fleamarket_name">Name des Veranstaltung</label>
                     <input id="fleamarket_name" type="text" placeholder="Name des Veranstaltung">
 
                     <label for="fleamarket_description">Beschreibung der Veranstaltung</label>
-                    <textarea id="fleamarket_description" type="text" placeholder="Beschreibung der Veranstaltung">
+                    <textarea id="fleamarket_description" type="text" placeholder="Beschreibung der Veranstaltung" style="width: 100%; height: 200px;"></textarea>
 
                     <label for="fleamarket_start">Beginn</label>
                     <input id="fleamarket_start" type="datetime" placeholder="Beginn der Veranstaltung">

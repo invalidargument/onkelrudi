@@ -67,8 +67,15 @@ $app->get('/{wildcard}/termin/{id}', function ($request, $response, $args) use (
 
 // Admin View
 $app->get('/admin/', function ($request, $response, $args) use ($service) {
+    $fleamarketOrganizers = [];
+    foreach ($service->getAllOrganizers() as $organizer) {
+        $fleamarketOrganizers[] = ['id' => $organizer->getId(), 'name' => $organizer->getName()];
+    }
+
     return $this->get('view')
-        ->render($response, 'admin.html', []);
+        ->render($response, 'admin.html', [
+            'fleamarket_organizers' => $fleamarketOrganizers
+        ]);
 })->setName('admin');
 
 // API routes
