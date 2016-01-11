@@ -66,7 +66,7 @@
                     {% if item.location %}{{item.location}}<br>{% endif %}
                     {% if item.street %}{{item.street}} {{item.streetNo}}<br>{% endif %}
                     {% if item.zipCode %}{{item.zipCode}} {{item.city}}<br>{% endif %}
-                    {% if item.url %}<a href="{{item.url}}" target="_blank" class="post-category-organizer-url">Flohmarktseite</a>{% endif %}
+                    {% if item.url %}<a href="{{item.url}}" target="_blank" class="post-category-organizer-url">{{item.url}}</a>{% endif %}
                 </p>
             </div>
             {% endfor %}

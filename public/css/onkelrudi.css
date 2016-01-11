@@ -341,10 +341,13 @@ a.pure-button-primary {
 .post-category-yui {
     background: #62C2CC;
 }
-.post-category-organizer-url {
+a.post-category-organizer-url {
     background-color: transparent;
     border-bottom: 1px solid #F17022;
     color:inherit;
+}
+a.post-category-organizer-url:hover {
+    border-bottom: 1px solid transparent;
 }
 a.post-category {
     text-decoration: none;
