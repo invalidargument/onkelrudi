@@ -28,6 +28,7 @@ class FleaMarketOrganizerReadListQuery extends AbstractQuery
         $selectStatement = $this->pdo
             ->select()
             ->from('fleamarkets_organizer')
+            ->orderBy('name', 'ASC')
             ->limit($this->_limit)
             ->offset($this->_offset);
 
