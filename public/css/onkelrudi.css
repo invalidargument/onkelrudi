@@ -96,7 +96,7 @@ a.pure-button-primary {
     box-shadow: 0 1px 1px rgba(0,0,0, 0.10);
 }
 .home-menu {
-    background: #bbf28f;
+    background: #62C2CC;
 }
 .pure-menu.pure-menu-fixed {
     /* Fixed menus normally have a border at the bottom. */
@@ -106,27 +106,27 @@ a.pure-button-primary {
 }
 
 .home-menu .pure-menu-heading {
-    color: #505258;
+    color: #E4F6F8;
     font-weight: 400;
     font-size: 120%;
     float:left;
 }
 
 .home-menu .pure-menu-selected a {
-    color: #505258;
-    border-bottom:2px solid #000000;
+    color: #E4F6F8;
+    border-bottom:2px solid #E4F6F8;
 }
 
 .home-menu a {
-    color: #505258;
+    color: #E4F6F8;
     border-bottom:2px solid transparent;
 }
 .home-menu li a:hover,
 .home-menu li a:focus {
     background: none;
     border: none;
-    color: #505258;
-    border-bottom:2px solid #000000;
+    color: #E4F6F8;
+    border-bottom:2px solid #E4F6F8;
 }
 
 
@@ -136,7 +136,7 @@ a.pure-button-primary {
  */
 
 .splash-container {
-    background: #1f8dd6;
+    background: #E4F6F8;
     z-index: 1;
     overflow: hidden;
     /* The following styles are required for the "scroll-over" effect */
@@ -162,7 +162,7 @@ a.pure-button-primary {
 .splash-head {
     font-size: 20px;
     font-weight: bold;
-    color: white;
+    color: #62C2CC;
     border: 0;
     padding: 0 1.6em;
     font-weight: 100;
@@ -172,7 +172,8 @@ a.pure-button-primary {
 
 /* This is the subheading that appears on the blue section */
 .splash-subhead {
-    color: white;
+    font-size: 18px;
+    color: #62C2CC;
     letter-spacing: 0.05em;
     opacity: 0.8;
 }
@@ -190,6 +191,10 @@ a.pure-button-primary {
     z-index: 2;
     background: white;
 
+}
+
+.content {
+    background: #fff;
 }
 
 /* This is the class used for the main content headers (<h2>) */
@@ -231,6 +236,9 @@ a.pure-button-primary {
 }
 
 /* content items that are linked */
+.content a {
+    text-decoration: none;
+}
 .content a.block {
     display:block;
     text-decoration: none;
@@ -239,14 +247,16 @@ a.pure-button-primary {
 
 /* This is the class used for the dark-background areas. */
 .ribbon {
-    background: #2d3e50;
-    color: #aaa;
+    background: #62C2CC;
+    color: #E4F6F8;
 }
 
 /* This is the class used for the footer */
 .footer {
-    background: #bbf28f;
-    color:#505258;
+    /*background: #bbf28f;
+    color:#505258;*/
+    background: #EEF66C;
+    color: #F17022;
 }
 
 /*
@@ -322,7 +332,8 @@ a.pure-button-primary {
     letter-spacing: 3px;
 }
 .post-category-design {
-    background: #5aba59;
+    background: #EEF66C;
+    color: #F17022;
 }
 .post-category-pure {
     background: #4d85d1;
