@@ -99,6 +99,19 @@
     <changeSet id="5" author="Rudi Bieller" failOnError="false">
         <sql>INSERT INTO fleamarkets_organizer (id, name) VALUES (1, 'Rudi the Organizer');</sql>
     </changeSet>
+    <changeSet id="6" author="Rudi Bieller" failOnError="false">
+        <createTable tableName="fleamarkets_dates">
+            <column name="fleamarket_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>
 
 

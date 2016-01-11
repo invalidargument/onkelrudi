@@ -12,6 +12,10 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
     private $_description;
     private $_start;
     private $_end;
+    /**
+     * @var \DateTimeInterface[]
+     */
+    private $_dates = [];
     private $_street;
     private $_streetNo;
     private $_city;
@@ -186,6 +190,29 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface[]
+     */
+    public function getDates()
+    {
+        return $this->_dates;
+    }
+
+    /**
+     * @param \DateTimeInterface[] $dates
+     * @return FleaMarket
+     */
+    public function setDates($dates)
+    {
+        $this->_dates = $dates;
+        return $this;
+    }
+
+    public function addDate(\DateTimeInterface $date)
+    {
+        $this->date[] = $date;
+    }
+
     public function jsonSerialize()
     {
         return [
@@ -194,6 +221,7 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
             'organizer' => $this->getOrganizer(),
             'name' => $this->getName(),
             'description' => $this->getDescription(),
+            //'dates' => $this->getDates(),
             'start' => $this->getStart(),
             'end' => $this->getEnd(),
             'street' => $this->getStreet(),
