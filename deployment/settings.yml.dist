@@ -8,6 +8,7 @@ System:
   domain: "localhost"
   
 Wordpress:
+  api-domain: "localhost/wordpress"
   api-documentation: "http://v2.wp-api.org/"
   api-base-url: "/wordpress/wp-json/wp/v2/"
   api-get-posts: "posts"
