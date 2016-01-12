@@ -4,6 +4,7 @@ namespace RudiBieller\OnkelRudi\Controller;
 
 use RudiBieller\OnkelRudi\BuilderFactory;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
+use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use Slim\App;
 
 class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
@@ -20,8 +21,12 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
             'location' => 'Cologne',
             'street' => 'Venloer',
             'streetNo' => 1,
-            'url' => 'foo.com'
+            'url' => 'foo.com',
+            'organizerId' => 42
         ];
+
+        $organizer = new Organizer();
+        $organizer->setId(42);
         $fleaMarket = new FleaMarket();
         $fleaMarket->setName('foo')
             ->setCity('bar')
@@ -32,7 +37,8 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
             ->setLocation('Cologne')
             ->setStreet('Venloer')
             ->setStreetNo(1)
-            ->setUrl('foo.com');
+            ->setUrl('foo.com')
+            ->setOrganizer($organizer);
 
         $builderFactory = new BuilderFactory();
         $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketService');

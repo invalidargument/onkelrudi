@@ -2,6 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
+use RudiBieller\OnkelRudi\FleaMarket\Organizer;
+
 class FleaMarketCreateAction extends AbstractJsonAction
 {
     protected function getData()
@@ -13,6 +15,11 @@ class FleaMarketCreateAction extends AbstractJsonAction
         $builder->reset();
 
         $data = $this->request->getParsedBody();
+        if (array_key_exists('organizerId', $data)) {
+            $organizer = new Organizer();
+            $organizer->setId($data['organizerId']);
+            $data['organizer'] = $organizer;
+        }
 
         // if incomplete, return error
 
