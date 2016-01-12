@@ -11,7 +11,7 @@
     ],
     "require": {
         "slim/slim": "3.0.*",
-        "slim/pdo": "*",
+        "slim/pdo": "1.9.2",
         "slim/csrf": "*",
         "slim/twig-view": "*",
         "kriswallsmith/buzz": "*",
