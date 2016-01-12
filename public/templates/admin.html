@@ -49,8 +49,14 @@
                     data: postData,
                     beforeSend: function() { console.log('beforeSend') },
                     complete: function() { console.log('complete') },
-                    success: function(data) { console.log("ajax worked"); },
-                    error: function(data) { console.log("ajax error", data); },
+                    success: function(data) {
+                        console.log("ajax worked");
+                        alert("done with success");
+                    },
+                    error: function(data) {
+                        console.log("ajax error", data);
+                        alert("errors occured, damn!");
+                    },
                     dataType: 'json'
                 });
             });
@@ -81,8 +87,14 @@
                     data: postData,
                     beforeSend: function() { console.log('beforeSend') },
                     complete: function() { console.log('complete') },
-                    success: function(data) { console.log("ajax worked"); },
-                    error: function(data) { console.log("ajax error", data); },
+                    success: function(data) {
+                        console.log("ajax worked");
+                        alert("done with success");
+                    },
+                    error: function(data) {
+                        console.log("ajax error", data);
+                        alert("errors occured, damn!");
+                    },
                     dataType: 'json'
                 });
             });

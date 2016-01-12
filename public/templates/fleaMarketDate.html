@@ -25,11 +25,11 @@
 <body>
 <div class="header">
     <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-        <a class="pure-menu-heading" href="">Onkel Rudi</a>
+        <a class="pure-menu-heading" href="/public/">Onkel Rudi</a>
         <ul class="pure-menu-list">
-            <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">Termine</a></li>
+            <li class="pure-menu-item pure-menu-selected"><a href="/public/" class="pure-menu-link">Termine</a></li>
             {% for item in wpCategories %}
-            <li class="pure-menu-item"><a href="{{data.seoName}}/cat/{{data.id}}" class="pure-menu-link">{{data.name}}</a></li>
+            <li class="pure-menu-item"><a href="{{item.seoName}}/cat/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
             {% endfor %}
         </ul>
     </div>
