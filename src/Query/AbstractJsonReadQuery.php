@@ -2,6 +2,9 @@
 
 namespace RudiBieller\OnkelRudi\Query;
 
+use Buzz\Listener\BasicAuthListener;
+use RudiBieller\OnkelRudi\Config\Config;
+
 abstract class AbstractJsonReadQuery implements QueryInterface
 {
     protected $uri;
@@ -55,6 +58,25 @@ abstract class AbstractJsonReadQuery implements QueryInterface
             $this->browser = new \Buzz\Browser($curl);
         }
 
+        if ($this->needsBasicAuthentication()) {
+            $this->addAuthListenerToBrowser();
+        }
+
         return $this->browser;
+    }
+
+    protected function addAuthListenerToBrowser()
+    {
+        $username = Config::$wordpress['authUsername'];
+        $password = Config::$wordpress['authPassword'];
+
+        $this->browser->addListener(
+            new BasicAuthListener($username, $password)
+        );
+    }
+
+    protected function needsBasicAuthentication()
+    {
+        return Config::$system['environment'] !== 'dev';
     }
 }
