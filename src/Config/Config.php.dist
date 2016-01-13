@@ -16,6 +16,8 @@ class Config
     ];
 
     public static $wordpress = [
+        'auth-username' => {{auth-username}},
+        'auth-password' => {{auth-password}},
         'api-documentation' => 'http://v2.wp-api.org/',
         'api-domain' => {{api-domain}},
         'api-base-url' => '/wp-json/wp/v2/',

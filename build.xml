@@ -32,6 +32,8 @@
         <replace file="${basedir}/src/Config/Config.php" token="{{environment}}" value="${environment}"/>
         <replace file="${basedir}/src/Config/Config.php" token="{{domain}}" value="${domain}"/>
         <replace file="${basedir}/src/Config/Config.php" token="{{api-domain}}" value="${api-domain}"/>
+        <replace file="${basedir}/src/Config/Config.php" token="{{auth-username}}" value="${auth-username}"/>
+        <replace file="${basedir}/src/Config/Config.php" token="{{auth-password}}" value="${auth-password}"/>
     </target>
 
     <target name="composer" description="composer update">
@@ -131,6 +133,8 @@
         <replace file="${basedir}/build/onkelrudi/src/Config/Config.php" token="{{environment}}" value="${Live-environment}"/>
         <replace file="${basedir}/build/onkelrudi/src/Config/Config.php" token="{{domain}}" value="${Live-domain}"/>
         <replace file="${basedir}/build/onkelrudi/src/Config/Config.php" token="{{api-domain}}" value="${Live-api-domain}"/>
+        <replace file="${basedir}/build/onkelrudi/src/Config/Config.php" token="{{auth-username}}" value="${Live-auth-username}"/>
+        <replace file="${basedir}/build/onkelrudi/src/Config/Config.php" token="{{auth-password}}" value="${Live-auth-password}"/>
     </target>
 
     <target name="prepare-frontend-for-deployment">

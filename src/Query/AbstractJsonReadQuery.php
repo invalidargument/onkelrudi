@@ -67,8 +67,8 @@ abstract class AbstractJsonReadQuery implements QueryInterface
 
     protected function addAuthListenerToBrowser()
     {
-        $username = Config::$wordpress['authUsername'];
-        $password = Config::$wordpress['authPassword'];
+        $username = Config::$wordpress['auth-username'];
+        $password = Config::$wordpress['auth-password'];
 
         $this->browser->addListener(
             new BasicAuthListener($username, $password)

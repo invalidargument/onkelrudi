@@ -8,6 +8,8 @@ System:
   domain: "localhost"
   
 Wordpress:
+  auth-username: 'rudi'
+  auth-password: 'abc'
   api-domain: "localhost/wordpress"
   api-documentation: "http://v2.wp-api.org/"
   api-base-url: "/wp-json/wp/v2/"
