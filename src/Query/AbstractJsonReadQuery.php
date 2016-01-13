@@ -77,6 +77,6 @@ abstract class AbstractJsonReadQuery implements QueryInterface
 
     protected function needsBasicAuthentication()
     {
-        return Config::$system['environment'] !== 'dev';
+        return true;
     }
 }

@@ -1,6 +1,8 @@
 <?php
 namespace RudiBieller\OnkelRudi\Config;
 
+// TODO: make non static
+
 class Config
 {
     public static $database = [
