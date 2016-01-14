@@ -2,6 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\Wordpress;
 
+use RudiBieller\OnkelRudi\Config\Config;
+
 class PostReadListQueryTest extends \PHPUnit_Framework_TestCase
 {
     public function testQueryReturnsMappedPosts()
@@ -20,7 +22,8 @@ class PostReadListQueryTest extends \PHPUnit_Framework_TestCase
 
         $browser = \Mockery::mock('Buzz\Browser');
         $browser->shouldReceive('get')->once()->with('http://localhost/wordpress/wp-json/wp/v2/posts', ['Content-Type: application/json'], '')->andReturn($browser)
-            ->shouldReceive('getContent')->andReturn($postsJson);
+            ->shouldReceive('getContent')->andReturn($postsJson)
+            ->shouldReceive('addListener')->with(\Hamcrest\Matchers::equalTo(new \Buzz\Listener\BasicAuthListener(Config::$wordpress['auth-username'], Config::$wordpress['auth-password'])));
 
         $sut = new PostReadListQuery();
         $sut->setBrowser($browser);
