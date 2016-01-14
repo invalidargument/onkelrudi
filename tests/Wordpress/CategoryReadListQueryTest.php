@@ -8,6 +8,8 @@ class CategoryReadListQueryTest extends \PHPUnit_Framework_TestCase
 {
     public function testQueryReturnsMappedCategories()
     {
+        $wpConfig = (new Config())->getWordpressConfiguration();
+        
         $category = new Category();
         $category
             ->setId(1)
@@ -21,7 +23,7 @@ class CategoryReadListQueryTest extends \PHPUnit_Framework_TestCase
         $browser = \Mockery::mock('Buzz\Browser');
         $browser->shouldReceive('get')->once()->with('http://localhost/wordpress/wp-json/wp/v2/categories', ['Content-Type: application/json'], '')->andReturn($browser)
             ->shouldReceive('getContent')->andReturn($categoriesJson)
-            ->shouldReceive('addListener')->with(\Hamcrest\Matchers::equalTo(new \Buzz\Listener\BasicAuthListener(Config::$wordpress['auth-username'], Config::$wordpress['auth-password'])));
+            ->shouldReceive('addListener')->with(\Hamcrest\Matchers::equalTo(new \Buzz\Listener\BasicAuthListener($wpConfig['auth-username'], $wpConfig['auth-password'])));
 
         $sut = new CategoryReadListQuery();
         $sut->setBrowser($browser);

@@ -6,6 +6,7 @@ Database:
 System:
   environment: "dev"
   domain: "localhost"
+  protocol: "http://"
   
 Wordpress:
   auth-username: 'rudi'

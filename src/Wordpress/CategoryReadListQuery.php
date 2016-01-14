@@ -9,8 +9,12 @@ class CategoryReadListQuery extends AbstractJsonReadQuery
 {
     protected function getUri()
     {
-        return Config::$system['protocol'] . Config::$wordpress['api-domain'] .
-            Config::$wordpress['api-base-url'] . Config::$wordpress['api-get-categories'];
+        $config = new Config();
+        $wpConfig = $config->getWordpressConfiguration();
+        $systemConfig = $config->getSystemConfiguration();
+        
+        return $systemConfig['protocol'] . $wpConfig['api-domain'] .
+            $wpConfig['api-base-url'] . $wpConfig['api-get-categories'];
     }
 
     protected function mapResult($result)

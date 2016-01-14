@@ -24,16 +24,6 @@
         <mkdir dir="${basedir}/build/logs"/>
         <mkdir dir="${basedir}/build/onkelrudi"/>
         <mkdir dir="${basedir}/src/cache"/>
-
-        <copy file="${basedir}/src/Config/Config.php.dist" tofile="${basedir}/src/Config/Config.php" overwrite="true"/>
-        <replace file="${basedir}/src/Config/Config.php" token="{{dsn}}" value="${dsn}"/>
-        <replace file="${basedir}/src/Config/Config.php" token="{{user}}" value="${user}"/>
-        <replace file="${basedir}/src/Config/Config.php" token="{{password}}" value="${password}"/>
-        <replace file="${basedir}/src/Config/Config.php" token="{{environment}}" value="${environment}"/>
-        <replace file="${basedir}/src/Config/Config.php" token="{{domain}}" value="${domain}"/>
-        <replace file="${basedir}/src/Config/Config.php" token="{{api-domain}}" value="${api-domain}"/>
-        <replace file="${basedir}/src/Config/Config.php" token="{{auth-username}}" value="${auth-username}"/>
-        <replace file="${basedir}/src/Config/Config.php" token="{{auth-password}}" value="${auth-password}"/>
     </target>
 
     <target name="composer" description="composer update">
@@ -126,15 +116,6 @@
         <copy todir="${basedir}/build/onkelrudi/vendor">
             <fileset dir="${basedir}/vendor"/>
         </copy>
-        <copy file="${basedir}/src/Config/Config.php.dist" tofile="${basedir}/build/onkelrudi/src/Config/Config.php" overwrite="true"/>
-        <replace file="${basedir}/build/onkelrudi/src/Config/Config.php" token="{{dsn}}" value="${Live-dsn}"/>
-        <replace file="${basedir}/build/onkelrudi/src/Config/Config.php" token="{{user}}" value="${Live-user}"/>
-        <replace file="${basedir}/build/onkelrudi/src/Config/Config.php" token="{{password}}" value="${Live-password}"/>
-        <replace file="${basedir}/build/onkelrudi/src/Config/Config.php" token="{{environment}}" value="${Live-environment}"/>
-        <replace file="${basedir}/build/onkelrudi/src/Config/Config.php" token="{{domain}}" value="${Live-domain}"/>
-        <replace file="${basedir}/build/onkelrudi/src/Config/Config.php" token="{{api-domain}}" value="${Live-api-domain}"/>
-        <replace file="${basedir}/build/onkelrudi/src/Config/Config.php" token="{{auth-username}}" value="${Live-auth-username}"/>
-        <replace file="${basedir}/build/onkelrudi/src/Config/Config.php" token="{{auth-password}}" value="${Live-auth-password}"/>
     </target>
 
     <target name="prepare-frontend-for-deployment">

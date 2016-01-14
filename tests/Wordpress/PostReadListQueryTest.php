@@ -8,6 +8,8 @@ class PostReadListQueryTest extends \PHPUnit_Framework_TestCase
 {
     public function testQueryReturnsMappedPosts()
     {
+        $wpConfig = (new Config())->getWordpressConfiguration();
+        
         $post = new Post();
         $post
             ->setId(6)
@@ -23,7 +25,7 @@ class PostReadListQueryTest extends \PHPUnit_Framework_TestCase
         $browser = \Mockery::mock('Buzz\Browser');
         $browser->shouldReceive('get')->once()->with('http://localhost/wordpress/wp-json/wp/v2/posts', ['Content-Type: application/json'], '')->andReturn($browser)
             ->shouldReceive('getContent')->andReturn($postsJson)
-            ->shouldReceive('addListener')->with(\Hamcrest\Matchers::equalTo(new \Buzz\Listener\BasicAuthListener(Config::$wordpress['auth-username'], Config::$wordpress['auth-password'])));
+            ->shouldReceive('addListener')->with(\Hamcrest\Matchers::equalTo(new \Buzz\Listener\BasicAuthListener($wpConfig['auth-username'], $wpConfig['auth-password'])));
 
         $sut = new PostReadListQuery();
         $sut->setBrowser($browser);
