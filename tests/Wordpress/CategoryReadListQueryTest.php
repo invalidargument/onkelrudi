@@ -8,7 +8,7 @@ class CategoryReadListQueryTest extends \PHPUnit_Framework_TestCase
 {
     public function testQueryReturnsMappedCategories()
     {
-        $wpConfig = (new Config())->getWordpressConfiguration();
+        $wpConfig = (new Config('settings.yml.dist'))->getWordpressConfiguration();
         
         $category = new Category();
         $category

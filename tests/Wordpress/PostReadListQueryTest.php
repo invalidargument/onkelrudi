@@ -8,7 +8,7 @@ class PostReadListQueryTest extends \PHPUnit_Framework_TestCase
 {
     public function testQueryReturnsMappedPosts()
     {
-        $wpConfig = (new Config())->getWordpressConfiguration();
+        $wpConfig = (new Config('settings.yml.dist'))->getWordpressConfiguration();
         
         $post = new Post();
         $post
