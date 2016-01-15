@@ -5,7 +5,7 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\PyStringNode;
-use Behat\WebApiExtension\Context\WebApiContext;
+use Behat\MinkExtension\Context\MinkContext;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketService;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
@@ -14,7 +14,7 @@ use RudiBieller\OnkelRudi\FleaMarket\Query\Factory;
 /**
  * Defines application features from the specific context.
  */
-class FeatureContext implements Context, SnippetAcceptingContext
+class FeatureContext extends MinkContext implements Context, SnippetAcceptingContext
 {
     private $_browser;
     private $_service;
