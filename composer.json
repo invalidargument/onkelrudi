@@ -36,7 +36,7 @@
         "phpmd/phpmd": "*",
         "sebastian/phpcpd": "*",
         "squizlabs/php_codesniffer": "2.*",
-        "deployer/deployer": "^3.0"
+        "andres-montanez/magallanes": "~1.0.6"
     },
     "autoload": {
         "psr-4": {
