@@ -18,7 +18,8 @@
         "alcaeus/liquibase": "*",
         "cocur/slugify": "1.4",
         "ramsey/uuid": "3.1.*",
-        "ezyang/htmlpurifier": "4.7.*"
+        "ezyang/htmlpurifier": "4.7.*",
+        "symfony/yaml": "2.8.*"
     },
     "require-dev": {
         "phpunit/phpunit": "4.8.*",
@@ -36,7 +37,7 @@
         "phpmd/phpmd": "*",
         "sebastian/phpcpd": "*",
         "squizlabs/php_codesniffer": "2.*",
-        "andres-montanez/magallanes": "~1.0.6"
+        "halleck45/phpmetrics": ">=1.8"
     },
     "autoload": {
         "psr-4": {
