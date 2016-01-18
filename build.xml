@@ -10,7 +10,7 @@
     <property file="deployment/settings_live.yml"/>
 
     <target name="build"
-        depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, behat, composer_optimize, archive"/>
+        depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, behat, archive"/>
 
     <target name="clean" description="Cleanup artifacts">
         <delete dir="${basedir}/build/coverage"/>
@@ -34,8 +34,9 @@
 
     <target name="composer_optimize" description="composer dump autoload">
         <exec executable="composer" failonerror="true">
-            <arg value="dump-autoload" />
-            <arg value="--optimize" />
+            <arg value="update" />
+            <arg value="--no-dev" />
+            <arg value="-o" />
         </exec>
     </target>
 
@@ -128,7 +129,7 @@
         <fail message="Grunt failed!" unless="onSuccess"/>
     </target>
 
-    <target name="archive" depends="prepare-backend-for-deployment, prepare-frontend-for-deployment">
+    <target name="archive" depends="composer_optimize, prepare-backend-for-deployment, prepare-frontend-for-deployment">
         <tar compression="gzip" destfile="${basedir}/build/artifacts/onkelrudi_${buildtimestamp}.tar.gz" longfile="posix">
             <tarfileset dir="${basedir}/build/onkelrudi" prefix=".">
                 <include name="**/*" />
