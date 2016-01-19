@@ -10,8 +10,6 @@ interface FleaMarketServiceInterface extends ServiceInterface
 
     public function getFleaMarkets($limit, $offset);
 
-    public function getAllOrganizers();
-
     public function getFleaMarket($id);
 
     public function updateFleaMarket(FleaMarketInterface $fleaMarket);
@@ -19,12 +17,4 @@ interface FleaMarketServiceInterface extends ServiceInterface
     public function deleteFleaMarket(FleaMarketInterface $fleaMarket);
 
     public function createFleaMarket(FleaMarketInterface $fleaMarket);
-
-    public function createOrganizer(OrganizerInterface $organizer);
-
-    public function updateOrganizer(OrganizerInterface $organizer);
-
-    public function deleteOrganizer(OrganizerInterface $organizer);
-
-    public function getOrganizer($id);
 }

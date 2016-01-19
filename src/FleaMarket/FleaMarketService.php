@@ -46,38 +46,10 @@ class FleaMarketService implements FleaMarketServiceInterface
         return $fleaMarketId;
     }
 
-    public function createOrganizer(OrganizerInterface $organizer)
-    {
-        $query = $this->_factory->createFleaMarketOrganizerInsertQuery();
-
-        $query
-            ->setUuid($organizer->getUuid())
-            ->setName($organizer->getName())
-            ->setStreet($organizer->getStreet())
-            ->setStreetNo($organizer->getStreetNo())
-            ->setZipCode($organizer->getZipCode())
-            ->setCity($organizer->getCity())
-            ->setPhone($organizer->getPhone())
-            ->setUrl($organizer->getUrl());
-
-        $id = $query->run();
-        $organizer->setId($id);
-
-        return $id;
-    }
-
     public function deleteFleaMarket(FleaMarketInterface $fleaMarket)
     {
         $query = $this->_factory->createFleaMarketDeleteQuery();
         $query->setFleaMarket($fleaMarket);
-
-        return $query->run();
-    }
-
-    public function deleteOrganizer(OrganizerInterface $organizer)
-    {
-        $query = $this->_factory->createFleaMarketOrganizerDeleteQuery();
-        $query->setOrganizer($organizer);
 
         return $query->run();
     }
@@ -108,33 +80,10 @@ class FleaMarketService implements FleaMarketServiceInterface
         return $query->run();
     }
 
-    public function getOrganizer($id)
-    {
-        $query = $this->_factory->createFleaMarketOrganizerReadQuery();
-        $query->setOrganizerId($id);
-
-        return $query->run();
-    }
-
     public function updateFleaMarket(FleaMarketInterface $fleaMarket)
     {
         $query = $this->_factory->createFleaMarketUpdateQuery();
         $query->setFleaMarket($fleaMarket);
-
-        return $query->run();
-    }
-
-    public function updateOrganizer(OrganizerInterface $organizer)
-    {
-        $query = $this->_factory->createFleaMarketOrganizerUpdateQuery();
-        $query->setOrganizer($organizer);
-
-        return $query->run();
-    }
-
-    public function getAllOrganizers()
-    {
-        $query = $this->_factory->createFleaMarketOrganizerReadListQuery();
 
         return $query->run();
     }
