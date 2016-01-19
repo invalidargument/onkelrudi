@@ -27,6 +27,6 @@ class OrganizerUpdateAction extends AbstractJsonAction
             }
         }
 
-        return $this->service->updateOrganizer($builder->build());
+        return $this->organizerService->updateOrganizer($builder->build());
     }
 }

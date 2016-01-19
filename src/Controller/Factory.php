@@ -2,6 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
+use RudiBieller\OnkelRudi\FleaMarket\OrganizerServiceInterface;
 use RudiBieller\OnkelRudi\ServiceInterface;
 
 class Factory implements FactoryInterface
@@ -9,6 +10,7 @@ class Factory implements FactoryInterface
     private $_instances = array();
     private $_slimApp;
     private $_service;
+    private $_organizerService;
 
     public function __construct(\Slim\App $app)
     {
@@ -18,6 +20,11 @@ class Factory implements FactoryInterface
     public function setService(ServiceInterface $service)
     {
         $this->_service = $service;
+    }
+
+    public function setOrganizerService(OrganizerServiceInterface $service)
+    {
+        $this->_organizerService = $service;
     }
 
     public function createActionByName($name)
@@ -33,6 +40,7 @@ class Factory implements FactoryInterface
         $instance = new $name();
         $instance->setApp($this->_slimApp);
         $instance->setService($this->_service);
+        $instance->setOrganizerService($this->_organizerService);
         $this->_instances[$name] = $instance;
 
         return $this->_instances[$name];

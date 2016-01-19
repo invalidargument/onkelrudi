@@ -23,6 +23,6 @@ class OrganizerCreateAction extends AbstractJsonAction
             }
         }
 
-        return $this->service->createOrganizer($builder->build());
+        return $this->organizerService->createOrganizer($builder->build());
     }
 }

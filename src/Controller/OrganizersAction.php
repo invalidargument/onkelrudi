@@ -6,6 +6,6 @@ class OrganizersAction extends AbstractJsonAction
 {
     protected function getData()
     {
-        return $this->service->getAllOrganizers();
+        return $this->organizerService->getAllOrganizers();
     }
 }

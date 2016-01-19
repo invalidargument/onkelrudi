@@ -9,7 +9,9 @@ use Behat\MinkExtension\Context\MinkContext;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketService;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
+use RudiBieller\OnkelRudi\FleaMarket\OrganizerService;
 use RudiBieller\OnkelRudi\FleaMarket\Query\Factory;
+use RudiBieller\OnkelRudi\FleaMarket\Query\OrganizerQueryFactory;
 
 /**
  * Defines application features from the specific context.
@@ -18,6 +20,7 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
 {
     private $_browser;
     private $_service;
+    private $_organizerService;
     /**
      * @var \Buzz\Message\Response
      */
@@ -39,6 +42,10 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
         $factory = new Factory();
         $this->_service = new FleaMarketService();
         $this->_service->setQueryFactory($factory);
+
+        $organizerQueryFactory = new OrganizerQueryFactory();
+        $this->_organizerService = new OrganizerService();
+        $this->_organizerService->setQueryFactory($organizerQueryFactory);
     }
 
     /** @BeforeScenario */
@@ -150,7 +157,7 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
                 ->setStreet('foo')
                 ->setStreetNo('2000')
                 ->setUrl('http://www.example.com');
-            $id = $this->_service->createOrganizer($organizer);
+            $id = $this->_organizerService->createOrganizer($organizer);
             $organizer->setId($id);
             $fleaMarket = new FleaMarket();
             $fleaMarket
@@ -184,7 +191,7 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
                 ->setStreet('foo')
                 ->setStreetNo('2000')
                 ->setUrl('http://www.example.com');
-            $this->_service->createOrganizer($organizer);
+            $this->_organizerService->createOrganizer($organizer);
         }
     }
 
@@ -200,7 +207,7 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
             ->setStreet('foo')
             ->setStreetNo('2000')
             ->setUrl('http://www.example.com');
-        $id = $this->_service->createOrganizer($organizer);
+        $id = $this->_organizerService->createOrganizer($organizer);
     }
 
     private function _cleanupDatabase()

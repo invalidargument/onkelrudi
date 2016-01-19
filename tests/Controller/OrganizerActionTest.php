@@ -16,12 +16,12 @@ class OrganizerActionTest extends \PHPUnit_Framework_TestCase
         $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
 
-        $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketService');
+        $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\OrganizerService');
         $service->shouldReceive('getOrganizer')->once()->with(42)->andReturn($organizer);
 
         $action = new OrganizerAction();
         $action->setApp($app);
-        $action->setService($service);
+        $action->setOrganizerService($service);
 
         $return = $action($request, $response, array('id' => 42));
         $actual = (string)$return->getBody();
@@ -42,12 +42,12 @@ class OrganizerActionTest extends \PHPUnit_Framework_TestCase
             ->with(FleaMarketAction::DEFAULT_ERROR_RESPONSE_HTTP_STATUS_CODE, FleaMarketAction::DEFAULT_ERROR_RESPONSE_MESSAGE)
             ->andReturn($response);
 
-        $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketService');
+        $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\OrganizerService');
         $service->shouldReceive('getOrganizer')->andReturn(null);
 
         $action = new OrganizerAction();
         $action->setApp($app);
-        $action->setService($service);
+        $action->setOrganizerService($service);
 
         $return = $action($request, $response, array('id' => 42));
         $actual = (string)$return->getBody();

@@ -5,6 +5,7 @@ namespace RudiBieller\OnkelRudi\Controller;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use RudiBieller\OnkelRudi\BuilderFactoryInterface;
+use RudiBieller\OnkelRudi\FleaMarket\OrganizerServiceInterface;
 use RudiBieller\OnkelRudi\ServiceInterface;
 
 abstract class AbstractAction implements ActionInterface
@@ -14,6 +15,7 @@ abstract class AbstractAction implements ActionInterface
 
     protected $app;
     protected $service;
+    protected $organizerService;
     /**
      * @var BuilderFactoryInterface
      */
@@ -39,6 +41,12 @@ abstract class AbstractAction implements ActionInterface
     public function setService(ServiceInterface $service)
     {
         $this->service = $service;
+        return $this;
+    }
+
+    public function setOrganizerService(OrganizerServiceInterface $service)
+    {
+        $this->organizerService = $service;
         return $this;
     }
 

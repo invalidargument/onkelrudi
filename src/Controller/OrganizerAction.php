@@ -7,6 +7,6 @@ class OrganizerAction extends AbstractJsonAction
     protected function getData()
     {
         // TODO: if not found, return 404
-        return $this->service->getOrganizer($this->args['id']);
+        return $this->organizerService->getOrganizer($this->args['id']);
     }
 }

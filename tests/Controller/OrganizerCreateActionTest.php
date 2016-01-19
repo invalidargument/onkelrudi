@@ -29,7 +29,7 @@ class OrganizerCreateActionTest extends \PHPUnit_Framework_TestCase
             ->setUrl('foo.com');
 
         $builderFactory = new BuilderFactory();
-        $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketService');
+        $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\OrganizerService');
         $service->shouldReceive('createOrganizer')->once()->with(\Hamcrest\Matchers::equalTo($organizer))->andReturn(1);
 
         $app = new App();
@@ -39,7 +39,7 @@ class OrganizerCreateActionTest extends \PHPUnit_Framework_TestCase
 
         $action = new OrganizerCreateAction();
         $action->setApp($app)
-            ->setService($service)
+            ->setOrganizerService($service)
             ->setBuilderFactory($builderFactory);
 
         $return = $action($request, $response, array());

@@ -1,0 +1,37 @@
+<?php
+
+namespace RudiBieller\OnkelRudi\FleaMarket\Query;
+
+class OrganizerQueryFactoryTest extends \PHPUnit_Framework_TestCase
+{
+    private $_sut;
+
+    protected function setUp()
+    {
+        $this->_sut = new OrganizerQueryFactory();
+    }
+
+    /**
+     * @dataProvider dataProviderTestFactoryCreatesDesiredQuery
+     */
+    public function testFactoryCreatesDesiredQuery($method, $expectedQuery)
+    {
+        $query = $this->_sut->$method();
+
+        $this->assertInstanceOf(
+            $expectedQuery,
+            $query
+        );
+    }
+
+    public function dataProviderTestFactoryCreatesDesiredQuery()
+    {
+        return array(
+            array('createFleaMarketOrganizerDeleteQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerDeleteQuery'),
+            array('createFleaMarketOrganizerInsertQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerInsertQuery'),
+            array('createFleaMarketOrganizerReadListQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerReadListQuery'),
+            array('createFleaMarketOrganizerReadQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerReadQuery'),
+            array('createFleaMarketOrganizerUpdateQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerUpdateQuery'),
+        );
+    }
+}

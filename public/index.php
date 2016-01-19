@@ -2,9 +2,11 @@
 include_once '../vendor/autoload.php';
 
 use RudiBieller\OnkelRudi\BuilderFactory;
+use RudiBieller\OnkelRudi\FleaMarket\OrganizerService;
 use RudiBieller\OnkelRudi\FleaMarket\Query\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketService;
 use RudiBieller\OnkelRudi\Controller\Factory as ControllerFactory;
+use RudiBieller\OnkelRudi\FleaMarket\Query\OrganizerQueryFactory;
 use RudiBieller\OnkelRudi\Wordpress\QueryFactory;
 use RudiBieller\OnkelRudi\Wordpress\Service as WpService;
 
@@ -30,6 +32,9 @@ $container['view'] = function ($c) {
 // fleaMarkets
 $service = new FleaMarketService();
 $service->setQueryFactory(new Factory());
+// organizers
+$organizerService = new OrganizerService();
+$organizerService->setQueryFactory(new OrganizerQueryFactory());
 
 // wordpress
 $wpService = new WpService();
@@ -38,6 +43,7 @@ $wpService->setQueryFactory(new QueryFactory());
 // controller
 $controllerFactory = new ControllerFactory($app);
 $controllerFactory->setService($service);
+$controllerFactory->setOrganizerService($organizerService);
 
 // Index
 $app->get('/', function ($request, $response, $args) use ($service, $wpService, $app) {
@@ -66,9 +72,9 @@ $app->get('/{wildcard}/termin/{id}', function ($request, $response, $args) use (
 })->setName('event-date');
 
 // Admin View
-$app->get('/admin/', function ($request, $response, $args) use ($service) {
+$app->get('/admin/', function ($request, $response, $args) use ($organizerService) {
     $fleamarketOrganizers = [];
-    foreach ($service->getAllOrganizers() as $organizer) {
+    foreach ($organizerService->getAllOrganizers() as $organizer) {
         $fleamarketOrganizers[] = ['id' => $organizer->getId(), 'name' => $organizer->getName()];
     }
 

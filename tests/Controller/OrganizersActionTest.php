@@ -17,12 +17,12 @@ class OrganizersActionTest extends \PHPUnit_Framework_TestCase
         $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
 
-        $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketService');
+        $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\OrganizerService');
         $service->shouldReceive('getAllOrganizers')->once()->andReturn($organizers);
 
         $action = new OrganizersAction();
         $action->setApp($app);
-        $action->setService($service);
+        $action->setOrganizerService($service);
 
         $return = $action($request, $response, array());
         $actual = (string)$return->getBody();
