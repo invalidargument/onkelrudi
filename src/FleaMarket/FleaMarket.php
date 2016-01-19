@@ -156,7 +156,7 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getSlug()
     {
@@ -164,7 +164,7 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
     }
 
     /**
-     * @param mixed $slug
+     * @param string $slug
      */
     public function setSlug($slug)
     {
