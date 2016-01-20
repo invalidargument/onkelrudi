@@ -25,6 +25,7 @@
     "pure": "~0.6.0",
     "requirejs": "~2.1.22",
     "underscore": "~1.8.3",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "pickadate": "3.5.6"
   }
 }
