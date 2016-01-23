@@ -13,7 +13,7 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
     private $_start;
     private $_end;
     /**
-     * @var \DateTimeInterface[]
+     * @var FleaMarketDate[]
      */
     private $_dates = [];
     private $_street;

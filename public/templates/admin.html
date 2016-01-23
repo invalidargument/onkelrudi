@@ -23,6 +23,7 @@
     <!--<![endif]-->
 
     <script src="/public/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/public/bower_components/underscore/underscore.js"></script>
     <script>
         console.log('z0nk!');
         $(function() {
@@ -65,6 +66,19 @@
                 console.log('sending post with new fleamarket data..... will post json as body now.');
                 e.preventDefault();
 
+                var marketDates = [];
+                var startDates = $('[name="startDates[]"]');
+                var endDates = $('[name="endDates[]"]');
+                $.map(
+                    startDates,
+                    function(element,index) {
+                        marketDates.push({
+                            start: $(element).val(),
+                            end: $(endDates[index]).val()
+                        });
+                    }
+                )
+
                 var apiUrlFleaMarkets = '/public/api/v1/fleamarkets';
                 var postData = JSON.stringify({
                     organizerId: $('#fleamarket_organizer').val(),
@@ -72,6 +86,7 @@
                     description: $('#fleamarket_description').val(),
                     start: $('#fleamarket_start').val(),
                     end: $('#fleamarket_end').val(),
+                    dates: marketDates,
                     street: $('#fleamarket_street').val(),
                     streetNo: $('#fleamarket_streetNo').val(),
                     zipCode: $('#fleamarket_zipCode').val(),
@@ -97,6 +112,11 @@
                     },
                     dataType: 'json'
                 });
+            });
+
+            $('.duplicate').on('click', function(e) {
+                var clone = $('.datesBlock div').last().clone();
+                $('.datesBlock div:last').after(clone);
             });
         });
     </script>
@@ -177,6 +197,16 @@
 
                     <label for="fleamarket_end">Ende</label>
                     <input id="fleamarket_end" type="datetime" placeholder="Ende der Veranstaltung">
+
+                    <section class="datesBlock">
+                        <h3>Termine (von bis)</h3>
+                        <div>
+                            <input name="startDates[]" type="datetime" placeholder="Beginn 0000-00-00 00:00:00">
+                            <span>bis</span>
+                            <input name="endDates[]" type="datetime" placeholder="Ende 0000-00-00 00:00:00">
+                        </div>
+                        <p class="duplicate">+</p>
+                    </section>
 
                     <label for="fleamarket_street">Stra&szlig;e</label>
                     <input id="fleamarket_street" type="text" placeholder="Stra&szlig;e">

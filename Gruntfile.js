@@ -8,6 +8,9 @@ module.exports = function(grunt) {
                     'build/onkelrudi/public/js/jquery.js': [
                         'public/bower_components/jquery/dist/jquery.js'
                     ],
+                    'build/onkelrudi/public/js/underscore.js': [
+                        'public/bower_components/underscore/underscore.js'
+                    ],
                     'build/onkelrudi/public/js/onkelrudi.js': [
                         'public/js/onkelrudi.js'
                     ]

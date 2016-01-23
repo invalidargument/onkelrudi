@@ -364,3 +364,23 @@ EEF66C
 .mapsLocation {
     border:1px solid #000000;
 }
+
+
+/** ADMIN FORM **/
+.pure-form .datesBlock input[type] {
+    display: inline;
+    width: auto;
+    margin-right:20px;
+    margin-left:20px;
+    border: 1px solid green;
+}
+
+.datesBlock {
+    border: 1px solid #cccccc;
+    padding:0 20px;
+}
+.datesBlock p {
+    font-size: large;
+    font-weight: bold;
+    cursor: pointer;
+}
