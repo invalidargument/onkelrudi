@@ -2,6 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
+use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 
 class FleaMarketCreateAction extends AbstractJsonAction
@@ -15,13 +16,17 @@ class FleaMarketCreateAction extends AbstractJsonAction
         $builder->reset();
 
         $data = $this->request->getParsedBody();
+        
         if (array_key_exists('organizerId', $data)) {
             $organizer = new Organizer();
             $organizer->setId($data['organizerId']);
             $data['organizer'] = $organizer;
+            unset($data['organizerId']);
         }
 
-        // if incomplete, return error
+        $data['dates'] = $this->_mapDates($data['dates']);
+
+        // TODO if incomplete, return error
 
         foreach ($data as $key => $value) {
             $method = 'set'.ucfirst($key);
@@ -31,5 +36,15 @@ class FleaMarketCreateAction extends AbstractJsonAction
         }
 
         return $this->service->createFleaMarket($builder->build());
+    }
+
+    private function _mapDates(array $dates) {
+        $map = array();
+
+        foreach ($dates as $date) {
+            $map[] = new FleaMarketDate($date['start'], $date['end']);
+        }
+
+        return $map;
     }
 }

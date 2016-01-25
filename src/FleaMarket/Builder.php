@@ -48,6 +48,12 @@ class Builder extends AbstractBuilder
         return $this;
     }
 
+    public function setDates(array $dates)
+    {
+        $this->properties['dates'] = $dates;
+        return $this;
+    }
+
     public function setStreet($street)
     {
         $this->properties['street'] = $street;

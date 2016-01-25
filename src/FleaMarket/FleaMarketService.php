@@ -99,7 +99,9 @@ class FleaMarketService implements FleaMarketServiceInterface
     public function createDates($fleaMarketId, array $dates)
     {
         $query = $this->_factory->createFleaMarketDatesInsertQuery();
-        $query->setDates($dates);
+        $query
+            ->setFleaMarketId($fleaMarketId)
+            ->setDates($dates);
 
         return $query->run();
     }
