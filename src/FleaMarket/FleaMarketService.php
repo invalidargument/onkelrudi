@@ -27,12 +27,14 @@ class FleaMarketService implements FleaMarketServiceInterface
             : $fleaMarket->getOrganizer()->getId();
 
         $query
+            ->setFleaMarketService($this)
             ->setUuid($fleaMarket->getUuid())
             ->setOrganizerId($organizerId)
             ->setName($fleaMarket->getName())
             ->setDescription($fleaMarket->getDescription())
             ->setStart($fleaMarket->getStart())
             ->setEnd($fleaMarket->getEnd())
+            ->setDates($fleaMarket->getDates())
             ->setStreet($fleaMarket->getStreet())
             ->setStreetNo($fleaMarket->getStreetNo())
             ->setCity($fleaMarket->getCity())
@@ -91,6 +93,14 @@ class FleaMarketService implements FleaMarketServiceInterface
     public function truncateTablesForTestCases()
     {
         $query = $this->_factory->createFleaMarketTestCaseDeleteQuery();
+        return $query->run();
+    }
+
+    public function createDates($fleaMarketId, array $dates)
+    {
+        $query = $this->_factory->createFleaMarketDatesInsertQuery();
+        $query->setDates($dates);
+
         return $query->run();
     }
 }

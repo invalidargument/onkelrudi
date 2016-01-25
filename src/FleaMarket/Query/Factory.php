@@ -10,6 +10,7 @@ class Factory
     private $_fleaMarketReadQuery;
     private $_fleaMarketUpdateQuery;
     private $_fleaMarketTestCaseDeleteQuery;
+    private $_datesInsertQuery;
 
     /**
      * @return \RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketDeleteQuery
@@ -81,5 +82,17 @@ class Factory
         }
 
         return $this->_fleaMarketTestCaseDeleteQuery;
+    }
+
+    /**
+     * @return \RudiBieller\OnkelRudi\FleaMarket\Query\DatesInsertQuery
+     */
+    public function createFleaMarketDatesInsertQuery()
+    {
+        if (is_null($this->_datesInsertQuery)) {
+            $this->_datesInsertQuery = new DatesInsertQuery();
+        }
+
+        return $this->_datesInsertQuery;
     }
 }

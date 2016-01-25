@@ -22,6 +22,8 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
         $organizer = new Organizer();
         $organizer->setId(42);
 
+        $dates = array(new FleaMarketDate());
+
         $fleaMarket = new FleaMarket();
         $fleaMarket
             ->setUuid('uuid')
@@ -34,17 +36,20 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
             ->setStreetNo('20000')
             ->setStart('2015-12-12 00:00:12')
             ->setEnd('2015-12-12 00:00:33')
+            ->setDates($dates)
             ->setLocation('Daheim')
             ->setUrl('http://www.example.com/foo');
 
         $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketInsertQuery');
         $query
+            ->shouldReceive('setFleaMarketService')->once()->with($this->_sut)->andReturn($query)
             ->shouldReceive('setUuid')->once()->with('uuid')->andReturn($query)
             ->shouldReceive('setOrganizerId')->once()->with('42')->andReturn($query)
             ->shouldReceive('setName')->once()->with('Der erste Flohmarkt von Rudi')->andReturn($query)
             ->shouldReceive('setDescription')->once()->with('Ein toller Flohmarkt')->andReturn($query)
             ->shouldReceive('setStart')->once()->with('2015-12-12 00:00:12')->andReturn($query)
             ->shouldReceive('setEnd')->once()->with('2015-12-12 00:00:33')->andReturn($query)
+            ->shouldReceive('setDates')->once()->with($dates)->andReturn($query)
             ->shouldReceive('setStreet')->once()->with('Venloer')->andReturn($query)
             ->shouldReceive('setStreetNo')->once()->with('20000')->andReturn($query)
             ->shouldReceive('setZipCode')->once()->with('5000')->andReturn($query)
@@ -126,5 +131,10 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
         $this->_factory->shouldReceive('createFleaMarketUpdateQuery')->once()->andReturn($query);
 
         $this->_sut->updateFleaMarket($fleaMarket);
+    }
+
+    public function testCreateDates()
+    {
+        $this->markTestIncomplete('lazy!');
     }
 }

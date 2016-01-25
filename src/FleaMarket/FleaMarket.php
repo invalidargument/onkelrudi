@@ -191,7 +191,7 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
     }
 
     /**
-     * @return \DateTimeInterface[]
+     * @return FleaMarketDate[]
      */
     public function getDates()
     {
@@ -199,7 +199,7 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
     }
 
     /**
-     * @param \DateTimeInterface[] $dates
+     * @param FleaMarketDate[] $dates
      * @return FleaMarket
      */
     public function setDates($dates)
@@ -208,9 +208,9 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
         return $this;
     }
 
-    public function addDate(\DateTimeInterface $date)
+    public function addDate(FleaMarketDate $date)
     {
-        $this->date[] = $date;
+        $this->_dates[] = $date;
     }
 
     public function jsonSerialize()

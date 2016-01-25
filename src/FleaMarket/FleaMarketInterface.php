@@ -18,6 +18,8 @@ interface FleaMarketInterface
 
     public function getEnd();
 
+    public function getDates();
+
     public function getStreet();
 
     public function getStreetNo();

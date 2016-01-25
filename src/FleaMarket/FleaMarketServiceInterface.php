@@ -17,4 +17,11 @@ interface FleaMarketServiceInterface extends ServiceInterface
     public function deleteFleaMarket(FleaMarketInterface $fleaMarket);
 
     public function createFleaMarket(FleaMarketInterface $fleaMarket);
+
+    /**
+     * @param int $fleaMarketId
+     * @param FleaMarketDate[] $dates
+     * @return boolean
+     */
+    public function createDates($fleaMarketId, array $dates);
 }

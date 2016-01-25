@@ -2,6 +2,8 @@
 namespace RudiBieller\OnkelRudi\FleaMarket\Query;
 
 use Ramsey\Uuid\Uuid;
+use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
+use RudiBieller\OnkelRudi\FleaMarket\FleaMarketService;
 use RudiBieller\OnkelRudi\Query\AbstractInsertQuery;
 
 class FleaMarketInsertQuery extends AbstractInsertQuery
@@ -12,12 +14,24 @@ class FleaMarketInsertQuery extends AbstractInsertQuery
     private $_description;
     private $_start;
     private $_end;
+    private $_dates;
     private $_street;
     private $_streetNo;
     private $_city;
     private $_zipCode;
     private $_location;
     private $_url;
+    private $_fleaMarketService;
+
+    /**
+     * @param FleaMarketService $fleaMarketService
+     * @return FleaMarketInsertQuery
+     */
+    public function setFleaMarketService(FleaMarketService $fleaMarketService)
+    {
+        $this->_fleaMarketService = $fleaMarketService;
+        return $this;
+    }
 
     public function setUuid($uuid)
     {
@@ -52,6 +66,16 @@ class FleaMarketInsertQuery extends AbstractInsertQuery
     public function setEnd($end)
     {
         $this->_end = $end;
+        return $this;
+    }
+
+    /**
+     * @param FleaMarketDate[] $dates
+     * @return FleaMarketInsertQuery
+     */
+    public function setDates(array $dates)
+    {
+        $this->_dates = $dates;
         return $this;
     }
 
@@ -101,6 +125,8 @@ class FleaMarketInsertQuery extends AbstractInsertQuery
 
     protected function runQuery()
     {
+        $this->pdo->beginTransaction();
+
         $insertStatement = $this->pdo
             ->insert(
                 array('uuid', 'organizer_id', 'name', 'description', 'start', 'end', 'street', 'streetno', 'city', 'zipcode', 'location', 'url')
@@ -110,6 +136,12 @@ class FleaMarketInsertQuery extends AbstractInsertQuery
                 array($this->getUuid(), $this->_organizerId, $this->_name, $this->_description, $this->_start, $this->_end, $this->_street, $this->_streetNo, $this->_city, $this->_zipCode, $this->_location, $this->_url)
             );
 
-        return $insertStatement->execute();
+        $fleaMarketId = $insertStatement->execute();
+
+        $this->_fleaMarketService->createDates($fleaMarketId, $this->_dates);
+
+        $this->pdo->commit();
+
+        return $fleaMarketId;
     }
 }
