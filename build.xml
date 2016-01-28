@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Onkel Rudi" default="build" basedir=".">
+<project name="Onkel Rudi" default="build-ci" basedir=".">
     <description>Build and test Onkel Rudi.</description>
 
     <tstamp>
@@ -9,8 +9,8 @@
     <property file="deployment/settings.yml"/>
     <property file="deployment/settings_live.yml"/>
 
-    <target name="build"
-        depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, behat, archive"/>
+    <target name="build-ci"
+        depends="prepare-ci, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, behat, archive"/>
 
     <target name="build-local"
         depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, behat"/>
