@@ -10,7 +10,7 @@
     <property file="deployment/settings_live.yml"/>
 
     <target name="build-ci"
-        depends="prepare-ci, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit"/>
+        depends="prepare-ci, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs-ci, phpunit"/>
 
     <target name="build-local"
         depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, behat, archive"/>
@@ -98,16 +98,27 @@
         </exec>
     </target>
 
-    <target name="phpcs" description="Code Sniffer">
+    <target name="phpcs-ci" description="Code Sniffer">
         <exec executable="vendor/bin/phpcs" failonerror="true">
             <arg value="-n" />
             <arg value="--report=checkstyle" />
             <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
-            <arg path="${basedir}/src" />
-            <arg path="${basedir}/tests" />
-            <arg line="--standard=PSR2" />
+            <arg value="--standard=PSR2" />
             <arg value="--extensions=php" />
             <arg value="--ignore=autoload.php" />
+            <arg path="${basedir}/src" />
+            <arg path="${basedir}/tests" />
+        </exec>
+    </target>
+
+    <target name="phpcs" description="Code Sniffer">
+        <exec executable="vendor/bin/phpcs" failonerror="true">
+            <arg value="-n" />
+            <arg value="--standard=PSR2" />
+            <arg value="--extensions=php" />
+            <arg value="--ignore=autoload.php" />
+            <arg path="${basedir}/src" />
+            <arg path="${basedir}/tests" />
         </exec>
     </target>
 
