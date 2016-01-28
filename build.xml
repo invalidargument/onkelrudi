@@ -10,10 +10,10 @@
     <property file="deployment/settings_live.yml"/>
 
     <target name="build-ci"
-        depends="prepare-ci, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, archive"/>
+        depends="prepare-ci, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit"/>
 
     <target name="build-local"
-        depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, behat"/>
+        depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, behat, archive"/>
 
     <target name="clean" description="Cleanup artifacts">
         <delete dir="${basedir}/build/coverage"/>
