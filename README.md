@@ -14,7 +14,7 @@
 
 
 ```
-curl -H "Content-Type: application/json" -X POST -d '{"name":"Max POWER", "description": "Blue Pants", "start":"2015-01-01 00:00:00", "end":"2015-12-12 00:00:00", "zipCode":"50667"}' http://localhost/public/api/v1/fleamarkets
+curl -H "Content-Type: application/json" -X POST -d '{"name":"Max POWER", "description": "Blue Pants", "start":"2015-01-01 00:00:00", "end":"2015-12-12 00:00:00", "dates":"[]", "zipCode":"50667"}' http://localhost/public/api/v1/fleamarkets
 ```
 
 ```

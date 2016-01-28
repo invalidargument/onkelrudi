@@ -27,7 +27,7 @@ Feature: API v1 fleamarkets
     Given I have a default organizer
     And I send a "POST" request to "http://localhost/public/api/v1/fleamarkets" with body
     """
-    {"name":"Max Power", "description": "Blue Pants", "start":"2015-01-01 00:00:00", "end":"2015-12-12 00:00:00", "zipCode":"50667"}
+    {"name":"Max Power", "description": "Blue Pants", "start":"2015-01-01 00:00:00", "end":"2015-12-12 00:00:00", "dates":[], "zipCode":"50667"}
     """
     Then the response code should be "200"
     And the response should be json

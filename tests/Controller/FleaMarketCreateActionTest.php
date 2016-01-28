@@ -18,6 +18,7 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
             'description' => 'baz',
             'start' => '2017-01-01 00:00:00',
             'end' => '2018-01-01 00:00:00',
+            'dates' => [],
             'location' => 'Cologne',
             'street' => 'Venloer',
             'streetNo' => 1,
@@ -34,6 +35,7 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
             ->setDescription('baz')
             ->setStart('2017-01-01 00:00:00')
             ->setEnd('2018-01-01 00:00:00')
+            ->setDates([])
             ->setLocation('Cologne')
             ->setStreet('Venloer')
             ->setStreetNo(1)

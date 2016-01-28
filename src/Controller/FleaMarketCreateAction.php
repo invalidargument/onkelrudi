@@ -16,7 +16,7 @@ class FleaMarketCreateAction extends AbstractJsonAction
         $builder->reset();
 
         $data = $this->request->getParsedBody();
-        
+
         if (array_key_exists('organizerId', $data)) {
             $organizer = new Organizer();
             $organizer->setId($data['organizerId']);
@@ -38,7 +38,8 @@ class FleaMarketCreateAction extends AbstractJsonAction
         return $this->service->createFleaMarket($builder->build());
     }
 
-    private function _mapDates(array $dates) {
+    private function _mapDates(array $dates)
+    {
         $map = array();
 
         foreach ($dates as $date) {

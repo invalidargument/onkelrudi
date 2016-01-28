@@ -12,9 +12,14 @@
     <target name="build"
         depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, behat, archive"/>
 
+    <target name="build-local"
+        depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, behat"/>
+
     <target name="clean" description="Cleanup artifacts">
         <delete dir="${basedir}/build/coverage"/>
         <delete dir="${basedir}/build/logs"/>
+        <delete dir="${basedir}/build/pdepend"/>
+        <delete dir="${basedir}/build/phpdox"/>
         <delete dir="${basedir}/build/onkelrudi"/>
         <delete dir="${basedir}/src/cache"/>
     </target>
@@ -22,8 +27,14 @@
     <target name="prepare" depends="clean" description="Prepare build">
         <mkdir dir="${basedir}/build/coverage"/>
         <mkdir dir="${basedir}/build/logs"/>
+        <mkdir dir="${basedir}/build/pdepend"/>
+        <mkdir dir="${basedir}/build/phpdox"/>
         <mkdir dir="${basedir}/build/onkelrudi"/>
         <mkdir dir="${basedir}/src/cache"/>
+    </target>
+
+    <target name="prepare-ci" depends="prepare" description="Prepare build and create needed configuration">
+        <copy file="deployment/settings.yml.dist" tofile="deployment/settings.yml" />
     </target>
 
     <target name="composer" description="composer update">
@@ -59,9 +70,13 @@
 
     <target name="phploc" description="Project size">
         <exec executable="vendor/bin/phploc">
+            <arg value="--count-tests" />
             <arg value="--log-csv" />
-            <arg value="${basedir}/build/logs/phploc.csv" />
+            <arg path="${basedir}/build/logs/phploc.csv" />
+            <arg value="--log-xml" />
+            <arg path="${basedir}/build/logs/phploc.xml" />
             <arg path="${basedir}/src" />
+            <arg path="${basedir}/tests" />
         </exec>
     </target>
 
@@ -86,8 +101,22 @@
     <target name="phpcs" description="Code Sniffer">
         <exec executable="vendor/bin/phpcs" failonerror="true">
             <arg value="-n" />
+            <arg value="--report=checkstyle" />
+            <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
             <arg path="${basedir}/src" />
+            <arg path="${basedir}/tests" />
             <arg line="--standard=PSR2" />
+            <arg value="--extensions=php" />
+            <arg value="--ignore=autoload.php" />
+        </exec>
+    </target>
+
+    <target name="pdepend" description="Software metrics using PHP_Depend">
+        <exec executable="vendor/bin/pdepend" failonerror="true">
+            <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
+            <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
+            <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
+            <arg path="${basedir}/src" />
         </exec>
     </target>
 
@@ -95,7 +124,13 @@
         <exec dir="${basedir}" executable="vendor/bin/phpunit" failonerror="true" description="Unit tests">
             <arg line="--verbose --stderr" />
             <arg value="--coverage-html" />
-            <arg value="${basedir}/build/coverage" />
+            <arg path="${basedir}/build/coverage" />
+            <arg value="--coverage-clover" />
+            <arg path="${basedir}/build/logs/clover.xml" />
+            <arg value="--coverage-crap4j" />
+            <arg path="${basedir}/build/logs/crap4j.xml" />
+            <arg value="--log-junit" />
+            <arg path="${basedir}/build/logs/junit.xml" />
         </exec>
     </target>
     <target name="behat">

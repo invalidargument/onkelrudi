@@ -3,7 +3,6 @@ Feature: Index page of onkelrudi
   As an onkelrudi user
   I need to be able to call the index page and see some useful information
 
-  @now
   Scenario: Navigation is in place with wordpress content
     Given I am on "/"
     Then I should see "Onkel Rudi"
