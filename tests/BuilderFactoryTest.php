@@ -44,9 +44,4 @@ class BuilderFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $builder = $this->_sut->create('FooBuilder');
     }
-
-    public function testFoo()
-    {
-        $this->assertTrue(false);
-    }
 }
