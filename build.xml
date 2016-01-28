@@ -10,7 +10,7 @@
     <property file="deployment/settings_live.yml"/>
 
     <target name="build-ci"
-        depends="prepare-ci, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, behat, archive"/>
+        depends="prepare-ci, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, archive"/>
 
     <target name="build-local"
         depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, behat"/>
