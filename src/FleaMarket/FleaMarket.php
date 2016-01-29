@@ -221,7 +221,7 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
             'organizer' => $this->getOrganizer(),
             'name' => $this->getName(),
             'description' => $this->getDescription(),
-            //'dates' => $this->getDates(),
+            'dates' => $this->getDates(),
             'start' => $this->getStart(),
             'end' => $this->getEnd(),
             'street' => $this->getStreet(),

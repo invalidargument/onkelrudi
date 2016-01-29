@@ -12,7 +12,9 @@ class FleaMarketTestCaseDeleteQuery extends AbstractInsertQuery
             ->exec('SET FOREIGN_KEY_CHECKS = 0; TRUNCATE fleamarkets; SET FOREIGN_KEY_CHECKS = 1;');
         $affected2 = $this->pdo
             ->exec('SET FOREIGN_KEY_CHECKS = 0; TRUNCATE fleamarkets_organizer; SET FOREIGN_KEY_CHECKS = 1;');
+        $affected3 = $this->pdo
+            ->exec('SET FOREIGN_KEY_CHECKS = 0; TRUNCATE fleamarkets_dates; SET FOREIGN_KEY_CHECKS = 1;');
 
-        return $affected1 + $affected2;
+        return $affected1 + $affected2 + $affected3;
     }
 }

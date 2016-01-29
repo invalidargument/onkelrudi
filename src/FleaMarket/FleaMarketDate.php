@@ -2,7 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\FleaMarket;
 
-class FleaMarketDate
+class FleaMarketDate implements \JsonSerializable
 {
     private $_start;
     private $_end;
@@ -46,5 +46,13 @@ class FleaMarketDate
     {
         $this->_end = $end;
         return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'start' => $this->getStart(),
+            'end' => $this->getEnd()
+        ];
     }
 }

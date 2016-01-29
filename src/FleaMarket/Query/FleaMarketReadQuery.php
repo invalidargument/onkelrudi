@@ -8,10 +8,6 @@ use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 
 class FleaMarketReadQuery extends AbstractQuery
 {
-    /**
-     * @var \RudiBieller\OnkelRudi\FleaMarket\FleaMarket
-     */
-    private $_fleaMarket;
     private $_fleaMarketId;
     private $_fleaMarketService;
     private $_dates = [];
@@ -50,12 +46,15 @@ class FleaMarketReadQuery extends AbstractQuery
     protected function mapResult($result)
     {
         if ($result === false) {
-            return $this->_fleaMarket;
+            return null;
         }
 
-        $this->_fleaMarket = new FleaMarket();
+        /**
+         * @var \RudiBieller\OnkelRudi\FleaMarket\FleaMarket
+         */
+        $fleaMarket = new FleaMarket();
 
-        $this->_fleaMarket
+        $fleaMarket
             ->setId($result['id'])
             ->setUuid($result['uuid'])
             ->setName($result['name'])
@@ -71,6 +70,6 @@ class FleaMarketReadQuery extends AbstractQuery
             ->setLocation($result['location'])
             ->setUrl($result['url']);
 
-        return $this->_fleaMarket;
+        return $fleaMarket;
     }
 }
