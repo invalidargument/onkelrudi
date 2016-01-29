@@ -11,6 +11,7 @@ class Factory
     private $_fleaMarketUpdateQuery;
     private $_fleaMarketTestCaseDeleteQuery;
     private $_datesInsertQuery;
+    private $_datesReadListQuery;
 
     /**
      * @return \RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketDeleteQuery
@@ -94,5 +95,17 @@ class Factory
         }
 
         return $this->_datesInsertQuery;
+    }
+
+    /**
+     * @return \RudiBieller\OnkelRudi\FleaMarket\Query\DatesReadListQuery
+     */
+    public function createFleaMarketDatesReadListQuery()
+    {
+        if (is_null($this->_datesReadListQuery)) {
+            $this->_datesReadListQuery = new DatesReadListQuery();
+        }
+
+        return $this->_datesReadListQuery;
     }
 }
