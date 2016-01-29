@@ -32,6 +32,7 @@ cp /var/www/html/deployment/000-default.conf /etc/apache2/sites-enabled/000-defa
 a2enmod rewrite
 service apache2 restart
 
+git config --global push.default simple
 git config --global user.name "Rudi Bieller"
 git config --global user.email "kontakt@rudi-bieller.de"
 
