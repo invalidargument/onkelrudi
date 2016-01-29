@@ -16,6 +16,12 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
 
     public function testQueryReadsFleaMarketsByDefaultLimitAndOffset()
     {
+        $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketServiceInterface');
+        $service
+            ->shouldReceive('getDates')->once()->with(42)->andReturn([])
+            ->shouldReceive('getDates')->once()->with(23)->andReturn([]);
+        $this->_sut->setFleaMarketService($service);
+
         $result = array(
             array(
                 'id' => 42,

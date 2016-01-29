@@ -85,7 +85,9 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
         $markets = array();
 
         $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketReadListQuery');
-        $query->shouldReceive('run')->once()->andReturn($markets);
+        $query
+            ->shouldReceive('setFleaMarketService')->andReturn($query)
+            ->shouldReceive('run')->once()->andReturn($markets);
 
         $this->_factory->shouldReceive('createFleaMarketReadListQuery')->once()->andReturn($query);
 
@@ -100,6 +102,7 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
         $query
             ->shouldReceive('setLimit')->once()->with(42)->andReturn($query)
             ->shouldReceive('setOffset')->once()->with(23)->andReturn($query)
+            ->shouldReceive('setFleaMarketService')->andReturn($query)
             ->shouldReceive('run')->once()->andReturn($markets);
 
         $this->_factory->shouldReceive('createFleaMarketReadListQuery')->once()->andReturn($query);

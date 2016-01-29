@@ -2,6 +2,7 @@
 namespace RudiBieller\OnkelRudi\FleaMarket\Query;
 
 use Cocur\Slugify\Slugify;
+use RudiBieller\OnkelRudi\FleaMarket\FleaMarketServiceInterface;
 use RudiBieller\OnkelRudi\Query\AbstractQuery;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 
@@ -10,6 +11,10 @@ class FleaMarketReadListQuery extends AbstractQuery
     private $_fleaMarkets = array();
     private $_offset = 0;
     private $_limit = 20;
+    /**
+     * @var FleaMarketServiceInterface
+     */
+    private $_fleaMarketService;
 
     public function setOffset($offset)
     {
@@ -20,6 +25,12 @@ class FleaMarketReadListQuery extends AbstractQuery
     public function setLimit($limit)
     {
         $this->_limit = $limit;
+        return $this;
+    }
+
+    public function setFleaMarketService(FleaMarketServiceInterface $service)
+    {
+        $this->_fleaMarketService = $service;
         return $this;
     }
 
@@ -59,6 +70,7 @@ class FleaMarketReadListQuery extends AbstractQuery
                 ->setDescription($item['description'])
                 ->setStart($item['start'])
                 ->setEnd($item['end'])
+                ->setDates($this->_fleaMarketService->getDates($item['id']))
                 ->setStreet($item['street'])
                 ->setStreetNo($item['streetno'])
                 ->setCity($item['city'])
