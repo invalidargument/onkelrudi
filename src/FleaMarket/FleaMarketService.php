@@ -77,7 +77,9 @@ class FleaMarketService implements FleaMarketServiceInterface
     public function getFleaMarket($id)
     {
         $query = $this->_factory->createFleaMarketReadQuery();
-        $query->setFleaMarketId($id);
+        $query
+            ->setFleaMarketService($this)
+            ->setFleaMarketId($id);
 
         return $query->run();
     }
@@ -102,6 +104,15 @@ class FleaMarketService implements FleaMarketServiceInterface
         $query
             ->setFleaMarketId($fleaMarketId)
             ->setDates($dates);
+
+        return $query->run();
+    }
+
+    public function getDates($fleaMarketId)
+    {
+        $query = $this->_factory->createFleaMarketDatesReadListQuery();
+        $query
+            ->setFleaMarketId($fleaMarketId);
 
         return $query->run();
     }

@@ -24,4 +24,10 @@ interface FleaMarketServiceInterface extends ServiceInterface
      * @return boolean
      */
     public function createDates($fleaMarketId, array $dates);
+
+    /**
+     * @param int $fleaMarketId
+     * @return FleaMarketDate[]
+     */
+    public function getDates($fleaMarketId);
 }

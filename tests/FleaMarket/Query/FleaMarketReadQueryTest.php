@@ -16,7 +16,12 @@ class FleaMarketReadQueryTest extends \PHPUnit_Framework_TestCase
 
     public function testQueryReturnsNullIfNotFoundInDb()
     {
-        $this->_sut->setFleaMarketId(23);
+        $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketServiceInterface');
+        $service->shouldReceive('getDates')->once()->with(23)->andReturn([]);
+
+        $this->_sut
+            ->setFleaMarketService($service)
+            ->setFleaMarketId(23);
 
         $statement = \Mockery::mock('\PDOStatement');
         $statement->shouldReceive('fetch')
@@ -45,7 +50,12 @@ class FleaMarketReadQueryTest extends \PHPUnit_Framework_TestCase
 
     public function testQueryReadsMarketByIdIfFound()
     {
-        $this->_sut->setFleaMarketId(23);
+        $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketServiceInterface');
+        $service->shouldReceive('getDates')->once()->with(23)->andReturn([]);
+
+        $this->_sut
+            ->setFleaMarketService($service)
+            ->setFleaMarketId(23);
 
         $result = array(
             'id' => 42,

@@ -6,6 +6,9 @@ use RudiBieller\OnkelRudi\Config\Config;
 
 abstract class AbstractQuery implements QueryInterface
 {
+    /**
+     * @var \PDO
+     */
     protected $pdo;
 
     abstract protected function mapResult($result);

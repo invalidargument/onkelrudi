@@ -110,7 +110,9 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
     public function testGetFleaMarketReturnsRequestedMarket()
     {
         $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketReadQuery');
-        $query->shouldReceive('setFleaMarketId')->once()->with(2)->andReturn($query)
+        $query
+            ->shouldReceive('setFleaMarketId')->once()->with(2)->andReturn($query)
+            ->shouldReceive('setFleaMarketService')->once()->andReturn($query)
             ->shouldReceive('run')->once()->andReturn(new FleaMarket());
 
         $this->_factory->shouldReceive('createFleaMarketReadQuery')->once()->andReturn($query);
@@ -134,6 +136,11 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testCreateDates()
+    {
+        $this->markTestIncomplete('lazy!');
+    }
+
+    public function testGetDatesByFleaMarket()
     {
         $this->markTestIncomplete('lazy!');
     }
