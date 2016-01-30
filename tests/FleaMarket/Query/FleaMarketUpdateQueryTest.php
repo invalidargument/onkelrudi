@@ -23,8 +23,7 @@ class FleaMarketUpdateQueryTest extends \PHPUnit_Framework_TestCase
             ->setId(23)
             ->setName('foo')
             ->setDescription('fooobaaarbaaaz')
-            ->setStart('2015-12-22 00:00:00')
-            ->setEnd('2015-12-22 00:00:01')
+            ->setDates([])
             ->setStreet('foooo')
             ->setStreetNo('77')
             ->setCity('Cologne')
@@ -41,8 +40,6 @@ class FleaMarketUpdateQueryTest extends \PHPUnit_Framework_TestCase
                 ->with(array(
                     'name' => $fleaMarket->getName(),
                     'description' => $fleaMarket->getDescription(),
-                    'start' => $fleaMarket->getStart(),
-                    'end' => $fleaMarket->getEnd(),
                     'street' => $fleaMarket->getStreet(),
                     'streetno' => $fleaMarket->getStreetNo(),
                     'city' => $fleaMarket->getCity(),

@@ -60,8 +60,6 @@ class FleaMarketReadQuery extends AbstractQuery
             ->setName($result['name'])
             ->setSlug((new Slugify())->slugify($result['name']))
             ->setDescription($result['description'])
-            ->setStart($result['start'])
-            ->setEnd($result['end'])
             ->setDates($this->_dates)
             ->setStreet($result['street'])
             ->setStreetNo($result['streetno'])

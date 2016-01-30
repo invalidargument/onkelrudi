@@ -32,8 +32,6 @@ class FleaMarketService implements FleaMarketServiceInterface
             ->setOrganizerId($organizerId)
             ->setName($fleaMarket->getName())
             ->setDescription($fleaMarket->getDescription())
-            ->setStart($fleaMarket->getStart())
-            ->setEnd($fleaMarket->getEnd())
             ->setDates($fleaMarket->getDates())
             ->setStreet($fleaMarket->getStreet())
             ->setStreetNo($fleaMarket->getStreetNo())

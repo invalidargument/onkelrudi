@@ -36,18 +36,6 @@ class Builder extends AbstractBuilder
         return $this;
     }
 
-    public function setStart($start)
-    {
-        $this->properties['start'] = $start;
-        return $this;
-    }
-
-    public function setEnd($end)
-    {
-        $this->properties['end'] = $end;
-        return $this;
-    }
-
     public function setDates(array $dates)
     {
         $this->properties['dates'] = $dates;

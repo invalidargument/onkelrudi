@@ -173,8 +173,6 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
                 ->setZipCode('5000')
                 ->setStreet('Venloer')
                 ->setStreetNo('20000')
-                ->setStart('2016-03-12 08:00:12')
-                ->setEnd('2016-03-12 19:30:33')
                 ->setDates($dates)
                 ->setLocation('Daheim')
                 ->setUrl('http://www.example.com/foo');

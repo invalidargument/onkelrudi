@@ -19,8 +19,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
         $expected
             ->setCity('cologne')
             ->setDescription('foo')
-            ->setEnd('2015-12-12 00:00:00')
-            ->setStart('2015-12-13 00:00:00')
+            ->setDates([])
             ->setId(2)
             ->setLocation('bar')
             ->setName('baz')
@@ -33,8 +32,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
         $result = $this->_sut
             ->setCity('cologne')
             ->setDescription('foo')
-            ->setEnd('2015-12-12 00:00:00')
-            ->setStart('2015-12-13 00:00:00')
+            ->setDates([])
             ->setId(2)
             ->setLocation('bar')
             ->setName('baz')

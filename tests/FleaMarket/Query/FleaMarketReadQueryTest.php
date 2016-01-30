@@ -63,8 +63,7 @@ class FleaMarketReadQueryTest extends \PHPUnit_Framework_TestCase
             'organizer_id' => '55',
             'name' => 'Hänsel & Gretel warten in Dänemark',
             'description' => 'foo',
-            'start' => '2015-12-12 00:00:00',
-            'end' => '2015-12-13 00:00:00',
+            'dates' => [],
             'street' => 'bar',
             'streetno' => '1',
             'city' => 'baz',
@@ -103,9 +102,8 @@ class FleaMarketReadQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Hänsel & Gretel warten in Dänemark', $fleaMarket->getName());
         $this->assertEquals('haensel-gretel-warten-in-daenemark', $fleaMarket->getSlug());
         $this->assertEquals('foo', $fleaMarket->getDescription());
-        $this->assertEquals('2015-12-12 00:00:00', $fleaMarket->getStart());
-        $this->assertEquals('2015-12-13 00:00:00', $fleaMarket->getEnd());
         $this->assertEquals('bar', $fleaMarket->getStreet());
+        $this->assertEquals([], $fleaMarket->getDates());
         $this->assertEquals('1', $fleaMarket->getStreetNo());
         $this->assertEquals('baz', $fleaMarket->getCity());
         $this->assertEquals('12345', $fleaMarket->getZipCode());

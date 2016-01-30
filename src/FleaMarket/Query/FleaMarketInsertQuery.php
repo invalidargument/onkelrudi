@@ -12,8 +12,6 @@ class FleaMarketInsertQuery extends AbstractInsertQuery
     private $_organizerId;
     private $_name;
     private $_description;
-    private $_start;
-    private $_end;
     private $_dates;
     private $_street;
     private $_streetNo;
@@ -54,18 +52,6 @@ class FleaMarketInsertQuery extends AbstractInsertQuery
     public function setDescription($description)
     {
         $this->_description = $description;
-        return $this;
-    }
-
-    public function setStart($start)
-    {
-        $this->_start = $start;
-        return $this;
-    }
-
-    public function setEnd($end)
-    {
-        $this->_end = $end;
         return $this;
     }
 
@@ -119,7 +105,7 @@ class FleaMarketInsertQuery extends AbstractInsertQuery
     {
         return Uuid::uuid5(
             Uuid::NAMESPACE_URL,
-            $this->_name.$this->_zipCode.$this->_url.$this->_street.$this->_streetNo.$this->_city.$this->_description.$this->_start.$this->_end.$this->_location.$this->_organizerId
+            $this->_name.$this->_zipCode.$this->_url.$this->_street.$this->_streetNo.$this->_city.$this->_description.$this->_location.$this->_organizerId
         )->toString();
     }
 
@@ -129,11 +115,11 @@ class FleaMarketInsertQuery extends AbstractInsertQuery
 
         $insertStatement = $this->pdo
             ->insert(
-                array('uuid', 'organizer_id', 'name', 'description', 'start', 'end', 'street', 'streetno', 'city', 'zipcode', 'location', 'url')
+                array('uuid', 'organizer_id', 'name', 'description', 'street', 'streetno', 'city', 'zipcode', 'location', 'url')
             )
             ->into('fleamarkets')
             ->values(
-                array($this->getUuid(), $this->_organizerId, $this->_name, $this->_description, $this->_start, $this->_end, $this->_street, $this->_streetNo, $this->_city, $this->_zipCode, $this->_location, $this->_url)
+                array($this->getUuid(), $this->_organizerId, $this->_name, $this->_description, $this->_street, $this->_streetNo, $this->_city, $this->_zipCode, $this->_location, $this->_url)
             );
 
         $fleaMarketId = $insertStatement->execute();

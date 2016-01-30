@@ -25,8 +25,6 @@ class FleaMarketUpdateQuery extends AbstractInsertQuery
                     // TODO: organizer id
                     'name' => $this->_fleaMarket->getName(),
                     'description' => $this->_fleaMarket->getDescription(),
-                    'start' => $this->_fleaMarket->getStart(),
-                    'end' => $this->_fleaMarket->getEnd(),
                     'street' => $this->_fleaMarket->getStreet(),
                     'streetno' => $this->_fleaMarket->getStreetNo(),
                     'city' => $this->_fleaMarket->getCity(),

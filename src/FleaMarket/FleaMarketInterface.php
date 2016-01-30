@@ -14,10 +14,6 @@ interface FleaMarketInterface
 
     public function getDescription();
 
-    public function getStart();
-
-    public function getEnd();
-
     public function getDates();
 
     public function getStreet();

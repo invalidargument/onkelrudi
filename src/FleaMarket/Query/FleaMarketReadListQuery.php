@@ -41,7 +41,7 @@ class FleaMarketReadListQuery extends AbstractQuery
             ->from('fleamarkets_dates')
             ->where('start', '>=', date('Y-m-d 00:00:00'))
             ->groupBy('fleamarket_id');
-;
+
         $validFleaMarkets = $upcomingFleaMarketsStatement->execute()->fetchAll(\PDO::FETCH_COLUMN);
 
         if ($this->_noUpcomingDates($validFleaMarkets)) {
@@ -80,8 +80,6 @@ class FleaMarketReadListQuery extends AbstractQuery
                 ->setName($item['name'])
                 ->setSlug((new Slugify())->slugify($item['name']))
                 ->setDescription($item['description'])
-                ->setStart($item['start'])
-                ->setEnd($item['end'])
                 ->setDates($this->_fleaMarketService->getDates($item['id']))
                 ->setStreet($item['street'])
                 ->setStreetNo($item['streetno'])

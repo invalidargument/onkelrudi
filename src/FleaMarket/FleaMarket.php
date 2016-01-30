@@ -10,8 +10,6 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
     private $_name;
     private $_slug;
     private $_description;
-    private $_start;
-    private $_end;
     /**
      * @var FleaMarketDate[]
      */
@@ -61,16 +59,6 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
         return $this->_description;
     }
 
-    public function getStart()
-    {
-        return $this->_start;
-    }
-
-    public function getEnd()
-    {
-        return $this->_end;
-    }
-
     public function getStreet()
     {
         return $this->_street;
@@ -104,18 +92,6 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
     public function setDescription($description)
     {
         $this->_description = $description;
-        return $this;
-    }
-
-    public function setStart($start)
-    {
-        $this->_start = $start;
-        return $this;
-    }
-
-    public function setEnd($end)
-    {
-        $this->_end = $end;
         return $this;
     }
 
@@ -222,8 +198,6 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
             'name' => $this->getName(),
             'description' => $this->getDescription(),
             'dates' => $this->getDates(),
-            'start' => $this->getStart(),
-            'end' => $this->getEnd(),
             'street' => $this->getStreet(),
             'streetNo' => $this->getStreetNo(),
             'city' => $this->getCity(),

@@ -34,8 +34,6 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
             ->setZipCode('5000')
             ->setStreet('Venloer')
             ->setStreetNo('20000')
-            ->setStart('2015-12-12 00:00:12')
-            ->setEnd('2015-12-12 00:00:33')
             ->setDates($dates)
             ->setLocation('Daheim')
             ->setUrl('http://www.example.com/foo');
@@ -47,8 +45,6 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('setOrganizerId')->once()->with('42')->andReturn($query)
             ->shouldReceive('setName')->once()->with('Der erste Flohmarkt von Rudi')->andReturn($query)
             ->shouldReceive('setDescription')->once()->with('Ein toller Flohmarkt')->andReturn($query)
-            ->shouldReceive('setStart')->once()->with('2015-12-12 00:00:12')->andReturn($query)
-            ->shouldReceive('setEnd')->once()->with('2015-12-12 00:00:33')->andReturn($query)
             ->shouldReceive('setDates')->once()->with($dates)->andReturn($query)
             ->shouldReceive('setStreet')->once()->with('Venloer')->andReturn($query)
             ->shouldReceive('setStreetNo')->once()->with('20000')->andReturn($query)
