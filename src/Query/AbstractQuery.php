@@ -7,7 +7,7 @@ use RudiBieller\OnkelRudi\Config\Config;
 abstract class AbstractQuery implements QueryInterface
 {
     /**
-     * @var \PDO
+     * @var Database
      */
     protected $pdo;
 

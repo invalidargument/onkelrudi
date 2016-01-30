@@ -18,7 +18,11 @@ class FleaMarketTestCaseDeleteQueryTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('exec')
                 ->once()
                 ->with('SET FOREIGN_KEY_CHECKS = 0; TRUNCATE fleamarkets_organizer; SET FOREIGN_KEY_CHECKS = 1;')
-                ->andReturn(40);
+                ->andReturn(40)
+            ->shouldReceive('exec')
+                ->once()
+                ->with('SET FOREIGN_KEY_CHECKS = 0; TRUNCATE fleamarkets_dates; SET FOREIGN_KEY_CHECKS = 1;')
+                ->andReturn(80);
         $query->run();
     }
 }

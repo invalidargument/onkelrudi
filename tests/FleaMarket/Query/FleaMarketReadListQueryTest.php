@@ -22,6 +22,8 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('getDates')->once()->with(23)->andReturn([]);
         $this->_sut->setFleaMarketService($service);
 
+        $validFleaMarketIds = [1,2,3];
+
         $result = array(
             array(
                 'id' => 42,
@@ -55,10 +57,39 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $statement = \Mockery::mock('\PDOStatement');
-        $statement->shouldReceive('fetchAll')
+        $statement1 = \Mockery::mock('\PDOStatement');
+        $statement1->shouldReceive('fetch')
+            ->once()
+            ->andReturn($validFleaMarketIds);
+        $statement2 = \Mockery::mock('\PDOStatement');
+        $statement2->shouldReceive('fetchAll')
             ->once()
             ->andReturn($result);
+
+        $this->_pdo
+            ->shouldReceive('select')
+                ->once()
+                ->with(['fleamarket_id'])
+                ->andReturn($this->_pdo)
+            ->shouldReceive('from')
+                ->once()
+                ->with('fleamarkets_dates')
+                ->andReturn($this->_pdo)
+            ->shouldReceive('where')
+                ->once()
+                ->with('start', '>=', date('Y-m-d 00:00:00'))
+                ->andReturn($this->_pdo)
+            ->shouldReceive('groupBy')
+                ->once()
+                ->with('fleamarket_id')
+                ->andReturn($this->_pdo)
+            ->shouldReceive('execute')
+                ->once()
+                ->andReturn($statement1)
+            ->shouldReceive('fetch')
+                ->once()
+                ->with(\PDO::FETCH_ASSOC)
+                ->andReturn($validFleaMarketIds);
 
         $this->_pdo
             ->shouldReceive('select')
@@ -68,9 +99,9 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
                 ->once()
                 ->with('fleamarkets')
                 ->andReturn($this->_pdo)
-            ->shouldReceive('where')
+            ->shouldReceive('whereIn')
                 ->once()
-                ->with('start', '>=', date('Y-m-d 00:00:00'))
+                ->with('id', $validFleaMarketIds)
                 ->andReturn($this->_pdo)
             ->shouldReceive('orderBy')
                 ->once()
@@ -86,7 +117,9 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
                 ->andReturn($this->_pdo)
             ->shouldReceive('execute')
                 ->once()
-                ->andReturn($statement);
+                ->andReturn($statement2)
+            ->shouldReceive('fetch')
+                ->once();
         /**
          * @var \RudiBieller\OnkelRudi\FleaMarket\FleaMarket
          */

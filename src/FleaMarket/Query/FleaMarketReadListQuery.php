@@ -36,10 +36,19 @@ class FleaMarketReadListQuery extends AbstractQuery
 
     protected function runQuery()
     {
+        $upcomingFleaMarketsStatement = $this->pdo
+            ->select(['fleamarket_id'])
+            ->from('fleamarkets_dates')
+            ->where('start', '>=', date('Y-m-d 00:00:00'))
+            ->groupBy('fleamarket_id');
+        $validFleaMarkets = array_values(
+            $upcomingFleaMarketsStatement->execute()->fetch(\PDO::FETCH_ASSOC)
+        );
+
         $selectStatement = $this->pdo
             ->select()
             ->from('fleamarkets')
-            ->where('start', '>=', date('Y-m-d 00:00:00'))
+            ->whereIn('id', $validFleaMarkets)
             ->orderBy('start', 'ASC')
             ->limit($this->_limit)
             ->offset($this->_offset);
