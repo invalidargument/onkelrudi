@@ -7,6 +7,7 @@ use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\MinkExtension\Context\MinkContext;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
+use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketService;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use RudiBieller\OnkelRudi\FleaMarket\OrganizerService;
@@ -160,6 +161,9 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
             $id = $this->_organizerService->createOrganizer($organizer);
             $organizer->setId($id);
             $fleaMarket = new FleaMarket();
+            $dates = [
+                new FleaMarketDate('2016-12-12 08:01:02', '2016-12-13 20:20:20')
+            ];
             $fleaMarket
                 ->setUuid('uuid-'.$i)
                 ->setName('Der  #'.$i.' Flohmarkt von Rudi')
@@ -171,6 +175,7 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
                 ->setStreetNo('20000')
                 ->setStart('2016-03-12 08:00:12')
                 ->setEnd('2016-03-12 19:30:33')
+                ->setDates($dates)
                 ->setLocation('Daheim')
                 ->setUrl('http://www.example.com/foo');
 

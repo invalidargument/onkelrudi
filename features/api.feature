@@ -13,7 +13,6 @@ Feature: API v1 fleamarkets
     {"data":[{"id":"1","uuid":"99448e9a-b780-53ec-8143-255473192537","organizer":null,"name":"Der  #0 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","start":"2016-03-12 08:00:12","end":"2016-03-12 19:30:33","street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"},{"id":"2","uuid":"7e318e08-24a6-5be1-88be-ddffb9e10222","organizer":null,"name":"Der  #1 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","start":"2016-03-12 08:00:12","end":"2016-03-12 19:30:33","street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"},{"id":"3","uuid":"dfb80ebc-0f53-5ac4-90ec-414f87b947de","organizer":null,"name":"Der  #2 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","start":"2016-03-12 08:00:12","end":"2016-03-12 19:30:33","street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"}]}
     """
 
-  @now
   Scenario: Get a single FleaMarket by id
     Given I have some fleamarkets
     And I send a "GET" request to "http://localhost/public/api/v1/fleamarkets/2"
@@ -21,7 +20,7 @@ Feature: API v1 fleamarkets
     And the response should be json
     And the response should be
     """
-    {"data":{"id":"2","uuid":"7e318e08-24a6-5be1-88be-ddffb9e10222","organizer":null,"name":"Der  #1 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","start":"2016-03-12 08:00:12","end":"2016-03-12 19:30:33","street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"}}
+    {"data":{"id":"2","uuid":"7e318e08-24a6-5be1-88be-ddffb9e10222","organizer":null,"name":"Der  #1 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"start":"2016-03-12 08:00:12","end":"2016-03-12 19:30:33","street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"}}
     """
 
   Scenario: Create a new fleamarket
