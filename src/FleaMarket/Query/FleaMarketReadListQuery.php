@@ -41,9 +41,12 @@ class FleaMarketReadListQuery extends AbstractQuery
             ->from('fleamarkets_dates')
             ->where('start', '>=', date('Y-m-d 00:00:00'))
             ->groupBy('fleamarket_id');
-        $validFleaMarkets = array_values(
-            $upcomingFleaMarketsStatement->execute()->fetch(\PDO::FETCH_ASSOC)
-        );
+;
+        $validFleaMarkets = $upcomingFleaMarketsStatement->execute()->fetchAll(\PDO::FETCH_COLUMN);
+
+        if ($this->_noUpcomingDates($validFleaMarkets)) {
+            return array();
+        }
 
         $selectStatement = $this->pdo
             ->select()
@@ -91,5 +94,14 @@ class FleaMarketReadListQuery extends AbstractQuery
         }
 
         return $this->_fleaMarkets;
+    }
+
+    /**
+     * @param $validFleaMarkets
+     * @return bool
+     */
+    private function _noUpcomingDates($fleaMarketIds)
+    {
+        return count($fleaMarketIds) === 0;
     }
 }

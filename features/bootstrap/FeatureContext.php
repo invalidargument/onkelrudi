@@ -59,8 +59,8 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
     /** @AfterScenario */
     public function after(AfterScenarioScope $scope)
     {
-        $this->_cleanupDatabase();
-        $this->_response = null;
+        //$this->_cleanupDatabase();
+        //$this->_response = null;
     }
 
     /**

@@ -58,7 +58,7 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
         );
 
         $statement1 = \Mockery::mock('\PDOStatement');
-        $statement1->shouldReceive('fetch')
+        $statement1->shouldReceive('fetchAll')
             ->once()
             ->andReturn($validFleaMarketIds);
         $statement2 = \Mockery::mock('\PDOStatement');
