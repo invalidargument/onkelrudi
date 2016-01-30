@@ -58,7 +58,7 @@
                     </h3>
                 </a>
                 <p>
-                    <time datetime="{{item.start|date('c')}}">{{item.start|date("d.m.Y")}} von {{item.start|date("H:i")}} - {{item.end|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{item.city}}</span>
+                    <time datetime="{{item.dates|first.start|date('c')}}">{{item.dates|first.start|date("d.m.Y")}} von {{item.dates|first.start|date("H:i")}} - {{item.dates|first.end|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{item.city}}</span>
                 </p>
                 <p>
                     <a href="{{fleamarketsDetailsRoutes[item.id]}}" title="Alle Details zu {{item.name}}" class="block">{{item.description|length > 533 ? item.description[:533] ~ '...' : item.description}}</a>
