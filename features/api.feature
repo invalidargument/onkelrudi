@@ -10,7 +10,7 @@ Feature: API v1 fleamarkets
     And the response should be json
     And the response should be
     """
-    {"data":[{"id":"1","uuid":"99448e9a-b780-53ec-8143-255473192537","organizer":null,"name":"Der  #0 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","start":"2016-03-12 08:00:12","end":"2016-03-12 19:30:33","street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"},{"id":"2","uuid":"7e318e08-24a6-5be1-88be-ddffb9e10222","organizer":null,"name":"Der  #1 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","start":"2016-03-12 08:00:12","end":"2016-03-12 19:30:33","street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"},{"id":"3","uuid":"dfb80ebc-0f53-5ac4-90ec-414f87b947de","organizer":null,"name":"Der  #2 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","start":"2016-03-12 08:00:12","end":"2016-03-12 19:30:33","street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"}]}
+    {"data":[{"id":"1","uuid":"99448e9a-b780-53ec-8143-255473192537","organizer":null,"name":"Der  #0 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"start":"2016-03-12 08:00:12","end":"2016-03-12 19:30:33","street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"},{"id":"2","uuid":"7e318e08-24a6-5be1-88be-ddffb9e10222","organizer":null,"name":"Der  #1 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"start":"2016-03-12 08:00:12","end":"2016-03-12 19:30:33","street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"},{"id":"3","uuid":"dfb80ebc-0f53-5ac4-90ec-414f87b947de","organizer":null,"name":"Der  #2 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"start":"2016-03-12 08:00:12","end":"2016-03-12 19:30:33","street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"}]}
     """
 
   Scenario: Get a single FleaMarket by id
@@ -27,7 +27,7 @@ Feature: API v1 fleamarkets
     Given I have a default organizer
     And I send a "POST" request to "http://localhost/public/api/v1/fleamarkets" with body
     """
-    {"name":"Max Power", "description": "Blue Pants", "start":"2015-01-01 00:00:00", "end":"2015-12-12 00:00:00", "dates":[], "zipCode":"50667"}
+    {"name":"Max Power", "description": "Blue Pants", "dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}], "start":"2015-01-01 00:00:00", "end":"2015-12-12 00:00:00", "zipCode":"50667"}
     """
     Then the response code should be "200"
     And the response should be json
@@ -38,7 +38,7 @@ Feature: API v1 fleamarkets
     Given I send a "GET" request to "http://localhost/public/api/v1/fleamarkets/1"
     Then the response should be
     """
-    {"data":{"id":"1","uuid":"b5920ca9-0bd6-5466-95b9-79a7c0532a91","organizer":null,"name":"Max Power","description":"Blue Pants","start":"2015-01-01 00:00:00","end":"2015-12-12 00:00:00","street":null,"streetNo":null,"city":null,"zipCode":"50667","location":null,"url":null}}
+    {"data":{"id":"1","uuid":"b5920ca9-0bd6-5466-95b9-79a7c0532a91","organizer":null,"name":"Max Power","description":"Blue Pants","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"start":"2015-01-01 00:00:00","end":"2015-12-12 00:00:00","street":null,"streetNo":null,"city":null,"zipCode":"50667","location":null,"url":null}}
     """
 
   Scenario: Delete an existing fleamarket
@@ -66,7 +66,7 @@ Feature: API v1 fleamarkets
     Given I send a "GET" request to "http://localhost/public/api/v1/fleamarkets/1"
     Then the response should be
     """
-    {"data":{"id":"1","uuid":"99448e9a-b780-53ec-8143-255473192537","organizer":null,"name":"Max UPDATED","description":"Blue Pants","start":"2015-01-01 00:00:00","end":"2015-12-12 00:00:00","street":null,"streetNo":null,"city":null,"zipCode":"50667","location":null,"url":null}}
+    {"data":{"id":"1","uuid":"99448e9a-b780-53ec-8143-255473192537","organizer":null,"name":"Max UPDATED","description":"Blue Pants","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"start":"2015-01-01 00:00:00","end":"2015-12-12 00:00:00","street":null,"streetNo":null,"city":null,"zipCode":"50667","location":null,"url":null}}
     """
 
   Scenario: Create a new organizer
