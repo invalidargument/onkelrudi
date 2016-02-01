@@ -77,12 +77,12 @@ class FleaMarketService implements FleaMarketServiceInterface
         return $query->run();
     }
 
-    public function getFleaMarket($id)
+    public function getFleaMarket($fleaMarketId)
     {
         $query = $this->_factory->createFleaMarketReadQuery();
         $query
             ->setFleaMarketService($this)
-            ->setFleaMarketId($id);
+            ->setFleaMarketId($fleaMarketId);
 
         return $query->run();
     }

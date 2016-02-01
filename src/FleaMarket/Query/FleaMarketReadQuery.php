@@ -12,9 +12,9 @@ class FleaMarketReadQuery extends AbstractQuery
     private $_fleaMarketService;
     private $_dates = [];
 
-    public function setFleaMarketId($id)
+    public function setFleaMarketId($fleaMarketId)
     {
-        $this->_fleaMarketId = $id;
+        $this->_fleaMarketId = $fleaMarketId;
         return $this;
     }
 
