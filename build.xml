@@ -163,6 +163,7 @@
         <copy todir="${basedir}/build/onkelrudi/vendor">
             <fileset dir="${basedir}/vendor"/>
         </copy>
+        <copy file="${basedir}/deployment/settings_live.yml" tofile="${basedir}/build/onkelrudi/deployment/settings.yml"/>
     </target>
 
     <target name="prepare-frontend-for-deployment">
@@ -186,6 +187,8 @@
     <target name="deploy">
         <echo message="Deploying to desired environment ${deployment-environment}..."/>
         <echo message="tar -xzf r1/onkelrudi_20160206-193346.tar.gz"/>
+        <echo message="cd"/>
         <echo message="ln -s Quellordner Linkname"/>
+        <echo message="liquibase update"/>
     </target>
 </project>

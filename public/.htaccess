@@ -1,3 +1,26 @@
+#<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
+#Header set Expires "Fri, 15 Apr 2017 20:00:00 GMT"
+#</FilesMatch>
+
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+
+RewriteCond %{HTTP_HOST} ^onkel-rudi.de$ [NC]
+RewriteRule ^(.*) http://www.onkel-rudi.de/$1 [L,R=301]
+
 RewriteEngine On
+Options +FollowSymLinks
+#needed for live
+#RewriteBase /
+#/needed for live
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
 RewriteRule ^ index.php [QSA,L]

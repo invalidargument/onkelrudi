@@ -59,6 +59,10 @@ module.exports = function(grunt) {
                         to: '/css/'
                     },
                     {
+                        from: '/public/css/',
+                        to: '/css/'
+                    },
+                    {
                         from: '/public/bower_components/jquery/dist/',
                         to: '/js/'
                     }
@@ -70,6 +74,10 @@ module.exports = function(grunt) {
                 replacements: [
                     {
                         from: '/public/bower_components/pure/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/css/',
                         to: '/css/'
                     },
                     {
@@ -87,8 +95,22 @@ module.exports = function(grunt) {
                         to: '/css/'
                     },
                     {
+                        from: '/public/css/',
+                        to: '/css/'
+                    },
+                    {
                         from: '/public/bower_components/jquery/dist/',
                         to: '/js/'
+                    }
+                ]
+            },
+            htaccessPaths: {
+                src: ['build/onkelrudi/public/.htaccess'],
+                dest: 'build/onkelrudi/public/.htaccess',
+                replacements: [
+                    {
+                        from: '#RewriteBase /',
+                        to: 'RewriteBase /'
                     }
                 ]
             }
