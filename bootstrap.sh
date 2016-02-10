@@ -22,9 +22,9 @@ curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin
 /sbin/mkswap /var/swap.1
 /sbin/swapon /var/swap.1
 
-chmod 0755 /var/www/html/vendor/phpunit/phpunit/phpunit
-chmod 0755 /var/www/html/vendor/behat/behat/bin/behat
-chmod 0755 /var/www/html/vendor/alcaeus/liquibase/liquibase
+#chmod 0755 /var/www/html/vendor/phpunit/phpunit/phpunit
+#chmod 0755 /var/www/html/vendor/behat/behat/bin/behat
+#chmod 0755 /var/www/html/vendor/alcaeus/liquibase/liquibase
 
 apt-get install -y mysql-server libmysql-java
 
