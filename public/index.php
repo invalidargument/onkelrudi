@@ -2,6 +2,7 @@
 include_once '../vendor/autoload.php';
 
 use RudiBieller\OnkelRudi\BuilderFactory;
+use RudiBieller\OnkelRudi\Config\Config;
 use RudiBieller\OnkelRudi\FleaMarket\OrganizerService;
 use RudiBieller\OnkelRudi\FleaMarket\Query\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketService;
@@ -10,24 +11,39 @@ use RudiBieller\OnkelRudi\FleaMarket\Query\OrganizerQueryFactory;
 use RudiBieller\OnkelRudi\Wordpress\QueryFactory;
 use RudiBieller\OnkelRudi\Wordpress\Service as WpService;
 
-$app = new \Slim\App;
-$container = $app->getContainer();
-$container['view'] = function ($c) {
-    $view = new \Slim\Views\Twig(
-        'templates',
-        [
-            //'cache' => 'templates/cache'
-            'cache' => false
-        ]
-    );
+$envSettings = [
+    'displayErrorDetails' => false,
+    'cache' => 'templates/cache'
+];
 
-    $view->addExtension(new Slim\Views\TwigExtension(
-        $c['router'],
-        $c['request']->getUri()
-    ));
+if ((new Config())->getSystemConfiguration()['environment'] === 'dev') {
+    $envSettings['displayErrorDetails'] = true;
+    $envSettings['cache'] = false;
+}
 
-    return $view;
-};
+$appConfiguration = [
+    'settings' => [
+        'displayErrorDetails' => $envSettings['displayErrorDetails'],
+    ],
+    'view' => function ($c) use ($envSettings) {
+        $view = new \Slim\Views\Twig(
+            'templates',
+            ['cache' => $envSettings['cache']]
+        );
+
+        $view->addExtension(new Slim\Views\TwigExtension(
+            $c['router'],
+            $c['request']->getUri()
+        ));
+
+        return $view;
+    }
+];
+
+$container = new \Slim\Container($appConfiguration);
+
+$app = new \Slim\App($container);
+
 
 // fleaMarkets
 $service = new FleaMarketService();
@@ -126,33 +142,33 @@ $app->group('/api', function () use ($app, $controllerFactory) {
 
         // ############# Organizer #############
 
-        // GET list a specific fleamarket
+        // GET list a specific Organizer
         $app->get('/organizers/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\OrganizerAction');
             $action($request, $response, $args);
         });
 
-        // GET list all fleamarkets
+        // GET list all Organizers
         $app->get('/organizers', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\OrganizersAction');
             $action($request, $response, $args);
         });
 
-        // PUT route, for updating a fleamarket
+        // PUT route, for updating an Organizer
         $app->put('/organizers/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\OrganizerUpdateAction');
             $action->setBuilderFactory(new BuilderFactory());
             $action($request, $response, $args);
         });
 
-        // DELETE route, for deleting a fleamarket
+        // DELETE route, for deleting an Organizer
         $app->delete('/organizers/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\OrganizerDeleteAction');
             $action->setBuilderFactory(new BuilderFactory());
             $action($request, $response, $args);
         });
 
-        // POST route, for creating a fleamarket
+        // POST route, for creating an Organizer
         $app->post('/organizers', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\OrganizerCreateAction');
             $action->setBuilderFactory(new BuilderFactory());
