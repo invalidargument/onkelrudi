@@ -12,7 +12,7 @@
             <column name="uuid" type="UUID">
                 <constraints nullable="false"/>
             </column>
-            <column name="name" type="varchar(21844)">
+            <column name="name" type="varchar(5461)">
                 <constraints nullable="false"/>
             </column>
             <column name="street" type="varchar(255)">
@@ -30,10 +30,13 @@
             <column name="phone" type="varchar(255)">
                 <constraints nullable="true"/>
             </column>
-            <column name="url" type="varchar(21844)">
+            <column name="url" type="varchar(5461)">
                 <constraints nullable="true"/>
             </column>
         </createTable>
+        <modifySql dbms="mysql">
+            <append value="ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
+        </modifySql>
     </changeSet>
     <changeSet id="2" author="Rudi Bieller">
         <createTable tableName="fleamarkets">
@@ -49,7 +52,7 @@
             <column name="name" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="description" type="varchar(21844)">
+            <column name="description" type="text">
                 <constraints nullable="false"/>
             </column>
             <column name="start" type="DATETIME">
@@ -73,10 +76,13 @@
             <column name="location" type="varchar(255)">
                 <constraints nullable="true"/>
             </column>
-            <column name="url" type="varchar(21844)">
+            <column name="url" type="varchar(5461)">
                 <constraints nullable="true"/>
             </column>
         </createTable>
+        <modifySql dbms="mysql">
+            <append value="ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
+        </modifySql>
     </changeSet>
     <changeSet id="3" author="Rudi Bieller">
         <addAutoIncrement catalogName="onkelrudi"
@@ -111,6 +117,9 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+        <modifySql dbms="mysql">
+            <append value="ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
+        </modifySql>
     </changeSet>
 </databaseChangeLog>
 
