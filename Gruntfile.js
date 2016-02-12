@@ -65,6 +65,10 @@ module.exports = function(grunt) {
                     {
                         from: '/public/bower_components/jquery/dist/',
                         to: '/js/'
+                    },
+                    {
+                        from: '/public/',
+                        to: '/'
                     }
                 ]
             },
@@ -83,6 +87,10 @@ module.exports = function(grunt) {
                     {
                         from: '/public/bower_components/jquery/dist/',
                         to: '/js/'
+                    },
+                    {
+                        from: '/public/',
+                        to: '/'
                     }
                 ]
             },
@@ -101,6 +109,10 @@ module.exports = function(grunt) {
                     {
                         from: '/public/bower_components/jquery/dist/',
                         to: '/js/'
+                    },
+                    {
+                        from: '/public/',
+                        to: '/'
                     }
                 ]
             },
