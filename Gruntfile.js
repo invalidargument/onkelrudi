@@ -45,6 +45,9 @@ module.exports = function(grunt) {
                     ],
                     'build/onkelrudi/public/templates/fleaMarketDate.html': [
                         'public/templates/fleaMarketDate.html'
+                    ],
+                    'build/onkelrudi/public/templates/wordpressCategoryOverview.html': [
+                        'public/templates/wordpressCategoryOverview.html'
                     ]
                 }
             },
@@ -97,6 +100,28 @@ module.exports = function(grunt) {
             fleaMarketDateHtmlPaths: {
                 src: ['build/onkelrudi/public/templates/fleaMarketDate.html'],
                 dest: 'build/onkelrudi/public/templates/fleaMarketDate.html',
+                replacements: [
+                    {
+                        from: '/public/bower_components/pure/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/css/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/bower_components/jquery/dist/',
+                        to: '/js/'
+                    },
+                    {
+                        from: '/public/',
+                        to: '/'
+                    }
+                ]
+            },
+            wordpressCategoryHtmlPaths: {
+                src: ['build/onkelrudi/public/templates/wordpressCategoryOverview.html'],
+                dest: 'build/onkelrudi/public/templates/wordpressCategoryOverview.html',
                 replacements: [
                     {
                         from: '/public/bower_components/pure/',
