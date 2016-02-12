@@ -27,9 +27,9 @@
     <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
         <a class="pure-menu-heading" href="/public/">Onkel Rudi</a>
         <ul class="pure-menu-list">
-            <li class="pure-menu-item pure-menu-selected"><a href="/public/" class="pure-menu-link">Termine</a></li>
+            <li class="pure-menu-item"><a href="/public/" class="pure-menu-link">Termine</a></li>
             {% for item in wpCategories %}
-            <li class="pure-menu-item"><a href="{{item.slug}}/cat/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
+            <li class="pure-menu-item{% if item.id == data.selectedCategory %} pure-menu-selected{% endif %}"><a href="{{item.slug}}/cat/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
             {% endfor %}
         </ul>
     </div>
