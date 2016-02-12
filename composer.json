@@ -14,6 +14,7 @@
         "slim/pdo": "1.9.2",
         "slim/csrf": "*",
         "slim/twig-view": "*",
+        "slim/http-cache": "0.3.0",
         "kriswallsmith/buzz": "*",
         "alcaeus/liquibase": "*",
         "cocur/slugify": "1.4",
