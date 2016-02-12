@@ -89,12 +89,10 @@ $app->get('/{wildcard}/termin/{id}', function ($request, $response, $args) use (
 })->setName('event-date');
 
 // Blog Category View
-/*
 $app->get('/{wildcard}/kategorie/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\WordpressCategoryAction');
     $action($request, $response, $args);
 })->setName('wp-category');
-*/
 
 // Admin View
 $app->get('/admin/', function ($request, $response, $args) use ($organizerService) {

@@ -29,7 +29,7 @@
         <ul class="pure-menu-list">
             <li class="pure-menu-item pure-menu-selected"><a href="/public/" class="pure-menu-link">Termine</a></li>
             {% for item in wpCategories %}
-            <li class="pure-menu-item"><a href="{{item.slug}}/kategorie/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
+            <li class="pure-menu-item"><a href="{{item.slug}}/cat/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
             {% endfor %}
         </ul>
     </div>
@@ -47,24 +47,18 @@
 <div class="content-wrapper">
     <div class="content">
         <div class="pure-g">
-            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+            {% for item in data %}
+            <div class="l-box pure-u-1 pure-u-md-1-4 pure-u-lg-1-4">
+                <!-- {{wpCategories|first.name}} -->
+                <h3 class="content-head"><time datetime="{{item.date|date('c')}}">{{item.date|date("d.m.Y H:i")}}</time></h3>
             </div>
-            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-2-4">
-                <h2 class="content-head">{{data.name}}</h2>
-                <h3 class="content-head"><time datetime="{{data.dates|first.start|date('c')}}">{{data.dates|first.start|date("d.m.Y")}} von {{data.dates|first.start|date("H:i")}} - {{data.dates|first.end|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{data.city}}</span></h3>
+            <div class="l-box pure-u-1 pure-u-md-3-4 pure-u-lg-3-4">
+                <h2 class="content-head">{{item.title}}</h2>
                 <p>
-                    {{data.description}}
-                </p>
-                <p>
-                    {% if data.location %}{{data.location}}<br>{% endif %}
-                    {% if data.street %}{{data.street}} {{data.streetNo}}<br>{% endif %}
-                    {% if data.zipCode %}{{data.zipCode}} {{data.city}}<br>{% endif %}
-                    {% if data.url %}<a href="{{data.url}}" target="_blank">{{data.url}}</a>{% endif %}
+                    {{item.content|raw}}
                 </p>
             </div>
-            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4 mapsLocation">
-                <iframe style="width:100%;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="400" height="400" src="https://maps.google.com/maps?hl=de&q={{data.street}} {{data.streetNo}}, {{data.zipCode}} {{data.city}}&ie=UTF8&t=roadmap&z=15&iwloc=B&output=embed"></iframe>
-            </div>
+            {% endfor %}
         </div>
     </div>
 

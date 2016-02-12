@@ -7,6 +7,9 @@ use RudiBieller\OnkelRudi\Wordpress\ServiceInterface;
 abstract class AbstractHttpAction extends AbstractAction implements HttpActionInterface
 {
     protected $template = 'index.html';
+    /**
+     * @var ServiceInterface
+     */
     protected $wordpressService;
 
     public function setWordpressService(ServiceInterface $service)
