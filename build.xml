@@ -188,7 +188,7 @@
         <echo message="Deploying to desired environment ${deployment-environment}..."/>
         <echo message="tar -xzf r1/onkelrudi_20160206-193346.tar.gz"/>
         <echo message="cd"/>
-        <echo message="ln -s Quellordner Linkname"/>
+        <echo message="ln -f -s Quellordner Linkname"/>
         <echo message="liquibase update"/>
     </target>
 </project>
