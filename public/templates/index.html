@@ -29,7 +29,7 @@
         <ul class="pure-menu-list">
             <li class="pure-menu-item pure-menu-selected"><a href="/public/" class="pure-menu-link">Termine</a></li>
             {% for item in wpCategories %}
-            <li class="pure-menu-item"><a href="{{item.seoName}}/cat/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
+            <li class="pure-menu-item"><a href="{{item.slug}}/kategorie/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
             {% endfor %}
         </ul>
     </div>

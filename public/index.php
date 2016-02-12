@@ -60,6 +60,7 @@ $wpService->setQueryFactory(new QueryFactory());
 $controllerFactory = new ControllerFactory($app);
 $controllerFactory->setService($service);
 $controllerFactory->setOrganizerService($organizerService);
+$controllerFactory->setWordpressService($wpService);
 
 // Index
 $app->get('/', function ($request, $response, $args) use ($service, $wpService, $app) {
@@ -86,6 +87,14 @@ $app->get('/{wildcard}/termin/{id}', function ($request, $response, $args) use (
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketDetailAction');
     $action($request, $response, $args);
 })->setName('event-date');
+
+// Blog Category View
+/*
+$app->get('/{wildcard}/kategorie/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\WordpressCategoryAction');
+    $action($request, $response, $args);
+})->setName('wp-category');
+*/
 
 // Admin View
 $app->get('/admin/', function ($request, $response, $args) use ($organizerService) {

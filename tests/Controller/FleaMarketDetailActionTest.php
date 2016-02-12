@@ -42,9 +42,13 @@ class FleaMarketDetailActionTest extends \PHPUnit_Framework_TestCase
         $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketService');
         $service->shouldReceive('getFleaMarket')->once()->with(42)->andReturn($fleaMarket);
 
+        $wordpressService = \Mockery::mock('RudiBieller\OnkelRudi\Wordpress\ServiceInterface');
+        $wordpressService->shouldReceive('getAllCategories')->andReturn([]);
+
         $action = new FleaMarketDetailAction();
         $action->setApp($app);
         $action->setService($service);
+        $action->setWordpressService($wordpressService);
 
         $return = $action($request, $response, array('id' => 42));
         $actual = (string)$return->getBody();
