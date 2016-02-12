@@ -22,11 +22,25 @@
     <link rel="stylesheet" href="/public/css/onkelrudi.css">
     <!--<![endif]-->
 
+    <style>
+        h2.content-head {
+            cursor: pointer;
+        }
+        h2.content-head + div {
+            display:none;
+        }
+    </style>
+
     <script src="/public/bower_components/jquery/dist/jquery.js"></script>
     <script src="/public/bower_components/underscore/underscore.js"></script>
     <script>
-        console.log('z0nk!');
         $(function() {
+
+            // TOGGLE
+            $('h2.content-head').on('click', function(e) {
+                $(e.currentTarget).find('+div').toggle()
+            });
+
             $('#newOrganizer').on('submit', function(e) {
                 console.log('sending post with new organizer data..... will post json as body now.');
                 e.preventDefault();
@@ -140,7 +154,7 @@
 
 <div class="content-wrapper">
     <div class="content">
-        <h2 class="content-head is-center">Neuen Veranstalter anlegen</h2>
+        <h2 class="content-head">Neuen Veranstalter anlegen</h2>
         <div>
             <form id="newOrganizer" method="post" class="pure-form pure-form-stacked">
                 <fieldset>
@@ -173,7 +187,7 @@
             </form>
         </div>
 
-        <h2 class="content-head is-center">Neuen Termin anlegen</h2>
+        <h2 class="content-head">Neuen Termin anlegen</h2>
         <div>
             <form id="newFleaMarket" method="post" class="pure-form pure-form-stacked">
                 <fieldset>
