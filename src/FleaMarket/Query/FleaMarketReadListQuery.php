@@ -52,7 +52,6 @@ class FleaMarketReadListQuery extends AbstractQuery
             ->select()
             ->from('fleamarkets')
             ->whereIn('id', $validFleaMarkets)
-            ->orderBy('start', 'ASC')
             ->limit($this->_limit)
             ->offset($this->_offset);
 

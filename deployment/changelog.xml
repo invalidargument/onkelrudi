@@ -121,6 +121,18 @@
             <append value="ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
         </modifySql>
     </changeSet>
+    <changeSet author="Rudi Bieller" id="7">
+        <dropColumn catalogName="onkelrudi"
+                    columnName="start"
+                    schemaName="public"
+                    tableName="fleamarkets"/>
+    </changeSet>
+    <changeSet author="Rudi Bieller" id="8">
+        <dropColumn catalogName="onkelrudi"
+                    columnName="end"
+                    schemaName="public"
+                    tableName="fleamarkets"/>
+    </changeSet>
 </databaseChangeLog>
 
 
