@@ -90,7 +90,32 @@ class FleaMarketReadListQuery extends AbstractQuery
             $this->_fleaMarkets[] = $fleaMarket;
         }
 
+        usort(
+            $this->_fleaMarkets,
+            array($this, '_sortFleaMarketsByDates')
+        );
+
         return $this->_fleaMarkets;
+    }
+
+    private function _sortFleaMarketsByDates($a, $b)
+    {
+        $dates1 = $a->getDates();
+        $dates2 = $b->getDates();
+
+        if (count($dates1) === 0 || count($dates2) === 0) {
+            return 0;
+        }
+
+        if ($dates1[0]->getStart() == $dates2[0]->getStart()) {
+            return 0;
+        }
+
+        if ($dates1[0]->getStart() < $dates2[0]->getStart()) {
+            return -1;
+        }
+
+        return 1;
     }
 
     /**

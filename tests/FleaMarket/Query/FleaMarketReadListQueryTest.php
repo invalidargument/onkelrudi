@@ -122,7 +122,7 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $fleaMarkets);
         $this->assertSame(2, count($fleaMarkets));
 
-        $this->assertEquals(42, $fleaMarkets[0]->getId());
-        $this->assertEquals(23, $fleaMarkets[1]->getId());
+        $this->assertEquals(23, $fleaMarkets[0]->getId());
+        $this->assertEquals(42, $fleaMarkets[1]->getId());
     }
 }
