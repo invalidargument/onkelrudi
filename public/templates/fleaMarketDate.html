@@ -45,9 +45,21 @@
 </div>
 
 <div class="content-wrapper">
-    <div class="content">
+    <div class="content detailView">
         <div class="pure-g">
             <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+                <h3>Infos zum Veranstalter</h3>
+                <strong>{{data.organizer.name}}</strong>
+                {% if data.dates|length > 1 %}
+                <p>
+                    Kommende Termine:
+                    <ol>
+                    {% for dateItem in data.dates %}
+                        <li{% if dateItem.start|date("d.m.Y") == "now"|date("d.m.Y") %} class="today"{% endif %}>{{dateItem.start|date("d.m.Y")}}</li>
+                    {% endfor %}
+                    </ol>
+                </p>
+                {% endif %}
             </div>
             <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-2-4">
                 <h2 class="content-head">{{data.name}}</h2>
