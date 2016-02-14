@@ -62,15 +62,15 @@ class OrganizerBuilder extends AbstractBuilder
 
     public function build()
     {
-        $market = new Organizer();
+        $organizer = new Organizer();
 
         foreach ($this->properties as $name => $value) {
             if (array_key_exists($name, $this->properties) && !is_null($this->properties[$name])) {
                 $method = 'set' . ucfirst($name);
-                $market->$method($value);
+                $organizer->$method($value);
             }
         }
 
-        return $market;
+        return $organizer;
     }
 }
