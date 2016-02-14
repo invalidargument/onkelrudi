@@ -390,6 +390,11 @@ EEF66C
     list-style-position: inside;
 }
 
+.detailView ol li.over {
+    text-decoration: line-through;
+    font-style: italic;
+}
+
 .detailView ol {
     margin-left:0;
     padding-left:0;
