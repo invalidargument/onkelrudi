@@ -58,7 +58,7 @@
                     <strong>Alle Termine:</strong>
                     <ol>
                     {% for dateItem in data.dates %}
-                        <li class="dateItem{% if dateItem.start|date("Ymd") == "now"|date("Ymd") %} today{% endif %}{% if dateItem.start|date("Ymd") < "now"|date("Ymd") %} over{% endif %}">{{dateItem.start|date("d.m.Y")}}</li>
+                        <li class="dateItem{% if dateItem.start|date('Ymd') == 'now'|date('Ymd#) %} today{% endif %}{% if dateItem.start|date('Ymd') < 'now'|date('Ymd') %} over{% endif %}">{{dateItem.start|date("d.m.Y")}}</li>
                     {% endfor %}
                     </ol>
                 </p>
