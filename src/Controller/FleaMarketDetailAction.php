@@ -8,6 +8,11 @@ class FleaMarketDetailAction extends AbstractHttpAction
 
     protected function getData()
     {
-        return $this->service->getFleaMarket($this->args['id']);
+        $fleaMarket = $this->service->getFleaMarket($this->args['id']);
+        $fleaMarket->setOrganizer(
+            $this->organizerService->getOrganizer($fleaMarket->getOrganizer()->getId())
+        );
+
+        return $fleaMarket;
     }
 }

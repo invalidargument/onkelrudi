@@ -3,6 +3,7 @@
 namespace RudiBieller\OnkelRudi\Controller;
 
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
+use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use Slim\App;
 use Slim\Http\Body;
 
@@ -10,8 +11,11 @@ class FleaMarketDetailActionTest extends \PHPUnit_Framework_TestCase
 {
     public function testActionReturnsRequestedMarket()
     {
+        $organizer = new Organizer();
+        $organizer->setId(2000);
         $fleaMarket = new FleaMarket();
-        $fleaMarket->setId(23)->setName('Rudis Market');
+        $fleaMarket->setId(23)->setName('Rudis Market')
+            ->setOrganizer($organizer);
 
         $app = new App();
         $container = $app->getContainer();
@@ -45,9 +49,13 @@ class FleaMarketDetailActionTest extends \PHPUnit_Framework_TestCase
         $wordpressService = \Mockery::mock('RudiBieller\OnkelRudi\Wordpress\ServiceInterface');
         $wordpressService->shouldReceive('getAllCategories')->andReturn([]);
 
+        $organizerService = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\OrganizerServiceInterface');
+        $organizerService->shouldReceive('getOrganizer')->once()->with(2000)->andReturn(new Organizer());
+
         $action = new FleaMarketDetailAction();
         $action->setApp($app);
         $action->setService($service);
+        $action->setOrganizerService($organizerService);
         $action->setWordpressService($wordpressService);
 
         $return = $action($request, $response, array('id' => 42));

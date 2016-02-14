@@ -3,6 +3,7 @@ namespace RudiBieller\OnkelRudi\FleaMarket\Query;
 
 use Cocur\Slugify\Slugify;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketServiceInterface;
+use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use RudiBieller\OnkelRudi\Query\AbstractQuery;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 
@@ -53,6 +54,8 @@ class FleaMarketReadQuery extends AbstractQuery
          * @var \RudiBieller\OnkelRudi\FleaMarket\FleaMarket
          */
         $fleaMarket = new FleaMarket();
+        $organizer = new Organizer();
+        $organizer->setId($result['organizer_id']);
 
         $fleaMarket
             ->setId($result['id'])
@@ -66,7 +69,8 @@ class FleaMarketReadQuery extends AbstractQuery
             ->setCity($result['city'])
             ->setZipCode($result['zipcode'])
             ->setLocation($result['location'])
-            ->setUrl($result['url']);
+            ->setUrl($result['url'])
+            ->setOrganizer($organizer);
 
         return $fleaMarket;
     }
