@@ -22,9 +22,11 @@ if ((new Config())->getSystemConfiguration()['environment'] === 'dev') {
 }
 
 $appConfiguration = [
+    // general Slim settings
     'settings' => [
         'displayErrorDetails' => $envSettings['displayErrorDetails'],
     ],
+    // Twig view
     'view' => function ($c) use ($envSettings) {
         $view = new \Slim\Views\Twig(
             'templates',
