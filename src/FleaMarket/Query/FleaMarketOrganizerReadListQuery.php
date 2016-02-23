@@ -9,7 +9,7 @@ class FleaMarketOrganizerReadListQuery extends AbstractQuery
 {
     private $_organizers;
     private $_offset = 0;
-    private $_limit = 20;
+    private $_limit = 50;
 
     public function setOffset($offset)
     {

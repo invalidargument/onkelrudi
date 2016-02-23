@@ -10,7 +10,7 @@ class FleaMarketReadListQuery extends AbstractQuery
 {
     private $_fleaMarkets = array();
     private $_offset = 0;
-    private $_limit = 20;
+    private $_limit = 50;
     private $_onlyCurrentDates = false;
     /**
      * @var FleaMarketServiceInterface

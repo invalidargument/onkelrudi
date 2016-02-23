@@ -60,7 +60,7 @@ class FleaMarketOrganizerReadListQueryTest extends \PHPUnit_Framework_TestCase
                 ->andReturn($this->_pdo)
             ->shouldReceive('limit')
                 ->once()
-                ->with(20)
+                ->with(50)
                 ->andReturn($this->_pdo)
             ->shouldReceive('offset')
                 ->once()
