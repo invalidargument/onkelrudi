@@ -2,6 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\FleaMarket\Query;
 
+use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
+
 class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
 {
     private $_sut;
@@ -18,8 +20,8 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
     {
         $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketServiceInterface');
         $service
-            ->shouldReceive('getDates')->once()->with(42)->andReturn([])
-            ->shouldReceive('getDates')->once()->with(23)->andReturn([]);
+            ->shouldReceive('getDates')->once()->with(42, false)->andReturn([new FleaMarketDate('2018-02-02 10:00:00', '2018-02-02 18:00:00')])
+            ->shouldReceive('getDates')->once()->with(23, false)->andReturn([new FleaMarketDate('2018-02-03 10:00:00', '2018-03-02 18:00:00')]);
         $this->_sut->setFleaMarketService($service);
 
         $validFleaMarketIds = [1,2,3];
@@ -122,7 +124,7 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $fleaMarkets);
         $this->assertSame(2, count($fleaMarkets));
 
-        $this->assertEquals(23, $fleaMarkets[0]->getId());
-        $this->assertEquals(42, $fleaMarkets[1]->getId());
+        $this->assertEquals(42, $fleaMarkets[0]->getId());
+        $this->assertEquals(23, $fleaMarkets[1]->getId());
     }
 }

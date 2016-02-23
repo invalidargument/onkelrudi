@@ -66,6 +66,19 @@ class FleaMarketService implements FleaMarketServiceInterface
         return $query->run();
     }
 
+    /**
+     * @return FleaMarket[]
+     */
+    public function getAllUpcomingFleaMarkets()
+    {
+        $query = $this->_factory->createFleaMarketReadListQuery();
+
+        $query->setFleaMarketService($this)
+            ->setQueryOnlyCurrentDates();
+
+        return $query->run();
+    }
+
     public function getFleaMarkets($limit, $offset)
     {
         $query = $this->_factory->createFleaMarketReadListQuery();
@@ -111,11 +124,12 @@ class FleaMarketService implements FleaMarketServiceInterface
         return $query->run();
     }
 
-    public function getDates($fleaMarketId)
+    public function getDates($fleaMarketId, $onlyUpcoming = false)
     {
         $query = $this->_factory->createFleaMarketDatesReadListQuery();
         $query
-            ->setFleaMarketId($fleaMarketId);
+            ->setFleaMarketId($fleaMarketId)
+            ->setQueryOnlyCurrentDates($onlyUpcoming);
 
         return $query->run();
     }

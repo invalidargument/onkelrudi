@@ -133,6 +133,13 @@
                     schemaName="public"
                     tableName="fleamarkets"/>
     </changeSet>
+    <changeSet author="Rudi Bieller" id="9">
+        <addColumn catalogName="onkelrudi"
+                   schemaName="public"
+                   tableName="fleamarkets_organizer">
+            <column name="email" type="varchar(255)" afterColumn="phone"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
 
 

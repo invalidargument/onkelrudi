@@ -64,7 +64,7 @@ $controllerFactory->setWordpressService($wpService);
 
 // Index
 $app->get('/', function ($request, $response, $args) use ($service, $wpService, $app) {
-    $fleaMarkets = $service->getAllFleaMarkets();
+    $fleaMarkets = $service->getAllUpcomingFleaMarkets();
     $wpCategories = $wpService->getAllCategories();
     $fleaMarketsDetailRoutes = [];
     foreach($fleaMarkets as $fleaMarket) {

@@ -11,6 +11,7 @@ class FleaMarketReadListQuery extends AbstractQuery
     private $_fleaMarkets = array();
     private $_offset = 0;
     private $_limit = 20;
+    private $_onlyCurrentDates = false;
     /**
      * @var FleaMarketServiceInterface
      */
@@ -34,17 +35,26 @@ class FleaMarketReadListQuery extends AbstractQuery
         return $this;
     }
 
+    public function setQueryOnlyCurrentDates($onlyCurrentDates = true)
+    {
+        $this->_onlyCurrentDates = $onlyCurrentDates;
+    }
+
     protected function runQuery()
     {
-        $upcomingMarketsStatement = $this->pdo
+        // TODO optimize to fetch all dates for later use as well
+        $validMarketsStmt = $this->pdo
             ->select(['fleamarket_id'])
             ->from('fleamarkets_dates')
-            ->where('start', '>=', date('Y-m-d 00:00:00'))
             ->groupBy('fleamarket_id');
 
-        $validFleaMarkets = $upcomingMarketsStatement->execute()->fetchAll(\PDO::FETCH_COLUMN);
+        if ($this->_onlyCurrentDates) {
+            $validMarketsStmt->where('start', '>=', date('Y-m-d 00:00:00'));
+        }
 
-        if ($this->_noUpcomingDates($validFleaMarkets)) {
+        $validFleaMarkets = $validMarketsStmt->execute()->fetchAll(\PDO::FETCH_COLUMN);
+
+        if (count($validFleaMarkets) === 0) {
             return array();
         }
 
@@ -72,22 +82,26 @@ class FleaMarketReadListQuery extends AbstractQuery
         }
 
         foreach ($result as $item) {
-            $fleaMarket = new FleaMarket();
-            $fleaMarket
-                ->setId($item['id'])
-                ->setUuid($item['uuid'])
-                ->setName($item['name'])
-                ->setSlug((new Slugify())->slugify($item['name']))
-                ->setDescription($item['description'])
-                ->setDates($this->_fleaMarketService->getDates($item['id']))
-                ->setStreet($item['street'])
-                ->setStreetNo($item['streetno'])
-                ->setCity($item['city'])
-                ->setZipCode($item['zipcode'])
-                ->setLocation($item['location'])
-                ->setUrl($item['url']);
+            $dates = $this->_fleaMarketService->getDates($item['id'], $this->_onlyCurrentDates);
 
-            $this->_fleaMarkets[] = $fleaMarket;
+            if (count($dates) > 0) {
+                $fleaMarket = new FleaMarket();
+                $fleaMarket
+                    ->setId($item['id'])
+                    ->setUuid($item['uuid'])
+                    ->setName($item['name'])
+                    ->setSlug((new Slugify())->slugify($item['name']))
+                    ->setDescription($item['description'])
+                    ->setDates($dates)
+                    ->setStreet($item['street'])
+                    ->setStreetNo($item['streetno'])
+                    ->setCity($item['city'])
+                    ->setZipCode($item['zipcode'])
+                    ->setLocation($item['location'])
+                    ->setUrl($item['url']);
+
+                $this->_fleaMarkets[] = $fleaMarket;
+            }
         }
 
         usort(
@@ -116,14 +130,5 @@ class FleaMarketReadListQuery extends AbstractQuery
         }
 
         return 1;
-    }
-
-    /**
-     * @param $validFleaMarkets
-     * @return bool
-     */
-    private function _noUpcomingDates($fleaMarketIds)
-    {
-        return count($fleaMarketIds) === 0;
     }
 }

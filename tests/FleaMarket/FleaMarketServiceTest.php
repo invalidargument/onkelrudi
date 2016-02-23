@@ -90,6 +90,21 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
         $this->_sut->getAllFleaMarkets();
     }
 
+    public function testGetAllUpcomingReturnsListWithAllUpcomingMarketsOnly()
+    {
+        $markets = array();
+
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketReadListQuery');
+        $query
+            ->shouldReceive('setFleaMarketService')->andReturn($query)
+            ->shouldReceive('setQueryOnlyCurrentDates')->andReturn($query)
+            ->shouldReceive('run')->once()->andReturn($markets);
+
+        $this->_factory->shouldReceive('createFleaMarketReadListQuery')->once()->andReturn($query);
+
+        $this->_sut->getAllUpcomingFleaMarkets();
+    }
+
     public function testGetFleaMarketsReturnsListWithMarketsByLimitAndOffset()
     {
         $markets = array();
