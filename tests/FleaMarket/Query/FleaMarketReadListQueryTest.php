@@ -16,17 +16,20 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
         $this->_sut->setPdo($this->_pdo);
     }
 
+    protected function tearDown()
+    {
+        parent::tearDown();
+        //\Mockery::close();
+    }
+
     public function testQueryReadsFleaMarketsByDefaultLimitAndOffset()
     {
-        $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketServiceInterface');
-        $service
-            ->shouldReceive('getDates')->once()->with(42, false)->andReturn([new FleaMarketDate('2018-02-02 10:00:00', '2018-02-02 18:00:00')])
-            ->shouldReceive('getDates')->once()->with(23, false)->andReturn([new FleaMarketDate('2018-02-03 10:00:00', '2018-03-02 18:00:00')]);
-        $this->_sut->setFleaMarketService($service);
+        $datesData = [
+            ['fleamarket_id' => 42, 'start' => '2018-03-04 10:00:00', 'end' => '2018-03-04 18:00:00'],
+            ['fleamarket_id' => 23, 'start' => '2018-05-04 10:00:00', 'end' => '2018-05-04 18:00:00']
+        ];
 
-        $validFleaMarketIds = [1,2,3];
-
-        $result = array(
+        $marketsData = array(
             array(
                 'id' => 42,
                 'uuid' => 'uuid',
@@ -58,64 +61,19 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
         );
 
         $statement1 = \Mockery::mock('\PDOStatement');
-        $statement1->shouldReceive('fetchAll')
-            ->once()
-            ->andReturn($validFleaMarketIds);
+        $statement1->shouldReceive('fetchAll')->once()->andReturn($datesData);
+
         $statement2 = \Mockery::mock('\PDOStatement');
-        $statement2->shouldReceive('fetchAll')
-            ->once()
-            ->andReturn($result);
+        $statement2->shouldReceive('fetchAll')->once()->andReturn($marketsData);
 
-        $this->_pdo
-            ->shouldReceive('select')
-                ->once()
-                ->with(['fleamarket_id'])
-                ->andReturn($this->_pdo)
-            ->shouldReceive('from')
-                ->once()
-                ->with('fleamarkets_dates')
-                ->andReturn($this->_pdo)
-            ->shouldReceive('where')
-                ->once()
-                ->with('start', '>=', date('Y-m-d 00:00:00'))
-                ->andReturn($this->_pdo)
-            ->shouldReceive('groupBy')
-                ->once()
-                ->with('fleamarket_id')
-                ->andReturn($this->_pdo)
-            ->shouldReceive('execute')
-                ->once()
-                ->andReturn($statement1)
-            ->shouldReceive('fetch')
-                ->once()
-                ->with(\PDO::FETCH_ASSOC)
-                ->andReturn($validFleaMarketIds);
+        // query dates
+        $this->_pdo->shouldReceive('select->from->orderBy->limit->offset')->andReturn($this->_pdo);
+        $this->_pdo->shouldReceive('execute')->once()->andReturn($statement1);
 
-        $this->_pdo
-            ->shouldReceive('select')
-                ->once()
-                ->andReturn($this->_pdo)
-            ->shouldReceive('from')
-                ->once()
-                ->with('fleamarkets')
-                ->andReturn($this->_pdo)
-            ->shouldReceive('whereIn')
-                ->once()
-                ->with('id', $validFleaMarketIds)
-                ->andReturn($this->_pdo)
-            ->shouldReceive('limit')
-                ->once()
-                ->with(50)
-                ->andReturn($this->_pdo)
-            ->shouldReceive('offset')
-                ->once()
-                ->with(0)
-                ->andReturn($this->_pdo)
-            ->shouldReceive('execute')
-                ->once()
-                ->andReturn($statement2)
-            ->shouldReceive('fetch')
-                ->once();
+        // query markets
+        $this->_pdo->shouldReceive('select->from->whereIn')->andReturn($this->_pdo);
+        $this->_pdo->shouldReceive('execute')->once()->andReturn($statement2);
+
         /**
          * @var \RudiBieller\OnkelRudi\FleaMarket\FleaMarket
          */

@@ -14,7 +14,7 @@ Feature: Index page of onkelrudi
     And I am on "/"
     Then I should see "Onkel Rudi" in the "h1" element
     And I should see a ".marketSummaryBox:nth-of-type(3)" element
-    And I should see "Der #0 Flohmarkt von Rudi" in the ".marketSummaryBox:nth-of-type(3)" element
+    And I should see "Der #2 Flohmarkt von Rudi" in the ".marketSummaryBox:nth-of-type(3)" element
     When I follow "Der #2 Flohmarkt von Rudi"
     Then I should be on "/der-2-flohmarkt-von-rudi/termin/3"
 

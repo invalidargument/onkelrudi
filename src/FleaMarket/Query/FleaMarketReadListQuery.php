@@ -2,16 +2,18 @@
 namespace RudiBieller\OnkelRudi\FleaMarket\Query;
 
 use Cocur\Slugify\Slugify;
+use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketServiceInterface;
+//use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use RudiBieller\OnkelRudi\Query\AbstractQuery;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 
 class FleaMarketReadListQuery extends AbstractQuery
 {
-    private $_fleaMarkets = array();
     private $_offset = 0;
     private $_limit = 50;
     private $_onlyCurrentDates = false;
+    private $_queryTimespan;
     /**
      * @var FleaMarketServiceInterface
      */
@@ -35,6 +37,12 @@ class FleaMarketReadListQuery extends AbstractQuery
         return $this;
     }
 
+    public function setQueryTimespan(\DateTimeImmutable $start, \DateTimeImmutable $end)
+    {
+        $this->_queryTimespan = ['start' => $start, 'end' => $end];
+        return $this;
+    }
+
     public function setQueryOnlyCurrentDates($onlyCurrentDates = true)
     {
         $this->_onlyCurrentDates = $onlyCurrentDates;
@@ -42,93 +50,92 @@ class FleaMarketReadListQuery extends AbstractQuery
 
     protected function runQuery()
     {
-        // TODO optimize to fetch all dates for later use as well
-        $validMarketsStmt = $this->pdo
-            ->select(['fleamarket_id'])
+        $datesStatement = $this->pdo
+            ->select()
             ->from('fleamarkets_dates')
-            ->groupBy('fleamarket_id');
+            ->orderBy('start', 'ASC')
+            ->limit($this->_limit)
+            ->offset($this->_offset);
 
         if ($this->_onlyCurrentDates) {
-            $validMarketsStmt->where('start', '>=', date('Y-m-d 00:00:00'));
+            $datesStatement->where('start', '>=', date('Y-m-d 00:00:00'));
         }
 
-        $validFleaMarkets = $validMarketsStmt->execute()->fetchAll(\PDO::FETCH_COLUMN);
+        $datesData = $datesStatement->execute()->fetchAll();
 
-        if (count($validFleaMarkets) === 0) {
-            return array();
+        if (count($datesData) === 0) {
+            return false;
         }
+
+        $fleaMarketIds = $this->_extractFleaMarketIds($datesData);
 
         $selectStatement = $this->pdo
             ->select()
             ->from('fleamarkets')
-            ->whereIn('id', $validFleaMarkets)
-            ->limit($this->_limit)
-            ->offset($this->_offset);
+            ->whereIn('id', $fleaMarketIds);
 
         /**
          * @var \Slim\PDO\Statement
          */
         $statement = $selectStatement->execute();
+        $fleaMarketData = $statement->fetchAll();
 
-        return $statement->fetchAll();
+        return array(
+            'fleaMarkets' => $fleaMarketData,
+            'dates' => $datesData
+        );
     }
 
     protected function mapResult($result)
     {
-        $this->_fleaMarkets = array();
+        $mappedMarkets = array();
 
         if ($result === false) {
-            return $this->_fleaMarkets;
+            return array();
         }
 
-        foreach ($result as $item) {
-            $dates = $this->_fleaMarketService->getDates($item['id'], $this->_onlyCurrentDates);
-
-            if (count($dates) > 0) {
-                $fleaMarket = new FleaMarket();
-                $fleaMarket
-                    ->setId($item['id'])
-                    ->setUuid($item['uuid'])
-                    ->setName($item['name'])
-                    ->setSlug((new Slugify())->slugify($item['name']))
-                    ->setDescription($item['description'])
-                    ->setDates($dates)
-                    ->setStreet($item['street'])
-                    ->setStreetNo($item['streetno'])
-                    ->setCity($item['city'])
-                    ->setZipCode($item['zipcode'])
-                    ->setLocation($item['location'])
-                    ->setUrl($item['url']);
-
-                $this->_fleaMarkets[] = $fleaMarket;
-            }
+        $marketData = array();
+        foreach ($result['fleaMarkets'] as $item) {
+            $marketData[$item['id']] = $item;
         }
 
-        usort(
-            $this->_fleaMarkets,
-            array($this, '_sortFleaMarketsByDates')
-        );
+        foreach ($result['dates'] as $item) {
+            $date = new FleaMarketDate($item['start'], $item['end']);
 
-        return $this->_fleaMarkets;
+            //$organizer = new Organizer();
+            //$organizer->setId($marketData[$item['fleamarket_id']]['organizer_id']);
+
+            $fleaMarket = new FleaMarket();
+
+            $fleaMarket
+                ->setId($item['fleamarket_id'])
+                ->setUuid($marketData[$item['fleamarket_id']]['uuid'])
+                //->setOrganizer($organizer)
+                ->setName($marketData[$item['fleamarket_id']]['name'])
+                ->setSlug((new Slugify())->slugify($marketData[$item['fleamarket_id']]['name']))
+                ->setDescription($marketData[$item['fleamarket_id']]['description'])
+                ->setDates([$date])
+                ->setStreet($marketData[$item['fleamarket_id']]['street'])
+                ->setStreetNo($marketData[$item['fleamarket_id']]['streetno'])
+                ->setCity($marketData[$item['fleamarket_id']]['city'])
+                ->setZipCode($marketData[$item['fleamarket_id']]['zipcode'])
+                ->setLocation($marketData[$item['fleamarket_id']]['location'])
+                ->setUrl($marketData[$item['fleamarket_id']]['url']);
+
+            $mappedMarkets[] = $fleaMarket;
+        }
+
+        return $mappedMarkets;
     }
 
-    private function _sortFleaMarketsByDates($a, $b)
+    private function _extractFleaMarketIds(array $date)
     {
-        $dates1 = $a->getDates();
-        $dates2 = $b->getDates();
+        $ids = array();
 
-        if (count($dates1) === 0 || count($dates2) === 0) {
-            return 0;
+        foreach ($date as $item) {
+            $ids[] = $item['fleamarket_id'];
         }
 
-        if ($dates1[0]->getStart() == $dates2[0]->getStart()) {
-            return 0;
-        }
-
-        if ($dates1[0]->getStart() < $dates2[0]->getStart()) {
-            return -1;
-        }
-
-        return 1;
+        return array_unique($ids);
     }
 }
