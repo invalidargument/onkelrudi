@@ -15,6 +15,8 @@
             {% for item in wpCategories %}
             <li class="pure-menu-item"><a href="/public/{{item.slug}}/kategorie/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
             {% endfor %}
+            <li class="pure-menu-item"><a href="/public/#about" class="pure-menu-link">About</a></li>
+            <li class="pure-menu-item"><a href="/public/#impressum" class="pure-menu-link">Impressum</a></li>
         </ul>
     </div>
 </div>
@@ -51,13 +53,14 @@
                     {% if item.location %}{{item.location}}<br>{% endif %}
                     {% if item.street %}{{item.street}} {{item.streetNo}}<br>{% endif %}
                     {% if item.zipCode %}{{item.zipCode}} {{item.city}}<br>{% endif %}
-                    {% if item.url %}<a href="{{item.url}}" target="_blank" class="post-category-organizer-url">{{item.url}}</a>{% endif %}
+                    {% if item.url %}<a href="{{item.url}}" target="_blank" class="post-category-organizer-url" rel="nofollow">{{item.url|length > 43 ? item.url[:43] ~ '...' : item.url}}</a>{% endif %}
                 </p>
             </div>
             {% endfor %}
         </div>
     </div>
 
+    <a name="about"></a>
     <div class="ribbon l-box-lrg pure-g">
         <div class="pure-u-1">
             <h2 class="content-head">About.</h2>
@@ -73,6 +76,7 @@
         </div>
     </div>
 
+    <a name="impressum"></a>
     <div class="content">
         <div class="pure-u-1">
             <h2 class="content-head">Impressum.</h2>
