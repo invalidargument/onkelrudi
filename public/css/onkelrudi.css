@@ -409,3 +409,7 @@ EEF66C
     font-weight: normal;
     text-transform: uppercase;
 }
+
+i.fa {
+    margin-right: 7px;
+}
