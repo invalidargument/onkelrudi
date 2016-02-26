@@ -60,6 +60,7 @@ class FleaMarketOrganizerReadListQuery extends AbstractQuery
                 ->setCity($item['city'])
                 ->setZipCode($item['zipcode'])
                 ->setPhone($item['phone'])
+                ->setEmail($item['email'])
                 ->setUrl($item['url']);
 
             $this->_organizers[] = $organizer;

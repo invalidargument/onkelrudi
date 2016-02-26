@@ -54,6 +54,12 @@ class OrganizerBuilder extends AbstractBuilder
         return $this;
     }
 
+    public function setEmail($email)
+    {
+        $this->properties['email'] = $email;
+        return $this;
+    }
+
     public function setUrl($url)
     {
         $this->properties['url'] = $url;

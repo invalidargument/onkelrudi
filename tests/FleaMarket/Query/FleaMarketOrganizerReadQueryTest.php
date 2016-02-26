@@ -56,6 +56,7 @@ class FleaMarketOrganizerReadQueryTest extends \PHPUnit_Framework_TestCase
             'city' => 'Cologne',
             'zipcode' => 50667,
             'phone' => '0123456',
+            'email' => 'baz@example.com',
             'url' => 'http://www.example.com'
         );
 
@@ -92,6 +93,7 @@ class FleaMarketOrganizerReadQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Cologne', $organizer->getCity());
         $this->assertEquals(50667, $organizer->getZipCode());
         $this->assertEquals('0123456', $organizer->getPhone());
+        $this->assertEquals('baz@example.com', $organizer->getEmail());
         $this->assertEquals('http://www.example.com', $organizer->getUrl());
     }
 }

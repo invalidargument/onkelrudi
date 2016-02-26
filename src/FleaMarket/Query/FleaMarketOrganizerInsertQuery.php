@@ -13,6 +13,7 @@ class FleaMarketOrganizerInsertQuery extends AbstractInsertQuery
     private $_zipCode;
     private $_city;
     private $_phone;
+    private $_email;
     private $_url;
 
     public function setUuid($uuid)
@@ -67,19 +68,37 @@ class FleaMarketOrganizerInsertQuery extends AbstractInsertQuery
     {
         return Uuid::uuid5(
             Uuid::NAMESPACE_URL,
-            $this->_name.$this->_city.$this->_phone.$this->_street.$this->_streetNo.$this->_url.$this->_zipCode
+            $this->_name.$this->_city.$this->_phone.$this->_email.$this->_street.$this->_streetNo.$this->_url.$this->_zipCode
         )->toString();
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->_email;
+    }
+
+    /**
+     * @param string $email
+     * @return FleaMarketOrganizerInsertQuery
+     */
+    public function setEmail($email)
+    {
+        $this->_email = $email;
+        return $this;
     }
 
     protected function runQuery()
     {
         $insertStatement = $this->pdo
             ->insert(
-                array('uuid', 'name', 'street', 'streetno', 'city', 'zipcode', 'phone', 'url')
+                array('uuid', 'name', 'street', 'streetno', 'city', 'zipcode', 'phone', 'email', 'url')
             )
             ->into('fleamarkets_organizer')
             ->values(
-                array($this->getUuid(), $this->_name, $this->_street, $this->_streetNo, $this->_city, $this->_zipCode, $this->_phone, $this->_url)
+                array($this->getUuid(), $this->_name, $this->_street, $this->_streetNo, $this->_city, $this->_zipCode, $this->_phone, $this->_email, $this->_url)
             );
 
         return $insertStatement->execute();

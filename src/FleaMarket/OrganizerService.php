@@ -30,6 +30,7 @@ class OrganizerService implements OrganizerServiceInterface
             ->setZipCode($organizer->getZipCode())
             ->setCity($organizer->getCity())
             ->setPhone($organizer->getPhone())
+            ->setEmail($organizer->getEmail())
             ->setUrl($organizer->getUrl());
 
         $id = $query->run();

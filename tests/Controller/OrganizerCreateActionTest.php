@@ -17,6 +17,7 @@ class OrganizerCreateActionTest extends \PHPUnit_Framework_TestCase
             'zipCode' => '12345',
             'city' => 'bar',
             'phone' => '0221 2345',
+            'email' => 'foo@example.com',
             'url' => 'foo.com'
         ];
         $organizer = new Organizer();
@@ -26,6 +27,7 @@ class OrganizerCreateActionTest extends \PHPUnit_Framework_TestCase
             ->setZipCode(12345)
             ->setCity('bar')
             ->setPhone('0221 2345')
+            ->setEmail('foo@example.com')
             ->setUrl('foo.com');
 
         $builderFactory = new BuilderFactory();

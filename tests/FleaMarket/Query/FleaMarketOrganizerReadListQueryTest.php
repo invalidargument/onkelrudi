@@ -26,6 +26,7 @@ class FleaMarketOrganizerReadListQueryTest extends \PHPUnit_Framework_TestCase
                 'city' => 'Cologne',
                 'zipcode' => 50667,
                 'phone' => '0123456',
+                'email' => 'foo@example.com',
                 'url' => 'http://www.example.com'
             ),
             array(
@@ -37,6 +38,7 @@ class FleaMarketOrganizerReadListQueryTest extends \PHPUnit_Framework_TestCase
                 'city' => 'Ehrenfeld',
                 'zipcode' => 50825,
                 'phone' => '0123456789',
+                'email' => 'baz@example.com',
                 'url' => 'http://www.example.com/foo'
             )
         );

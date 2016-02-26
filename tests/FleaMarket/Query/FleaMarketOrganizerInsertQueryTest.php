@@ -23,12 +23,13 @@ class FleaMarketOrganizerInsertQueryTest extends \PHPUnit_Framework_TestCase
             ->setCity('mycity')
             ->setZipCode('myzipcode')
             ->setPhone('myphone')
+            ->setEmail('bar@example.com')
             ->setUrl('myurl');
 
         $this->_pdo
             ->shouldReceive('insert')
                 ->once()
-                ->with(array('uuid', 'name', 'street', 'streetno', 'city', 'zipcode', 'phone', 'url'))
+                ->with(array('uuid', 'name', 'street', 'streetno', 'city', 'zipcode', 'phone', 'email', 'url'))
                 ->andReturn($this->_pdo)
             ->shouldReceive('into')
                 ->once()
@@ -36,7 +37,7 @@ class FleaMarketOrganizerInsertQueryTest extends \PHPUnit_Framework_TestCase
                 ->andReturn($this->_pdo)
             ->shouldReceive('values')
                 ->once()
-                ->with(array('a857f06c-0c36-569a-a664-dfd902701d4c', 'myname', 'mystreet', 'mystreetno', 'mycity', 'myzipcode', 'myphone', 'myurl'))
+                ->with(array('77fda2c8-e84d-54a8-9b1e-abd2101136ad', 'myname', 'mystreet', 'mystreetno', 'mycity', 'myzipcode', 'myphone', 'bar@example.com', 'myurl'))
                 ->andReturn($this->_pdo)
             ->shouldReceive('execute')
                 ->once();

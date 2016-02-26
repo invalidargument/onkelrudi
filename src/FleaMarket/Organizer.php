@@ -13,6 +13,7 @@ class Organizer implements OrganizerInterface, \JsonSerializable
     private $_zipCode;
     private $_city;
     private $_phone;
+    private $_email;
     private $_url;
 
     public function setId($id)
@@ -139,6 +140,24 @@ class Organizer implements OrganizerInterface, \JsonSerializable
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->_email;
+    }
+
+    /**
+     * @param string $email
+     * @return Organizer
+     */
+    public function setEmail($email)
+    {
+        $this->_email = $email;
+        return $this;
+    }
+
     public function jsonSerialize()
     {
         return [
@@ -150,6 +169,7 @@ class Organizer implements OrganizerInterface, \JsonSerializable
             'zipCode' => $this->getZipCode(),
             'city' => $this->getCity(),
             'phone' => $this->getPhone(),
+            'email' => $this->getEmail(),
             'url' => $this->getUrl()
         ];
     }

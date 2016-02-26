@@ -24,6 +24,7 @@ class OrganizerServiceTest extends \PHPUnit_Framework_TestCase
             ->setUuid('uuid')
             ->setName('Rudi')
             ->setPhone('23')
+            ->setEmail('foo@example.com')
             ->setCity('Köln')
             ->setZipCode('50000')
             ->setStreet('foo')
@@ -39,6 +40,7 @@ class OrganizerServiceTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('setZipCode')->once()->with('50000')->andReturn($query)
             ->shouldReceive('setCity')->once()->with('Köln')->andReturn($query)
             ->shouldReceive('setPhone')->once()->with('23')->andReturn($query)
+            ->shouldReceive('setEmail')->once()->with('foo@example.com')->andReturn($query)
             ->shouldReceive('setUrl')->once()->with('http://www.example.com')->andReturn($query)
             ->shouldReceive('run')->once()->andReturn($query);
 
