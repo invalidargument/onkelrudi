@@ -13,6 +13,8 @@ class WordpressCategoryAction extends AbstractHttpAction
         $category = new Category();
         $category->setId($this->args['id']);
 
+        $this->templateVariables = ['selectedCategory' => $this->args['id']];
+
         return $this->wordpressService->getPosts($category);
     }
 }

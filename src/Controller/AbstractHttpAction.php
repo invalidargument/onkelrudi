@@ -7,6 +7,7 @@ use RudiBieller\OnkelRudi\Wordpress\ServiceInterface;
 abstract class AbstractHttpAction extends AbstractAction implements HttpActionInterface
 {
     protected $template = 'index.html';
+    protected $templateVariables = array();
     /**
      * @var ServiceInterface
      */
@@ -33,7 +34,10 @@ abstract class AbstractHttpAction extends AbstractAction implements HttpActionIn
             ->render(
                 $this->response,
                 $this->template,
-                ['data' => $this->result, 'wpCategories' => $this->wordpressService->getAllCategories()]
+                array_merge(
+                    ['data' => $this->result, 'wpCategories' => $this->wordpressService->getAllCategories()],
+                    $this->templateVariables
+                )
             );
     }
 }

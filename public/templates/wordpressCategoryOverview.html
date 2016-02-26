@@ -13,7 +13,7 @@
         <ul class="pure-menu-list">
             <li class="pure-menu-item"><a href="/public/" class="pure-menu-link">Termine</a></li>
             {% for item in wpCategories %}
-            <li class="pure-menu-item{% if item.id == data.selectedCategory %} pure-menu-selected{% endif %}"><a href="/public/{{item.slug}}/kategorie/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
+            <li class="pure-menu-item{% if item.id == selectedCategory %} pure-menu-selected{% endif %}"><a href="/public/{{item.slug}}/kategorie/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
             {% endfor %}
             <li class="pure-menu-item"><a href="/public/#about" class="pure-menu-link">About</a></li>
             <li class="pure-menu-item"><a href="/public/#impressum" class="pure-menu-link">Impressum</a></li>
