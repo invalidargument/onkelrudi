@@ -57,6 +57,7 @@
                     {% if item.zipCode %}{{item.zipCode}} {{item.city}}<br>{% endif %}
                     {% if item.url %}<i class="fa fa-external-link"></i><a href="{{item.url}}" target="_blank" class="post-category-organizer-url" rel="nofollow">{{item.url|length > 38 ? item.url[:38] ~ '...' : item.url}}</a>{% endif %}
                 </p>
+                <i class="fa fa-hand-o-right"></i><a href="{{fleamarketsDetailsRoutes[item.id]}}" title="Alle Details zu {{item.name|e('html_attr')}}" class="internal-block">Alle Infos zum Termin...</a>
             </div>
             {% endfor %}
         </div>
