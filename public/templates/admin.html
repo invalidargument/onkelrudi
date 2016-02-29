@@ -8,6 +8,9 @@
     <title>Onkel Rudi - Administration.</title>
 
     <link rel="stylesheet" href="/public/bower_components/pure/pure-min.css">
+    <link rel="stylesheet" href="/public/bower_components/pickadate/lib/compressed/themes/default.css">
+    <link rel="stylesheet" href="/public/bower_components/pickadate/lib/compressed/themes/default.date.css">
+    <link rel="stylesheet" href="/public/bower_components/pickadate/lib/compressed/themes/default.time.css">
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="/public/bower_components/pure/grids-responsive-old-ie-min.css">
     <![endif]-->
@@ -27,12 +30,29 @@
             cursor: pointer;
         }
         h2.content-head + div {
-            display:none;
+            display: none;
+        }
+        .picker__select--month,
+        .picker__select--year {
+            display:inline !important;
+            height: 1.4em !important;
+            padding:.2em !important;
+        }
+        .picker__select--month option,
+        .picker__select--year option {
+            font-size: 100% !important;
+            height: 1em !important;
+            padding:0 !important;
         }
     </style>
 
     <script src="/public/bower_components/jquery/dist/jquery.js"></script>
     <script src="/public/bower_components/underscore/underscore.js"></script>
+    <script src="/public/bower_components/moment/min/moment-with-locales.min.js"></script>
+    <script src="/public/bower_components/pickadate/lib/compressed/picker.js"></script>
+    <script src="/public/bower_components/pickadate/lib/compressed/picker.date.js"></script>
+    <script src="/public/bower_components/pickadate/lib/compressed/picker.time.js"></script>
+    
     <script>
         $(function() {
 
@@ -77,21 +97,27 @@
             });
 
             $('#newFleaMarket').on('submit', function(e) {
-                console.log('sending post with new fleamarket data..... will post json as body now.');
                 e.preventDefault();
 
+                var startDateItems = $('[name="marketDate[]"]');
+                var startTimeItems = $('[name="marketTimeStart[]"]');
+                var endTimeItems = $('[name="marketTimeEnd[]"]');
+                var startDateTimeItem, endDateTimeItem;
+
                 var marketDates = [];
-                var startDates = $('[name="startDates[]"]');
-                var endDates = $('[name="endDates[]"]');
+
                 $.map(
-                    startDates,
+                    startDateItems,
                     function(element,index) {
+                        startDateTimeItem = $(startDateItems[index]).val() + ' ' + $(startTimeItems[index]).val();
+                        endDateTimeItem = $(startDateItems[index]).val() + ' ' + $(endTimeItems[index]).val();
+
                         marketDates.push({
-                            start: $(element).val(),
-                            end: $(endDates[index]).val()
+                            start: moment(startDateTimeItem, 'DD.MM.YYYY HH:mm', 'de').format('YYYY-MM-DD HH:mm:ss'),
+                            end: moment(endDateTimeItem, 'DD.MM.YYYY HH:mm', 'de').format('YYYY-MM-DD HH:mm:ss')
                         });
                     }
-                )
+                );
 
                 var apiUrlFleaMarkets = '/public/api/v1/fleamarkets';
                 var postData = JSON.stringify({
@@ -106,6 +132,8 @@
                     location: $('#fleamarket_location').val(),
                     url: $('#fleamarket_url').val()
                 });
+
+                console.log('sending post with new fleamarket data.....', postData);
 
                 $.ajax({
                     type: "POST",
@@ -129,6 +157,25 @@
             $('.duplicate').on('click', function(e) {
                 var clone = $('.datesBlock div').last().clone();
                 $('.datesBlock div:last').after(clone);
+            });
+
+            $('.datepicker').pickadate({
+                monthsFull: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+                weekdaysShort: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+                today: 'heute',
+                clear: 'zurücksetzen',
+                close: 'schließen',
+                labelMonthNext: 'Nächster Monat',
+                labelMonthPrev: 'Voriger Monat',
+                labelMonthSelect: 'Monat wählen',
+                labelYearSelect: 'Jahr wählen',
+                formatSubmit: 'dd.mm.yyyy',
+                format: 'dd.mm.yyyy',
+                selectYears: 5,
+                selectMonths: true,
+                firstDay: 1,
+                min:true,
+                max:0
             });
         });
     </script>
@@ -209,9 +256,9 @@
                     <section class="datesBlock">
                         <h3>Termine (von bis)</h3>
                         <div>
-                            <input name="startDates[]" type="datetime" placeholder="Beginn 0000-00-00 00:00:00">
-                            <span>bis</span>
-                            <input name="endDates[]" type="datetime" placeholder="Ende 0000-00-00 00:00:00">
+                            <input name="marketDate[]" class="datepicker" type="date" placeholder="Datum (z.B. 23.05.2016)" style="width: 260px;">
+                            von <input name="marketTimeStart[]" type="time" placeholder="Beginn (z.B. 12:00)">
+                            bis <input name="marketTimeEnd[]" type="time" placeholder="Ende (z.B. 15:00)"> Uhr
                         </div>
                         <p class="duplicate">+</p>
                     </section>

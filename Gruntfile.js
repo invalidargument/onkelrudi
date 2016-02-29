@@ -84,6 +84,10 @@ module.exports = function(grunt) {
                         to: '/css/'
                     },
                     {
+                        from: '/public/bower_components/moment/min/',
+                        to: '/js/'
+                    },
+                    {
                         from: '/public/css/',
                         to: '/css/'
                     },
@@ -158,9 +162,26 @@ module.exports = function(grunt) {
         var sourceDir = 'public/bower_components/';
         var targetDir = 'build/onkelrudi/public/';
 
+        /* pure css */
         grunt.file.copy(sourceDir + 'pure/pure-min.css', targetDir + 'css/pure-min.css');
         grunt.file.copy(sourceDir + 'pure/grids-responsive-old-ie-min.css', targetDir + 'css/grids-responsive-old-ie-min.css');
         grunt.file.copy(sourceDir + 'pure/grids-responsive-min.css', targetDir + 'css/grids-responsive-min.css');
+
+        /* pickadate css */
+        grunt.file.copy(sourceDir + 'pickadate/lib/compressed/themes/default.css', targetDir + 'css/pickadate/default.css');
+        grunt.file.copy(sourceDir + 'pickadate/lib/compressed/themes/default.date.css', targetDir + 'css/pickadate/date.css');
+        grunt.file.copy(sourceDir + 'pickadate/lib/compressed/themes/default.time.css', targetDir + 'css/pickadate/time.css');
+        grunt.log.ok();
+    });
+
+    grunt.registerTask('copyJsFiles', 'Copy all relevant JS files.', function() {
+        var sourceDir = 'public/bower_components/';
+        var targetDir = 'build/onkelrudi/public/';
+
+        grunt.file.copy(sourceDir + 'moment/min/moment-with-locales.min.js', targetDir + 'js/moment-with-locales.min.js');
+        grunt.file.copy(sourceDir + 'pickadate/lib/compressed/picker.js', targetDir + 'js/pickadate/picker.js');
+        grunt.file.copy(sourceDir + 'pickadate/lib/compressed/picker.date.js', targetDir + 'js/pickadate/picker.date.js');
+        grunt.file.copy(sourceDir + 'pickadate/lib/compressed/picker.time.js', targetDir + 'js/pickadate/picker.time.js');
         grunt.log.ok();
     });
 
@@ -173,6 +194,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', 'Deploy onkelrudi frontend.', function() {
         grunt.log.write('Starting build of frontend...');
         grunt.task.run('copyCssFiles');
+        grunt.task.run('copyJsFiles');
         grunt.task.run('cssmin');
         grunt.task.run('uglify');
         grunt.task.run('htmlmin');

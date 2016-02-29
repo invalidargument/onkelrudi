@@ -244,6 +244,11 @@ a.pure-button-primary {
     text-decoration: none;
     color: inherit;
 }
+.content a.internal-block {
+    display:inline;
+    text-decoration: underline;
+    color: inherit;
+}
 
 /* This is the class used for the dark-background areas. */
 .ribbon {
