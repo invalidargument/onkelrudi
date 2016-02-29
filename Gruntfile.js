@@ -84,6 +84,18 @@ module.exports = function(grunt) {
                         to: '/css/'
                     },
                     {
+                        from: '/public/bower_components/pickadate/lib/compressed/themes/',
+                        to: '/css/pickadate/'
+                    },
+                    {
+                        from: '/public/bower_components/underscore/',
+                        to: '/js/'
+                    },
+                    {
+                        from: '/public/bower_components/pickadate/lib/compressed/',
+                        to: '/js/pickadate/'
+                    },
+                    {
                         from: '/public/bower_components/moment/min/',
                         to: '/js/'
                     },
@@ -169,8 +181,8 @@ module.exports = function(grunt) {
 
         /* pickadate css */
         grunt.file.copy(sourceDir + 'pickadate/lib/compressed/themes/default.css', targetDir + 'css/pickadate/default.css');
-        grunt.file.copy(sourceDir + 'pickadate/lib/compressed/themes/default.date.css', targetDir + 'css/pickadate/date.css');
-        grunt.file.copy(sourceDir + 'pickadate/lib/compressed/themes/default.time.css', targetDir + 'css/pickadate/time.css');
+        grunt.file.copy(sourceDir + 'pickadate/lib/compressed/themes/default.date.css', targetDir + 'css/pickadate/default.date.css');
+        grunt.file.copy(sourceDir + 'pickadate/lib/compressed/themes/default.time.css', targetDir + 'css/pickadate/default.time.css');
         grunt.log.ok();
     });
 
