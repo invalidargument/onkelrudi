@@ -5,7 +5,7 @@
     "Rudi Bieller <kontakt@rudi-bieller.de>"
   ],
   "description": "Onkel Rudi",
-  "main": "public/css/main.css",
+  "main": "public/css/onkelrudi.css",
   "moduleType": [
     "amd"
   ],
