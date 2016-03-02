@@ -59,8 +59,7 @@
 
             // TOGGLE
             $('h2.content-head').on('click', function(e) {
-                console.log(e);
-                $(e.currentTarget).find('+ div').toggle();
+                $(e.currentTarget).find('~ div').first().toggle();
             });
 
             $('#newOrganizer').on('submit', function(e) {
