@@ -47,6 +47,7 @@
     </style>
 
     <script src="/public/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/public/bower_components/mustache/mustache.min.js"></script>
     <script src="/public/bower_components/underscore/underscore.js"></script>
     <script src="/public/bower_components/moment/min/moment-with-locales.min.js"></script>
     <script src="/public/bower_components/pickadate/lib/compressed/picker.js"></script>
@@ -155,37 +156,48 @@
             });
 
             $('.duplicate').on('click', function(e) {
-                var clone = $('.datesBlock div').last().clone();
-                $('.datesBlock div:last').after(clone);
+                addDateTimeSelectionRow('/public/templates/pickadate_container.html');
             });
 
-            $('.datepicker').pickadate({
-                monthsFull: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
-                weekdaysShort: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
-                today: 'heute',
-                clear: 'zurücksetzen',
-                close: 'schließen',
-                labelMonthNext: 'Nächster Monat',
-                labelMonthPrev: 'Voriger Monat',
-                labelMonthSelect: 'Monat wählen',
-                labelYearSelect: 'Jahr wählen',
-                formatSubmit: 'dd.mm.yyyy',
-                format: 'dd.mm.yyyy',
-                selectYears: 5,
-                selectMonths: true,
-                firstDay: 1,
-                min:true,
-                max:0
-            });
+            function initPickadate() {
+                $('.timepicker').pickatime({
+                    clear: 'zurücksetzen',
+                    format: 'HH:i',
+                    formatSubmit: 'HH:i',
+                    interval: 15,
+                    min: [8,00],
+                    max: [20,0]
+                });
 
-            $('.timepicker').pickatime({
-                clear: 'zurücksetzen',
-                format: 'HH:i',
-                formatSubmit: 'HH:i',
-                interval: 15,
-                min: [8,00],
-                max: [20,0]
-            });
+                $('.datepicker').pickadate({
+                    monthsFull: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+                    weekdaysShort: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+                    today: 'heute',
+                    clear: 'zurücksetzen',
+                    close: 'schließen',
+                    labelMonthNext: 'Nächster Monat',
+                    labelMonthPrev: 'Voriger Monat',
+                    labelMonthSelect: 'Monat wählen',
+                    labelYearSelect: 'Jahr wählen',
+                    formatSubmit: 'dd.mm.yyyy',
+                    format: 'dd.mm.yyyy',
+                    selectYears: 5,
+                    selectMonths: true,
+                    firstDay: 1,
+                    min:true,
+                    max:0
+                });
+            };
+
+            function addDateTimeSelectionRow(templateName, templateVariables /*{placeholder: 'value'}*/) {
+                $.get(templateName, function(template) {
+                    var renderedHtml = Mustache.render(template, templateVariables);
+                    $('.datesBlock > div:last').after(renderedHtml);
+                    initPickadate();
+                })
+            };
+
+            initPickadate();
         });
     </script>
 </head>

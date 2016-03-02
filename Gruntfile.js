@@ -88,6 +88,10 @@ module.exports = function(grunt) {
                         to: '/css/pickadate/'
                     },
                     {
+                        from: '/public/bower_components/mustache/',
+                        to: '/js/'
+                    },
+                    {
                         from: '/public/bower_components/underscore/',
                         to: '/js/'
                     },
@@ -191,6 +195,7 @@ module.exports = function(grunt) {
         var targetDir = 'build/onkelrudi/public/';
 
         grunt.file.copy(sourceDir + 'moment/min/moment-with-locales.min.js', targetDir + 'js/moment-with-locales.min.js');
+        grunt.file.copy(sourceDir + 'mustache/mustache.min.js', targetDir + 'js/mustache.min.js');
         grunt.file.copy(sourceDir + 'pickadate/lib/compressed/picker.js', targetDir + 'js/pickadate/picker.js');
         grunt.file.copy(sourceDir + 'pickadate/lib/compressed/picker.date.js', targetDir + 'js/pickadate/picker.date.js');
         grunt.file.copy(sourceDir + 'pickadate/lib/compressed/picker.time.js', targetDir + 'js/pickadate/picker.time.js');
