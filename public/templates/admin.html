@@ -29,7 +29,7 @@
         h2.content-head {
             cursor: pointer;
         }
-        h2.content-head + div {
+        .regformbox {
             display: none;
         }
         .picker__select--month,
@@ -59,7 +59,8 @@
 
             // TOGGLE
             $('h2.content-head').on('click', function(e) {
-                $(e.currentTarget).find('+div').toggle()
+                console.log(e);
+                $(e.currentTarget).find('+ div').toggle();
             });
 
             $('#newOrganizer').on('submit', function(e) {
@@ -223,7 +224,15 @@
 <div class="content-wrapper">
     <div class="content">
         <h2 class="content-head">+ Veranstalter anlegen</h2>
-        <div>
+        <p>
+            Veranstaltest order organisierst Du einen Flohmarkt?
+            <br>
+            Hier kannst Du Dich als Veranstalter registrieren und Deine Kontaktdaten hinterlegen. Dabei ist es egal,
+            ob Du als Privatperson oder als Vertreter einer Organisation (KiTa, Schule, GmbH, ...) auftrittst.
+            <br>
+            Als registrierter Veranstalter kannst Du Deine Flohmärkte jederzeit bearbeiten und neue anlegen.
+        </p>
+        <div class="regformbox">
             <form id="newOrganizer" method="post" class="pure-form pure-form-stacked">
                 <fieldset>
                     <label for="organizer_name">Name des Veranstalters</label>
@@ -256,7 +265,14 @@
         </div>
 
         <h2 class="content-head">+ Termin anlegen</h2>
-        <div>
+        <p>
+            Hier kannst Du einen Kinderflohmarkt veröffentlichen.
+            Gibt es mehrere Termine für Deinen Flohmarkt, kannst du diese in diesem Formular einfach direkt eintragen.
+            <br>
+            Möchtest Du die Informationen zu Deinem Flohmarkt später ändern oder erweitern, registriere Dich bitte!
+            Änderungen sind nur für registrierte Veranstalter möglich.
+        </p>
+        <div class="regformbox">
             <form id="newFleaMarket" method="post" class="pure-form pure-form-stacked">
                 <fieldset>
                     <label for="fleamarket_organizer">Zugeordneter Veranstalter</label>
@@ -268,22 +284,24 @@
                     <br>
                     <a href="#" id="fleamarket_use_organizer_data">Adressdaten vom Veranstalter übernehmen</a>
 
-                    <label for="fleamarket_name">Name des Veranstaltung</label>
-                    <input id="fleamarket_name" type="text" placeholder="Name des Veranstaltung">
+                    <label for="fleamarket_name">Name des Events</label>
+                    <input id="fleamarket_name" type="text" placeholder="Wie heißt Dein Kinderflohmarkt?">
 
-                    <label for="fleamarket_description">Beschreibung der Veranstaltung</label>
-                    <textarea id="fleamarket_description" type="text" placeholder="Beschreibung der Veranstaltung" style="width: 100%; height: 200px;"></textarea>
+                    <label for="fleamarket_description">Beschreibung</label>
+                    <textarea id="fleamarket_description" type="text" placeholder="Beschreibe bitte kurz Deinen Kinderflohmarkt. Von wem, für wen, was wird angeboten, wieviel Kuchen wird es geben, usw." style="width: 100%; height: 200px;"></textarea>
 
                     <section class="datesBlock">
-                        <h3>Termine (von bis)</h3>
+                        <h3>Termin (von bis)</h3>
                         <div>
                             <input name="marketDate[]" class="datepicker" type="date" placeholder="Datum (z.B. 23.05.2016)" style="width: 260px;">
                             von <input name="marketTimeStart[]" class="timepicker" type="time" placeholder="Beginn (z.B. 12:00)">
                             bis <input name="marketTimeEnd[]" class="timepicker" type="time" placeholder="Ende (z.B. 15:00)"> Uhr
                         </div>
-                        <p class="duplicate">+</p>
+                        <p>Es gibt mehrere Termine für diesen Flohmarkt?</p>
+                        <p class="duplicate">+ weiteren Termin hinzufügen</p>
                     </section>
 
+                    <h4>Adressdaten</h4>
                     <label for="fleamarket_street">Stra&szlig;e</label>
                     <input id="fleamarket_street" type="text" placeholder="Stra&szlig;e">
 
@@ -291,16 +309,16 @@
                     <input id="fleamarket_streetNo" type="text" placeholder="Hausnummer">
 
                     <label for="fleamarket_zipCode">PLZ</label>
-                    <input id="fleamarket_zipCode" type="number" placeholder="PLZ">
+                    <input id="fleamarket_zipCode" type="text" placeholder="PLZ">
 
                     <label for="fleamarket_city">Ort</label>
                     <input id="fleamarket_city" type="text" placeholder="Ort">
 
                     <label for="fleamarket_location">Name der Location der Veranstaltung</label>
-                    <input id="fleamarket_location" type="text" placeholder="Name der Location der Veranstaltung">
+                    <input id="fleamarket_location" type="text" placeholder="Wo findet der Flohmarkt statt? Z.B. KiTa Sonnenblume oder Turnhalle der Waldschule.">
 
-                    <label for="fleamarket_url">Website</label>
-                    <input id="fleamarket_url" type="text" placeholder="Website">
+                    <label for="fleamarket_url">Website für diesen Flohmarkt</label>
+                    <input id="fleamarket_url" type="text" placeholder="Link zur Flohmarkt-Website">
 
                     <button type="submit" class="pure-button">Neuen Termin anlegen - click hier!</button>
                 </fieldset>
