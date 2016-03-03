@@ -101,18 +101,20 @@ class FleaMarketReadListQuery extends AbstractQuery
 
         foreach ($result['dates'] as $item) {
             $date = new FleaMarketDate($item['start'], $item['end']);
+            $slug = (new Slugify())->slugify(
+                $marketData[$item['fleamarket_id']]['name'].'-'.$marketData[$item['fleamarket_id']]['city']
+            );
 
             //$organizer = new Organizer();
             //$organizer->setId($marketData[$item['fleamarket_id']]['organizer_id']);
 
             $fleaMarket = new FleaMarket();
-
             $fleaMarket
                 ->setId($item['fleamarket_id'])
                 ->setUuid($marketData[$item['fleamarket_id']]['uuid'])
                 //->setOrganizer($organizer)
                 ->setName($marketData[$item['fleamarket_id']]['name'])
-                ->setSlug((new Slugify())->slugify($marketData[$item['fleamarket_id']]['name']))
+                ->setSlug($slug)
                 ->setDescription($marketData[$item['fleamarket_id']]['description'])
                 ->setDates([$date])
                 ->setStreet($marketData[$item['fleamarket_id']]['street'])

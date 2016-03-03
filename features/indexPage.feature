@@ -19,7 +19,7 @@ Feature: Index page of onkelrudi
     And I should see a ".marketSummaryBox:nth-of-type(3)" element
     And I should see "Der #2 Flohmarkt von Rudi" in the ".marketSummaryBox:nth-of-type(3)" element
     When I follow "Der #2 Flohmarkt von Rudi"
-    Then I should be on "/der-2-flohmarkt-von-rudi/termin/3"
+    Then I should be on "/der-2-flohmarkt-von-rudi-cologne/termin/3"
 
   @browser
   Scenario: Detailview of a single fleamarket

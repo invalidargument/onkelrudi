@@ -50,18 +50,21 @@ class FleaMarketReadQuery extends AbstractQuery
             return null;
         }
 
+        $organizer = new Organizer();
+        $organizer->setId($result['organizer_id']);
+        $slug = (new Slugify())->slugify(
+            $result['name'].'-'.$result['city']
+        );
+
         /**
          * @var \RudiBieller\OnkelRudi\FleaMarket\FleaMarket
          */
         $fleaMarket = new FleaMarket();
-        $organizer = new Organizer();
-        $organizer->setId($result['organizer_id']);
-
         $fleaMarket
             ->setId($result['id'])
             ->setUuid($result['uuid'])
             ->setName($result['name'])
-            ->setSlug((new Slugify())->slugify($result['name']))
+            ->setSlug($slug)
             ->setDescription($result['description'])
             ->setDates($this->_dates)
             ->setStreet($result['street'])
