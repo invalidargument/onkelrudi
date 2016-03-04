@@ -11,7 +11,6 @@
     <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
         <a class="pure-menu-heading" href="/public/">Onkel Rudi</a>
         <ul class="pure-menu-list">
-            <li class="pure-menu-item pure-menu-selected"><a href="/public/" class="pure-menu-link">Termine</a></li>
             {% for item in wpCategories %}
             <li class="pure-menu-item"><a href="/public/{{item.slug}}/kategorie/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
             {% endfor %}
@@ -49,7 +48,7 @@
                     <time datetime="{{item.dates|first.start|date('c')}}">{{item.dates|first.start|date("d.m.Y")}} von {{item.dates|first.start|date("H:i")}} - {{item.dates|first.end|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{item.city}}</span>
                 </p>
                 <p>
-                    <a href="{{fleamarketsDetailsRoutes[item.id]}}" title="Alle Details zu {{item.name}}" class="block">{{item.description|length > 533 ? item.description[:533] ~ '...' : item.description}}</a>
+                    <a href="{{fleamarketsDetailsRoutes[item.id]}}" title="Alle Details zu {{item.name}}" class="block">{{item.description|length > 253 ? item.description[:253] ~ '...' : item.description}}</a>
                 </p>
                 <p>
                     {% if item.location %}{{item.location}}<br>{% endif %}
