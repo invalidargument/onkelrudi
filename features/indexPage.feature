@@ -6,10 +6,9 @@ Feature: Index page of onkelrudi
   @browser
   Scenario: Navigation is in place with wordpress content
     Given I am on "/"
-    Then I should see "Termine" in the ".pure-menu-list li:nth-of-type(1)" element
-    And I should see "Blog" in the ".pure-menu-list li:nth-of-type(2)" element
-    And I should see "About" in the ".pure-menu-list li:nth-of-type(3)" element
-    And I should see "Impressum" in the ".pure-menu-list li:nth-of-type(4)" element
+    And I should see "Blog" in the ".pure-menu-list li:nth-of-type(1)" element
+    And I should see "About" in the ".pure-menu-list li:nth-of-type(2)" element
+    And I should see "Impressum" in the ".pure-menu-list li:nth-of-type(3)" element
 
   @browser
   Scenario: Startpage with fleamarket boxes is displayed
