@@ -97,15 +97,18 @@ $app->get('/{wildcard}/kategorie/{id}', function ($request, $response, $args) us
 })->setName('wp-category');
 
 // Admin View
-$app->get('/admin/', function ($request, $response, $args) use ($organizerService) {
+$app->get('/admin/', function ($request, $response, $args) use ($organizerService, $wpService) {
     $fleamarketOrganizers = [];
-    foreach ($organizerService->getAllOrganizers() as $organizer) {
+    /*foreach ($organizerService->getAllOrganizers() as $organizer) {
         $fleamarketOrganizers[] = ['id' => $organizer->getId(), 'name' => $organizer->getName()];
-    }
+    }*/
+
+    $wpCategories = $wpService->getAllCategories();
 
     return $this->get('view')
         ->render($response, 'admin.html', [
-            'fleamarket_organizers' => $fleamarketOrganizers
+            'fleamarket_organizers' => $fleamarketOrganizers,
+            'wpCategories' => $wpCategories
         ]);
 })->setName('admin');
 

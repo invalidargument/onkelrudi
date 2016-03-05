@@ -25,27 +25,6 @@
     <link rel="stylesheet" href="/public/css/onkelrudi.css">
     <!--<![endif]-->
 
-    <style>
-        h2.content-head {
-            cursor: pointer;
-        }
-        .regformbox {
-            display: none;
-        }
-        .picker__select--month,
-        .picker__select--year {
-            display:inline !important;
-            height: 1.4em !important;
-            padding:.2em !important;
-        }
-        .picker__select--month option,
-        .picker__select--year option {
-            font-size: 100% !important;
-            height: 1em !important;
-            padding:0 !important;
-        }
-    </style>
-
     <script src="/public/bower_components/jquery/dist/jquery.js"></script>
     <script src="/public/bower_components/mustache/mustache.min.js"></script>
     <script src="/public/bower_components/underscore/underscore.js"></script>
@@ -57,15 +36,50 @@
     <script>
         $(function() {
 
-            // TOGGLE
-            $('h2.content-head').on('click', function(e) {
-                $(e.currentTarget).find('~ div').first().toggle();
-            });
+            function validateMandatoryFields() {
+                var fieldNames = [
+                    'fleamarket_name',
+                    'fleamarket_description',
+                    'marketDate',
+                    'marketTimeFrom',
+                    'marketTimeTo',
+                    'fleamarket_location',
+                    'fleamarket_street',
+                    'fleamarket_streetNo',
+                    'fleamarket_zipCode',
+                    'fleamarket_city',
+                    'organizer_name'
+                ];
 
-            $('#newOrganizer').on('submit', function(e) {
-                console.log('sending post with new organizer data..... will post json as body now.');
+                var el;
+                var elLabel;
+                var hasError = false;
+
+                $.each(fieldNames, function( index, value ) {
+                    el = $('#'+value);
+                    elLabel = $('label[for="'+value+'"]');
+
+                    if (el.val() == '') {
+                        hasError = true;
+                        elLabel.addClass("error");
+                    } else {
+                        elLabel.removeClass("error");
+                    }
+                });
+
+                return !hasError;
+            };
+
+            $('#newFleaMarket').on('submit', function(e) {
                 e.preventDefault();
 
+                // validate mandatory fields
+                if (validateMandatoryFields() == false) {
+                    alert('Bitte alle Pflichtfelder ausfüllen!');
+                    return false;
+                }
+
+                // ############# grab Organizer data ##################
                 var apiUrlOrganizers = '/public/api/v1/organizers';
                 var postData = JSON.stringify({
                     name: $('#organizer_name').val(),
@@ -83,69 +97,60 @@
                     url: apiUrlOrganizers,
                     contentType: "application/json",
                     data: postData,
-                    beforeSend: function() { console.log('beforeSend') },
-                    complete: function() { console.log('complete') },
                     success: function(data) {
-                        console.log("ajax worked");
-                        alert("done with success");
-                    },
-                    error: function(data) {
-                        console.log("ajax error", data);
-                        alert("errors occured, damn!");
-                    },
-                    dataType: 'json'
-                });
-            });
+                        console.log("Organizer created successfully.", data);
+                        var createdOrganizerId = data.data;
 
-            $('#newFleaMarket').on('submit', function(e) {
-                e.preventDefault();
+                        // ############# grab FleaMarket data #################
+                        var startDateItems = $('[name="marketDate[]"]');
+                        var startTimeItems = $('[name="marketTimeStart[]"]');
+                        var endTimeItems = $('[name="marketTimeEnd[]"]');
+                        var startDateTimeItem, endDateTimeItem;
 
-                var startDateItems = $('[name="marketDate[]"]');
-                var startTimeItems = $('[name="marketTimeStart[]"]');
-                var endTimeItems = $('[name="marketTimeEnd[]"]');
-                var startDateTimeItem, endDateTimeItem;
+                        var marketDates = [];
 
-                var marketDates = [];
+                        $.map(
+                            startDateItems,
+                            function(element,index) {
+                                startDateTimeItem = $(startDateItems[index]).val() + ' ' + $(startTimeItems[index]).val();
+                                endDateTimeItem = $(startDateItems[index]).val() + ' ' + $(endTimeItems[index]).val();
 
-                $.map(
-                    startDateItems,
-                    function(element,index) {
-                        startDateTimeItem = $(startDateItems[index]).val() + ' ' + $(startTimeItems[index]).val();
-                        endDateTimeItem = $(startDateItems[index]).val() + ' ' + $(endTimeItems[index]).val();
+                                marketDates.push({
+                                    start: moment(startDateTimeItem, 'DD.MM.YYYY HH:mm', 'de').format('YYYY-MM-DD HH:mm:ss'),
+                                    end: moment(endDateTimeItem, 'DD.MM.YYYY HH:mm', 'de').format('YYYY-MM-DD HH:mm:ss')
+                                });
+                            }
+                        );
 
-                        marketDates.push({
-                            start: moment(startDateTimeItem, 'DD.MM.YYYY HH:mm', 'de').format('YYYY-MM-DD HH:mm:ss'),
-                            end: moment(endDateTimeItem, 'DD.MM.YYYY HH:mm', 'de').format('YYYY-MM-DD HH:mm:ss')
+                        var apiUrlFleaMarkets = '/public/api/v1/fleamarkets';
+                        var postData = JSON.stringify({
+                            //organizerId: $('#fleamarket_organizer').val(),
+                            organizerId: createdOrganizerId,
+                            name: $('#fleamarket_name').val(),
+                            description: $('#fleamarket_description').val(),
+                            dates: marketDates,
+                            street: $('#fleamarket_street').val(),
+                            streetNo: $('#fleamarket_streetNo').val(),
+                            zipCode: $('#fleamarket_zipCode').val(),
+                            city: $('#fleamarket_city').val(),
+                            location: $('#fleamarket_location').val(),
+                            url: $('#fleamarket_url').val()
                         });
-                    }
-                );
 
-                var apiUrlFleaMarkets = '/public/api/v1/fleamarkets';
-                var postData = JSON.stringify({
-                    organizerId: $('#fleamarket_organizer').val(),
-                    name: $('#fleamarket_name').val(),
-                    description: $('#fleamarket_description').val(),
-                    dates: marketDates,
-                    street: $('#fleamarket_street').val(),
-                    streetNo: $('#fleamarket_streetNo').val(),
-                    zipCode: $('#fleamarket_zipCode').val(),
-                    city: $('#fleamarket_city').val(),
-                    location: $('#fleamarket_location').val(),
-                    url: $('#fleamarket_url').val()
-                });
-
-                console.log('sending post with new fleamarket data.....', postData);
-
-                $.ajax({
-                    type: "POST",
-                    url: apiUrlFleaMarkets,
-                    contentType: "application/json",
-                    data: postData,
-                    beforeSend: function() { console.log('beforeSend') },
-                    complete: function() { console.log('complete') },
-                    success: function(data) {
-                        console.log("ajax worked");
-                        alert("done with success");
+                        $.ajax({
+                            type: "POST",
+                            url: apiUrlFleaMarkets,
+                            contentType: "application/json",
+                            data: postData,
+                            success: function(data) {
+                                console.log("FleaMarket created successfully!", data);
+                            },
+                            error: function(data) {
+                                console.log("ajax error", data);
+                                alert("errors occured, damn!");
+                            },
+                            dataType: 'json'
+                        });
                     },
                     error: function(data) {
                         console.log("ajax error", data);
@@ -157,6 +162,32 @@
 
             $('.duplicate').on('click', function(e) {
                 addDateTimeSelectionRow('/public/templates/pickadate_container.html');
+            });
+
+            function addDateTimeSelectionRow(templateName, templateVariables /*{placeholder: 'value'}*/) {
+                $.get(templateName, function(template) {
+                    var renderedHtml = Mustache.render(template, templateVariables);
+                    $('.datesBlock > div:last').after(renderedHtml);
+                    initPickadate();
+                })
+            };
+
+            $('.hint > a').on('click', function(e) {
+                e.preventDefault();
+                var fieldNames = [
+                    ['fleamarket_street', 'organizer_street'],
+                    ['fleamarket_streetNo', 'organizer_streetNo'],
+                    ['fleamarket_zipCode', 'organizer_zip'],
+                    ['fleamarket_city', 'organizer_city']
+                ];
+
+                $.each(fieldNames, function( index, value ) {
+                    console.log($('#'+value[1]).val());
+                    console.log($('#'+value[0]).val());
+                    $('#'+value[1]).val(
+                        $('#'+value[0]).val()
+                    );
+                });
             });
 
             function initPickadate() {
@@ -189,24 +220,20 @@
                 });
             };
 
-            function addDateTimeSelectionRow(templateName, templateVariables /*{placeholder: 'value'}*/) {
-                $.get(templateName, function(template) {
-                    var renderedHtml = Mustache.render(template, templateVariables);
-                    $('.datesBlock > div:last').after(renderedHtml);
-                    initPickadate();
-                })
-            };
-
             initPickadate();
         });
     </script>
 </head>
-<body>
+<body class="admin">
 <div class="header">
     <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-        <a class="pure-menu-heading" href="">Onkel Rudi</a>
+        <a class="pure-menu-heading" href="/public/">Onkel Rudi</a>
         <ul class="pure-menu-list">
-            <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">Babyflohmärkte, Kinderflohmärkte</a></li>
+            {% for item in wpCategories %}
+            <li class="pure-menu-item"><a href="/public/{{item.slug}}/kategorie/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
+            {% endfor %}
+            <li class="pure-menu-item"><a href="/public/#about" class="pure-menu-link">About</a></li>
+            <li class="pure-menu-item"><a href="/public/#impressum" class="pure-menu-link">Impressum</a></li>
         </ul>
     </div>
 </div>
@@ -222,58 +249,23 @@
 
 <div class="content-wrapper">
     <div class="content">
-        <h2 class="content-head">+ Veranstalter anlegen</h2>
-        <p>
-            Veranstaltest order organisierst Du einen Flohmarkt?
-            <br>
-            Hier kannst Du Dich als Veranstalter registrieren und Deine Kontaktdaten hinterlegen. Dabei ist es egal,
-            ob Du als Privatperson oder als Vertreter einer Organisation (KiTa, Schule, GmbH, ...) auftrittst.
-            <br>
-            Als registrierter Veranstalter kannst Du Deine Flohmärkte jederzeit bearbeiten und neue anlegen.
-        </p>
-        <div class="regformbox">
-            <form id="newOrganizer" method="post" class="pure-form pure-form-stacked">
-                <fieldset>
-                    <label for="organizer_name">Name des Veranstalters</label>
-                    <input id="organizer_name" type="text" placeholder="Name des Veranstalters">
-
-                    <label for="organizer_street">Stra&szlig;e</label>
-                    <input id="organizer_street" type="text" placeholder="Stra&szlig;e">
-
-                    <label for="organizer_streetNo">Hausnummer</label>
-                    <input id="organizer_streetNo" type="text" placeholder="Hausnummer">
-
-                    <label for="organizer_zip">PLZ</label>
-                    <input id="organizer_zip" type="number" placeholder="PLZ">
-
-                    <label for="organizer_city">Ort</label>
-                    <input id="organizer_city" type="text" placeholder="Ort">
-
-                    <label for="organizer_phone">Telefonnummer</label>
-                    <input id="organizer_phone" type="tel" placeholder="Telefonnummer">
-
-                    <label for="organizer_email">E-Mail</label>
-                    <input id="organizer_email" type="email" placeholder="E-Mail">
-
-                    <label for="organizer_url">Website</label>
-                    <input id="organizer_url" type="text" placeholder="Website">
-
-                    <button type="submit" class="pure-button">Neuen Veranstalter anlegen - click hier!</button>
-                </fieldset>
-            </form>
-        </div>
-
         <h2 class="content-head">+ Termin anlegen</h2>
         <p>
-            Hier kannst Du einen Kinderflohmarkt veröffentlichen.
-            Gibt es mehrere Termine für Deinen Flohmarkt, kannst du diese in diesem Formular einfach direkt eintragen.
+            Hier kannst Du kostenlos einen Kinderflohmarkt veröffentlichen.
             <br>
-            Möchtest Du die Informationen zu Deinem Flohmarkt später ändern oder erweitern, registriere Dich bitte!
-            Änderungen sind nur für registrierte Veranstalter möglich.
+            Findet Dein Kinderflohmarkt regelmäßig oder an mehreren Terminen statt, kannst du diese direkt mit eintragen.
+            <br>
+            Möchtest Du die Informationen zu Deinem Flohmarkt später ändern oder erweitern, registriere Dich bitte als Veranstalter!
+            Spätere Änderungen sind nur für registrierte Veranstalter möglich.
+            <br><br>
+            Pflichtfelder sind mit (*) gekennzeichnet.
         </p>
         <div class="regformbox">
-            <form id="newFleaMarket" method="post" class="pure-form pure-form-stacked">
-                <fieldset>
+
+            <form id="newFleaMarket" method="post" class="pure-form pure-g">
+
+                <!--
+                <div class="pure-u-1-2">
                     <label for="fleamarket_organizer">Zugeordneter Veranstalter</label>
                     <select id="fleamarket_organizer" style="width: 100%;">
                         {% for item in fleamarket_organizers %}
@@ -282,45 +274,143 @@
                     </select>
                     <br>
                     <a href="#" id="fleamarket_use_organizer_data">Adressdaten vom Veranstalter übernehmen</a>
+                </div>
+                //-->
 
-                    <label for="fleamarket_name">Name des Events</label>
-                    <input id="fleamarket_name" type="text" placeholder="Wie heißt Dein Kinderflohmarkt?">
+                <div class="pure-g">
+                    <div class="pure-u-1-2">
+                        <label for="fleamarket_name">Name des Kinderflohmarkts (*)</label>
+                        <input id="fleamarket_name" type="text" placeholder="Wie heißt Dein Kinderflohmarkt?" class="pure-input-1">
+                    </div>
+                </div>
 
-                    <label for="fleamarket_description">Beschreibung</label>
-                    <textarea id="fleamarket_description" type="text" placeholder="Beschreibe bitte kurz Deinen Kinderflohmarkt. Von wem, für wen, was wird angeboten, wieviel Kuchen wird es geben, usw." style="width: 100%; height: 200px;"></textarea>
+                <div class="pure-g">
+                    <div class="pure-u-1-2">
+                        <label for="fleamarket_description">Beschreibung (*)</label>
+                        <textarea id="fleamarket_description" type="text" placeholder="Beschreibe bitte kurz Deinen Kinderflohmarkt. Wer wird dort was anbieten, wieviel Kuchen wird es geben, usw." style="height: 200px;" class="pure-input-1"></textarea>
+                    </div>
+                </div>
 
-                    <section class="datesBlock">
-                        <h3>Termin (von bis)</h3>
-                        <div>
-                            <input name="marketDate[]" class="datepicker" type="date" placeholder="Datum (z.B. 23.05.2016)" style="width: 260px;">
-                            von <input name="marketTimeStart[]" class="timepicker" type="time" placeholder="Beginn (z.B. 12:00)">
-                            bis <input name="marketTimeEnd[]" class="timepicker" type="time" placeholder="Ende (z.B. 15:00)"> Uhr
-                        </div>
-                        <p>Es gibt mehrere Termine für diesen Flohmarkt?</p>
-                        <p class="duplicate">+ weiteren Termin hinzufügen</p>
-                    </section>
+                <div class="pure-g">
+                    <div class="pure-u-1-2">
+                        <section class="datesBlock">
+                            <h3>Termin für den Kinderflohmarkt - Wann findet er statt? (*)</h3>
+                            <div style="padding:0;">
+                                <label for="marketDate">Datum - von - bis</label><br>
+                                <input name="marketDate[]" id="marketDate" class="datepicker" type="date" placeholder="Datum (z.B. 23.05.2016)">
+                                <input name="marketTimeStart[]" id="marketTimeFrom" class="timepicker pure-input-1-4" type="time" placeholder="Beginn (z.B. 12:00)">
+                                <input name="marketTimeEnd[]" id="marketTimeTo" class="timepicker pure-input-1-4" type="time" placeholder="Ende (z.B. 15:00)">
+                            </div>
+                            <p>Es gibt mehrere Termine für diesen Flohmarkt?<br><strong class="duplicate">+ weiteren Termin hinzufügen</strong></p>
+                        </section>
+                    </div>
+                </div>
 
-                    <h4>Adressdaten</h4>
-                    <label for="fleamarket_street">Stra&szlig;e</label>
-                    <input id="fleamarket_street" type="text" placeholder="Stra&szlig;e">
+                <div class="pure-g">
+                    <div class="pure-u-1-2">
+                        <h3>Wo findet der Kinderflohmarkt statt?</h3>
+                    </div>
+                </div>
 
-                    <label for="fleamarket_streetNo">Hausnummer</label>
-                    <input id="fleamarket_streetNo" type="text" placeholder="Hausnummer">
+                <div class="pure-g">
+                    <div class="pure-u-1-2">
+                        <label for="fleamarket_location">Veranstaltungsort (*)</label>
+                        <input id="fleamarket_location" type="text" placeholder="Wo findet der Flohmarkt statt? Z.B. KiTa Sonnenblume oder Turnhalle der Waldschule." class="pure-input-1">
+                    </div>
+                </div>
 
-                    <label for="fleamarket_zipCode">PLZ</label>
-                    <input id="fleamarket_zipCode" type="text" placeholder="PLZ">
+                <div class="pure-g">
+                    <div class="pure-u-9-24">
+                        <label for="fleamarket_street">Stra&szlig;e (*)</label>
+                        <input id="fleamarket_street" type="text" placeholder="Stra&szlig;e" class="pure-input-1">
+                    </div>
 
-                    <label for="fleamarket_city">Ort</label>
-                    <input id="fleamarket_city" type="text" placeholder="Ort">
+                    <div class="pure-u-3-24">
+                        <label for="fleamarket_streetNo">Hausnummer (*)</label>
+                        <input id="fleamarket_streetNo" type="text" placeholder="Hausnummer" class="pure-input-1">
+                    </div>
+                </div>
 
-                    <label for="fleamarket_location">Name der Location der Veranstaltung</label>
-                    <input id="fleamarket_location" type="text" placeholder="Wo findet der Flohmarkt statt? Z.B. KiTa Sonnenblume oder Turnhalle der Waldschule.">
+                <div class="pure-g">
+                    <div class="pure-u-3-24">
+                        <label for="fleamarket_zipCode">PLZ (*)</label>
+                        <input id="fleamarket_zipCode" type="text" placeholder="PLZ" class="pure-input-1">
+                    </div>
 
-                    <label for="fleamarket_url">Website für diesen Flohmarkt</label>
-                    <input id="fleamarket_url" type="text" placeholder="Link zur Flohmarkt-Website">
+                    <div class="pure-u-9-24">
+                        <label for="fleamarket_city">Ort (*)</label>
+                        <input id="fleamarket_city" type="text" placeholder="Ort" class="pure-input-1">
+                    </div>
+                </div>
 
-                    <button type="submit" class="pure-button">Neuen Termin anlegen - click hier!</button>
-                </fieldset>
+                <div class="pure-g">
+                    <div class="pure-u-1-2">
+                        <label for="fleamarket_url">Website für diesen Flohmarkt</label>
+                        <input id="fleamarket_url" type="text" placeholder="Link zur Flohmarkt-Website" class="pure-input-1">
+                    </div>
+                </div>
+
+                <div class="pure-g">
+                    <div class="pure-u-1-2">
+                        <h3>Wer veranstaltet den Kinderflohmarkt?</h3>
+                    </div>
+                </div>
+
+                <div class="pure-g">
+                    <div class="pure-u-1-2">
+                        <label for="organizer_name">Name des Veranstalters (*)</label>
+                        <input id="organizer_name" type="text" placeholder="Name des Veranstalters" class="pure-input-1">
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-1-2">
+                        <label for="organizer_phone">Telefonnummer</label>
+                        <input id="organizer_phone" type="tel" placeholder="Telefonnummer" class="pure-input-1">
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-1-2">
+                        <label for="organizer_email">E-Mail</label>
+                        <input id="organizer_email" type="email" placeholder="E-Mail" class="pure-input-1">
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-1-2">
+                        <label for="organizer_url">Website</label>
+                        <input id="organizer_url" type="text" placeholder="Website" class="pure-input-1">
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-1-2 hint">
+                        <strong>Die Adresse ist identisch mit der Adresse des Kinderflohmarkts?</strong> <a href="#">Adresse übernehmen!</a>
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-9-24">
+                        <label for="organizer_street">Stra&szlig;e</label>
+                        <input id="organizer_street" type="text" placeholder="Stra&szlig;e" class="pure-input-1">
+                    </div>
+                    <div class="pure-u-3-24">
+                        <label for="organizer_streetNo">Hausnummer</label>
+                        <input id="organizer_streetNo" type="text" placeholder="Hausnummer" class="pure-input-1">
+                    </div>
+                </div>
+                <div class="pure-g">
+                    <div class="pure-u-3-24">
+                        <label for="organizer_zip">PLZ</label>
+                        <input id="organizer_zip" type="text" placeholder="PLZ" class="pure-input-1">
+                    </div>
+                    <div class="pure-u-9-24">
+                        <label for="organizer_city">Ort</label>
+                        <input id="organizer_city" type="text" placeholder="Ort" class="pure-input-1">
+                    </div>
+                </div>
+
+                <div class="pure-g">
+                    <div class="pure-u-1-2">
+                        <button type="submit" class="pure-button">Neuen Termin anlegen - click hier!</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

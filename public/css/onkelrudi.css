@@ -62,7 +62,7 @@ label {
     border: 2px solid #ddd;
     box-shadow: none;
     font-size: 100%;
-    width: 100%;
+    /*width: 100%;*/
     margin-bottom: 1em;
 }
 
@@ -370,26 +370,6 @@ EEF66C
     border:1px solid #000000;
 }
 
-
-/** ADMIN FORM **/
-.pure-form .datesBlock input[type] {
-    display: inline;
-    width: auto;
-    margin-right:20px;
-    margin-left:20px;
-    border: 1px solid green;
-}
-
-.datesBlock {
-    border: 1px solid #cccccc;
-    padding:0 20px;
-}
-.datesBlock p {
-    font-size: large;
-    font-weight: bold;
-    cursor: pointer;
-}
-
 .detailView ol li {
     list-style-type: none;
     list-style-position: inside;
@@ -417,4 +397,51 @@ EEF66C
 
 i.fa {
     margin-right: 7px;
+}
+
+.admin .datesBlock input[type] {
+    display: inline;
+    margin-right:20px;
+}
+
+.admin .datesBlock {
+    margin-top:16px;
+    border: 1px solid #cccccc;
+    padding:0 20px;
+}
+.admin .datesBlock strong {
+    cursor: pointer;
+}
+.admin .datesBlock input {
+    margin-left:0;
+}
+.admin .datesBlock input.datepicker {
+    width: 200px;
+}
+.admin .error {
+    color: #ff0000;
+}
+
+.admin .regformbox {
+    /*display: none;*/
+}
+.admin .hint strong,
+.admin .hint a {
+    font-size: 90%;
+}
+.admin .hint a {
+    color: #111;
+    text-decoration: underline;
+}
+.picker__select--month,
+.picker__select--year {
+    display:inline !important;
+    height: 1.4em !important;
+    padding:.2em !important;
+}
+.picker__select--month option,
+.picker__select--year option {
+    font-size: 100% !important;
+    height: 1em !important;
+    padding:0 !important;
 }
