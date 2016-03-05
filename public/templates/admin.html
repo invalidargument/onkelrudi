@@ -59,9 +59,12 @@
                     el = $('#'+value);
                     elLabel = $('label[for="'+value+'"]');
 
+                    $('#submitform').removeClass('button-warning');
+
                     if (el.val() == '') {
                         hasError = true;
                         elLabel.addClass("error");
+                        $('#submitform').addClass('button-warning');
                     } else {
                         elLabel.removeClass("error");
                     }
@@ -144,6 +147,11 @@
                             data: postData,
                             success: function(data) {
                                 console.log("FleaMarket created successfully!", data);
+                                var url = '/public/admin/termin/' + data.data;
+                                $('#submitform').addClass('button-success');
+                                $('#submitform').parent().append(
+                                    '<p class="successmessage"><i class="fa fa-check fa-lg"></i>Danke - Dein <a href='+url+'" title="Zu Deinem neu angelegten Termin">Termin</a> wurde erfolgreich angelegt!</p>'
+                                );
                             },
                             error: function(data) {
                                 console.log("ajax error", data);
@@ -408,7 +416,10 @@
 
                 <div class="pure-g">
                     <div class="pure-u-1-2">
-                        <button type="submit" class="pure-button">Neuen Termin anlegen - click hier!</button>
+                        <button type="submit" id="submitform" class="pure-button">
+                            <i class="fa fa-save fa-lg"></i>
+                            Neuen Termin speichern - click hier!
+                        </button>
                     </div>
                 </div>
             </form>
