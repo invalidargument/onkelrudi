@@ -54,7 +54,12 @@
             </div>
             <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-2-4">
                 <h2 class="content-head">{{data.name}}</h2>
-                <h3 class="content-head"><time datetime="{{data.dates|first.start|date('c')}}">{{data.dates|first.start|date("d.m.Y")}} von {{data.dates|first.start|date("H:i")}} - {{data.dates|first.end|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{data.city}}</span></h3>
+
+                {% if hasValidDate == false %}
+                    <p class="expired"><i class="fa fa-exclamation"></i><strong>Dieser Kinderflohmarkt hat bereits stattgefunden! Wir haben aktuell keinen weiteren Termin für diesen Flohmarkt vorliegen.</strong></p>
+                {% endif %}
+
+                <h3 class="content-head"><time datetime="{{nextValidDateStart|date('c')}}">{{nextValidDateStart|date("d.m.Y")}} von {{nextValidDateStart|date("H:i")}} - {{nextValidDateStart|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{data.city}}</span></h3>
                 <p>
                     {{data.description}}
                 </p>

@@ -2,6 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
+use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
+
 class FleaMarketDetailAction extends AbstractHttpAction
 {
     protected $template = 'fleaMarketDate.html';
@@ -9,6 +11,8 @@ class FleaMarketDetailAction extends AbstractHttpAction
     protected function getData()
     {
         $fleaMarket = $this->service->getFleaMarket($this->args['id']);
+
+        $this->_setDateInfoTemplateVariables($fleaMarket);
 
         if (is_null($fleaMarket)) {
             return null;
@@ -19,5 +23,25 @@ class FleaMarketDetailAction extends AbstractHttpAction
         );
 
         return $fleaMarket;
+    }
+
+    public function _setDateInfoTemplateVariables(FleaMarket $market)
+    {
+        $hasValidDate = false;
+        $nextValidDateStart = $nextValidDateEnd = null;
+        $today = date('Y-m-d 00:00:00');
+
+        foreach ($market->getDates() as $date) {
+            if (strtotime($date->getStart()) >= strtotime($today)) {
+                $hasValidDate = true;
+                $nextValidDateStart = $date->getStart();
+                $nextValidDateEnd = $date->getEnd();
+                break;
+            }
+        }
+
+        $this->templateVariables['hasValidDate'] = $hasValidDate;
+        $this->templateVariables['nextValidDateStart'] = $nextValidDateStart;
+        $this->templateVariables['nextValidDateStartEnd'] = $nextValidDateEnd;
     }
 }

@@ -76,6 +76,18 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
     }
 
     /**
+     * @Given I have an expired fleamarket
+     */
+    public function iHaveAnExpiredFleamarket()
+    {
+        try {
+            $this->_createFleaMarkets(1, true);
+        } catch(\Exception $e) {
+            throw new \Exception("Could not create test fleamarket:\n" . $e->getMessage());
+        }
+    }
+
+    /**
      * @Given I have some organizers
      */
     public function iHaveSomeOrganizers()
@@ -145,8 +157,18 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
         \PHPUnit_Framework_Assert::assertEquals((string)$string, (string)$this->_response->getContent());
     }
 
-    private function _createFleaMarkets($num = 3)
+    private function _createFleaMarkets($num = 3, $expired = false)
     {
+        if ($expired === false) {
+            $dates = [
+                new FleaMarketDate('2016-12-12 08:01:02', '2016-12-13 20:20:20')
+            ];
+        } else {
+            $dates = [
+                new FleaMarketDate('2015-12-12 08:01:02', '2015-12-13 20:20:20')
+            ];
+        }
+
         for($i=0; $i<$num; $i++) {
             $organizer = new Organizer();
             $organizer
@@ -162,9 +184,6 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
             $id = $this->_organizerService->createOrganizer($organizer);
             $organizer->setId($id);
             $fleaMarket = new FleaMarket();
-            $dates = [
-                new FleaMarketDate('2016-12-12 08:01:02', '2016-12-13 20:20:20')
-            ];
             $fleaMarket
                 ->setUuid('uuid-'.$i)
                 ->setName('Der  #'.$i.' Flohmarkt von Rudi')

@@ -3,19 +3,24 @@
 namespace RudiBieller\OnkelRudi\Controller;
 
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
+use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use Slim\App;
 use Slim\Http\Body;
 
 class FleaMarketDetailActionTest extends \PHPUnit_Framework_TestCase
 {
-    public function testActionReturnsRequestedMarket()
+    /**
+     * @dataProvider dataProviderTestActionReturnsRequestedMarket
+     */
+    public function testActionReturnsRequestedMarket(array $dates, $templateVariables)
     {
         $organizer = new Organizer();
         $organizer->setId(2000);
         $fleaMarket = new FleaMarket();
         $fleaMarket->setId(23)->setName('Rudis Market')
-            ->setOrganizer($organizer);
+            ->setOrganizer($organizer)
+            ->setDates($dates);
 
         $app = new App();
         $container = $app->getContainer();
@@ -63,5 +68,32 @@ class FleaMarketDetailActionTest extends \PHPUnit_Framework_TestCase
         $expected = 'String representation of the Body object';
 
         $this->assertContains($expected, $actual);
+        $this->assertAttributeEquals($templateVariables, 'templateVariables', $action);
+    }
+
+    public function dataProviderTestActionReturnsRequestedMarket()
+    {
+        return array(
+            array(
+                [
+                    new FleaMarketDate('2015-01-01 09:00:00', '2015-01-01 12:30:00')
+                ],
+                ['hasValidDate' => false, 'nextValidDateStart' => null, 'nextValidDateStartEnd' => null]
+            ),
+            array(
+                [
+                    new FleaMarketDate('2015-01-01 09:00:00', '2015-01-01 12:30:00'),
+                    new FleaMarketDate('2019-01-01 09:00:00', '2019-01-01 12:30:00')
+                ],
+                ['hasValidDate' => true, 'nextValidDateStart' => '2019-01-01 09:00:00', 'nextValidDateStartEnd' => '2019-01-01 12:30:00']
+            ),
+            array(
+                [
+                    new FleaMarketDate('2019-01-01 09:00:00', '2019-01-01 12:30:00'),
+                    new FleaMarketDate('2021-01-01 09:00:00', '2021-01-01 12:30:00')
+                ],
+                ['hasValidDate' => true, 'nextValidDateStart' => '2019-01-01 09:00:00', 'nextValidDateStartEnd' => '2019-01-01 12:30:00']
+            )
+        );
     }
 }
