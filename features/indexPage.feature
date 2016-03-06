@@ -27,7 +27,7 @@ Feature: Index page of onkelrudi
     Then I should see "Der #2 Flohmarkt von Rudi"
     And I should see a ".mapsLocation iframe" element
 
-  @browser @now
+  @browser
   Scenario: Fleamarket with expired dates shows a notice
     Given I have an expired fleamarket
     And I am on "/der-0-flohmarkt-von-rudi/termin/1"
