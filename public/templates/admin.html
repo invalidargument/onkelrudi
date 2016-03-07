@@ -78,7 +78,10 @@
 
                 // validate mandatory fields
                 if (validateMandatoryFields() == false) {
-                    alert('Bitte alle Pflichtfelder ausfüllen!');
+                    console.log("Not all required fields are filled!");
+                    $('#submitform').parent().append(
+                        '<p class="errormessage"><i class="fa fa-exclamation fa-lg"></i>Bitte alle Pflichtfelder ausfüllen!</p>'
+                    );
                     return false;
                 }
 
@@ -199,16 +202,15 @@
             });
 
             function initPickadate() {
-                $('.timepicker').pickatime({
+                var timesConfig = {
                     clear: 'zurücksetzen',
                     format: 'HH:i',
                     formatSubmit: 'HH:i',
                     interval: 15,
                     min: [8,00],
                     max: [20,0]
-                });
-
-                $('.datepicker').pickadate({
+                };
+                var datesConfig = {
                     monthsFull: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
                     weekdaysShort: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
                     today: 'heute',
@@ -225,7 +227,16 @@
                     firstDay: 1,
                     min:true,
                     max:0
-                });
+                };
+
+                var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                if ($.inArray('test=1'), hashes) {
+                    datesConfig.editable = true;
+                    timesConfig.editable = true;
+                }
+
+                $('.timepicker').pickatime(timesConfig);
+                $('.datepicker').pickadate(datesConfig);
             };
 
             initPickadate();
@@ -270,7 +281,7 @@
         </p>
         <div class="regformbox">
 
-            <form id="newFleaMarket" method="post" class="pure-form pure-g">
+            <form id="newFleaMarket" method="post" class="pure-form pure-form-stacked">
 
                 <!--
                 <div class="pure-u-1-2">

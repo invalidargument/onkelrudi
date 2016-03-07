@@ -460,11 +460,15 @@ i.fa {
     text-decoration: underline;
 }
 
-.admin .successmessage {
+.admin .successmessage,
+.admin .errormessage{
     font-weight: bold;
     font-style: italic;
     padding-left: 0;
     color: #009926;
+}
+.admin .errormessage {
+    color: #ff0000;
 }
 
 .picker__select--month,

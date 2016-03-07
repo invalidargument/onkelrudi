@@ -157,6 +157,14 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
         \PHPUnit_Framework_Assert::assertEquals((string)$string, (string)$this->_response->getContent());
     }
 
+    /**
+     * @When I wait for :arg1 seconds
+     */
+    public function iWaitForSeconds($arg1)
+    {
+        sleep($arg1);
+    }
+
     private function _createFleaMarkets($num = 3, $expired = false)
     {
         if ($expired === false) {
