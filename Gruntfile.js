@@ -161,6 +161,28 @@ module.exports = function(grunt) {
                     }
                 ]
             },
+            errorHtmlPaths: {
+                src: ['build/onkelrudi/public/templates/error.html'],
+                dest: 'build/onkelrudi/public/templates/error.html',
+                replacements: [
+                    {
+                        from: '/public/bower_components/pure/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/css/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/bower_components/jquery/dist/',
+                        to: '/js/'
+                    },
+                    {
+                        from: '/public/',
+                        to: '/'
+                    }
+                ]
+            },
             htaccessPaths: {
                 src: ['build/onkelrudi/public/.htaccess'],
                 dest: 'build/onkelrudi/public/.htaccess',
