@@ -12,11 +12,11 @@ class FleaMarketDetailAction extends AbstractHttpAction
     {
         $fleaMarket = $this->service->getFleaMarket($this->args['id']);
 
-        $this->_setDateInfoTemplateVariables($fleaMarket);
-
         if (is_null($fleaMarket)) {
             return null;
         }
+
+        $this->_setDateInfoTemplateVariables($fleaMarket);
 
         $fleaMarket->setOrganizer(
             $this->organizerService->getOrganizer($fleaMarket->getOrganizer()->getId())
