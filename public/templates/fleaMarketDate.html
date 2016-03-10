@@ -59,7 +59,7 @@
                     <p class="expired"><i class="fa fa-exclamation"></i><strong>Dieser Kinderflohmarkt hat bereits stattgefunden! Wir haben aktuell keinen weiteren Termin für diesen Flohmarkt vorliegen.</strong></p>
                 {% endif %}
 
-                <h3 class="content-head"><time datetime="{{nextValidDateStart|date('c')}}">{{nextValidDateStart|date("d.m.Y")}} von {{nextValidDateStart|date("H:i")}} - {{nextValidDateStart|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{data.city}}</span></h3>
+                <h3 class="content-head"><time datetime="{{nextValidDateStart|date('c')}}">{{nextValidDateStart|date("d.m.Y")}} von {{nextValidDateStart|date("H:i")}} - {{nextValidDateEnd|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{data.city}}</span></h3>
                 <p>
                     {{data.description}}
                 </p>

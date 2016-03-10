@@ -42,6 +42,6 @@ class FleaMarketDetailAction extends AbstractHttpAction
 
         $this->templateVariables['hasValidDate'] = $hasValidDate;
         $this->templateVariables['nextValidDateStart'] = $nextValidDateStart;
-        $this->templateVariables['nextValidDateStartEnd'] = $nextValidDateEnd;
+        $this->templateVariables['nextValidDateEnd'] = $nextValidDateEnd;
     }
 }

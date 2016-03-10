@@ -78,21 +78,21 @@ class FleaMarketDetailActionTest extends \PHPUnit_Framework_TestCase
                 [
                     new FleaMarketDate('2015-01-01 09:00:00', '2015-01-01 12:30:00')
                 ],
-                ['hasValidDate' => false, 'nextValidDateStart' => null, 'nextValidDateStartEnd' => null]
+                ['hasValidDate' => false, 'nextValidDateStart' => null, 'nextValidDateEnd' => null]
             ),
             array(
                 [
                     new FleaMarketDate('2015-01-01 09:00:00', '2015-01-01 12:30:00'),
                     new FleaMarketDate('2019-01-01 09:00:00', '2019-01-01 12:30:00')
                 ],
-                ['hasValidDate' => true, 'nextValidDateStart' => '2019-01-01 09:00:00', 'nextValidDateStartEnd' => '2019-01-01 12:30:00']
+                ['hasValidDate' => true, 'nextValidDateStart' => '2019-01-01 09:00:00', 'nextValidDateEnd' => '2019-01-01 12:30:00']
             ),
             array(
                 [
                     new FleaMarketDate('2019-01-01 09:00:00', '2019-01-01 12:30:00'),
                     new FleaMarketDate('2021-01-01 09:00:00', '2021-01-01 12:30:00')
                 ],
-                ['hasValidDate' => true, 'nextValidDateStart' => '2019-01-01 09:00:00', 'nextValidDateStartEnd' => '2019-01-01 12:30:00']
+                ['hasValidDate' => true, 'nextValidDateStart' => '2019-01-01 09:00:00', 'nextValidDateEnd' => '2019-01-01 12:30:00']
             )
         );
     }
