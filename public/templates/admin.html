@@ -84,7 +84,7 @@
             };
 
             function isExistingOrganizer() {
-                if ($('#fleamarket_organizer').length && $('#fleamarket_organizer').val() != '') {
+                if ($('#fleamarket_organizer').length && $('#fleamarket_organizer').val() != null) {
                     return true;
                 }
 
@@ -124,13 +124,10 @@
                         data: postData,
                         success: function (data) {
                             console.log("Organizer created successfully.", data);
-                            var createdOrganizerId = data.data;
-
-                            createFleaMarket(createdOrganizerId);
+                            createFleaMarket(data.data);
                         },
                         error: function (data) {
                             console.log("ajax error", data);
-                            alert("errors occured, damn!");
                         },
                         dataType: 'json'
                     });
@@ -149,16 +146,16 @@
                 var marketDates = [];
 
                 $.map(
-                        startDateItems,
-                        function(element,index) {
-                            startDateTimeItem = $(startDateItems[index]).val() + ' ' + $(startTimeItems[index]).val();
-                            endDateTimeItem = $(startDateItems[index]).val() + ' ' + $(endTimeItems[index]).val();
+                    startDateItems,
+                    function(element,index) {
+                        startDateTimeItem = $(startDateItems[index]).val() + ' ' + $(startTimeItems[index]).val();
+                        endDateTimeItem = $(startDateItems[index]).val() + ' ' + $(endTimeItems[index]).val();
 
-                            marketDates.push({
-                                start: moment(startDateTimeItem, 'DD.MM.YYYY HH:mm', 'de').format('YYYY-MM-DD HH:mm:ss'),
-                                end: moment(endDateTimeItem, 'DD.MM.YYYY HH:mm', 'de').format('YYYY-MM-DD HH:mm:ss')
-                            });
-                        }
+                        marketDates.push({
+                            start: moment(startDateTimeItem, 'DD.MM.YYYY HH:mm', 'de').format('YYYY-MM-DD HH:mm:ss'),
+                            end: moment(endDateTimeItem, 'DD.MM.YYYY HH:mm', 'de').format('YYYY-MM-DD HH:mm:ss')
+                        });
+                    }
                 );
 
                 var apiUrlFleaMarkets = '/public/api/v1/fleamarkets';
@@ -186,12 +183,11 @@
                         var url = '/public/admin/termin/' + data.data;
                         $('#submitform').addClass('button-success');
                         $('#submitform').parent().append(
-                                '<p class="successmessage"><i class="fa fa-check fa-lg"></i>Danke - Dein <a href="'+url+'" title="Zu Deinem neu angelegten Termin">Termin</a> wurde erfolgreich angelegt!</p>'
+                            '<p class="successmessage"><i class="fa fa-check fa-lg"></i>Danke - Dein <a href="'+url+'" title="Zu Deinem neu angelegten Termin">Termin</a> wurde erfolgreich angelegt!</p>'
                         );
                     },
                     error: function(data) {
                         console.log("ajax error", data);
-                        alert("errors occured, damn!");
                     },
                     dataType: 'json'
                 });
