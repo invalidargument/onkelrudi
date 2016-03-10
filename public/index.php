@@ -99,9 +99,9 @@ $app->get('/{wildcard}/kategorie/{id}', function ($request, $response, $args) us
 // Admin View
 $app->get('/admin/', function ($request, $response, $args) use ($organizerService, $wpService) {
     $fleamarketOrganizers = [];
-    /*foreach ($organizerService->getAllOrganizers() as $organizer) {
+    foreach ($organizerService->getAllOrganizers() as $organizer) {
         $fleamarketOrganizers[] = ['id' => $organizer->getId(), 'name' => $organizer->getName()];
-    }*/
+    }
 
     $wpCategories = $wpService->getAllCategories();
 
