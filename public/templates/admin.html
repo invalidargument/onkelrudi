@@ -47,8 +47,8 @@
                     'fleamarket_street',
                     'fleamarket_streetNo',
                     'fleamarket_zipCode',
-                    'fleamarket_city',
-                    'organizer_name'
+                    'fleamarket_city'
+                    //'organizer_name'
                 ];
 
                 var el;
@@ -64,13 +64,31 @@
                     if (el.val() == '') {
                         hasError = true;
                         elLabel.addClass("error");
-                        $('#submitform').addClass('button-warning');
                     } else {
                         elLabel.removeClass("error");
                     }
                 });
 
+                if (!hasError) {
+                    if ($('#fleamarket_organizer').val() == '' && $('#organizer_name').val() == '') {
+                        hasError = true;
+                        $('label[for="organizer_name"]').addClass("error");
+                    }
+                }
+
+                if (hasError) {
+                    $('#submitform').addClass('button-warning');
+                }
+
                 return !hasError;
+            };
+
+            function isExistingOrganizer() {
+                if ($('#fleamarket_organizer').length && $('#fleamarket_organizer').val() != '') {
+                    return true;
+                }
+
+                return false;
             };
 
             $('#newFleaMarket').on('submit', function(e) {
@@ -85,83 +103,91 @@
                     return false;
                 }
 
-                // ############# grab Organizer data ##################
-                var apiUrlOrganizers = '/public/api/v1/organizers';
+                if (!isExistingOrganizer()) {
+                    // ############# grab Organizer data ##################
+                    var apiUrlOrganizers = '/public/api/v1/organizers';
+                    var postData = JSON.stringify({
+                        name: $('#organizer_name').val(),
+                        street: $('#organizer_street').val(),
+                        streetNo: $('#organizer_streetNo').val(),
+                        zipCode: $('#organizer_zip').val(),
+                        city: $('#organizer_city').val(),
+                        phone: $('#organizer_phone').val(),
+                        email: $('#organizer_email').val(),
+                        url: $('#organizer_url').val()
+                    });
+
+                    $.ajax({
+                        type: "POST",
+                        url: apiUrlOrganizers,
+                        contentType: "application/json",
+                        data: postData,
+                        success: function (data) {
+                            console.log("Organizer created successfully.", data);
+                            var createdOrganizerId = data.data;
+
+                            createFleaMarket(createdOrganizerId);
+                        },
+                        error: function (data) {
+                            console.log("ajax error", data);
+                            alert("errors occured, damn!");
+                        },
+                        dataType: 'json'
+                    });
+                } else {
+                    createFleaMarket($('#fleamarket_organizer').val());
+                }
+            });
+
+            function createFleaMarket(createdOrganizerId) {
+                // ############# grab FleaMarket data #################
+                var startDateItems = $('[name="marketDate[]"]');
+                var startTimeItems = $('[name="marketTimeStart[]"]');
+                var endTimeItems = $('[name="marketTimeEnd[]"]');
+                var startDateTimeItem, endDateTimeItem;
+
+                var marketDates = [];
+
+                $.map(
+                        startDateItems,
+                        function(element,index) {
+                            startDateTimeItem = $(startDateItems[index]).val() + ' ' + $(startTimeItems[index]).val();
+                            endDateTimeItem = $(startDateItems[index]).val() + ' ' + $(endTimeItems[index]).val();
+
+                            marketDates.push({
+                                start: moment(startDateTimeItem, 'DD.MM.YYYY HH:mm', 'de').format('YYYY-MM-DD HH:mm:ss'),
+                                end: moment(endDateTimeItem, 'DD.MM.YYYY HH:mm', 'de').format('YYYY-MM-DD HH:mm:ss')
+                            });
+                        }
+                );
+
+                var apiUrlFleaMarkets = '/public/api/v1/fleamarkets';
                 var postData = JSON.stringify({
-                    name: $('#organizer_name').val(),
-                    street: $('#organizer_street').val(),
-                    streetNo: $('#organizer_streetNo').val(),
-                    zipCode: $('#organizer_zip').val(),
-                    city: $('#organizer_city').val(),
-                    phone: $('#organizer_phone').val(),
-                    email: $('#organizer_email').val(),
-                    url: $('#organizer_url').val()
+                    //organizerId: $('#fleamarket_organizer').val(),
+                    organizerId: createdOrganizerId,
+                    name: $('#fleamarket_name').val(),
+                    description: $('#fleamarket_description').val(),
+                    dates: marketDates,
+                    street: $('#fleamarket_street').val(),
+                    streetNo: $('#fleamarket_streetNo').val(),
+                    zipCode: $('#fleamarket_zipCode').val(),
+                    city: $('#fleamarket_city').val(),
+                    location: $('#fleamarket_location').val(),
+                    url: $('#fleamarket_url').val()
                 });
 
                 $.ajax({
                     type: "POST",
-                    url: apiUrlOrganizers,
+                    url: apiUrlFleaMarkets,
                     contentType: "application/json",
                     data: postData,
                     success: function(data) {
-                        console.log("Organizer created successfully.", data);
-                        var createdOrganizerId = data.data;
-
-                        // ############# grab FleaMarket data #################
-                        var startDateItems = $('[name="marketDate[]"]');
-                        var startTimeItems = $('[name="marketTimeStart[]"]');
-                        var endTimeItems = $('[name="marketTimeEnd[]"]');
-                        var startDateTimeItem, endDateTimeItem;
-
-                        var marketDates = [];
-
-                        $.map(
-                            startDateItems,
-                            function(element,index) {
-                                startDateTimeItem = $(startDateItems[index]).val() + ' ' + $(startTimeItems[index]).val();
-                                endDateTimeItem = $(startDateItems[index]).val() + ' ' + $(endTimeItems[index]).val();
-
-                                marketDates.push({
-                                    start: moment(startDateTimeItem, 'DD.MM.YYYY HH:mm', 'de').format('YYYY-MM-DD HH:mm:ss'),
-                                    end: moment(endDateTimeItem, 'DD.MM.YYYY HH:mm', 'de').format('YYYY-MM-DD HH:mm:ss')
-                                });
-                            }
+                        console.log("FleaMarket created successfully!", data);
+                        var url = '/public/admin/termin/' + data.data;
+                        $('#submitform').addClass('button-success');
+                        $('#submitform').parent().append(
+                                '<p class="successmessage"><i class="fa fa-check fa-lg"></i>Danke - Dein <a href="'+url+'" title="Zu Deinem neu angelegten Termin">Termin</a> wurde erfolgreich angelegt!</p>'
                         );
-
-                        var apiUrlFleaMarkets = '/public/api/v1/fleamarkets';
-                        var postData = JSON.stringify({
-                            //organizerId: $('#fleamarket_organizer').val(),
-                            organizerId: createdOrganizerId,
-                            name: $('#fleamarket_name').val(),
-                            description: $('#fleamarket_description').val(),
-                            dates: marketDates,
-                            street: $('#fleamarket_street').val(),
-                            streetNo: $('#fleamarket_streetNo').val(),
-                            zipCode: $('#fleamarket_zipCode').val(),
-                            city: $('#fleamarket_city').val(),
-                            location: $('#fleamarket_location').val(),
-                            url: $('#fleamarket_url').val()
-                        });
-
-                        $.ajax({
-                            type: "POST",
-                            url: apiUrlFleaMarkets,
-                            contentType: "application/json",
-                            data: postData,
-                            success: function(data) {
-                                console.log("FleaMarket created successfully!", data);
-                                var url = '/public/admin/termin/' + data.data;
-                                $('#submitform').addClass('button-success');
-                                $('#submitform').parent().append(
-                                    '<p class="successmessage"><i class="fa fa-check fa-lg"></i>Danke - Dein <a href="'+url+'" title="Zu Deinem neu angelegten Termin">Termin</a> wurde erfolgreich angelegt!</p>'
-                                );
-                            },
-                            error: function(data) {
-                                console.log("ajax error", data);
-                                alert("errors occured, damn!");
-                            },
-                            dataType: 'json'
-                        });
                     },
                     error: function(data) {
                         console.log("ajax error", data);
@@ -169,7 +195,7 @@
                     },
                     dataType: 'json'
                 });
-            });
+            };
 
             $('.duplicate').on('click', function(e) {
                 addDateTimeSelectionRow('/public/templates/pickadate_container.html');
@@ -230,7 +256,7 @@
                 };
 
                 var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-                if ($.inArray('test=1'), hashes) {
+                if ($.inArray('test=1', hashes) != -1) {
                     datesConfig.editable = true;
                     timesConfig.editable = true;
                 }
@@ -283,7 +309,6 @@
 
             <form id="newFleaMarket" method="post" class="pure-form pure-form-stacked">
 
-                <!--
                 <div class="pure-u-1-2">
                     <label for="fleamarket_organizer">Zugeordneter Veranstalter</label>
                     <select id="fleamarket_organizer" style="width: 100%;">
@@ -294,7 +319,6 @@
                     <br>
                     <a href="#" id="fleamarket_use_organizer_data">Adressdaten vom Veranstalter übernehmen</a>
                 </div>
-                //-->
 
                 <div class="pure-g">
                     <div class="pure-u-1-2">
