@@ -37,7 +37,7 @@
                 <strong>{{data.organizer.name}}</strong><br>
                 {% if data.organizer.zipcode %}{{data.organizer.zipcode}} {{data.organizer.city}}<br>{% endif%}
                 {% if data.organizer.phone %}<i class="fa fa-phone"></i><span itemprop="telephone"><a href="tel:{{data.organizer.phone}}" class="post-category-organizer-url">{{data.organizer.phone}}</a></span><br>{% endif%}
-                {% if data.organizer.url %}<i class="fa fa-external-link"></i><a href="" target="_blank" class="post-category-organizer-url" rel="nofollow">{{data.organizer.url}}</a>{% endif%}
+                {% if data.organizer.url %}<i class="fa fa-external-link"></i><a href="{{data.organizer.url}}" target="_blank" class="post-category-organizer-url" rel="nofollow">{{data.organizer.url}}</a>{% endif%}
                 {% if data.dates|length > 1 %}
                 <p>
                     <strong>Alle Termine:</strong>
