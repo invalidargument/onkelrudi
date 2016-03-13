@@ -140,6 +140,14 @@
             <column name="email" type="varchar(255)" afterColumn="phone"/>
         </addColumn>
     </changeSet>
+    <changeSet author="Rudi Bieller" id="10">
+        <addColumn catalogName="onkelrudi"
+                   schemaName="public"
+                   tableName="fleamarkets">
+            <column name="approved" type="boolean" defaultValueBoolean="false"/>
+            <!-- ALTER TABLE onkelrudi.fleamarkets ADD approved BIT(1) DEFAULT 0 NULL -->
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
 
 
