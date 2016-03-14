@@ -103,12 +103,15 @@ $app->get('/admin/', function ($request, $response, $args) use ($organizerServic
         $fleamarketOrganizers[] = ['id' => $organizer->getId(), 'name' => $organizer->getName()];
     }
 
+    $isTest = strpos($request->getUri()->getQuery(), 'test=1') !== false;
+
     $wpCategories = $wpService->getAllCategories();
 
     return $this->get('view')
         ->render($response, 'admin.html', [
             'fleamarket_organizers' => $fleamarketOrganizers,
-            'wpCategories' => $wpCategories
+            'wpCategories' => $wpCategories,
+            'isTest' => $isTest
         ]);
 })->setName('admin');
 

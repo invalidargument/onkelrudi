@@ -309,6 +309,7 @@
             <form id="newFleaMarket" method="post" class="pure-form pure-form-stacked">
 
                 <!-- RENDER ONLY WHEN LOGGED IN -->
+                {% if isTest %}
                 <div class="pure-u-1-2">
                     <label for="fleamarket_organizer">Zugeordneter Veranstalter</label>
                     <select id="fleamarket_organizer" style="width: 100%;">
@@ -317,6 +318,7 @@
                         {% endfor %}
                     </select>
                 </div>
+                {% endif %}
                 <!-- /RENDER ONLY WHEN LOGGED IN -->
 
                 <div class="pure-g">

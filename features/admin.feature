@@ -80,7 +80,6 @@ Feature: Admin page of onkelrudi
   Scenario: Admin can not create a new fleamarket when no existing organizer is selected and no new organizer provided
     #Given I have no default organizer
     Given I am on "/admin/?test=1"
-    And i wait for "10" seconds
     Then I should see "+ Termin anlegen"
     When I fill in "fleamarket_name" with "Rudi Bieller"
     And I fill in "fleamarket_description" with "Eine Beschreibung"
