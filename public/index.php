@@ -96,6 +96,12 @@ $app->get('/{wildcard}/kategorie/{id}', function ($request, $response, $args) us
     $action($request, $response, $args);
 })->setName('wp-category');
 
+// Registration/Login form
+$app->get('/login/', function ($request, $response, $args) use ($app, $controllerFactory) {
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\LoginAction');
+    $action($request, $response, $args);
+})->setName('login-register');
+
 // Admin View
 $app->get('/admin/', function ($request, $response, $args) use ($organizerService, $wpService) {
     $fleamarketOrganizers = [];

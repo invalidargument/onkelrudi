@@ -483,3 +483,13 @@ i.fa {
     height: 1em !important;
     padding:0 !important;
 }
+
+.loginregister .pure-u-1-2 {
+    padding-right:20px;
+    padding-left:20px;
+}
+
+.loginregister p {
+    font-size: 90%;
+    font-style: italic;
+}

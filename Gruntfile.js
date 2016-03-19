@@ -161,6 +161,32 @@ module.exports = function(grunt) {
                     }
                 ]
             },
+            loginRegisterHtmlPaths: {
+                src: ['build/onkelrudi/public/templates/loginRegister.html'],
+                dest: 'build/onkelrudi/public/templates/loginRegister.html',
+                replacements: [
+                    {
+                        from: '/public/bower_components/pure/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/bower_components/mustache/',
+                        to: '/js/'
+                    },
+                    {
+                        from: '/public/bower_components/jquery/dist/',
+                        to: '/js/'
+                    },
+                    {
+                        from: '/public/css/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/',
+                        to: '/'
+                    }
+                ]
+            },
             errorHtmlPaths: {
                 src: ['build/onkelrudi/public/templates/error.html'],
                 dest: 'build/onkelrudi/public/templates/error.html',
