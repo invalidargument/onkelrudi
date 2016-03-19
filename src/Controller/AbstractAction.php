@@ -7,6 +7,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use RudiBieller\OnkelRudi\BuilderFactoryInterface;
 use RudiBieller\OnkelRudi\FleaMarket\OrganizerServiceInterface;
 use RudiBieller\OnkelRudi\ServiceInterface;
+use RudiBieller\OnkelRudi\User\UserServiceInterface;
 
 abstract class AbstractAction implements ActionInterface
 {
@@ -16,6 +17,7 @@ abstract class AbstractAction implements ActionInterface
     protected $app;
     protected $service;
     protected $organizerService;
+    protected $userService;
     /**
      * @var BuilderFactoryInterface
      */
@@ -47,6 +49,12 @@ abstract class AbstractAction implements ActionInterface
     public function setOrganizerService(OrganizerServiceInterface $service)
     {
         $this->organizerService = $service;
+        return $this;
+    }
+
+    public function setUserService(UserServiceInterface $service)
+    {
+        $this->userService = $service;
         return $this;
     }
 

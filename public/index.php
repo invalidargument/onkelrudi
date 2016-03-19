@@ -8,6 +8,7 @@ use RudiBieller\OnkelRudi\FleaMarket\Query\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketService;
 use RudiBieller\OnkelRudi\Controller\Factory as ControllerFactory;
 use RudiBieller\OnkelRudi\FleaMarket\Query\OrganizerQueryFactory;
+use RudiBieller\OnkelRudi\User\UserService;
 use RudiBieller\OnkelRudi\Wordpress\QueryFactory;
 use RudiBieller\OnkelRudi\Wordpress\Service as WpService;
 
@@ -53,6 +54,8 @@ $service->setQueryFactory(new Factory());
 // organizers
 $organizerService = new OrganizerService();
 $organizerService->setQueryFactory(new OrganizerQueryFactory());
+// users
+$userService = new UserService();
 
 // wordpress
 $wpService = new WpService();
@@ -62,6 +65,7 @@ $wpService->setQueryFactory(new QueryFactory());
 $controllerFactory = new ControllerFactory($app);
 $controllerFactory->setService($service);
 $controllerFactory->setOrganizerService($organizerService);
+$controllerFactory->setUserService($userService);
 $controllerFactory->setWordpressService($wpService);
 
 // Index
@@ -192,6 +196,15 @@ $app->group('/api', function () use ($app, $controllerFactory) {
         // POST route, for creating an Organizer
         $app->post('/organizers', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\OrganizerCreateAction');
+            $action->setBuilderFactory(new BuilderFactory());
+            $action($request, $response, $args);
+        });
+
+        // ############# User #############
+
+        // POST route, for creating an Organizer
+        $app->post('/users', function ($request, $response, $args) use ($app, $controllerFactory) {
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\UserCreateAction');
             $action->setBuilderFactory(new BuilderFactory());
             $action($request, $response, $args);
         });
