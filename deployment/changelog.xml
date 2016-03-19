@@ -148,6 +148,22 @@
             <!-- ALTER TABLE onkelrudi.fleamarkets ADD approved BIT(1) DEFAULT 0 NULL -->
         </addColumn>
     </changeSet>
+    <changeSet author="Rudi Bieller" id="11">
+        <createTable tableName="fleamarkets_users">
+            <column name="email" type="varchar(255)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="enum('admin','user')" defaultValue="user">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value="ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
+        </modifySql>
+    </changeSet>
 </databaseChangeLog>
 
 
