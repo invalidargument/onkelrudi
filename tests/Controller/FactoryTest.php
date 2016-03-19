@@ -10,14 +10,18 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     private $_sut;
     private $_service;
     private $_organizerervice;
+    private $_userService;
 
     protected function setUp()
     {
         $this->_sut = new Factory(new \Slim\App());
         $this->_service = \Mockery::mock('RudiBieller\OnkelRudi\ServiceInterface');
         $this->_organizerervice = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\OrganizerServiceInterface');
+        $this->_userService = \Mockery::mock('RudiBieller\OnkelRudi\User\UserServiceInterface');
+        
         $this->_sut->setService($this->_service);
         $this->_sut->setOrganizerService($this->_organizerervice);
+        $this->_sut->setUserService($this->_userService);
     }
 
     /**

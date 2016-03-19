@@ -4,6 +4,7 @@ namespace RudiBieller\OnkelRudi\Controller;
 
 use RudiBieller\OnkelRudi\FleaMarket\OrganizerServiceInterface;
 use RudiBieller\OnkelRudi\ServiceInterface;
+use RudiBieller\OnkelRudi\User\UserServiceInterface;
 use RudiBieller\OnkelRudi\Wordpress\ServiceInterface as WordpressServiceInterface;
 
 class Factory implements FactoryInterface
@@ -12,6 +13,7 @@ class Factory implements FactoryInterface
     private $_slimApp;
     private $_service;
     private $_organizerService;
+    private $_userService;
     private $_wpService;
 
     public function __construct(\Slim\App $app)
@@ -27,6 +29,11 @@ class Factory implements FactoryInterface
     public function setOrganizerService(OrganizerServiceInterface $service)
     {
         $this->_organizerService = $service;
+    }
+
+    public function setUserService(UserServiceInterface $service)
+    {
+        $this->_userService = $service;
     }
 
     public function setWordpressService(WordpressServiceInterface $service)
@@ -48,6 +55,7 @@ class Factory implements FactoryInterface
         $instance->setApp($this->_slimApp);
         $instance->setService($this->_service);
         $instance->setOrganizerService($this->_organizerService);
+        $instance->setUserService($this->_userService);
         if ($instance instanceof HttpActionInterface) {
             $instance->setWordpressService($this->_wpService);
         }
