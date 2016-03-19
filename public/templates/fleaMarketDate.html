@@ -34,10 +34,11 @@
         <div class="pure-g">
             <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
                 <h3>Infos zum Veranstalter</h3>
-                <strong>{{data.organizer.name}}</strong><br>
+                <i class="fa fa-home"></i>{{data.organizer.name}}<br>
                 {% if data.organizer.zipcode %}{{data.organizer.zipcode}} {{data.organizer.city}}<br>{% endif%}
                 {% if data.organizer.phone %}<i class="fa fa-phone"></i><span itemprop="telephone"><a href="tel:{{data.organizer.phone}}" class="post-category-organizer-url">{{data.organizer.phone}}</a></span><br>{% endif%}
-                {% if data.organizer.url %}<i class="fa fa-external-link"></i><a href="{{data.organizer.url}}" target="_blank" class="post-category-organizer-url" rel="nofollow">{{data.organizer.url}}</a>{% endif%}
+                {% if data.organizer.email %}<i class="fa fa-inbox"></i><span itemprop="email"><a href="tel:{{data.organizer.email}}" class="post-category-organizer-url">{{data.organizer.email}}</a></span><br>{% endif%}
+                {% if data.organizer.url %}<i class="fa fa-external-link"></i><a href="{{data.organizer.url}}" target="_blank" class="post-category-organizer-url" rel="nofollow">{{data.organizer.url|length > 33 ? data.organizer.url[:33] ~ '...' : data.organizer.url}}</a>{% endif%}
                 {% if data.dates|length > 1 %}
                 <p>
                     <strong>Alle Termine:</strong>
@@ -64,10 +65,10 @@
                     {{data.description}}
                 </p>
                 <p>
-                    {% if data.location %}{{data.location}}<br>{% endif %}
-                    {% if data.street %}{{data.street}} {{data.streetNo}}<br>{% endif %}
-                    {% if data.zipCode %}{{data.zipCode}} {{data.city}}<br>{% endif %}
-                    {% if data.url %}<i class="fa fa-external-link"></i><a href="{{data.url}}" target="_blank" class="post-category-organizer-url" rel="nofollow">{{data.url}}</a>{% endif %}
+                    <i class="fa fa-home"></i>{% if data.location %}{{data.location}}<br>{% endif %}
+                    <i class="fa fa-home vhidden"></i>{% if data.street %}{{data.street}} {{data.streetNo}}<br>{% endif %}
+                    <i class="fa fa-home vhidden"></i>{% if data.zipCode %}{{data.zipCode}} {{data.city}}<br>{% endif %}
+                    {% if data.url %}<i class="fa fa-external-link"></i><a href="{{data.url}}" target="_blank" class="post-category-organizer-url" rel="nofollow">{{data.url|length > 70 ? data.url[:70] ~ '...' : data.url}}</a>{% endif %}
                 </p>
             </div>
             <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4 mapsLocation">
