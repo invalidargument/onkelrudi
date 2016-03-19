@@ -22,7 +22,7 @@ class QueryFactoryTest extends \PHPUnit_Framework_TestCase
     public function dateProviderTestFactoryCreatesQueriesAndReturnsThemWhenRequested()
     {
         return array(
-            array('createUserInsertQuery', 'RudiBieller\OnkelRudi\User\UserInsertQuery')
+            array('createUserInsertQuery', 'RudiBieller\OnkelRudi\User\InsertQuery')
         );
     }
 }

@@ -6,6 +6,6 @@ class QueryFactory
 {
     public function createUserInsertQuery()
     {
-        return new UserInsertQuery();
+        return new InsertQuery();
     }
 }
