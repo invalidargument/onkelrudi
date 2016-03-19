@@ -17,7 +17,7 @@ class UserCreateAction extends AbstractJsonAction
 
         return $this->userService->createUser(
             $data['email'],
-            $data['password']
+            password_hash($data['password'], PASSWORD_DEFAULT)
         );
     }
 
