@@ -425,6 +425,10 @@ i.fa {
     margin-right: 7px;
 }
 
+.vhidden {
+    visibility: hidden;
+}
+
 .admin .datesBlock input[type] {
     display: inline;
     margin-right:20px;
