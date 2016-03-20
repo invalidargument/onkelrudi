@@ -51,6 +51,7 @@
                                 '<p class="successmessage"><i class="fa fa-check fa-lg"></i>Danke - Dein Benutzer wurde erfolgreich angelegt! Bitte schaue in Dein E-Mail-Postfach und folge dem Bestätigungslink, um Deine Registrierung abzuschließen.</p>'
                             );
                         } else {
+                            $('.errormessage').remove();
                             $('#submitregister').addClass('button-error');
                             $('#submitregister').parent().append(
                                 '<p class="errormessage"><i class="fa fa-bolt fa-lg"></i>Es ist ein Fehler aufgetreten. ' + data.error + '.</p>'
