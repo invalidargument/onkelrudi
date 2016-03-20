@@ -15,22 +15,33 @@ class UserCreateAction extends AbstractJsonAction
             return null;
         }
 
-        return $this->userService->createUser(
-            $data['email'],
-            password_hash($data['password'], PASSWORD_DEFAULT)
-        );
+        $result = null;
+
+        try {
+            $result = $this->userService->createUser(
+                $data['email'],
+                password_hash($data['password'], PASSWORD_DEFAULT)
+            );
+        } catch (\PDOException $e) {
+            $this->_passwordsDontMatchStatusCode = 400;
+            $this->_passwordsDontMatchStatusMessage = 'Primary identifier already exists in database';
+
+            return null;
+        }
+
+        return $result;
     }
 
     private function _passwordIsValid($password1, $password2)
     {
         if ($password1 !== $password2) {
-            $this->_passwordsDontMatchStatusCode = 401;
+            $this->_passwordsDontMatchStatusCode = 400;
             $this->_passwordsDontMatchStatusMessage = 'Passwords do not match';
             return false;
         }
 
         if (strlen($password1) < 8) {
-            $this->_passwordsDontMatchStatusCode = 401;
+            $this->_passwordsDontMatchStatusCode = 400;
             $this->_passwordsDontMatchStatusMessage = 'Passwords must have at least a length of 8 chracters';
             return false;
         }
