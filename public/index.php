@@ -204,7 +204,7 @@ $app->group('/api', function () use ($app, $controllerFactory) {
 
         // ############# User #############
 
-        // POST route, for creating an Organizer
+        // POST route, for creating a user
         $app->post('/users', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\UserCreateAction');
             $action->setBuilderFactory(new BuilderFactory());
