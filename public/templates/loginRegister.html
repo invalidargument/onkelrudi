@@ -44,27 +44,24 @@
                     contentType: "application/json",
                     data: postData,
                     success: function (data) {
-                        if (data.data == '0') {
-                            console.log("User created successfully.", data);
-                            $('.errormessage').remove();
-                            $('.successmessage').remove();
-                            $('#submitregister').removeClass('button-error');
-                            $('#submitregister').addClass('button-success');
-                            $('#submitregister').parent().append(
-                                '<p class="successmessage"><i class="fa fa-check fa-lg"></i>Danke - Dein Benutzer wurde erfolgreich angelegt! Bitte schaue in Dein E-Mail-Postfach und folge dem Bestätigungslink, um Deine Registrierung abzuschließen.</p>'
-                            );
-                        } else {
-                            $('.errormessage').remove();
-                            $('.successmessage').remove();
-                            $('#submitregister').removeClass('button-success');
-                            $('#submitregister').addClass('button-error');
-                            $('#submitregister').parent().append(
-                                '<p class="errormessage"><i class="fa fa-bolt fa-lg"></i>Es ist ein Fehler aufgetreten. ' + data.error + '.</p>'
-                            );
-                        }
+                        console.log("User created successfully.", data);
+                        $('.errormessage').remove();
+                        $('.successmessage').remove();
+                        $('#submitregister').removeClass('button-error');
+                        $('#submitregister').addClass('button-success');
+                        $('#submitregister').parent().append(
+                            '<p class="successmessage"><i class="fa fa-check fa-lg"></i>Danke - Dein Benutzer wurde erfolgreich angelegt! Bitte schaue in Dein E-Mail-Postfach und folge dem Bestätigungslink, um Deine Registrierung abzuschließen.</p>'
+                        );
                     },
                     error: function (data) {
                         console.log("ajax error when creating new user", data);
+                        $('.errormessage').remove();
+                        $('.successmessage').remove();
+                        $('#submitregister').removeClass('button-success');
+                        $('#submitregister').addClass('button-error');
+                        $('#submitregister').parent().append(
+                            '<p class="errormessage"><i class="fa fa-bolt fa-lg"></i>Es ist ein Fehler aufgetreten. ' + data.responseJSON.error/*data.statusText*/ + '.</p>'
+                        );
                     },
                     dataType: 'json'
                 });
