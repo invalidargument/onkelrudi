@@ -208,7 +208,7 @@ $app->group('/api', function () use ($app, $controllerFactory) {
         $app->post('/users', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\UserCreateAction');
             $action->setBuilderFactory(new BuilderFactory());
-            $action($request, $response, $args);
+            return $action($request, $response, $args);
         });
     });
 
