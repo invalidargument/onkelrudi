@@ -164,6 +164,44 @@
             <append value="ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
         </modifySql>
     </changeSet>
+    <changeSet author="Rudi Bieller" id="12">
+        <addColumn catalogName="onkelrudi"
+                   schemaName="public"
+                   tableName="fleamarkets_users">
+            <column name="opt_in" type="boolean" defaultValueBoolean="false"/>
+            <!-- ALTER TABLE onkelrudi.fleamarkets_users ADD opt_in BIT(1) DEFAULT 0 NULL -->
+        </addColumn>
+    </changeSet>
+    <changeSet author="Rudi Bieller" id="15">
+        <modifyDataType catalogName="onkelrudi"
+                        columnName="opt_in"
+                        newDataType="TINYINT"
+                        schemaName="public"
+                        tableName="fleamarkets_users"/>
+    </changeSet>
+    <changeSet author="Rudi Bieller" id="16">
+        <modifyDataType catalogName="onkelrudi"
+                        columnName="approved"
+                        newDataType="TINYINT"
+                        schemaName="public"
+                        tableName="fleamarkets"/>
+    </changeSet>
+    <changeSet author="Rudi Bieller" id="17">
+        <addDefaultValue catalogName="onkelrudi"
+                         columnDataType="TINYINT"
+                         columnName="opt_in"
+                         defaultValue="0"
+                         schemaName="public"
+                         tableName="fleamarkets_users"/>
+    </changeSet>
+    <changeSet author="Rudi Bieller" id="18">
+        <addDefaultValue catalogName="onkelrudi"
+                         columnDataType="TINYINT"
+                         columnName="approved"
+                         defaultValue="0"
+                         schemaName="public"
+                         tableName="fleamarkets"/>
+    </changeSet>
 </databaseChangeLog>
 
 
