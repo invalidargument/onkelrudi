@@ -207,6 +207,12 @@ $app->group('/api', function () use ($app, $controllerFactory) {
         // POST route, for creating a user
         $app->post('/users', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\UserCreateAction');
+            return $action($request, $response, $args);
+        });
+
+        // POST route, for logging in a user
+        $app->post('/login', function ($request, $response, $args) use ($app, $controllerFactory) {
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\UserLoginAction');
             $action->setBuilderFactory(new BuilderFactory());
             return $action($request, $response, $args);
         });

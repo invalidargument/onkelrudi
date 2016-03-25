@@ -2,6 +2,9 @@
 
 namespace RudiBieller\OnkelRudi\User;
 
+use Zend\Authentication\AuthenticationService;
+use Zend\Authentication\Result;
+
 class UserService implements UserServiceInterface
 {
     /**
@@ -25,14 +28,20 @@ class UserService implements UserServiceInterface
 
     public function login($identifier, $password)
     {
-        $query = $this->_factory->createUserLoginQuery();
+        $sessionStorage = null;
 
-        $query->setIdentifier($identifier);
+        $authAdapter = new DbAuthenticationAdapter();
+        $authAdapter->setIdentifier($identifier)->setPassword($password);
 
-        $hash = $query->run();
+        $authService = new AuthenticationService();
+        $authService->setAdapter($authAdapter);
 
-        return password_verify($password, $hash);
+        /**
+         * @var \Zend\Authentication\Result
+         */
+        $result = $authService->authenticate();
 
+        return $result;
         // TODO: here, we need to continue with creating a session
     }
 }

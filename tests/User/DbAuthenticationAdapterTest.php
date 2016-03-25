@@ -28,6 +28,7 @@ class DbAuthenticationAdapterTest extends \PHPUnit_Framework_TestCase
 
         $this->_pdo
             ->shouldReceive('select')
+                ->with(['password'])
                 ->andReturn($this->_pdo)
             ->shouldReceive('from')
                 ->with('fleamarkets_users')

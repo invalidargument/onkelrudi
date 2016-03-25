@@ -4,6 +4,7 @@ namespace RudiBieller\OnkelRudi\Controller;
 
 use RudiBieller\OnkelRudi\BuilderFactory;
 use Slim\App;
+use Zend\Authentication\Result;
 
 class UserLoginActionTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,9 +15,11 @@ class UserLoginActionTest extends \PHPUnit_Framework_TestCase
             'password' => 'foobarbaz'
         ];
 
+        $result = new Result(1, 'foo@example.com');
+
         $builderFactory = new BuilderFactory();
         $service = \Mockery::mock('RudiBieller\OnkelRudi\User\UserService');
-        $service->shouldReceive('login')->once()->with('foo@example.com', 'foobarbaz')->andReturn(1);
+        $service->shouldReceive('login')->once()->with('foo@example.com', 'foobarbaz')->andReturn($result);
 
         $app = new App();
         $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');

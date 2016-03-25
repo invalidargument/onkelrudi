@@ -54,7 +54,7 @@ class DbAuthenticationAdapter extends AbstractQuery implements AdapterInterface
     protected function runQuery()
     {
         $selectStatement = $this->getPdo()
-            ->select()
+            ->select(['password'])
             ->from('fleamarkets_users')
             ->where('email', '=', $this->_identifier);
 
