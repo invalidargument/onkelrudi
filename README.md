@@ -2,32 +2,28 @@
 
 [![Build Status](https://travis-ci.org/invalidargument/onkelrudi.svg?branch=master)](https://travis-ci.org/invalidargument/onkelrudi)
 
-### Run Unit Tests
+### Tests
 ```
 ant phpunit
-```
-
-### Run Acceptance Tests
-```
 ant behat
 
 requires Selenium locally, e.g.:
 java -jar bin/selenium-server-standalone-2.49.0.jar -Dwebdriver.chrome.driver=/Users/rudibieller/Sites/VagrantBoxes/onkelrudi/bin/chromedriver
 ```
 
-### CI and Full build
+### Build
 ```
 ant
 ant build-local
 ```
 
-### Liquibase
+### Database
 ```
 ./vendor/alcaeus/liquibase/liquibase --defaultsFile=deployment/liquibase.properties update
 ```
 
-### API Documentation
-Yet to be done. :) See api.feature. For playing there is curl:
+### API
+api.feature. For playing there is curl:
 ```
 curl -H "Content-Type: application/json" -X POST -d '{"name":"Max POWER", "description": "Blue Pants", "start":"2015-01-01 00:00:00", "end":"2015-12-12 00:00:00", "dates":"[]", "zipCode":"50667"}' http://localhost/public/api/v1/fleamarkets
 ```
