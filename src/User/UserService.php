@@ -2,9 +2,6 @@
 
 namespace RudiBieller\OnkelRudi\User;
 
-use Zend\Authentication\AuthenticationService;
-use Zend\Authentication\Result;
-
 class UserService implements UserServiceInterface
 {
     /**
@@ -12,9 +9,19 @@ class UserService implements UserServiceInterface
      */
     private $_factory;
 
+    /**
+     * @var \RudiBieller\OnkelRudi\User\AuthenticationFactory
+     */
+    private $_authFactory;
+
     public function setQueryFactory(QueryFactory $factory)
     {
         $this->_factory = $factory;
+    }
+
+    public function setAuthenticationFactory(AuthenticationFactory $factory)
+    {
+        $this->_authFactory = $factory;
     }
     
     public function createUser($identifier, $password)
@@ -28,20 +35,13 @@ class UserService implements UserServiceInterface
 
     public function login($identifier, $password)
     {
+        $dbAdapter = $this->_authFactory->createAuthAdapter($identifier, $password);
         $sessionStorage = null;
-
-        $authAdapter = new DbAuthenticationAdapter();
-        $authAdapter->setIdentifier($identifier)->setPassword($password);
-
-        $authService = new AuthenticationService();
-        $authService->setAdapter($authAdapter);
+        $authService = $this->_authFactory->createAuthService($dbAdapter, $sessionStorage);
 
         /**
          * @var \Zend\Authentication\Result
          */
-        $result = $authService->authenticate();
-
-        return $result;
-        // TODO: here, we need to continue with creating a session
+        return $authService->authenticate();
     }
 }
