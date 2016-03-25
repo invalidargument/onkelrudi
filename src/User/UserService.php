@@ -22,4 +22,17 @@ class UserService implements UserServiceInterface
 
         return $query->run();
     }
+
+    public function login($identifier, $password)
+    {
+        $query = $this->_factory->createUserLoginQuery();
+
+        $query->setIdentifier($identifier);
+
+        $hash = $query->run();
+
+        return password_verify($password, $hash);
+
+        // TODO: here, we need to continue with creating a session
+    }
 }

@@ -8,4 +8,9 @@ class QueryFactory
     {
         return new InsertQuery();
     }
+
+    public function createUserLoginQuery()
+    {
+        return new LoginQuery();
+    }
 }

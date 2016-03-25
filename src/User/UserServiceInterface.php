@@ -4,5 +4,7 @@ namespace RudiBieller\OnkelRudi\User;
 
 interface UserServiceInterface
 {
-    public function createUser($dentifier, $password);
+    public function createUser($identifier, $password);
+
+    public function login($identifier, $password);
 }
