@@ -63,14 +63,14 @@
 
                 {% if data.dates|length > 1 %}
                 <div class="pure-g mt20">
-                    <div class="pure-u-2-5">
+                    <div class="pure-u-1">
                         <h2 class="splash-subhead">Alle Termine</h2>
-                        <ol class="pure-menu-horizontal">
+                        <ol class="dates-list">
                             {% for dateItem in data.dates %}
                             {% set cssClass = 'dateTime' %}
                             {% if dateItem.start|date("Ymd") == "now"|date("Ymd") %}{% set cssClass = 'dateTime today' %} {% endif %}
                             {% if "now"|date("Ymd") > dateItem.start|date("Ymd") %}{% set cssClass = 'dateTime over'%} {% endif %}
-                            <li class="{{cssClass}} pure-menu-item">{{dateItem.start|date("d.m.Y")}}</li>
+                            <li class="{{cssClass}}">{{dateItem.start|date("d.m.Y")}}</li>
                             {% endfor %}
                         </ol>
                     </div>

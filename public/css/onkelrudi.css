@@ -393,12 +393,17 @@ EEF66C
 }
 
 .mapsLocation {
-    border:1px solid #000000;
+    border: 4px solid #62C2CC;
 }
 
+.detailView ol{
+    width:100%;
+}
 .detailView ol li {
     list-style-type: none;
     list-style-position: inside;
+    display: inline;
+    padding-right: 12px;
 }
 
 .detailView ol li.over {
