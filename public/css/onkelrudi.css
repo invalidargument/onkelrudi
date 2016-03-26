@@ -543,3 +543,11 @@ i.fa {
 .fleamarketDetail .mt20 {
     margin-top: 20px;
 }
+
+.fleamarketDetail h2.splash-subhead {
+    border-bottom: 2px solid #62C2CC;
+}
+
+.fleamarketDetail h2.mr40 {
+    margin-right: 10%;
+}
