@@ -82,9 +82,23 @@
                     data: postData,
                     success: function (data) {
                         console.log("User logged in successfully.", data);
+                        $('.errormessage').remove();
+                        $('.successmessage').remove();
+                        $('#submitlogin').removeClass('button-error');
+                        $('#submitlogin').addClass('button-success');
+                        $('#submitlogin').parent().append(
+                            '<p class="successmessage"><i class="fa fa-check fa-lg"></i>Danke - Du bist jetzt angemeldet!.</p>'
+                        );
                     },
                     error: function (data) {
                         console.log("ajax error when logging in user", data);
+                        $('.errormessage').remove();
+                        $('.successmessage').remove();
+                        $('#submitlogin').removeClass('button-success');
+                        $('#submitlogin').addClass('button-error');
+                        $('#submitlogin').parent().append(
+                            '<p class="errormessage"><i class="fa fa-bolt fa-lg"></i>Der Login ist fehlgeschlagen. ' + data.responseJSON.error/*data.statusText*/ + '.</p>'
+                        );
                     },
                     dataType: 'json'
                 });

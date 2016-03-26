@@ -472,13 +472,16 @@ i.fa {
 }
 
 .admin .successmessage,
-.admin .errormessage{
+.loginregister .successmessage,
+.admin .errormessage,
+.loginregister .errormessage {
     font-weight: bold;
     font-style: italic;
     padding-left: 0;
     color: #009926;
 }
-.admin .errormessage {
+.admin .errormessage,
+.loginregister .errormessage {
     color: #ff0000;
 }
 
