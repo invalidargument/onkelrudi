@@ -2,6 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\User;
 
+use Zend\Authentication\Storage\Session;
+
 class UserServiceTest extends \PHPUnit_Framework_TestCase
 {
     public function testServiceCreatesNewUserWithMinimumUserCredentials()
@@ -22,12 +24,14 @@ class UserServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testServiceLogsInUserByGivenCredentials()
     {
+        $sessionStorage = new Session();
         $authAdapter = new DbAuthenticationAdapter();
         $authService = \Mockery::mock('Zend\Authentication\AuthenticationServiceInterface');
         $authService->shouldReceive('authenticate')->once()->andReturn(true);
         $authFactory = \Mockery::mock('RudiBieller\OnkelRudi\User\AuthenticationFactory');
         $authFactory->shouldReceive('createAuthAdapter')->once()->with('foo', 'bar')->andReturn($authAdapter)
-            ->shouldReceive('createAuthService')->once()->with($authAdapter, null)->andReturn($authService);
+            ->shouldReceive('createAuthService')->once()->with($authAdapter, $sessionStorage)->andReturn($authService)
+            ->shouldReceive('createSessionStorage')->once()->andReturn($sessionStorage);
 
         $service = new UserService();
         $service->setAuthenticationFactory($authFactory);

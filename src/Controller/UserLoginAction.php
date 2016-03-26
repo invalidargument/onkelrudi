@@ -16,7 +16,7 @@ class UserLoginAction extends AbstractJsonAction
         $result = $this->userService->login($data['email'], $data['password']);
 
         if (!$result->isValid()) {
-            switch($result->getCode()) {
+            switch ($result->getCode()) {
                 case Result::FAILURE_IDENTITY_NOT_FOUND:
                     $this->_passwordsDontMatchStatusMessage = 'User not found';
                     break;

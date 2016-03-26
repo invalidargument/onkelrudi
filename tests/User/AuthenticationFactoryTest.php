@@ -2,6 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\User;
 
+use Zend\Authentication\Storage\Session;
+
 class AuthenticationFactoryTest extends \PHPUnit_Framework_TestCase
 {
     public function testFactoryCreatesServiceWithResolvedDependencies()
@@ -9,7 +11,8 @@ class AuthenticationFactoryTest extends \PHPUnit_Framework_TestCase
         $factory = new AuthenticationFactory();
 
         $dbAdapter = new DbAuthenticationAdapter();
-        $result = $factory->createAuthService($dbAdapter);
+        $sessionStorage = new Session();
+        $result = $factory->createAuthService($dbAdapter, $sessionStorage);
 
         $this->assertInstanceOf(
             'Zend\Authentication\AuthenticationServiceInterface',

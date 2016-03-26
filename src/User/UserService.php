@@ -36,7 +36,7 @@ class UserService implements UserServiceInterface
     public function login($identifier, $password)
     {
         $dbAdapter = $this->_authFactory->createAuthAdapter($identifier, $password);
-        $sessionStorage = null;
+        $sessionStorage = $this->_authFactory->createSessionStorage();
         $authService = $this->_authFactory->createAuthService($dbAdapter, $sessionStorage);
 
         /**
