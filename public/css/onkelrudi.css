@@ -172,7 +172,7 @@ a.pure-button-primary {
 
 /* This is the subheading that appears on the blue section */
 .splash-subhead {
-    font-size: 18px;
+    font-size: 20px;
     color: #62C2CC;
     letter-spacing: 0.05em;
     opacity: 0.8;
@@ -414,6 +414,8 @@ EEF66C
 .detailView h2 {
     margin-top:0.5em !important;
     padding-top:0 !important;;
+    text-transform: uppercase;
+    font-weight: normal;
 }
 
 .detailView h3 {
@@ -496,4 +498,43 @@ i.fa {
 .loginregister p {
     font-size: 90%;
     font-style: italic;
+}
+
+/*###################*/
+.fleamarketDetail .content-wrapper {
+    top: 60px;
+}
+.fleamarketDetail .head {
+    background: #E4F6F8;
+    width: 100%;
+    margin: 0;
+    padding: 20px 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.fleamarketDetail .splash-head {
+    font-weight: bold;
+    color: #62C2CC;
+    border: 0;
+    padding: 0 1.6em;
+    font-weight: 100;
+    border-radius: 5px;
+    line-height: 1em;
+}
+
+.fleamarketDetail .splash-subhead {
+    margin-bottom: 6px;
+}
+
+.fleamarketDetail .content {
+    padding-top: 0;
+}
+
+.fleamarketDetail .pure-menu-item {
+    padding-right: 20px;
+}
+
+.fleamarketDetail .mt20 {
+    margin-top: 20px;
 }

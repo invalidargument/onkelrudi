@@ -6,7 +6,7 @@
     <meta name="description" content="Onkel Rudi - Hier findest du den Kinderflohmarkt oder Kinderbasar.">
     <title>Onkel Rudi - Der Kalender für den Kinderflohmarkt und Kinderbasar..</title>
 </head>
-<body>
+<body class="fleamarketDetail">
 <div class="header">
     <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
         <a class="pure-menu-heading" href="/public/">Onkel Rudi</a>
@@ -20,59 +20,67 @@
     </div>
 </div>
 
-<div class="splash-container">
-    <div class="splash">
-        <h1 class="splash-head">Onkel Rudi</h1>
-        <p class="splash-subhead">
-            Du suchst einen Kinderflohmarkt? Hier findest Du ihn!
-        </p>
-    </div>
-</div>
-
 <div class="content-wrapper">
+    <div class="head">
+        <h1 class="splash-head">{{data.name}}</h1>
+        <p class="splash-subhead">
+            <time datetime="{{nextValidDateStart|date('c')}}">{{nextValidDateStart|date("d.m.Y")}} von {{nextValidDateStart|date("H:i")}} - {{nextValidDateEnd|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{data.city}}</span>
+        </p>
+        <p class="splash-subhead">
+            <i class="fa fa-home"></i>{% if data.location %}{{data.location}}<br>{% endif %}
+        </p>
+        {% if hasValidDate == false %}
+        <p class="expired"><i class="fa fa-exclamation"></i><strong>Dieser Kinderflohmarkt hat bereits stattgefunden! Wir haben aktuell keinen weiteren Termin für diesen Flohmarkt vorliegen.</strong></p>
+        {% endif %}
+    </div>
     <div class="content detailView">
         <div class="pure-g">
-            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
-                <h3>Infos zum Veranstalter</h3>
-                <strong>{{data.organizer.name}}</strong><br>
-                {% if data.organizer.zipcode %}<i class="fa fa-home"></i>{{data.organizer.zipcode}} {{data.organizer.city}}<br>{% endif%}
-                {% if data.organizer.phone %}<i class="fa fa-phone"></i><span itemprop="telephone"><a href="tel:{{data.organizer.phone}}" class="post-category-organizer-url">{{data.organizer.phone}}</a></span><br>{% endif%}
-                {% if data.organizer.email %}<i class="fa fa-inbox"></i><span itemprop="email"><a href="tel:{{data.organizer.email}}" class="post-category-organizer-url">{{data.organizer.email}}</a></span><br>{% endif%}
-                {% if data.organizer.url %}<i class="fa fa-external-link"></i><a href="{{data.organizer.url}}" target="_blank" class="post-category-organizer-url" rel="nofollow">{{data.organizer.url|length > 33 ? data.organizer.url[:33] ~ '...' : data.organizer.url}}</a>{% endif%}
-                {% if data.dates|length > 1 %}
-                <p>
-                    <strong>Alle Termine:</strong>
-                    <ol>
-                    {% for dateItem in data.dates %}
-                        {% set cssClass = 'dateTime' %}
-                        {% if dateItem.start|date("Ymd") == "now"|date("Ymd") %}{% set cssClass = 'dateTime today' %} {% endif %}
-                        {% if "now"|date("Ymd") > dateItem.start|date("Ymd") %}{% set cssClass = 'dateTime over'%} {% endif %}
-                        <li class="{{cssClass}}">{{dateItem.start|date("d.m.Y")}}</li>
-                    {% endfor %}
-                    </ol>
-                </p>
-                {% endif %}
-            </div>
-            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-2-4">
-                <h2 class="content-head">{{data.name}}</h2>
-
-                {% if hasValidDate == false %}
-                    <p class="expired"><i class="fa fa-exclamation"></i><strong>Dieser Kinderflohmarkt hat bereits stattgefunden! Wir haben aktuell keinen weiteren Termin für diesen Flohmarkt vorliegen.</strong></p>
-                {% endif %}
-
-                <h3 class="content-head"><time datetime="{{nextValidDateStart|date('c')}}">{{nextValidDateStart|date("d.m.Y")}} von {{nextValidDateStart|date("H:i")}} - {{nextValidDateEnd|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{data.city}}</span></h3>
+            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-2-3">
+                {% if data.description %}
+                <h2 class="splash-subhead">Beschreibung</h2>
                 <p>
                     {{data.description}}
                 </p>
-                <p>
-                    <i class="fa fa-home"></i>{% if data.location %}{{data.location}}<br>{% endif %}
-                    <i class="fa fa-home vhidden"></i>{% if data.street %}{{data.street}} {{data.streetNo}}<br>{% endif %}
-                    <i class="fa fa-home vhidden"></i>{% if data.zipCode %}{{data.zipCode}} {{data.city}}<br>{% endif %}
-                    {% if data.url %}<i class="fa fa-external-link"></i><a href="{{data.url}}" target="_blank" class="post-category-organizer-url" rel="nofollow">{{data.url|length > 70 ? data.url[:70] ~ '...' : data.url}}</a>{% endif %}
-                </p>
+                {% endif %}
+
+                <div class="pure-g">
+                    <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
+                        <h2 class="splash-subhead">Location</h2>
+                        <i class="fa fa-home"></i>{% if data.location %}{{data.location}}<br>{% endif %}
+                        <i class="fa fa-home vhidden"></i>{% if data.street %}{{data.street}} {{data.streetNo}}<br>{% endif %}
+                        <i class="fa fa-home vhidden"></i>{% if data.zipCode %}{{data.zipCode}} {{data.city}}<br>{% endif %}
+                        {% if data.url %}<i class="fa fa-external-link"></i><a href="{{data.url}}" target="_blank" class="post-category-organizer-url" rel="nofollow">{{data.url|length > 70 ? data.url[:70] ~ '...' : data.url}}</a>{% endif %}
+                    </div>
+                    <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-2-5">
+                        <h2 class="splash-subhead">Veranstalter</h2>
+                        <strong>{{data.organizer.name}}</strong><br>
+                        {% if data.organizer.zipcode %}<i class="fa fa-home"></i>{{data.organizer.zipcode}} {{data.organizer.city}}<br>{% endif%}
+                        {% if data.organizer.phone %}<i class="fa fa-phone"></i><span itemprop="telephone"><a href="tel:{{data.organizer.phone}}" class="post-category-organizer-url">{{data.organizer.phone}}</a></span><br>{% endif%}
+                        {% if data.organizer.email %}<i class="fa fa-inbox"></i><span itemprop="email"><a href="tel:{{data.organizer.email}}" class="post-category-organizer-url">{{data.organizer.email}}</a></span><br>{% endif%}
+                        {% if data.organizer.url %}<i class="fa fa-external-link"></i><a href="{{data.organizer.url}}" target="_blank" class="post-category-organizer-url" rel="nofollow">{{data.organizer.url|length > 33 ? data.organizer.url[:33] ~ '...' : data.organizer.url}}</a>{% endif%}
+                    </div>
+                </div>
+
+                {% if data.dates|length > 1 %}
+                <div class="pure-g mt20">
+                    <div class="pure-u-2-5">
+                        <h2 class="splash-subhead">Alle Termine</h2>
+                        <ol class="pure-menu-horizontal">
+                            {% for dateItem in data.dates %}
+                            {% set cssClass = 'dateTime' %}
+                            {% if dateItem.start|date("Ymd") == "now"|date("Ymd") %}{% set cssClass = 'dateTime today' %} {% endif %}
+                            {% if "now"|date("Ymd") > dateItem.start|date("Ymd") %}{% set cssClass = 'dateTime over'%} {% endif %}
+                            <li class="{{cssClass}} pure-menu-item">{{dateItem.start|date("d.m.Y")}}</li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+                {% endif %}
             </div>
-            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-4 mapsLocation">
-                <iframe style="width:100%;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="400" height="400" src="https://maps.google.com/maps?hl=de&q={{data.street}} {{data.streetNo}}, {{data.zipCode}} {{data.city}}&ie=UTF8&t=roadmap&z=15&iwloc=B&output=embed"></iframe>
+            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-3">
+                <div class="mapsLocation">
+                    <iframe style="width:100%;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="400" height="400" src="https://maps.google.com/maps?hl=de&q={{data.street}} {{data.streetNo}}, {{data.zipCode}} {{data.city}}&ie=UTF8&t=roadmap&z=14&iwloc=B&output=embed"></iframe>
+                </div>
             </div>
         </div>
     </div>
