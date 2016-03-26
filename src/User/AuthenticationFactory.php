@@ -9,36 +9,57 @@ use Zend\Session\SessionManager;
 
 class AuthenticationFactory
 {
+    private $_authenticationService = null;
+    private $_authenticationAdapter = null;
+    private $_sessionStorage = null;
+
     public function createAuthService($authAdapter, $sessionStorage)
     {
-        $authService = new AuthenticationService();
-        $authService->setAdapter($authAdapter)
-            ->setStorage($sessionStorage);
+        if (is_null($this->_authenticationService)) {
+            $this->_authenticationService = new AuthenticationService();
+            $this->_authenticationService->setAdapter($authAdapter)
+                ->setStorage($sessionStorage);
+        }
 
-        return $authService;
+        return $this->_authenticationService;
     }
 
     public function createAuthAdapter($identifier, $password)
     {
-        $authAdapter = new DbAuthenticationAdapter();
-        $authAdapter->setIdentifier($identifier)->setPassword($password);
+        if (is_null($this->_authenticationAdapter)) {
+            $this->_authenticationAdapter = new DbAuthenticationAdapter();
+            $this->_authenticationAdapter->setIdentifier($identifier)->setPassword($password);
+        }
 
-        return $authAdapter;
+        return $this->_authenticationAdapter;
     }
 
     public function createSessionStorage()
     {
-        $sessionConfig = new SessionConfig();
-        $sessionConfig->setOptions(array(
-            'remember_me_seconds' => 60 * 60 * 24 * 7,
-            'cookie_lifetime' => 60 * 60 * 24 * 7,
-            'name' => 'onkelrudi',
-            'use_cookies' => true
-        ));
-        $sessionManager = new SessionManager($sessionConfig);
-        $sessionManager->setConfig($sessionConfig);
-        $sessionStorage = new Session(null, null, $sessionManager);
+        if (is_null($this->_sessionStorage)) {
+            $sessionConfig = new SessionConfig();
+            $sessionConfig->setOptions(array(
+                'remember_me_seconds' => 60 * 60 * 24 * 7,
+                'cookie_lifetime' => 60 * 60 * 24 * 7,
+                'name' => 'onkelrudi',
+                'use_cookies' => true
+            ));
+            $sessionManager = new SessionManager($sessionConfig);
+            $sessionManager->setConfig($sessionConfig);
+            $this->_sessionStorage = new Session(null, null, $sessionManager);
 
-        return $sessionStorage;
+            //$this->session->getManager()->rememberMe($time);
+            //$this->session->getManager()->forgetMe();
+            /*
+             *
+             * public function logoutAction()
+                {
+                    $this->getSessionStorage()->forgetMe();
+                    $this->getAuthService()->clearIdentity();
+                }
+             */
+        }
+
+        return $this->_sessionStorage;
     }
 }
