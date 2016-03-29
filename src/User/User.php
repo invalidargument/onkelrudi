@@ -59,7 +59,7 @@ class User implements UserInterface, \JsonSerializable
      */
     public function setType($type)
     {
-        if(!in_array($type, array(self::TYPE_USER, self::TYPE_ADMIN))) {
+        if (!in_array($type, array(self::TYPE_USER, self::TYPE_ADMIN))) {
             throw new \InvalidArgumentException('Invalid usertype given, allowed are ' . self::TYPE_USER . ' and ' . self::TYPE_ADMIN);
         }
 
