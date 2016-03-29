@@ -7,6 +7,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use RudiBieller\OnkelRudi\BuilderFactoryInterface;
 use RudiBieller\OnkelRudi\FleaMarket\OrganizerServiceInterface;
 use RudiBieller\OnkelRudi\ServiceInterface;
+use RudiBieller\OnkelRudi\User\UserService;
 use RudiBieller\OnkelRudi\User\UserServiceInterface;
 
 abstract class AbstractAction implements ActionInterface
@@ -17,6 +18,9 @@ abstract class AbstractAction implements ActionInterface
     protected $app;
     protected $service;
     protected $organizerService;
+    /**
+     * @var \RudiBieller\OnkelRudi\User\UserService
+     */
     protected $userService;
     /**
      * @var BuilderFactoryInterface
