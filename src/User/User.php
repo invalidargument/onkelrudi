@@ -2,7 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\User;
 
-class User implements UserInterface
+class User implements UserInterface, \JsonSerializable
 {
     private $_identifier;
     private $_password;
@@ -65,5 +65,14 @@ class User implements UserInterface
 
         $this->_type = $type;
         return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'identifier' => $this->getIdentifier(),
+            'password' => $this->getPassword(),
+            'type' => $this->getType()
+        ];
     }
 }
