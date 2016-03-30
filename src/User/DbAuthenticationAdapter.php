@@ -56,7 +56,8 @@ class DbAuthenticationAdapter extends AbstractQuery implements AdapterInterface
         $selectStatement = $this->getPdo()
             ->select(['password'])
             ->from('fleamarkets_users')
-            ->where('email', '=', $this->_identifier);
+            ->where('email', '=', $this->_identifier)
+            ->where('opt_in', '=', '1');
 
         /**
          * @var \Slim\PDO\Statement
