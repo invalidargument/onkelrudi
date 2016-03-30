@@ -111,13 +111,18 @@ $app->get('/login/', function ($request, $response, $args) use ($app, $controlle
 })->setName('login-register');
 
 // Admin View
-$app->get('/admin/', function ($request, $response, $args) use ($organizerService, $wpService) {
+$app->get('/admin/', function ($request, $response, $args) use ($organizerService, $wpService, $userService) {
+    $isTest = strpos($request->getUri()->getQuery(), 'test=1') !== false;
+
+    if (!$isTest && is_null($userService->getAuthenticationService()->getStorage()->read())) {
+        return $this->get('view')
+            ->render($response, 'admin.html', ['notLoggedIn' => true]);
+    }
+
     $fleamarketOrganizers = [];
     foreach ($organizerService->getAllOrganizers() as $organizer) {
         $fleamarketOrganizers[] = ['id' => $organizer->getId(), 'name' => $organizer->getName()];
     }
-
-    $isTest = strpos($request->getUri()->getQuery(), 'test=1') !== false;
 
     $wpCategories = $wpService->getAllCategories();
 
@@ -125,7 +130,8 @@ $app->get('/admin/', function ($request, $response, $args) use ($organizerServic
         ->render($response, 'admin.html', [
             'fleamarket_organizers' => $fleamarketOrganizers,
             'wpCategories' => $wpCategories,
-            'isTest' => $isTest
+            'isTest' => $isTest,
+            'loggedIn' => true
         ]);
 })->setName('admin');
 

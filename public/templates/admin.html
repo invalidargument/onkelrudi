@@ -304,6 +304,13 @@
             <br><br>
             Pflichtfelder sind mit (*) gekennzeichnet.
         </p>
+        {% if notLoggedIn %}
+        <p class="errormessage">
+            <i class="fa fa-exclamation fa-lg"></i>Um einen Flohmarkt anzulegen musst Du Dich vorher anmelden. <a href="/public/login/">Login</a>
+        </p>
+        {% endif %}
+
+        {% if loggedIn %}
         <div class="regformbox">
 
             <form id="newFleaMarket" method="post" class="pure-form pure-form-stacked">
@@ -460,6 +467,7 @@
                 </div>
             </form>
         </div>
+        {% endif %}
     </div>
     <div class="footer l-box is-center">
         {{"now"|date("Y")}} onkel-rudi.de
