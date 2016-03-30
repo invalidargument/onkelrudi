@@ -2,6 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
+use RudiBieller\OnkelRudi\User\User;
 use Zend\Authentication\Result;
 
 class UserLoginAction extends AbstractJsonAction
@@ -13,7 +14,12 @@ class UserLoginAction extends AbstractJsonAction
     {
         $data = $this->request->getParsedBody();
 
-        $result = $this->userService->login($data['email'], $data['password']);
+        $user = new User($data['email'], $data['password']);
+
+        /**
+         * @var \Zend\Authentication\Result
+         */
+        $result = $this->userService->getAuthenticationService($user)->authenticate();
 
         if (!$result->isValid()) {
             switch ($result->getCode()) {
@@ -30,6 +36,8 @@ class UserLoginAction extends AbstractJsonAction
             $this->_passwordsDontMatchStatusCode = 403;
             return null;
         }
+
+        $this->userService->getAuthenticationService($user)->getStorage()->write(array('authenticated' => true));
 
         return true;
     }

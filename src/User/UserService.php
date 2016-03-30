@@ -8,6 +8,7 @@ class UserService implements UserServiceInterface
      * @var \RudiBieller\OnkelRudi\User\QueryFactory
      */
     private $_factory;
+    private static $_authenticationService;
 
     /**
      * @var \RudiBieller\OnkelRudi\User\AuthenticationFactory
@@ -43,5 +44,21 @@ class UserService implements UserServiceInterface
          * @var \Zend\Authentication\Result
          */
         return $authService->authenticate();
+    }
+
+    public function getAuthenticationService(UserInterface $user = null)
+    {
+        if (is_null(self::$_authenticationService)) {
+
+            $dbAdapter = $this->_authFactory->createAuthAdapter();
+            if (!is_null($user)) {
+                $dbAdapter->setIdentifier($user->getIdentifier())
+                    ->setPassword($user->getPassword());
+            }
+            $sessionStorage = $this->_authFactory->createSessionStorage();
+            self::$_authenticationService = $this->_authFactory->createAuthService($dbAdapter, $sessionStorage);
+        }
+
+        return self::$_authenticationService;
     }
 }

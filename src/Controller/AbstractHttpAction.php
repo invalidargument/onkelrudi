@@ -16,6 +16,7 @@ abstract class AbstractHttpAction extends AbstractAction implements HttpActionIn
     public function setWordpressService(ServiceInterface $service)
     {
         $this->wordpressService = $service;
+        return $this;
     }
 
     protected function writeErrorResponse()

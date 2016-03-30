@@ -3,8 +3,10 @@
 namespace RudiBieller\OnkelRudi\Controller;
 
 use RudiBieller\OnkelRudi\BuilderFactory;
+use RudiBieller\OnkelRudi\User\User;
 use Slim\App;
 use Zend\Authentication\Result;
+use Zend\Authentication\Storage\Session;
 
 class UserLoginActionTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,11 +17,15 @@ class UserLoginActionTest extends \PHPUnit_Framework_TestCase
             'password' => 'foobarbaz'
         ];
 
-        $result = new Result(1, 'foo@example.com');
+        $user = new User('foo@example.com', 'foobarbaz');
+
+        $authenticationService = \Mockery::mock('Zend\Authentication\AuthenticationService');
+        $authenticationService->shouldReceive('authenticate')->once()->andReturn(new Result(Result::SUCCESS, 'foo@example.com'))
+            ->shouldReceive('getStorage')->once()->andReturn(new Session());
 
         $builderFactory = new BuilderFactory();
         $service = \Mockery::mock('RudiBieller\OnkelRudi\User\UserService');
-        $service->shouldReceive('login')->once()->with('foo@example.com', 'foobarbaz')->andReturn($result);
+        $service->shouldReceive('getAuthenticationService')->once()->with(\Hamcrest\Matchers::equalTo($user))->andReturn($authenticationService);
 
         $app = new App();
         $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');

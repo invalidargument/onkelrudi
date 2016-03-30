@@ -8,6 +8,12 @@ class User implements UserInterface, \JsonSerializable
     private $_password;
     private $_type;
 
+    public function __construct($identifier, $password)
+    {
+        $this->_identifier = $identifier;
+        $this->_password = $password;
+    }
+
     /**
      * @return string
      */

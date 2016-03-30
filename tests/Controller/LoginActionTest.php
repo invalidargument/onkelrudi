@@ -2,11 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
-use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
-use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
-use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use Slim\App;
-use Slim\Http\Body;
+use Zend\Authentication\Storage\Session;
 
 class LoginActionTest extends \PHPUnit_Framework_TestCase
 {
@@ -38,12 +35,19 @@ class LoginActionTest extends \PHPUnit_Framework_TestCase
         $response->shouldReceive('getBody')->once()->andReturn($body)
             ->shouldReceive('write');
 
+        $authenticationService = \Mockery::mock('Zend\Authentication\AuthenticationService');
+        $authenticationService->shouldReceive('getStorage')->once()->andReturn(new Session());
+
+        $userService = \Mockery::mock('RudiBieller\OnkelRudi\User\UserService');
+        $userService->shouldReceive('getAuthenticationService')->andReturn($authenticationService);
+
         $wordpressService = \Mockery::mock('RudiBieller\OnkelRudi\Wordpress\ServiceInterface');
         $wordpressService->shouldReceive('getAllCategories')->andReturn([]);
 
         $action = new LoginAction();
         $action->setApp($app);
-        $action->setWordpressService($wordpressService);
+        $action->setWordpressService($wordpressService)
+            ->setUserService($userService);
 
         $return = $action($request, $response, array('login_email' => 'foo@example.com', 'nonsense'));
         $actual = (string)$return->getBody();
