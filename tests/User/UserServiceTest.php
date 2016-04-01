@@ -24,18 +24,19 @@ class UserServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testServiceLogsInUserByGivenCredentials()
     {
+        $user = new User('foo', 'bar');
         $sessionStorage = new Session();
         $authAdapter = new DbAuthenticationAdapter();
         $authService = \Mockery::mock('Zend\Authentication\AuthenticationServiceInterface');
         $authService->shouldReceive('authenticate')->once()->andReturn(true);
         $authFactory = \Mockery::mock('RudiBieller\OnkelRudi\User\AuthenticationFactory');
-        $authFactory->shouldReceive('createAuthAdapter')->once()->with('foo', 'bar')->andReturn($authAdapter)
+        $authFactory->shouldReceive('createAuthAdapter')->once()->with($user)->andReturn($authAdapter)
             ->shouldReceive('createAuthService')->once()->with($authAdapter, $sessionStorage)->andReturn($authService)
             ->shouldReceive('createSessionStorage')->once()->andReturn($sessionStorage);
 
         $service = new UserService();
         $service->setAuthenticationFactory($authFactory);
 
-        $this->assertSame(true, $service->login('foo', 'bar'));
+        $this->assertSame(true, $service->login($user));
     }
 }

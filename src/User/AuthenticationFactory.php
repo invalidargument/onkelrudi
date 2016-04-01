@@ -24,11 +24,15 @@ class AuthenticationFactory
         return $this->_authenticationService;
     }
 
-    public function createAuthAdapter($identifier, $password)
+    public function createAuthAdapter(UserInterface $user = null)
     {
         if (is_null($this->_authenticationAdapter)) {
             $this->_authenticationAdapter = new DbAuthenticationAdapter();
-            $this->_authenticationAdapter->setIdentifier($identifier)->setPassword($password);
+            if (!is_null($user)) {
+                $this->_authenticationAdapter
+                    ->setIdentifier($user->getIdentifier())
+                    ->setPassword($user->getPassword());
+            }
         }
 
         return $this->_authenticationAdapter;

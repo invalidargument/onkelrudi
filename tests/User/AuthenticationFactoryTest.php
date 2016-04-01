@@ -6,7 +6,10 @@ use Zend\Authentication\Storage\Session;
 
 class AuthenticationFactoryTest extends \PHPUnit_Framework_TestCase
 {
-    public function testFactoryCreatesServiceWithResolvedDependencies()
+    /**
+     * @dataProvider dataProviderTestFactoryCreatesServiceWithResolvedDependencies
+     */
+    public function testFactoryCreatesServiceWithResolvedDependencies($user)
     {
         $factory = new AuthenticationFactory();
 
@@ -20,5 +23,14 @@ class AuthenticationFactoryTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertSame($dbAdapter, $result->getAdapter());
+    }
+
+    public function dataProviderTestFactoryCreatesServiceWithResolvedDependencies()
+    {
+        return array(
+            array(null),
+            array(new User()),
+            array(new User('foo', 'foo@example.com'))
+        );
     }
 }
