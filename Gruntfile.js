@@ -37,14 +37,20 @@ module.exports = function(grunt) {
                     minifyJS: true
                 },
                 files: {
-                    'build/onkelrudi/public/templates/index.html': [
-                        'public/templates/index.html'
-                    ],
                     'build/onkelrudi/public/templates/admin.html': [
                         'public/templates/admin.html'
                     ],
+                    'build/onkelrudi/public/templates/error.html': [
+                        'public/templates/error.html'
+                    ],
                     'build/onkelrudi/public/templates/fleaMarketDate.html': [
                         'public/templates/fleaMarketDate.html'
+                    ],
+                    'build/onkelrudi/public/templates/index.html': [
+                        'public/templates/index.html'
+                    ],
+                    'build/onkelrudi/public/templates/loginRegister.html': [
+                        'public/templates/loginRegister.html'
                     ],
                     'build/onkelrudi/public/templates/wordpressCategoryOverview.html': [
                         'public/templates/wordpressCategoryOverview.html'
@@ -53,28 +59,6 @@ module.exports = function(grunt) {
             },
         },
         replace: {
-            indexHtmlPaths: {
-                src: ['build/onkelrudi/public/templates/index.html'],
-                dest: 'build/onkelrudi/public/templates/index.html',
-                replacements: [
-                    {
-                        from: '/public/bower_components/pure/',
-                        to: '/css/'
-                    },
-                    {
-                        from: '/public/css/',
-                        to: '/css/'
-                    },
-                    {
-                        from: '/public/bower_components/jquery/dist/',
-                        to: '/js/'
-                    },
-                    {
-                        from: '/public/',
-                        to: '/'
-                    }
-                ]
-            },
             adminHtmlPaths: {
                 src: ['build/onkelrudi/public/templates/admin.html'],
                 dest: 'build/onkelrudi/public/templates/admin.html',
@@ -117,6 +101,28 @@ module.exports = function(grunt) {
                     }
                 ]
             },
+            errorHtmlPaths: {
+                src: ['build/onkelrudi/public/templates/error.html'],
+                dest: 'build/onkelrudi/public/templates/error.html',
+                replacements: [
+                    {
+                        from: '/public/bower_components/pure/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/css/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/bower_components/jquery/dist/',
+                        to: '/js/'
+                    },
+                    {
+                        from: '/public/',
+                        to: '/'
+                    }
+                ]
+            },
             fleaMarketDateHtmlPaths: {
                 src: ['build/onkelrudi/public/templates/fleaMarketDate.html'],
                 dest: 'build/onkelrudi/public/templates/fleaMarketDate.html',
@@ -139,9 +145,9 @@ module.exports = function(grunt) {
                     }
                 ]
             },
-            wordpressCategoryHtmlPaths: {
-                src: ['build/onkelrudi/public/templates/wordpressCategoryOverview.html'],
-                dest: 'build/onkelrudi/public/templates/wordpressCategoryOverview.html',
+            indexHtmlPaths: {
+                src: ['build/onkelrudi/public/templates/index.html'],
+                dest: 'build/onkelrudi/public/templates/index.html',
                 replacements: [
                     {
                         from: '/public/bower_components/pure/',
@@ -170,16 +176,12 @@ module.exports = function(grunt) {
                         to: '/css/'
                     },
                     {
-                        from: '/public/bower_components/mustache/',
-                        to: '/js/'
+                        from: '/public/css/',
+                        to: '/css/'
                     },
                     {
                         from: '/public/bower_components/jquery/dist/',
                         to: '/js/'
-                    },
-                    {
-                        from: '/public/css/',
-                        to: '/css/'
                     },
                     {
                         from: '/public/',
@@ -187,9 +189,9 @@ module.exports = function(grunt) {
                     }
                 ]
             },
-            errorHtmlPaths: {
-                src: ['build/onkelrudi/public/templates/error.html'],
-                dest: 'build/onkelrudi/public/templates/error.html',
+            wordpressCategoryHtmlPaths: {
+                src: ['build/onkelrudi/public/templates/wordpressCategoryOverview.html'],
+                dest: 'build/onkelrudi/public/templates/wordpressCategoryOverview.html',
                 replacements: [
                     {
                         from: '/public/bower_components/pure/',
@@ -244,6 +246,7 @@ module.exports = function(grunt) {
 
         grunt.file.copy(sourceDir + 'moment/min/moment-with-locales.min.js', targetDir + 'js/moment-with-locales.min.js');
         grunt.file.copy(sourceDir + 'mustache/mustache.min.js', targetDir + 'js/mustache.min.js');
+        grunt.file.copy(sourceDir + 'underscore/underscore-min.js', targetDir + 'js/underscore-min.js');
         grunt.file.copy(sourceDir + 'pickadate/lib/compressed/picker.js', targetDir + 'js/pickadate/picker.js');
         grunt.file.copy(sourceDir + 'pickadate/lib/compressed/picker.date.js', targetDir + 'js/pickadate/picker.date.js');
         grunt.file.copy(sourceDir + 'pickadate/lib/compressed/picker.time.js', targetDir + 'js/pickadate/picker.time.js');
