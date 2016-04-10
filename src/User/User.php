@@ -50,7 +50,6 @@ class User implements UserInterface, ImmutableInterface, \JsonSerializable
     {
         return [
             'identifier' => $this->getIdentifier(),
-            'password' => $this->getPassword(),
             'type' => $this->getType()
         ];
     }

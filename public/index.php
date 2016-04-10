@@ -224,6 +224,13 @@ $app->group('/api', function () use ($app, $controllerFactory) {
             $action->setBuilderFactory(new BuilderFactory());
             return $action($request, $response, $args);
         });
+
+        // POST route, for logging out a user
+        $app->get('/logout', function ($request, $response, $args) use ($app, $controllerFactory) {
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\UserLogoutAction');
+            $action->setBuilderFactory(new BuilderFactory());
+            return $action($request, $response, $args);
+        });
     });
 
 });
