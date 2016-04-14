@@ -6,7 +6,6 @@ class InsertQueryTest extends \PHPUnit_Framework_TestCase
 {
     private $_sut;
     private $_pdo;
-    private $_fleaMarketService;
 
     protected function setUp()
     {
