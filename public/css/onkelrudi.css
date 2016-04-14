@@ -340,11 +340,15 @@ a.pure-button-primary {
     background: #EEF66C;
     color: #F17022;
 }
+.post-category-today {
+    padding: 0.2em 0.1em 0.1em 0.1em;
+    color: #000000;
+    background: #62C2CC;
+    font-size: 90%;
+    letter-spacing: 2px;
+}
 .post-category-pure {
     background: #E4F6F8;
-}
-.post-category-yui {
-    background: #62C2CC;
 }
 a.post-category-organizer-url {
     background-color: transparent;
