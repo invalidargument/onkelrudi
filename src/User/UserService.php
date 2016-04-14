@@ -49,7 +49,6 @@ class UserService implements UserServiceInterface
     public function getAuthenticationService(UserInterface $user = null)
     {
         if (is_null(self::$_authenticationService)) {
-
             $dbAdapter = $this->_authFactory->createAuthAdapter();
             if (!is_null($user)) {
                 $dbAdapter->setIdentifier($user->getIdentifier())
