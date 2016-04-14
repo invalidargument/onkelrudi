@@ -202,6 +202,22 @@
                          schemaName="public"
                          tableName="fleamarkets"/>
     </changeSet>
+    <changeSet id="19" author="Rudi Bieller">
+        <createTable tableName="fleamarkets_optins">
+            <column name="email" type="varchar(255)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="token" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP" defaultValueComputed="NOW()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value="ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
+        </modifySql>
+    </changeSet>
 </databaseChangeLog>
 
 
