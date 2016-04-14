@@ -20,7 +20,7 @@ class UserCreateAction extends AbstractJsonAction
         try {
             $result = $this->userService->createUser(
                 $data['email'],
-                password_hash($data['password'], PASSWORD_DEFAULT)
+                password_hash($data['password'], PASSWORD_DEFAULT) // TODO: should be done elsewhere, service for example
             );
         } catch (\PDOException $e) {
             $this->_passwordsDontMatchStatusCode = 400;
@@ -28,6 +28,8 @@ class UserCreateAction extends AbstractJsonAction
 
             return null;
         }
+
+        $this->userService->createOptInToken($data['email']);
 
         return $result;
     }

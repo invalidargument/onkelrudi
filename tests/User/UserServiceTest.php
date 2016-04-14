@@ -13,14 +13,8 @@ class UserServiceTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('setPassword')->with('bar')->andReturn($query)
             ->shouldReceive('run')->andReturn(1);
 
-        $optInQuery = \Mockery::mock('RudiBieller\OnkelRudi\User\OptInTokenInsertQuery');
-        $optInQuery->shouldReceive('setIdentifier')->with('foo')->andReturn($optInQuery)
-            ->shouldReceive('setToken')->with(\Hamcrest\Matchers::isNonEmptyString())->andReturn($optInQuery)
-            ->shouldReceive('run')->andReturn(1);
-
         $queryFactory = \Mockery::mock('RudiBieller\OnkelRudi\User\QueryFactory');
-        $queryFactory->shouldReceive('createUserInsertQuery')->once()->andReturn($query)
-            ->shouldReceive('createOptInTokenInsertQuery')->once()->andReturn($optInQuery);
+        $queryFactory->shouldReceive('createUserInsertQuery')->once()->andReturn($query);
 
         $service = new UserService();
         $service->setQueryFactory($queryFactory);
@@ -28,21 +22,20 @@ class UserServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(1, $service->createUser('foo', 'bar'));
     }
 
-    public function testNoOptInIsCreatedWhenUserCouldNotBePersisted()
+    public function testCreateOptInPersistsNewToken()
     {
-        $query = \Mockery::mock('RudiBieller\OnkelRudi\User\InsertQuery');
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\User\OptInTokenInsertQuery');
         $query->shouldReceive('setIdentifier')->with('foo')->andReturn($query)
-            ->shouldReceive('setPassword')->with('bar')->andReturn($query)
-            ->shouldReceive('run')->andReturn(null);
+            ->shouldReceive('setToken')->with(\Hamcrest\Matchers::isNonEmptyString())->andReturn($query)
+            ->shouldReceive('run')->andReturn(1);
 
         $queryFactory = \Mockery::mock('RudiBieller\OnkelRudi\User\QueryFactory');
-        $queryFactory->shouldReceive('createUserInsertQuery')->once()->andReturn($query)
-            ->shouldReceive('createOptInTokenInsertQuery')->never();
+        $queryFactory->shouldReceive('createOptInTokenInsertQuery')->once()->andReturn($query);
 
         $service = new UserService();
         $service->setQueryFactory($queryFactory);
 
-        $this->assertSame(null, $service->createUser('foo', 'bar'));
+        $this->assertSame(1, $service->createOptInToken('foo'));
     }
 
     public function testServiceLogsInUserByGivenCredentials()

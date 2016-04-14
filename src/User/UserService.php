@@ -29,18 +29,15 @@ class UserService implements UserServiceInterface
     {
         $userQuery = $this->_factory->createUserInsertQuery();
         $userQuery->setIdentifier($identifier)->setPassword($password);
-        $result = $userQuery->run();
+        return $userQuery->run();
+    }
 
-        if (!$result) {
-            return $result;
-        }
-
+    public function createOptInToken($identifier)
+    {
         $token = bin2hex(openssl_random_pseudo_bytes(32));
         $optInQuery = $this->_factory->createOptInTokenInsertQuery();
         $optInQuery->setIdentifier($identifier)->setToken($token);
-        $optInQuery->run();
-
-        return $result;
+        return $optInQuery->run();
     }
 
     public function login(UserInterface $user)
