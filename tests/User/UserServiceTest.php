@@ -13,13 +13,36 @@ class UserServiceTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('setPassword')->with('bar')->andReturn($query)
             ->shouldReceive('run')->andReturn(1);
 
+        $optInQuery = \Mockery::mock('RudiBieller\OnkelRudi\User\OptInTokenInsertQuery');
+        $optInQuery->shouldReceive('setIdentifier')->with('foo')->andReturn($optInQuery)
+            ->shouldReceive('setToken')->with(\Hamcrest\Matchers::isNonEmptyString())->andReturn($optInQuery)
+            ->shouldReceive('run')->andReturn(1);
+
         $queryFactory = \Mockery::mock('RudiBieller\OnkelRudi\User\QueryFactory');
-        $queryFactory->shouldReceive('createUserInsertQuery')->once()->andReturn($query);
+        $queryFactory->shouldReceive('createUserInsertQuery')->once()->andReturn($query)
+            ->shouldReceive('createOptInTokenInsertQuery')->once()->andReturn($optInQuery);
 
         $service = new UserService();
         $service->setQueryFactory($queryFactory);
 
         $this->assertSame(1, $service->createUser('foo', 'bar'));
+    }
+
+    public function testNoOptInIsCreatedWhenUserCouldNotBePersisted()
+    {
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\User\InsertQuery');
+        $query->shouldReceive('setIdentifier')->with('foo')->andReturn($query)
+            ->shouldReceive('setPassword')->with('bar')->andReturn($query)
+            ->shouldReceive('run')->andReturn(null);
+
+        $queryFactory = \Mockery::mock('RudiBieller\OnkelRudi\User\QueryFactory');
+        $queryFactory->shouldReceive('createUserInsertQuery')->once()->andReturn($query)
+            ->shouldReceive('createOptInTokenInsertQuery')->never();
+
+        $service = new UserService();
+        $service->setQueryFactory($queryFactory);
+
+        $this->assertSame(null, $service->createUser('foo', 'bar'));
     }
 
     public function testServiceLogsInUserByGivenCredentials()
