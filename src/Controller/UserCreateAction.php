@@ -4,6 +4,7 @@ namespace RudiBieller\OnkelRudi\Controller;
 
 class UserCreateAction extends AbstractJsonAction
 {
+    protected $template = 'notificationOptIn.html';
     private $_passwordsDontMatchStatusCode;
     private $_passwordsDontMatchStatusMessage;
 
@@ -29,7 +30,19 @@ class UserCreateAction extends AbstractJsonAction
             return null;
         }
 
-        $this->userService->createOptInToken($data['email']);
+        $token = $this->userService->createOptInToken($data['email']);
+        $this->templateVariables = ['token' => $token];
+
+        // generate rendered mail text
+        $optInText = $this->app->getContainer()->get('view')
+            ->render(
+                $this->response,
+                $this->template,
+                array_merge(
+                    ['data' => $this->result],
+                    $this->templateVariables
+                )
+            );
 
         return $result;
     }

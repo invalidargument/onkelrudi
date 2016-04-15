@@ -21,9 +21,34 @@ class UserCreateActionTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('createOptInToken')->once()->with('foo@example.com')->andReturn(2);
 
         $app = new App();
+        $container = $app->getContainer();
+        $container['view'] = function ($c) {
+            $view = new \Slim\Views\Twig(
+                dirname(__FILE__).'/../../public/templates',
+                [
+                    'cache' => false
+                ]
+            );
+
+            $view->addExtension(new \Slim\Views\TwigExtension(
+                $c['router'],
+                $c['request']->getUri()
+            ));
+
+            return $view;
+        };
+
+        $body = \Mockery::mock('Slim\Http\Body');
+        $body->shouldReceive('write')
+            ->once()
+            ->with(\Hamcrest\Matchers::stringContainsInOrder(
+                'um Deine Anmeldung bei Onkel Rudi abzuschließen, folge bitte diesem Link',
+                'http://www.onkel-rudi.de/opt-in/token-2'
+            ));
         $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
         $request->shouldReceive('getParsedBody')->once()->andReturn($parsedJson);
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
+        $response->shouldReceive('getBody')->once()->andReturn($body);
 
         $action = new UserCreateAction();
         $action->setApp($app)

@@ -34,10 +34,12 @@ class UserService implements UserServiceInterface
 
     public function createOptInToken($identifier)
     {
-        $token = bin2hex(openssl_random_pseudo_bytes(32));
+        $token = bin2hex(openssl_random_pseudo_bytes(16));
         $optInQuery = $this->_factory->createOptInTokenInsertQuery();
         $optInQuery->setIdentifier($identifier)->setToken($token);
-        return $optInQuery->run();
+        $optInQuery->run();
+
+        return $token;
     }
 
     public function login(UserInterface $user)

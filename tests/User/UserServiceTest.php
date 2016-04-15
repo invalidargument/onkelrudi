@@ -35,7 +35,7 @@ class UserServiceTest extends \PHPUnit_Framework_TestCase
         $service = new UserService();
         $service->setQueryFactory($queryFactory);
 
-        $this->assertSame(1, $service->createOptInToken('foo'));
+        $this->assertSame(32, strlen($service->createOptInToken('foo')));
     }
 
     public function testServiceLogsInUserByGivenCredentials()
