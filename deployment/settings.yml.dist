@@ -16,3 +16,12 @@ Wordpress:
   api-base-url: "/wp-json/wp/v2/"
   api-get-posts: "posts"
   api-get-categories: "categories"
+
+Mail:
+  smtp-host: ""
+  smtp-transport-security: ""
+  smtp-port: ""
+  smtp-name: ""
+  smtp-authentication-method: ""
+  smtp-username: ""
+  smtp-password: ""

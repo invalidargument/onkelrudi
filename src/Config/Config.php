@@ -37,6 +37,11 @@ class Config
         return self::$_parsedConfig['System'];
     }
 
+    public function getMailConfiguration()
+    {
+        return self::$_parsedConfig['Mail'];
+    }
+
     private function _parseConfig()
     {
         if (is_null(self::$_parsedConfig)) {
