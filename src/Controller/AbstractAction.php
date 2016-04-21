@@ -7,6 +7,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use RudiBieller\OnkelRudi\BuilderFactoryInterface;
 use RudiBieller\OnkelRudi\FleaMarket\OrganizerServiceInterface;
 use RudiBieller\OnkelRudi\ServiceInterface;
+use RudiBieller\OnkelRudi\User\NotificationServiceInterface;
 use RudiBieller\OnkelRudi\User\UserService;
 use RudiBieller\OnkelRudi\User\UserServiceInterface;
 
@@ -22,6 +23,10 @@ abstract class AbstractAction implements ActionInterface
      * @var \RudiBieller\OnkelRudi\User\UserService
      */
     protected $userService;
+    /**
+     * @var NotificationServiceInterface
+     */
+    protected $notificationService;
     /**
      * @var BuilderFactoryInterface
      */
@@ -59,6 +64,12 @@ abstract class AbstractAction implements ActionInterface
     public function setUserService(UserServiceInterface $service)
     {
         $this->userService = $service;
+        return $this;
+    }
+
+    public function setNotificationService(NotificationServiceInterface $service)
+    {
+        $this->notificationService = $service;
         return $this;
     }
 

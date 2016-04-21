@@ -9,7 +9,7 @@ class NotificationServiceTest extends \PHPUnit_Framework_TestCase
         $sut = new NotificationService();
         $mailer = \Mockery::mock('PHPMailer');
         $mailer
-            ->shouldReceive('isSendmail')->once()
+            ->shouldReceive('isSMTP')->once()
             ->shouldReceive('setFrom')->once()->with('info@onkel-rudi.de', 'onkelrudi.de')
             ->shouldReceive('addAddress')->once()->with('foo@bar.com')
             ->shouldReceive('isHTML')->once()->with(false)

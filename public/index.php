@@ -9,6 +9,7 @@ use RudiBieller\OnkelRudi\FleaMarket\FleaMarketService;
 use RudiBieller\OnkelRudi\Controller\Factory as ControllerFactory;
 use RudiBieller\OnkelRudi\FleaMarket\Query\OrganizerQueryFactory;
 use RudiBieller\OnkelRudi\User\AuthenticationFactory;
+use RudiBieller\OnkelRudi\User\NotificationService;
 use RudiBieller\OnkelRudi\User\UserService;
 use RudiBieller\OnkelRudi\User\QueryFactory as UserQueryFactory;
 use RudiBieller\OnkelRudi\Wordpress\QueryFactory;
@@ -60,6 +61,8 @@ $organizerService->setQueryFactory(new OrganizerQueryFactory());
 $userService = new UserService();
 $userService->setQueryFactory(new UserQueryFactory());
 $userService->setAuthenticationFactory(new AuthenticationFactory());
+// notifications
+$notificationService = new NotificationService();
 
 // wordpress
 $wpService = new WpService();
@@ -70,6 +73,7 @@ $controllerFactory = new ControllerFactory($app);
 $controllerFactory->setService($service);
 $controllerFactory->setOrganizerService($organizerService);
 $controllerFactory->setUserService($userService);
+$controllerFactory->setNotificationService($notificationService);
 $controllerFactory->setWordpressService($wpService);
 
 // Index

@@ -20,6 +20,9 @@ class UserCreateActionTest extends \PHPUnit_Framework_TestCase
         $service->shouldReceive('createUser')->once()->with('foo@example.com', \Hamcrest\Matchers::startsWith('$2y$10$'))->andReturn(1)
             ->shouldReceive('createOptInToken')->once()->with('foo@example.com')->andReturn(2);
 
+        $notificationService = \Mockery::mock('RudiBieller\OnkelRudi\User\NotificationServiceInterface');
+        $notificationService->shouldReceive('sendOptInNotification')->once()->with('foo@example.com', \Hamcrest\Matchers::containsString('um Deine Anmeldung bei Onkel Rudi abzuschließen, folge bitte diesem Link'));
+
         $app = new App();
         $container = $app->getContainer();
         $container['view'] = function ($c) {
@@ -53,7 +56,8 @@ class UserCreateActionTest extends \PHPUnit_Framework_TestCase
         $action = new UserCreateAction();
         $action->setApp($app)
             ->setUserService($service)
-            ->setBuilderFactory($builderFactory);
+            ->setBuilderFactory($builderFactory)
+            ->setNotificationService($notificationService);
 
         $return = $action($request, $response, array());
         $actual = (string)$return->getBody();

@@ -2,6 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\User;
 
+use RudiBieller\OnkelRudi\Config\Config;
+
 class NotificationService implements NotificationServiceInterface
 {
     /**
@@ -25,13 +27,30 @@ class NotificationService implements NotificationServiceInterface
 
     public function sendOptInNotification($email, $message)
     {
-        $this->_mailer->isSendmail();
-        $this->_mailer->setFrom('info@onkel-rudi.de', 'onkelrudi.de');
-        $this->_mailer->addAddress($email);
-        $this->_mailer->isHTML(false);
-        $this->_mailer->Subject = 'Bitte bestätige Deine Registrierung bei onkel-rudi.de!';
-        $this->_mailer->Body = $message;
+        $config = new Config();
+        $settings = $config->getMailConfiguration();
+        $systemSettings = $config->getSystemConfiguration();
 
-        return $this->_mailer->send();
+        if ($systemSettings['environment'] === 'dev') {
+            $this->getMailer()->SMTPDebug = 3;
+        }
+
+        $this->getMailer()->isSMTP();
+        $this->getMailer()->Host = $settings['smtp-host'];
+        $this->getMailer()->SMTPAuth = true;
+        $this->getMailer()->Username = $settings['smtp-username'];
+        $this->getMailer()->Password = $settings['smtp-password'];
+        $this->getMailer()->AuthType = $settings['smtp-authentication-method'];
+        $this->getMailer()->SMTPSecure = $settings['smtp-transport-security'];
+        $this->getMailer()->Port = $settings['smtp-port'];
+
+
+        $this->getMailer()->setFrom('info@onkel-rudi.de', 'onkelrudi.de');
+        $this->getMailer()->addAddress($email);
+        $this->getMailer()->isHTML(false);
+        $this->getMailer()->Subject = 'Bitte bestätige Deine Registrierung bei onkel-rudi.de!';
+        $this->getMailer()->Body = $message;
+
+        return $this->getMailer()->send();
     }
 }

@@ -2,6 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
+use RudiBieller\OnkelRudi\User\NotificationService;
+
 class UserCreateAction extends AbstractJsonAction
 {
     protected $template = 'notificationOptIn.html';
@@ -35,14 +37,15 @@ class UserCreateAction extends AbstractJsonAction
 
         // generate rendered mail text
         $optInText = $this->app->getContainer()->get('view')
-            ->render(
-                $this->response,
+            ->fetch(
                 $this->template,
                 array_merge(
                     ['data' => $this->result],
                     $this->templateVariables
                 )
             );
+
+        $this->notificationService->sendOptInNotification($data['email'], $optInText);
 
         return $result;
     }
