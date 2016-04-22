@@ -31,7 +31,7 @@ class NotificationService implements NotificationServiceInterface
         $settings = $config->getMailConfiguration();
         $systemSettings = $config->getSystemConfiguration();
 
-        if ($systemSettings['environment'] === 'dev') {
+        if ($systemSettings['environment'] === 'debug') {
             $this->getMailer()->SMTPDebug = 3;
         }
 
