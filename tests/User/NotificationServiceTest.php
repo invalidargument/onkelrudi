@@ -2,11 +2,15 @@
 
 namespace RudiBieller\OnkelRudi\User;
 
+use RudiBieller\OnkelRudi\Config\Config;
+
 class NotificationServiceTest extends \PHPUnit_Framework_TestCase
 {
     public function testOptInEmailIsSent()
     {
         $sut = new NotificationService();
+        $sut->setConfig(new Config('settings.yml.dist'));
+
         $mailer = \Mockery::mock('PHPMailer');
         $mailer
             ->shouldReceive('isSMTP')->once()

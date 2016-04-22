@@ -11,9 +11,19 @@ class NotificationService implements NotificationServiceInterface
      */
     private $_mailer;
 
+    /**
+     * @var Config
+     */
+    private $_config;
+
     public function setMailer(\PHPMailer $phpmailer)
     {
         $this->_mailer = $phpmailer;
+    }
+
+    public function setConfig(Config $config)
+    {
+        $this->_config = $config;
     }
 
     public function getMailer()
@@ -27,9 +37,12 @@ class NotificationService implements NotificationServiceInterface
 
     public function sendOptInNotification($email, $message)
     {
-        $config = new Config();
-        $settings = $config->getMailConfiguration();
-        $systemSettings = $config->getSystemConfiguration();
+        if (!$this->_config) {
+            $this->_config = new Config();
+        }
+
+        $settings = $this->_config->getMailConfiguration();
+        $systemSettings = $this->_config->getSystemConfiguration();
 
         if ($systemSettings['environment'] === 'debug') {
             $this->getMailer()->SMTPDebug = 3;
