@@ -37,7 +37,7 @@ class NotificationService implements NotificationServiceInterface
 
     public function sendOptInNotification($email, $message)
     {
-        if (!$this->_config) {
+        if (is_null($this->_config)) {
             $this->_config = new Config();
         }
 
