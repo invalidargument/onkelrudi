@@ -8,7 +8,6 @@ class OptInTokenInsertQuery extends AbstractInsertQuery
 {
     private $_identifier;
     private $_token;
-    private $_expires;
 
     /**
      * @param string $identifier
@@ -27,16 +26,6 @@ class OptInTokenInsertQuery extends AbstractInsertQuery
     public function setToken($token)
     {
         $this->_token = $token;
-        return $this;
-    }
-
-    /**
-     * @param string $expires
-     * @return OptInTokenInsertQuery
-     */
-    public function setExpires($expires)
-    {
-        $this->_expires = $expires;
         return $this;
     }
 
