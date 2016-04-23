@@ -51,17 +51,6 @@ class AuthenticationFactory
             $sessionManager = new SessionManager($sessionConfig);
             $sessionManager->setConfig($sessionConfig);
             $this->_sessionStorage = new Session(null, null, $sessionManager);
-
-            //$this->session->getManager()->rememberMe($time);
-            //$this->session->getManager()->forgetMe();
-            /*
-             *
-             * public function logoutAction()
-                {
-                    $this->getSessionStorage()->forgetMe();
-                    $this->getAuthService()->clearIdentity();
-                }
-             */
         }
 
         return $this->_sessionStorage;
