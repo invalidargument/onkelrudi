@@ -7,7 +7,7 @@ Feature: User login/register page of onkelrudi
   @browser
   Scenario Outline: User gets error messages when doing things wrong
     Given I am on "/login/?test=1"
-    When I fill in "register_email" with "hans@example.com"
+    When I fill in "register_email" with "test@onkel-rudi.de"
     And I fill in "register_password" with "<password1>"
     And I fill in "register_password_repeat" with "<password2>"
     And I press "Benutzer registrieren - click hier!"
