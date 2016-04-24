@@ -49,6 +49,7 @@ class NotificationService implements NotificationServiceInterface
         }
 
         $this->getMailer()->isSMTP();
+        $this->getMailer()->CharSet = 'UTF-8';
         $this->getMailer()->Host = $settings['smtp-host'];
         $this->getMailer()->SMTPAuth = true;
         $this->getMailer()->Username = $settings['smtp-username'];
