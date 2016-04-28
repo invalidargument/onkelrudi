@@ -82,6 +82,10 @@ $app->get('/', function ($request, $response, $args) use ($service, $wpService, 
     $wpCategories = $wpService->getAllCategories();
     $fleaMarketsDetailRoutes = [];
     foreach($fleaMarkets as $fleaMarket) {
+        // !!!!!!!!!!!!!!
+        // TODO: für jeden termin das datum an die route hängen
+        // TODO: kann ggfs. auch im template passieren
+        // !!!!!!!!!!!!!!
         $fleaMarketsDetailRoutes[$fleaMarket->getId()] = $app->getContainer()->router->pathFor('event-date', [
             'wildcard' => $fleaMarket->getSlug(),
             'id' => $fleaMarket->getId()
@@ -230,7 +234,7 @@ $app->group('/api', function () use ($app, $controllerFactory) {
         });
 
         // POST route, for logging out a user
-        $app->get('/logout', function ($request, $response, $args) use ($app, $controllerFactory) {
+        $app->post('/logout', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\UserLogoutAction');
             $action->setBuilderFactory(new BuilderFactory());
             return $action($request, $response, $args);
