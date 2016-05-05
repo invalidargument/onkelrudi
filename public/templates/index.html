@@ -36,14 +36,12 @@
         <div class="pure-g">
             {% for item in fleamarkets %}
             <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-3 marketSummaryBox">
-                <a href="{{fleamarketsDetailsRoutes[item.id]}}" title="Alle Details zu {{item.name|e('html_attr')}}">
-                    <h3 class="content-subhead content-subhead-listitem">
-                        {% set iconFlag = 'fa-flag-o' %}
-                        {% if item.dates|first.start|date("Ymd") == "now"|date("Ymd") %} {% set iconFlag = 'fa-flag-checkered' %} {% endif %}
-                        <i class="fa {{iconFlag}}"></i>
-                        {{item.name|length > 33 ? item.name[:33] ~ '...' : item.name}}
-                    </h3>
-                </a>
+                <h3 class="content-subhead content-subhead-listitem">
+                    {% set iconFlag = 'fa-flag-o' %}
+                    {% if item.dates|first.start|date("Ymd") == "now"|date("Ymd") %} {% set iconFlag = 'fa-flag-checkered' %} {% endif %}
+                    <i class="fa {{iconFlag}}"></i>
+                    {{item.name|length > 33 ? item.name[:33] ~ '...' : item.name}}
+                </h3>
                 <p>
                     <time datetime="{{item.dates|first.start|date('c')}}">{{item.dates|first.start|date("d.m.Y")}} von {{item.dates|first.start|date("H:i")}} - {{item.dates|first.end|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{item.city}}</span>
                 </p>
