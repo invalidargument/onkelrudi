@@ -59,7 +59,7 @@ class NotificationService implements NotificationServiceInterface
         $this->getMailer()->Port = $settings['smtp-port'];
 
 
-        $this->getMailer()->setFrom('info@onkel-rudi.de', 'onkelrudi.de');
+        $this->getMailer()->setFrom('info@onkel-rudi.de', 'onkel-rudi.de');
         $this->getMailer()->addAddress($email);
         $this->getMailer()->isHTML(false);
         $this->getMailer()->Subject = 'Bitte bestätige Deine Registrierung bei onkel-rudi.de!';
