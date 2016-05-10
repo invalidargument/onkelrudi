@@ -68,4 +68,13 @@ class UserService implements UserServiceInterface
 
         return self::$_authenticationService;
     }
+
+    public function optIn($token)
+    {
+        $optInQuery = $this->_factory->createOptInTokenUpdateQuery();
+
+        $optInQuery->setToken($token);
+
+        return $optInQuery->run();
+    }
 }

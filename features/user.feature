@@ -21,3 +21,10 @@ Feature: User login/register page of onkelrudi
       | foobarbaz | foobarbaz  | .button-success  | .errormessage      | Danke - Dein Benutzer wurde erfolgreich angelegt! Bitte schaue in Dein E-Mail-Postfach und folge dem Bestätigungslink, um Deine Registrierung abzuschließen. |
       | foo       | foo        | .button-error    | .successmessage    | Es ist ein Fehler aufgetreten. Passwords must have at least a length of 8 chracters. |
       | foobarbaz | foobarbazz | .button-error    | .successmessage    | Es ist ein Fehler aufgetreten. Passwords do not match. |
+
+  @now
+  Scenario: User can use created opt-in token
+    Given I have an optin token called "test123"
+    And I am on "/opt-in/token-test123"
+    And I wait for "1" seconds
+    Then I should see "Dein Benutzer ist jetzt aktiv!"

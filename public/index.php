@@ -104,6 +104,8 @@ $app->get('/', function ($request, $response, $args) use ($service, $wpService, 
 $app->get('/{wildcard}/termin/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketDetailAction');
     $action($request, $response, $args);
+
+    // 302 to new route with date included?!
 })->setName('event-date');
 
 // Blog Category View
@@ -117,6 +119,12 @@ $app->get('/login/', function ($request, $response, $args) use ($app, $controlle
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\LoginAction');
     $action($request, $response, $args);
 })->setName('login-register');
+
+// opt-in confirmation
+$app->get('/opt-in/token-{token}', function ($request, $response, $args) use ($app, $controllerFactory) {
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\OptInAction');
+    return $action($request, $response, $args);
+})->setName('optin-confirmation');
 
 // Admin View
 $app->get('/admin/', function ($request, $response, $args) use ($organizerService, $wpService, $userService) {

@@ -11,4 +11,6 @@ interface UserServiceInterface
     public function login(UserInterface $user);
 
     public function getAuthenticationService(UserInterface $user);
+
+    public function optIn($token);
 }

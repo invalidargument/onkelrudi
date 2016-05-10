@@ -13,4 +13,9 @@ class QueryFactory
     {
         return new OptInTokenInsertQuery();
     }
+
+    public function createOptInTokenUpdateQuery()
+    {
+        return new OptInTokenUpdateQuery();
+    }
 }

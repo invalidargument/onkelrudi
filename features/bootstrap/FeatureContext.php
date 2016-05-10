@@ -4,6 +4,7 @@ use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\MinkExtension\Context\MinkContext;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
@@ -163,6 +164,14 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
     public function iWaitForSeconds($arg1)
     {
         sleep($arg1);
+    }
+
+    /**
+     * @Given I have an optin token called :arg1
+     */
+    public function iHaveAnOptinTokenCalled($arg1)
+    {
+        throw new PendingException();
     }
 
     private function _createFleaMarkets($num = 3, $expired = false)

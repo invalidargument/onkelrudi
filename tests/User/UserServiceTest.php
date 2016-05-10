@@ -55,4 +55,19 @@ class UserServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(true, $service->login($user));
     }
+
+    public function testOptIn()
+    {
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\User\OptInTokenUpdateQuery');
+        $query->shouldReceive('setToken')->with('123abc456')->andReturn($query)
+            ->shouldReceive('run')->andReturn(1);
+
+        $queryFactory = \Mockery::mock('RudiBieller\OnkelRudi\User\QueryFactory');
+        $queryFactory->shouldReceive('createOptInTokenUpdateQuery')->once()->andReturn($query);
+
+        $service = new UserService();
+        $service->setQueryFactory($queryFactory);
+
+        $this->assertSame(1, $service->optIn('123abc456'));
+    }
 }
