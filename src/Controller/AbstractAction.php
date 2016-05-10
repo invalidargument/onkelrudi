@@ -20,7 +20,7 @@ abstract class AbstractAction implements ActionInterface
     protected $service;
     protected $organizerService;
     /**
-     * @var \RudiBieller\OnkelRudi\User\UserService
+     * @var \RudiBieller\OnkelRudi\User\UserServiceInterface
      */
     protected $userService;
     /**
