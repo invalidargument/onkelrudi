@@ -5,7 +5,7 @@ Feature: User login/register page of onkelrudi
   I need to be able to create new User and login as an existing one
 
   @browser
-  Scenario Outline: User gets error messages when doing things wrong
+  Scenario Outline: User gets proper feedback when trying to create a new user
     Given I am on "/login/?test=1"
     When I fill in "register_email" with "test@onkel-rudi.de"
     And I fill in "register_password" with "<password1>"
