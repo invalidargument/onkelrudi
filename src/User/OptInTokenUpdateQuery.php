@@ -28,7 +28,7 @@ class OptInTokenUpdateQuery extends AbstractInsertQuery
             ->select()
             ->from('fleamarkets_optins')
             ->where('token', '=', $this->_token)
-            ->where('created', '<', $dateTime->subDay()->format('Y-m-d H:i:s'));
+            ->where('created', '>', $dateTime->subDay()->format('Y-m-d H:i:s'));
 
         /**
          * @var \Slim\PDO\Statement
