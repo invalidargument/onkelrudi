@@ -14,6 +14,9 @@ use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use RudiBieller\OnkelRudi\FleaMarket\OrganizerService;
 use RudiBieller\OnkelRudi\FleaMarket\Query\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\Query\OrganizerQueryFactory;
+use RudiBieller\OnkelRudi\User\QueryFactory;
+use RudiBieller\OnkelRudi\User\UserService;
+use RudiBieller\OnkelRudi\User\UserServiceInterface;
 
 /**
  * Defines application features from the specific context.
@@ -23,6 +26,10 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
     private $_browser;
     private $_service;
     private $_organizerService;
+    /**
+     * @var UserServiceInterface
+     */
+    private $_userService;
     /**
      * @var \Buzz\Message\Response
      */
@@ -48,6 +55,10 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
         $organizerQueryFactory = new OrganizerQueryFactory();
         $this->_organizerService = new OrganizerService();
         $this->_organizerService->setQueryFactory($organizerQueryFactory);
+
+        $userQueryFactory = new QueryFactory();
+        $this->_userService = new UserService();
+        $this->_userService->setQueryFactory($userQueryFactory);
     }
 
     /** @BeforeScenario */
@@ -167,11 +178,12 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
     }
 
     /**
-     * @Given I have an optin token called :arg1
+     * @Given I have a user with email :arg1 and optin token :arg2
      */
-    public function iHaveAnOptinTokenCalled($arg1)
+    public function iHaveAUserWithEmailAndOptinToken($arg1, $arg2)
     {
-        throw new PendingException();
+        $user = $this->_userService->createUser($arg1, 'password');
+        $this->_userService->createTestOptInToken($arg1, $arg2);
     }
 
     private function _createFleaMarkets($num = 3, $expired = false)

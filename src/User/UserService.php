@@ -42,6 +42,15 @@ class UserService implements UserServiceInterface
         return $token;
     }
 
+    public function createTestOptInToken($identifier, $token)
+    {
+        $optInQuery = $this->_factory->createOptInTokenInsertQuery();
+        $optInQuery->setIdentifier($identifier)->setToken($token);
+        $optInQuery->run();
+
+        return $token;
+    }
+
     public function login(UserInterface $user)
     {
         $dbAdapter = $this->_authFactory->createAuthAdapter($user);

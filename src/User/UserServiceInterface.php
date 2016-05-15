@@ -8,6 +8,8 @@ interface UserServiceInterface
 
     public function createOptInToken($identifier);
 
+    public function createTestOptInToken($identifier, $token);
+
     public function login(UserInterface $user);
 
     public function getAuthenticationService(UserInterface $user);

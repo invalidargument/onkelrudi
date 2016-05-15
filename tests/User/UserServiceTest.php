@@ -38,6 +38,22 @@ class UserServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(32, strlen($service->createOptInToken('foo')));
     }
 
+    public function testCreateTestOptInPersistsNewToken()
+    {
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\User\OptInTokenInsertQuery');
+        $query->shouldReceive('setIdentifier')->with('foo')->andReturn($query)
+            ->shouldReceive('setToken')->with('test123abc')->andReturn($query)
+            ->shouldReceive('run')->andReturn(1);
+
+        $queryFactory = \Mockery::mock('RudiBieller\OnkelRudi\User\QueryFactory');
+        $queryFactory->shouldReceive('createOptInTokenInsertQuery')->once()->andReturn($query);
+
+        $service = new UserService();
+        $service->setQueryFactory($queryFactory);
+
+        $this->assertSame('test123abc', $service->createTestOptInToken('foo', 'test123abc'));
+    }
+
     public function testServiceLogsInUserByGivenCredentials()
     {
         $user = new User('foo', 'bar');

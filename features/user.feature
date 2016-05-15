@@ -22,9 +22,9 @@ Feature: User login/register page of onkelrudi
       | foo       | foo        | .button-error    | .successmessage    | Es ist ein Fehler aufgetreten. Passwords must have at least a length of 8 chracters. |
       | foobarbaz | foobarbazz | .button-error    | .successmessage    | Es ist ein Fehler aufgetreten. Passwords do not match. |
 
-  @now
+  @browser
   Scenario: User can use created opt-in token
-    Given I have an optin token called "test123"
-    And I am on "/opt-in/token-test123"
+    Given I have a user with email "info@onkel-rudi.de" and optin token "test-token"
+    And I am on "/opt-in/token-test-token"
     And I wait for "1" seconds
     Then I should see "Dein Benutzer ist jetzt aktiv!"
