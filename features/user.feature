@@ -27,4 +27,4 @@ Feature: User login/register page of onkelrudi
     Given I have a user with email "info@onkel-rudi.de" and optin token "test-token"
     And I am on "/opt-in/token-test-token"
     And I wait for "1" seconds
-    Then I should see "Dein Benutzer ist jetzt aktiv!"
+    Then I should see "Dein Login wurde aktiviert, Du kannst Dich jetzt anmelden."

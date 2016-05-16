@@ -164,6 +164,11 @@
                 </div>
                 {% endif %}
                 <div class="pure-u-1-2 pure-u-md-1 pure-u-lg-1-2">
+                    {% if optin and optinfailed %}
+                        <p class="errormessage"><i class="fa fa-exclamation fa-lg"></i>Dein Login konnte nicht aktiviert werden.</p>
+                    {% elseif optin %}
+                        <p class="successmessage"><i class="fa fa-check fa-lg"></i>Dein Login wurde aktiviert, Du kannst Dich jetzt anmelden.</p>
+                    {% endif %}
                     <h2 class="content-head">Login</h2>
                     <p>
                         Bitte melde Dich mit Deinen Benutzerdaten an!

@@ -15,7 +15,7 @@ class OptInAction extends AbstractHttpAction
         $success = $this->userService->optIn($token);
 
         if (!$success) {
-            $this->templateVariables['fail'] = true;
+            $this->templateVariables['optinfailed'] = true;
         }
 
         return array();

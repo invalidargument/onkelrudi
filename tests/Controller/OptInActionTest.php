@@ -7,7 +7,10 @@ use Zend\Authentication\Storage\Session;
 
 class OptInActionTest extends \PHPUnit_Framework_TestCase
 {
-    public function testActionDoesOptInWhenGivenAValidToken()
+    /**
+     * @dataProvider dataProviderTestActionDoesOptInWhenGivenAValidToken
+     */
+    public function testActionDoesOptInWhenGivenAValidToken($serviceWasAbleToOptIn, array $expectedTemplateVariables)
     {
         $parsedJson = [
             'token' => '123abc456'
@@ -44,7 +47,7 @@ class OptInActionTest extends \PHPUnit_Framework_TestCase
         $authenticationService->shouldReceive('getStorage')->once()->andReturn(new Session());
 
         $userService = \Mockery::mock('RudiBieller\OnkelRudi\User\UserService');
-        $userService->shouldReceive('optIn')->once()->with('123abc456')->andReturn(true);
+        $userService->shouldReceive('optIn')->once()->with('123abc456')->andReturn($serviceWasAbleToOptIn);
 
         $wordpressService = \Mockery::mock('RudiBieller\OnkelRudi\Wordpress\ServiceInterface');
         $wordpressService->shouldReceive('getAllCategories')->andReturn([]);
@@ -54,10 +57,20 @@ class OptInActionTest extends \PHPUnit_Framework_TestCase
         $action->setWordpressService($wordpressService)
             ->setUserService($userService);
 
-        $return = $action($request, $response, array('token' => '123abc456'));
-        $actual = (string)$return->getBody();
-        $expected = 'String representation of the Body object';
+        $action($request, $response, array('token' => '123abc456'));
 
-        $this->assertContains($expected, $actual);
+        $this->assertAttributeEquals(
+            $expectedTemplateVariables,
+            'templateVariables',
+            $action
+        );
+    }
+
+    public function dataProviderTestActionDoesOptInWhenGivenAValidToken()
+    {
+        return array(
+            array(true, ['optin' => true]),
+            array(false, ['optin' => true, 'optinfailed' => true])
+        );
     }
 }
