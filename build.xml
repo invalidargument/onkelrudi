@@ -176,12 +176,20 @@
         <fail message="Grunt failed!" unless="onSuccess"/>
     </target>
 
-    <target name="archive" depends="composer_optimize, prepare-backend-for-deployment, prepare-frontend-for-deployment">
+    <target name="archive" depends="tag, composer_optimize, prepare-backend-for-deployment, prepare-frontend-for-deployment">
         <tar compression="gzip" destfile="${basedir}/build/artifacts/onkelrudi_${buildtimestamp}.tar.gz" longfile="posix">
             <tarfileset dir="${basedir}/build/onkelrudi" prefix=".">
                 <include name="**/*" />
             </tarfileset>
         </tar>
+    </target>
+
+    <target name="tag">
+        <echo message="Tagging commit in git..."/>
+        <exec executable="git" failonerror="true">
+            <arg value="tag" />
+            <arg value="v${buildtimestamp}-lw" />
+        </exec>
     </target>
 
     <target name="deploy">
