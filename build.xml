@@ -186,6 +186,7 @@
 
     <target name="tag">
         <echo message="Tagging commit in git..."/>
+        <!-- do we want annotated tags for git push - -follow-tags or are lightweight tags enough? -->
         <exec executable="git" failonerror="true">
             <arg value="tag" />
             <arg value="v${buildtimestamp}-lw" />
