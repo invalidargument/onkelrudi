@@ -13,6 +13,9 @@ module.exports = function(grunt) {
                     ],
                     'build/onkelrudi/public/js/onkelrudi.js': [
                         'public/js/onkelrudi.js'
+                    ],
+                    'build/onkelrudi/public/js/cookieconsent.js': [
+                        'public/js/cookieconsent.js'
                     ]
                 }
             }
@@ -162,6 +165,10 @@ module.exports = function(grunt) {
                         to: '/js/'
                     },
                     {
+                        from: '/public/bower_components/cookieconsent2/build/',
+                        to: '/js/'
+                    },
+                    {
                         from: '/public/',
                         to: '/'
                     }
@@ -250,6 +257,7 @@ module.exports = function(grunt) {
         grunt.file.copy(sourceDir + 'pickadate/lib/compressed/picker.js', targetDir + 'js/pickadate/picker.js');
         grunt.file.copy(sourceDir + 'pickadate/lib/compressed/picker.date.js', targetDir + 'js/pickadate/picker.date.js');
         grunt.file.copy(sourceDir + 'pickadate/lib/compressed/picker.time.js', targetDir + 'js/pickadate/picker.time.js');
+        grunt.file.copy(sourceDir + 'cookieconsent2/build/cookieconsent.min.js', targetDir + 'js/cookieconsent.min.js');
         grunt.log.ok();
     });
 

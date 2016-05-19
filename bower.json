@@ -28,6 +28,7 @@
     "jquery": "~2.1.4",
     "pickadate": "3.5.6",
     "moment": "2.11.2",
-    "mustache": "2.2.1"
+    "mustache": "2.2.1",
+    "cookieconsent2": "1.0.10"
   }
 }
