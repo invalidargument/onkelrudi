@@ -21,7 +21,7 @@ class UserCreateActionTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('createOptInToken')->once()->with('foo@example.com')->andReturn(2);
 
         $notificationService = \Mockery::mock('RudiBieller\OnkelRudi\User\NotificationServiceInterface');
-        $notificationService->shouldReceive('sendOptInNotification')->once()->with('foo@example.com', \Hamcrest\Matchers::containsString('um Deine Anmeldung bei Onkel Rudi abzuschließen, folge bitte diesem Link'));
+        $notificationService->shouldReceive('sendOptInNotification')->once()->with('foo@example.com', \Hamcrest\Matchers::containsString('Um Deine Registrierung abzuschließen und Deinen Account zu aktivieren, folge bitte diesem Link'));
 
         $app = new App();
         $container = $app->getContainer();
