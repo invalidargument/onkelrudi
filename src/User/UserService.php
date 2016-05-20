@@ -86,4 +86,11 @@ class UserService implements UserServiceInterface
 
         return $optInQuery->run();
     }
+
+    public function isLoggedIn()
+    {
+        $user = $this->getAuthenticationService()->getStorage()->read();
+
+        return !is_null($user);
+    }
 }

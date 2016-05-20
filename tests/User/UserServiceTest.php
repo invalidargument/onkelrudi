@@ -86,4 +86,29 @@ class UserServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(1, $service->optIn('123abc456'));
     }
+
+    /**
+     * @dataProvider dataProviderTestIsUserLoggedIn
+     */
+    public function testIsUserLoggedIn($storageContent, $expectedLoggedInStatus)
+    {
+        $storage = \Mockery::mock('Zend\Authentication\Storage\StorageInterface');
+        $storage->shouldReceive('read')->andReturn($storageContent);
+
+        $authService = \Mockery::mock('Zend\Authentication\AuthenticationServiceInterface');
+        $authService->shouldReceive('getStorage')->andReturn($storage);
+
+        $service = \Mockery::mock('RudiBieller\OnkelRudi\User\UserService[getAuthenticationService]');
+        $service->shouldReceive('getAuthenticationService')->once()->andReturn($authService);
+
+        $this->assertSame($expectedLoggedInStatus, $service->isLoggedIn());
+    }
+
+    public function dataProviderTestIsUserLoggedIn()
+    {
+        return array(
+            array(true, true),
+            array(null, false)
+        );
+    }
 }

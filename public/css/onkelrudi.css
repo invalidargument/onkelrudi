@@ -135,6 +135,10 @@ a.pure-button-primary {
     background-color: inherit !important;
 }
 
+#settings i {
+    font-size: 120%;
+}
+
 /*
  * -- SPLASH STYLES --
  * This is the blue top section that appears on the page.
