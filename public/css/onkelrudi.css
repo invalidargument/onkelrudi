@@ -122,13 +122,18 @@ a.pure-button-primary {
     border-bottom:2px solid transparent;
 }
 .home-menu li a:hover,
-.home-menu li a:focus {
+.home-menu li a:focus,
+.pure-menu-active .pure-menu-link{
     background: none;
     border: none;
     color: #E4F6F8;
     border-bottom:2px solid #E4F6F8;
 }
 
+.pure-menu-active,
+.pure-menu-active .pure-menu-link{
+    background-color: inherit !important;
+}
 
 /*
  * -- SPLASH STYLES --
