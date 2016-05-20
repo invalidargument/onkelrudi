@@ -13,7 +13,7 @@ Feature: Index page of onkelrudi
   @browser
   Scenario: Startpage with fleamarket boxes is displayed
     Given I have some fleamarkets
-    And I am on "/"
+    And I am on "/?test=1"
     Then I should see "Onkel Rudi" in the "h1" element
     And I should see a ".marketSummaryBox:nth-of-type(3)" element
     And I should see "Der #2 Flohmarkt von Rudi" in the ".marketSummaryBox:nth-of-type(3)" element

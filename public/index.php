@@ -78,6 +78,7 @@ $controllerFactory->setWordpressService($wpService);
 
 // Index
 $app->get('/', function ($request, $response, $args) use ($service, $wpService, $app) {
+    $isTest = strpos($request->getUri()->getQuery(), 'test=1') !== false;
     $fleaMarkets = $service->getAllUpcomingFleaMarkets();
     $wpCategories = $wpService->getAllCategories();
     $fleaMarketsDetailRoutes = [];
@@ -87,12 +88,16 @@ $app->get('/', function ($request, $response, $args) use ($service, $wpService, 
             'id' => $fleaMarket->getId()
         ]);
     }
+
+    //var_dump($isTest);die;
+
     // we need a middleware to convert links to url-compliant representation
     return $this->get('view')
         ->render($response, 'index.html', [
             'fleamarkets' => $fleaMarkets,
             'fleamarketsDetailsRoutes' => $fleaMarketsDetailRoutes,
-            'wpCategories' => $wpCategories
+            'wpCategories' => $wpCategories,
+            'isTest' => (boolean)$isTest
         ]);
 })->setName('index');
 

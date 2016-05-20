@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Onkel Rudi - Die Seite für den Kinderflohmarkt und Kinderbasar.">
     <title>Onkel Rudi - Finde Deinen Kinderflohmarkt oder Kinderbasar!</title>
+    {% if isTest == false %}
     <script type="text/javascript">
         window.cookieconsent_options = {
             "message":"onkel-rudi.de nutzt Cookies, um seinen Besuchern den Aufenthalt so angenehm, wie möglich zu gestalten. Weiterführende Informationen erhalten Sie in der Datenschutzerklärung von onkel-rudi.de.",
@@ -14,9 +15,8 @@
             "theme":"/public/css/cookieconsent.css"
         };
     </script>
-
     <script type="text/javascript" src="/public/bower_components/cookieconsent2/build/cookieconsent.min.js"></script>
-
+    {% endif %}
 </head>
 <body>
 <div class="header">
