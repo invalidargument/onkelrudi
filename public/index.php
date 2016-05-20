@@ -82,10 +82,6 @@ $app->get('/', function ($request, $response, $args) use ($service, $wpService, 
     $wpCategories = $wpService->getAllCategories();
     $fleaMarketsDetailRoutes = [];
     foreach($fleaMarkets as $fleaMarket) {
-        // !!!!!!!!!!!!!!
-        // TODO: für jeden termin das datum an die route hängen
-        // TODO: kann ggfs. auch im template passieren
-        // !!!!!!!!!!!!!!
         $fleaMarketsDetailRoutes[$fleaMarket->getId()] = $app->getContainer()->router->pathFor('event-date', [
             'wildcard' => $fleaMarket->getSlug(),
             'id' => $fleaMarket->getId()
