@@ -218,6 +218,25 @@
             <append value="ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
         </modifySql>
     </changeSet>
+    <changeSet id="20" author="Rudi Bieller">
+        <modifyDataType catalogName="onkelrudi"
+                        columnName="type"
+                        newDataType="enum('admin','user','organizer')"
+                        schemaName="public"
+                        tableName="fleamarkets_users"/>
+    </changeSet>
+    <changeSet id="21" author="Rudi Bieller">
+        <addDefaultValue catalogName="onkelrudi"
+                         columnName="type"
+                         defaultValue="user"
+                         schemaName="public"
+                         tableName="fleamarkets_users"/>
+    </changeSet>
+
+    <!-- map user to organizer and markets -->
+    <!-- ein user kann organizer sein, muss aber nicht -->
+    <!-- ein user kann fleamarkets anlegen und neuen organizer anlegen und sich zuweisen -->
+    <!-- ein user kann fleamarkets anlegen und neuen organizer anlegen und sich nicht zuweisen -->
 </databaseChangeLog>
 
 

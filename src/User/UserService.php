@@ -25,10 +25,10 @@ class UserService implements UserServiceInterface
         $this->_authFactory = $factory;
     }
     
-    public function createUser($identifier, $password)
+    public function createUser($identifier, $password, $type = null)
     {
         $userQuery = $this->_factory->createUserInsertQuery();
-        $userQuery->setIdentifier($identifier)->setPassword($password);
+        $userQuery->setIdentifier($identifier)->setPassword($password)->setType($type);
         return $userQuery->run();
     }
 

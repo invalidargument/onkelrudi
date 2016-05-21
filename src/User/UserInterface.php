@@ -6,4 +6,5 @@ interface UserInterface
 {
     const TYPE_ADMIN = 'admin';
     const TYPE_USER = 'user';
+    const TYPE_ORGANIZER = 'organizer';
 }

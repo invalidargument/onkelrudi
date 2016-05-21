@@ -8,10 +8,11 @@ class InsertQuery extends AbstractInsertQuery
 {
     private $_identifier;
     private $_password;
+    private $_type;
 
     /**
      * @param string $identifier
-     * @return UserInsertQuery
+     * @return InsertQuery
      */
     public function setIdentifier($identifier)
     {
@@ -21,7 +22,7 @@ class InsertQuery extends AbstractInsertQuery
 
     /**
      * @param string $password
-     * @return UserInsertQuery
+     * @return InsertQuery
      */
     public function setPassword($password)
     {
@@ -29,17 +30,34 @@ class InsertQuery extends AbstractInsertQuery
         return $this;
     }
 
+    /**
+     * @param string $type
+     * @return InsertQuery
+     */
+    public function setType($type)
+    {
+        $this->_type = $type;
+        return $this;
+    }
+
     protected function runQuery()
     {
         $insertStatement = $this->pdo
             ->insert(
-                array('email', 'password')
+                array('email', 'password', 'type')
             )
             ->into('fleamarkets_users')
             ->values(
-                array($this->_identifier, $this->_password)
+                array($this->_identifier, $this->_password, $this->_getType())
             );
 
         return $insertStatement->execute();
+    }
+
+    private function _getType()
+    {
+        $valid = array(UserInterface::TYPE_ADMIN, UserInterface::TYPE_ORGANIZER, UserInterface::TYPE_USER);
+
+        return in_array($this->_type, $valid) ? $this->_type : UserInterface::TYPE_USER;
     }
 }

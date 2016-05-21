@@ -4,7 +4,7 @@ namespace RudiBieller\OnkelRudi\User;
 
 interface UserServiceInterface
 {
-    public function createUser($identifier, $password);
+    public function createUser($identifier, $password, $type = null);
 
     public function createOptInToken($identifier);
 

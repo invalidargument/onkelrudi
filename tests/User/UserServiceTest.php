@@ -11,6 +11,7 @@ class UserServiceTest extends \PHPUnit_Framework_TestCase
         $query = \Mockery::mock('RudiBieller\OnkelRudi\User\InsertQuery');
         $query->shouldReceive('setIdentifier')->with('foo')->andReturn($query)
             ->shouldReceive('setPassword')->with('bar')->andReturn($query)
+            ->shouldReceive('setType')->with(null)->andReturn($query)
             ->shouldReceive('run')->andReturn(1);
 
         $queryFactory = \Mockery::mock('RudiBieller\OnkelRudi\User\QueryFactory');
