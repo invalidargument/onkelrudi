@@ -33,7 +33,8 @@
                 var postData = JSON.stringify({
                     email: $('#register_email').val(),
                     password: $('#register_password').val(),
-                    password_repeat: $('#register_password_repeat').val()
+                    password_repeat: $('#register_password_repeat').val(),
+                    register_as_organizer: $('#register_as_organizer').prop('checked')
                 });
 
                 $.ajax({
@@ -146,15 +147,6 @@
     </div>
 </div>
 
-<div class="splash-container">
-    <div class="splash">
-        <h1 class="splash-head">Onkel Rudi</h1>
-        <p class="splash-subhead">
-            Du suchst einen Kinderflohmarkt? Hier findest Du ihn!
-        </p>
-    </div>
-</div>
-
 <div class="content-wrapper">
     <div class="content">
         <div class="regformbox">
@@ -188,20 +180,20 @@
                     </form>
                 </div>
                 <div class="pure-u-1-2 pure-u-md-1 pure-u-lg-1-2">
-                    <h2 class="content-head">Noch kein Login? - <br>Registriere Dich hier als Veranstalter!</h2>
+                    <h2 class="content-head">Noch kein Login? - <br>Registriere Dich hier und veröffentliche Deine Termine!</h2>
                     <p>
-                        Für die Registrierung brauchst Du nur Deine E-Mail-Adresse und ein Passwort. Du bekommst dann
-                        direkt eine E-Mail mit einem Link, über den Du Deine Registrierung bestätigen und aktivieren
-                        kannst.
-                        <br>
-                        Dies ist nötig, damit nur Du Dich mit Deiner E-Mail-Adresse hier registrieren kannst. Die E-Mail mit dem
-                        Bestätigungslink wird sofort nach Deiner Registrierung an die von Dir angegebene Adresse gesendet.
-                        <br>
-                        Falls Du nach einer Minute noch keine E-Mail erhalten hast, schau bitte in Deinem Spam-Ordner nach!
+                        Für die Registrierung brauchst Du nur Deine E-Mail-Adresse und ein Passwort. Sobald Du dieses Formular
+                        abgeschickt hast, bekommst Du eine E-Mail mit einem Bestätigungslink, über den Du Deine Registrierung aktivieren kannst.
                     </p>
                     <p>
-                        Nach der Aktivierung Deiner Registrierung kannst Du ein Profil für Dich anlegen und jederzeit Flohmarkttermine
-                        einstellen und ändern.
+                        So können wir sicherstellen, dass nur Du Dich mit Deiner E-Mail-Adresse hier registrieren kannst.
+                    </p>
+                    <p>
+                        Die E-Mail mit dem Bestätigungslink wird sofort nach Deiner Registrierung an die von Dir angegebene Adresse gesendet. Bitte
+                        folge dem Link zur Aktivierung deines Benutzers - erst nach der Aktivierung kannst Du Dich auf onkel-rudi.de anmelden!
+                    </p>
+                    <p>
+                        Falls Du nach einer Minute noch keine E-Mail mit einem Bestätigungslink erhalten hast, schau bitte in Deinem Spam-Ordner nach.
                     </p>
                     <form id="registrationForm" method="post" class="pure-form pure-form-stacked">
                         <label for="register_email">Deine E-Mail-Adresse</label>
@@ -213,6 +205,9 @@
                         <label for="register_password">Dein Passwort wiederholen</label>
                         <input id="register_password_repeat" type="password" placeholder="Bitte wiederhole das Passwort"
                                class="pure-input-1">
+                        <label for="register_as_organizer">
+                            <input id="register_as_organizer" type="checkbox"> Ich will mich als Veranstalter registrieren
+                        </label>
                         <button type="submit" id="submitregister" class="pure-button">
                             <i class="fa fa-save fa-lg"></i>
                             Benutzer registrieren - click hier!
