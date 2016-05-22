@@ -128,7 +128,8 @@ $app->get('/opt-in/token-{token}', function ($request, $response, $args) use ($a
 
 // Admin View
 $app->get('/admin/', function ($request, $response, $args) use ($organizerService, $wpService, $userService) {
-    $isTest = strpos($request->getUri()->getQuery(), 'test=1') !== false;
+    $isTest = (new Config())->getSystemConfiguration()['environment'] === 'dev' && 
+        strpos($request->getUri()->getQuery(), 'test=1') !== false;
 
     if (!$isTest && is_null($userService->getAuthenticationService()->getStorage()->read())) {
         return $this->get('view')
