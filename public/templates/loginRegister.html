@@ -43,7 +43,6 @@
                     contentType: "application/json",
                     data: postData,
                     success: function (data) {
-                        console.log("User created successfully.", data);
                         $('.errormessage').remove();
                         $('.successmessage').remove();
                         $('#submitregister').removeClass('button-error');
@@ -53,7 +52,6 @@
                         );
                     },
                     error: function (data) {
-                        console.log("ajax error when creating new user", data);
                         $('.errormessage').remove();
                         $('.successmessage').remove();
                         $('#submitregister').removeClass('button-success');
@@ -80,7 +78,6 @@
                     contentType: "application/json",
                     data: postData,
                     success: function (data) {
-                        console.log("User logged in successfully.", data);
                         $('.errormessage').remove();
                         $('.successmessage').remove();
                         $('#submitlogin').removeClass('button-error');
@@ -90,7 +87,6 @@
                         );
                     },
                     error: function (data) {
-                        console.log("ajax error when logging in user", data);
                         $('.errormessage').remove();
                         $('.successmessage').remove();
                         $('#submitlogin').removeClass('button-success');
@@ -111,7 +107,6 @@
                     contentType: "application/json",
                     data: {},
                     success: function (data) {
-                        console.log("User logged out successfully.", data);
                         $('.errormessage').remove();
                         $('.successmessage').remove();
                         $('#logout').parent().append(
@@ -119,7 +114,6 @@
                         );
                     },
                     error: function (data) {
-                        console.log("ajax error when logging out user", data);
                         $('.errormessage').remove();
                         $('.successmessage').remove();
                         $('#logout').parent().append(
