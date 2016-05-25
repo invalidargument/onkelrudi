@@ -202,7 +202,8 @@ a.pure-button-primary {
 
 }
 
-.loginregister .content-wrapper {
+.loginregister .content-wrapper,
+.admin .content-wrapper{
     top: 20px;
 }
 
