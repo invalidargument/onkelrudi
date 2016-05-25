@@ -161,33 +161,33 @@ $app->group('/api', function () use ($app, $controllerFactory) {
 
         // GET list a specific fleamarket
         $app->get('/fleamarkets/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
-            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketAction');
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\Api\FleaMarketAction');
             return $action($request, $response, $args);
         });
 
         // GET list all fleamarkets
         $app->get('/fleamarkets', function ($request, $response, $args) use ($app, $controllerFactory) {
-            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketsAction');
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\Api\FleaMarketsAction');
             return $action($request, $response, $args);
         });
 
         // PUT route, for updating a fleamarket
         $app->put('/fleamarkets/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
-            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketUpdateAction');
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\Api\FleaMarketUpdateAction');
             $action->setBuilderFactory(new BuilderFactory());
             return $action($request, $response, $args);
         });
 
         // DELETE route, for deleting a fleamarket
         $app->delete('/fleamarkets/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
-            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketDeleteAction');
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\Api\FleaMarketDeleteAction');
             $action->setBuilderFactory(new BuilderFactory());
             return $action($request, $response, $args);
         });
 
         // POST route, for creating a fleamarket
         $app->post('/fleamarkets', function ($request, $response, $args) use ($app, $controllerFactory) {
-            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketCreateAction');
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\Api\FleaMarketCreateAction');
             $action->setBuilderFactory(new BuilderFactory());
             return $action($request, $response, $args);
         });
@@ -196,33 +196,33 @@ $app->group('/api', function () use ($app, $controllerFactory) {
 
         // GET list a specific Organizer
         $app->get('/organizers/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
-            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\OrganizerAction');
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\Api\OrganizerAction');
             return $action($request, $response, $args);
         });
 
         // GET list all Organizers
         $app->get('/organizers', function ($request, $response, $args) use ($app, $controllerFactory) {
-            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\OrganizersAction');
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\Api\OrganizersAction');
             return $action($request, $response, $args);
         });
 
         // PUT route, for updating an Organizer
         $app->put('/organizers/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
-            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\OrganizerUpdateAction');
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\Api\OrganizerUpdateAction');
             $action->setBuilderFactory(new BuilderFactory());
             return $action($request, $response, $args);
         });
 
         // DELETE route, for deleting an Organizer
         $app->delete('/organizers/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
-            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\OrganizerDeleteAction');
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\Api\OrganizerDeleteAction');
             $action->setBuilderFactory(new BuilderFactory());
             return $action($request, $response, $args);
         });
 
         // POST route, for creating an Organizer
         $app->post('/organizers', function ($request, $response, $args) use ($app, $controllerFactory) {
-            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\OrganizerCreateAction');
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\Api\OrganizerCreateAction');
             $action->setBuilderFactory(new BuilderFactory());
             return $action($request, $response, $args);
         });
@@ -231,20 +231,20 @@ $app->group('/api', function () use ($app, $controllerFactory) {
 
         // POST route, for creating a user
         $app->post('/users', function ($request, $response, $args) use ($app, $controllerFactory) {
-            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\UserCreateAction');
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\Api\UserCreateAction');
             return $action($request, $response, $args);
         });
 
         // POST route, for logging in a user
         $app->post('/login', function ($request, $response, $args) use ($app, $controllerFactory) {
-            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\UserLoginAction');
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\Api\UserLoginAction');
             $action->setBuilderFactory(new BuilderFactory());
             return $action($request, $response, $args);
         });
 
         // POST route, for logging out a user
         $app->post('/logout', function ($request, $response, $args) use ($app, $controllerFactory) {
-            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\UserLogoutAction');
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\Api\UserLogoutAction');
             $action->setBuilderFactory(new BuilderFactory());
             return $action($request, $response, $args);
         });
