@@ -40,7 +40,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function createActionDataProvider()
     {
         return array(
-            array('RudiBieller\OnkelRudi\Controller\FleaMarketAction', 'RudiBieller\OnkelRudi\Controller\FleaMarketAction')
+            array('RudiBieller\OnkelRudi\Controller\Api\FleaMarketAction', 'RudiBieller\OnkelRudi\Controller\Api\FleaMarketAction')
         );
     }
 
@@ -54,8 +54,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateReturnsAlreadyCreatedInstances()
     {
-        $createdAction = $this->_sut->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketAction');
-        $cachedAction = $this->_sut->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketAction');
+        $createdAction = $this->_sut->createActionByName('RudiBieller\OnkelRudi\Controller\Api\FleaMarketAction');
+        $cachedAction = $this->_sut->createActionByName('RudiBieller\OnkelRudi\Controller\Api\FleaMarketAction');
 
         $this->assertSame($createdAction, $cachedAction);
     }

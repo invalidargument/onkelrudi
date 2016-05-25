@@ -1,6 +1,8 @@
 <?php
 
-namespace RudiBieller\OnkelRudi\Controller;
+namespace RudiBieller\OnkelRudi\Controller\Api;
+
+use RudiBieller\OnkelRudi\Controller\AbstractJsonAction;
 
 class OrganizerAction extends AbstractJsonAction
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace RudiBieller\OnkelRudi\Controller;
+namespace RudiBieller\OnkelRudi\Controller\Api;
 
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 use Slim\App;

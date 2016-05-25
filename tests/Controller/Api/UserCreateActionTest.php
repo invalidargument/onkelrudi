@@ -1,6 +1,6 @@
 <?php
 
-namespace RudiBieller\OnkelRudi\Controller;
+namespace RudiBieller\OnkelRudi\Controller\Api;
 
 use RudiBieller\OnkelRudi\BuilderFactory;
 use Slim\App;
@@ -28,7 +28,7 @@ class UserCreateActionTest extends \PHPUnit_Framework_TestCase
         $container = $app->getContainer();
         $container['view'] = function ($c) {
             $view = new \Slim\Views\Twig(
-                dirname(__FILE__).'/../../public/templates',
+                dirname(__FILE__).'/../../../public/templates',
                 [
                     'cache' => false
                 ]

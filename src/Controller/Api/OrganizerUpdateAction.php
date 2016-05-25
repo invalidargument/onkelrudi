@@ -1,24 +1,25 @@
 <?php
 
-namespace RudiBieller\OnkelRudi\Controller;
+namespace RudiBieller\OnkelRudi\Controller\Api;
 
+use RudiBieller\OnkelRudi\Controller\AbstractJsonAction;
 use RudiBieller\OnkelRudi\FleaMarket\Builder;
 
-class FleaMarketUpdateAction extends AbstractJsonAction
+class OrganizerUpdateAction extends AbstractJsonAction
 {
     protected function getData()
     {
         /**
          * @var Builder
          */
-        $builder = $this->builderFactory->create('RudiBieller\OnkelRudi\FleaMarket\Builder');
+        $builder = $this->builderFactory->create('RudiBieller\OnkelRudi\FleaMarket\OrganizerBuilder');
         $builder->reset();
 
-        $fleaMarketId = $this->args['id'];
+        $organizerId = $this->args['id'];
 
         // if not found, return 404
 
-        $builder->setId($fleaMarketId);
+        $builder->setId($organizerId);
 
         $data = $this->request->getParsedBody();
 
@@ -29,6 +30,6 @@ class FleaMarketUpdateAction extends AbstractJsonAction
             }
         }
 
-        return $this->service->updateFleaMarket($builder->build());
+        return $this->organizerService->updateOrganizer($builder->build());
     }
 }

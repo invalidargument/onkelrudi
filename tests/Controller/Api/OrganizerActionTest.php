@@ -1,31 +1,31 @@
 <?php
 
-namespace RudiBieller\OnkelRudi\Controller;
+namespace RudiBieller\OnkelRudi\Controller\Api;
 
-use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
+use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use Slim\App;
 
-class FleaMarketActionTest extends \PHPUnit_Framework_TestCase
+class OrganizerActionTest extends \PHPUnit_Framework_TestCase
 {
     public function testActionReturnsMarket()
     {
-        $market = new FleaMarket();
-        $market->setId(23)->setName('Rudis Market');
+        $organizer = new Organizer();
+        $organizer->setId(23)->setName('Max Power');
 
         $app = new App();
         $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
 
-        $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketService');
-        $service->shouldReceive('getFleaMarket')->once()->with(42)->andReturn($market);
+        $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\OrganizerService');
+        $service->shouldReceive('getOrganizer')->once()->with(42)->andReturn($organizer);
 
-        $action = new FleaMarketAction();
+        $action = new OrganizerAction();
         $action->setApp($app);
-        $action->setService($service);
+        $action->setOrganizerService($service);
 
         $return = $action($request, $response, array('id' => 42));
         $actual = (string)$return->getBody();
-        $expected = json_encode(array('data' => $market));
+        $expected = json_encode(array('data' => $organizer));
 
         $this->assertSame(200, $return->getStatusCode());
         $this->assertJsonStringEqualsJsonString($expected, $actual);
@@ -42,12 +42,12 @@ class FleaMarketActionTest extends \PHPUnit_Framework_TestCase
             ->with(FleaMarketAction::DEFAULT_ERROR_RESPONSE_HTTP_STATUS_CODE, FleaMarketAction::DEFAULT_ERROR_RESPONSE_MESSAGE)
             ->andReturn($response);
 
-        $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketService');
-        $service->shouldReceive('getFleaMarket')->andReturn(null);
+        $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\OrganizerService');
+        $service->shouldReceive('getOrganizer')->andReturn(null);
 
-        $action = new FleaMarketAction();
+        $action = new OrganizerAction();
         $action->setApp($app);
-        $action->setService($service);
+        $action->setOrganizerService($service);
 
         $return = $action($request, $response, array('id' => 42));
         $actual = (string)$return->getBody();

@@ -1,17 +1,17 @@
 <?php
 
-namespace RudiBieller\OnkelRudi\Controller;
+namespace RudiBieller\OnkelRudi\Controller\Api;
 
 use RudiBieller\OnkelRudi\BuilderFactory;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
-use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use Slim\App;
 
-class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
+class FleaMarketUpdateActionTest extends \PHPUnit_Framework_TestCase
 {
-    public function testActionCreatesNewFleaMarket()
+    public function testActionUpdatesPassedFleaMarket()
     {
         $parsedJson = [
+            'id' => 1,
             'name' => 'foo',
             'city' => 'bar',
             'zipCode' => '12345',
@@ -20,39 +20,35 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
             'location' => 'Cologne',
             'street' => 'Venloer',
             'streetNo' => 1,
-            'url' => 'foo.com',
-            'organizerId' => 42
+            'url' => 'foo.com'
         ];
-
-        $organizer = new Organizer();
-        $organizer->setId(42);
         $fleaMarket = new FleaMarket();
-        $fleaMarket->setName('foo')
+        $fleaMarket->setId(1)
+            ->setName('foo')
             ->setCity('bar')
             ->setZipCode(12345)
             ->setDescription('baz')
-            ->setDates([])
             ->setLocation('Cologne')
+            ->setDates([])
             ->setStreet('Venloer')
             ->setStreetNo(1)
-            ->setUrl('foo.com')
-            ->setOrganizer($organizer);
+            ->setUrl('foo.com');
 
         $builderFactory = new BuilderFactory();
         $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketService');
-        $service->shouldReceive('createFleaMarket')->once()->with(\Hamcrest\Matchers::equalTo($fleaMarket))->andReturn(1);
+        $service->shouldReceive('updateFleaMarket')->once()->with(\Hamcrest\Matchers::equalTo($fleaMarket))->andReturn(1);
 
         $app = new App();
         $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
         $request->shouldReceive('getParsedBody')->once()->andReturn($parsedJson);
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
 
-        $action = new FleaMarketCreateAction();
+        $action = new FleaMarketUpdateAction();
         $action->setApp($app)
             ->setService($service)
             ->setBuilderFactory($builderFactory);
 
-        $return = $action($request, $response, array());
+        $return = $action($request, $response, array('id' => 123));
         $actual = (string)$return->getBody();
         $expected = json_encode(array('data' => 1));
 

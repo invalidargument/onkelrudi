@@ -1,7 +1,9 @@
 <?php
 
-namespace RudiBieller\OnkelRudi\Controller;
+namespace RudiBieller\OnkelRudi\Controller\Api;
 
+use RudiBieller\OnkelRudi\Controller\AbstractJsonAction;
+use RudiBieller\OnkelRudi\FleaMarket\Builder;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 
