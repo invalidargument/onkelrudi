@@ -133,7 +133,7 @@ $app->get('/admin/', function ($request, $response, $args) use ($organizerServic
 
     if (!$isTest && is_null($userService->getAuthenticationService()->getStorage()->read())) {
         return $this->get('view')
-            ->render($response, 'admin.html', ['notLoggedIn' => true]);
+            ->render($response, 'createFleaMarket.html', ['notLoggedIn' => true]);
     }
 
     $fleamarketOrganizers = [];
@@ -144,7 +144,7 @@ $app->get('/admin/', function ($request, $response, $args) use ($organizerServic
     $wpCategories = $wpService->getAllCategories();
 
     return $this->get('view')
-        ->render($response, 'admin.html', [
+        ->render($response, 'createFleaMarket.html', [
             'fleamarket_organizers' => $fleamarketOrganizers,
             'wpCategories' => $wpCategories,
             'isTest' => $isTest,

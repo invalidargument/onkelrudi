@@ -41,7 +41,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'build/onkelrudi/public/templates/admin.html': [
-                        'public/templates/admin.html'
+                        'public/templates/createFleaMarket.html'
                     ],
                     'build/onkelrudi/public/templates/error.html': [
                         'public/templates/error.html'
@@ -63,8 +63,8 @@ module.exports = function(grunt) {
         },
         replace: {
             adminHtmlPaths: {
-                src: ['build/onkelrudi/public/templates/admin.html'],
-                dest: 'build/onkelrudi/public/templates/admin.html',
+                src: ['build/onkelrudi/public/templates/createFleaMarket.html'],
+                dest: 'build/onkelrudi/public/templates/createFleaMarket.html',
                 replacements: [
                     {
                         from: '/public/bower_components/pure/',
