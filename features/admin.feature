@@ -7,7 +7,7 @@ Feature: Admin page of onkelrudi
   @browser
   Scenario: Admin can create a new fleamarket with a new organizer
     Given I have a default organizer
-    And I am on "/admin/?test=1"
+    And I am on "/flohmarkt-anlegen/?test=1"
     Then I should see "+ Termin anlegen"
     When I fill in "fleamarket_name" with "Rudi Bieller"
     And I fill in "fleamarket_description" with "Eine Beschreibung"
@@ -49,7 +49,7 @@ Feature: Admin page of onkelrudi
   @browser
   Scenario: Admin can create a new fleamarket with an existing organizer
     Given I have a default organizer
-    And I am on "/admin/?test=1"
+    And I am on "/flohmarkt-anlegen/?test=1"
     Then I should see "+ Termin anlegen"
     When I fill in "fleamarket_name" with "Rudi Bieller"
     And I select "Max Power" from "fleamarket_organizer"
@@ -79,7 +79,7 @@ Feature: Admin page of onkelrudi
   @browser
   Scenario: Admin can not create a new fleamarket when no existing organizer is selected and no new organizer provided
     #Given I have no default organizer
-    Given I am on "/admin/?test=1"
+    Given I am on "/flohmarkt-anlegen/?test=1"
     Then I should see "+ Termin anlegen"
     When I fill in "fleamarket_name" with "Rudi Bieller"
     And I fill in "fleamarket_description" with "Eine Beschreibung"
@@ -101,7 +101,7 @@ Feature: Admin page of onkelrudi
 
   @browser
   Scenario: Admin is shown errormessage when not all mandatory fields are filled
-    Given I am on "/admin/?test=1"
+    Given I am on "/flohmarkt-anlegen/?test=1"
     And I fill in "fleamarket_name" with "Rudi Bieller"
     And I press "Neuen Termin speichern - click hier!"
     And I wait for "1" seconds

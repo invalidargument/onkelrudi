@@ -126,31 +126,11 @@ $app->get('/opt-in/token-{token}', function ($request, $response, $args) use ($a
     return $action($request, $response, $args);
 })->setName('optin-confirmation');
 
-// Admin View
-$app->get('/admin/', function ($request, $response, $args) use ($organizerService, $wpService, $userService) {
-    $isTest = (new Config())->getSystemConfiguration()['environment'] === 'dev' && 
-        strpos($request->getUri()->getQuery(), 'test=1') !== false;
-
-    if (!$isTest && is_null($userService->getAuthenticationService()->getStorage()->read())) {
-        return $this->get('view')
-            ->render($response, 'createFleaMarket.html', ['notLoggedIn' => true]);
-    }
-
-    $fleamarketOrganizers = [];
-    foreach ($organizerService->getAllOrganizers() as $organizer) {
-        $fleamarketOrganizers[] = ['id' => $organizer->getId(), 'name' => $organizer->getName()];
-    }
-
-    $wpCategories = $wpService->getAllCategories();
-
-    return $this->get('view')
-        ->render($response, 'createFleaMarket.html', [
-            'fleamarket_organizers' => $fleamarketOrganizers,
-            'wpCategories' => $wpCategories,
-            'isTest' => $isTest,
-            'loggedIn' => true
-        ]);
-})->setName('admin');
+// USER: create fleamarket view
+$app->get('/flohmarkt-anlegen/', function ($request, $response, $args) use ($controllerFactory) {
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\CreateFleaMarketAction');
+    return $action($request, $response, $args);
+})->setName('create-fleamarket');
 
 // API routes
 $app->group('/api', function () use ($app, $controllerFactory) {
