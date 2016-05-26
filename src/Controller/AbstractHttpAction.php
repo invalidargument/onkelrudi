@@ -25,7 +25,10 @@ abstract class AbstractHttpAction extends AbstractAction implements HttpActionIn
             ->render(
                 $this->response,
                 'error.html',
-                array('error' => $this->getResponseErrorStatusMessage())
+                array(
+                    'error' => $this->getResponseErrorStatusMessage(),
+                    'wpCategories' => $this->wordpressService->getAllCategories()
+                )
             );
     }
 
@@ -38,6 +41,20 @@ abstract class AbstractHttpAction extends AbstractAction implements HttpActionIn
                 array_merge(
                     ['data' => $this->result, 'wpCategories' => $this->wordpressService->getAllCategories()],
                     $this->templateVariables
+                )
+            );
+    }
+
+    protected function writeAuthenticationRequiredResponse()
+    {
+        return $this->app->getContainer()->get('view')
+            ->render(
+                $this->response,
+                'unauthorized.html',
+                array(
+                    'error' => 'Für diese Aktion musst Du Dich anmelden.',
+                    'returnurl' => (string) $this->request->getUri(),
+                    'wpCategories' => $this->wordpressService->getAllCategories()
                 )
             );
     }

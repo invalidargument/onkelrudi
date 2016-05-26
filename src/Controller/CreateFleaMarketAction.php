@@ -4,7 +4,7 @@ namespace RudiBieller\OnkelRudi\Controller;
 
 use RudiBieller\OnkelRudi\Config\Config;
 
-class CreateFleaMarketAction extends AbstractHttpAction
+class CreateFleaMarketAction extends AbstractHttpAction implements UserAwareInterface
 {
     protected $template = 'createFleaMarket.html';
 

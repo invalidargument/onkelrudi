@@ -58,7 +58,7 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
 
         $action($request, $response, array());
 
-        $this->assertAttributeEquals(['notLoggedIn' => true], 'templateVariables', $action);
+        $this->assertAttributeEquals([], 'templateVariables', $action);
     }
 
     public function testActionSetsNeededTemplateVariables()

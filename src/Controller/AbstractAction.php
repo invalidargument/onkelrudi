@@ -5,6 +5,7 @@ namespace RudiBieller\OnkelRudi\Controller;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use RudiBieller\OnkelRudi\BuilderFactoryInterface;
+use RudiBieller\OnkelRudi\Config\Config;
 use RudiBieller\OnkelRudi\FleaMarket\OrganizerServiceInterface;
 use RudiBieller\OnkelRudi\ServiceInterface;
 use RudiBieller\OnkelRudi\User\NotificationServiceInterface;
@@ -42,6 +43,8 @@ abstract class AbstractAction implements ActionInterface
     abstract protected function writeErrorResponse();
 
     abstract protected function writeSuccessResponse();
+
+    abstract protected function writeAuthenticationRequiredResponse();
 
     public function setApp(\Slim\App $app)
     {
@@ -85,6 +88,12 @@ abstract class AbstractAction implements ActionInterface
         $this->response = $response;
         $this->args = $args;
 
+        if ($this instanceof UserAwareInterface) {
+            if ($this->_isUnauthorizedRequest()) {
+                return $this->writeAuthenticationRequiredResponse();
+            }
+        }
+
         $this->result = $this->getData();
         if ($this->isInvalidResult()) {
             return $this->writeErrorResponse();
@@ -112,5 +121,17 @@ abstract class AbstractAction implements ActionInterface
     protected function getResponseErrorStatusMessage()
     {
         return self::DEFAULT_ERROR_RESPONSE_MESSAGE;
+    }
+
+    private function _isUnauthorizedRequest()
+    {
+        $isTest = (new Config())->getSystemConfiguration()['environment'] === 'dev' &&
+            strpos($this->request->getUri()->getQuery(), 'test=1') !== false;
+
+        if (!$isTest && is_null($this->userService->getAuthenticationService()->getStorage()->read())) {
+            return true;
+        }
+
+        return false;
     }
 }
