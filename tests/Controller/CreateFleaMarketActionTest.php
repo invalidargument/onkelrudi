@@ -22,10 +22,7 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
         $container['view'] = function ($c) {
             $view = new \Slim\Views\Twig(
                 dirname(__FILE__).'/../../public/templates',
-                [
-                    //'cache' => 'templates/cache'
-                    'cache' => false
-                ]
+                ['cache' => false]
             );
 
             $view->addExtension(new \Slim\Views\TwigExtension(
