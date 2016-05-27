@@ -2,6 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\User;
 
+use Slim\Container;
+
 class QueryFactoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -10,6 +12,7 @@ class QueryFactoryTest extends \PHPUnit_Framework_TestCase
     public function testFactoryCreatesQueriesAndReturnsThemWhenRequested($methodName, $expectedQuery)
     {
         $factory = new QueryFactory();
+        $factory->setDiContainer(new Container());
 
         $query = $factory->$methodName();
 

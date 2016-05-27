@@ -2,8 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\Query;
 
+use Slim\Container;
 use \Slim\PDO\Database;
-use RudiBieller\OnkelRudi\Config\Config;
 
 abstract class AbstractQuery implements QueryInterface
 {
@@ -11,6 +11,11 @@ abstract class AbstractQuery implements QueryInterface
      * @var Database
      */
     protected $pdo;
+
+    /**
+     * @var \Slim\Container
+     */
+    protected $diContainer;
 
     abstract protected function mapResult($result);
     abstract protected function runQuery();
@@ -20,6 +25,11 @@ abstract class AbstractQuery implements QueryInterface
         $this->getPdo();
         $result = $this->runQuery();
         return $this->mapResult($result);
+    }
+
+    public function setDiContainer(Container $diContainer)
+    {
+        $this->diContainer = $diContainer;
     }
 
     public function setPdo(\PDO $pdo)
@@ -39,12 +49,6 @@ abstract class AbstractQuery implements QueryInterface
 
     private function _createPdoInstance()
     {
-        $dbSettings = (new Config())->getDatabaseConfiguration();
-
-        return new Database(
-            $dbSettings['dsn'],
-            $dbSettings['user'],
-            $dbSettings['password']
-        );
+        return $this->diContainer->db;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\FleaMarket\Query;
 
+use Slim\Container;
+
 class Factory
 {
     private $_fleaMarketDeleteQuery;
@@ -13,6 +15,13 @@ class Factory
     private $_datesInsertQuery;
     private $_datesReadListQuery;
 
+    private $_diContainer;
+
+    public function setDiContainer(Container $diContainer)
+    {
+        $this->_diContainer = $diContainer;
+    }
+
     /**
      * @return \RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketDeleteQuery
      */
@@ -20,6 +29,7 @@ class Factory
     {
         if (is_null($this->_fleaMarketDeleteQuery)) {
             $this->_fleaMarketDeleteQuery = new FleaMarketDeleteQuery();
+            $this->_fleaMarketDeleteQuery->setDiContainer($this->_diContainer);
         }
 
         return $this->_fleaMarketDeleteQuery;
@@ -32,6 +42,7 @@ class Factory
     {
         if (is_null($this->_fleaMarketInsertQuery)) {
             $this->_fleaMarketInsertQuery = new FleaMarketInsertQuery();
+            $this->_fleaMarketInsertQuery->setDiContainer($this->_diContainer);
         }
 
         return $this->_fleaMarketInsertQuery;
@@ -44,6 +55,7 @@ class Factory
     {
         if (is_null($this->_fleaMarketReadListQuery)) {
             $this->_fleaMarketReadListQuery = new FleaMarketReadListQuery();
+            $this->_fleaMarketReadListQuery->setDiContainer($this->_diContainer);
         }
 
         return $this->_fleaMarketReadListQuery;
@@ -56,6 +68,7 @@ class Factory
     {
         if (is_null($this->_fleaMarketReadQuery)) {
             $this->_fleaMarketReadQuery = new FleaMarketReadQuery();
+            $this->_fleaMarketReadQuery->setDiContainer($this->_diContainer);
         }
 
         return $this->_fleaMarketReadQuery;
@@ -68,6 +81,7 @@ class Factory
     {
         if (is_null($this->_fleaMarketUpdateQuery)) {
             $this->_fleaMarketUpdateQuery = new FleaMarketUpdateQuery();
+            $this->_fleaMarketUpdateQuery->setDiContainer($this->_diContainer);
         }
 
         return $this->_fleaMarketUpdateQuery;
@@ -80,6 +94,7 @@ class Factory
     {
         if (is_null($this->_fleaMarketTestCaseDeleteQuery)) {
             $this->_fleaMarketTestCaseDeleteQuery = new FleaMarketTestCaseDeleteQuery();
+            $this->_fleaMarketTestCaseDeleteQuery->setDiContainer($this->_diContainer);
         }
 
         return $this->_fleaMarketTestCaseDeleteQuery;
@@ -92,6 +107,7 @@ class Factory
     {
         if (is_null($this->_datesInsertQuery)) {
             $this->_datesInsertQuery = new DatesInsertQuery();
+            $this->_datesInsertQuery->setDiContainer($this->_diContainer);
         }
 
         return $this->_datesInsertQuery;
@@ -104,6 +120,7 @@ class Factory
     {
         if (is_null($this->_datesReadListQuery)) {
             $this->_datesReadListQuery = new DatesReadListQuery();
+            $this->_datesReadListQuery->setDiContainer($this->_diContainer);
         }
 
         return $this->_datesReadListQuery;

@@ -3,12 +3,14 @@
 namespace RudiBieller\OnkelRudi\Wordpress;
 
 use RudiBieller\OnkelRudi\Config\Config;
+use Slim\Container;
 
 class PostReadListQueryTest extends \PHPUnit_Framework_TestCase
 {
     public function testQueryReturnsMappedPosts()
     {
-        $wpConfig = (new Config('settings.yml.dist'))->getWordpressConfiguration();
+        $config = new Config('settings.yml.dist');
+        $wpConfig = $config->getWordpressConfiguration();
         
         $post = new Post();
         $post
@@ -29,6 +31,7 @@ class PostReadListQueryTest extends \PHPUnit_Framework_TestCase
 
         $sut = new PostReadListQuery();
         $sut->setBrowser($browser);
+        $sut->setDiContainer(new Container(['config' => $config]));
 
         $result = $sut->run();
         $expected = array($post);

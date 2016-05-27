@@ -7,6 +7,7 @@ use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\MinkExtension\Context\MinkContext;
+use RudiBieller\OnkelRudi\Config\Config;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketService;
@@ -17,6 +18,7 @@ use RudiBieller\OnkelRudi\FleaMarket\Query\OrganizerQueryFactory;
 use RudiBieller\OnkelRudi\User\QueryFactory;
 use RudiBieller\OnkelRudi\User\UserService;
 use RudiBieller\OnkelRudi\User\UserServiceInterface;
+use Slim\PDO\Database;
 
 /**
  * Defines application features from the specific context.
@@ -44,19 +46,40 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
      */
     public function __construct()
     {
+        $config = new Config();
+        $appConfiguration = [
+            // Onkel Rudi Configuration
+            'config' => $config,
+            // Database PDO instance
+            'db' => function() use ($config) {
+                $dbSettings = $config->getDatabaseConfiguration();
+
+                return new Database(
+                    $dbSettings['dsn'],
+                    $dbSettings['user'],
+                    $dbSettings['password']
+                );
+            }
+        ];
+
+        $container = new \Slim\Container($appConfiguration);
+
         $curl = new \Buzz\Client\Curl();
         $curl->setOption(CURLOPT_FOLLOWLOCATION, false);
         $this->_browser = new \Buzz\Browser($curl);
 
         $factory = new Factory();
+        $factory->setDiContainer($container);
         $this->_service = new FleaMarketService();
         $this->_service->setQueryFactory($factory);
 
         $organizerQueryFactory = new OrganizerQueryFactory();
+        $organizerQueryFactory->setDiContainer($container);
         $this->_organizerService = new OrganizerService();
         $this->_organizerService->setQueryFactory($organizerQueryFactory);
 
         $userQueryFactory = new QueryFactory();
+        $userQueryFactory->setDiContainer($container);
         $this->_userService = new UserService();
         $this->_userService->setQueryFactory($userQueryFactory);
     }

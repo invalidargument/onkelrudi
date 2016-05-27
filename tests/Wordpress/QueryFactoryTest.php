@@ -2,6 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\Wordpress;
 
+use Slim\Container;
+
 class QueryFactoryTest extends \PHPUnit_Framework_TestCase
 {
     private $_sut;
@@ -9,6 +11,7 @@ class QueryFactoryTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->_sut = new QueryFactory();
+        $this->_sut->setDiContainer(new Container());
     }
 
     /**

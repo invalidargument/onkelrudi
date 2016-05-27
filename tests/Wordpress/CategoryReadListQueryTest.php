@@ -3,12 +3,14 @@
 namespace RudiBieller\OnkelRudi\Wordpress;
 
 use RudiBieller\OnkelRudi\Config\Config;
+use Slim\Container;
 
 class CategoryReadListQueryTest extends \PHPUnit_Framework_TestCase
 {
     public function testQueryReturnsMappedCategories()
     {
-        $wpConfig = (new Config('settings.yml.dist'))->getWordpressConfiguration();
+        $config = new Config('settings.yml.dist');
+        $wpConfig = $config->getWordpressConfiguration();
         
         $category = new Category();
         $category
@@ -27,6 +29,7 @@ class CategoryReadListQueryTest extends \PHPUnit_Framework_TestCase
 
         $sut = new CategoryReadListQuery();
         $sut->setBrowser($browser);
+        $sut->setDiContainer(new Container(['config' => $config]));
 
         $result = $sut->run();
 

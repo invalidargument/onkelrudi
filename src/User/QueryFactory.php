@@ -2,20 +2,48 @@
 
 namespace RudiBieller\OnkelRudi\User;
 
+use Slim\Container;
+
 class QueryFactory
 {
+    private $_insertQuery;
+    private $_optInTokenInsertQuery;
+    private $_optInTokenUpdateQuery;
+
+    private $_diContainer;
+
+    public function setDiContainer(Container $diContainer)
+    {
+        $this->_diContainer = $diContainer;
+    }
+
     public function createUserInsertQuery()
     {
-        return new InsertQuery();
+        if (is_null($this->_insertQuery)) {
+            $this->_insertQuery = new InsertQuery();
+            $this->_insertQuery->setDiContainer($this->_diContainer);
+        }
+
+        return $this->_insertQuery;
     }
 
     public function createOptInTokenInsertQuery()
     {
-        return new OptInTokenInsertQuery();
+        if (is_null($this->_optInTokenInsertQuery)) {
+            $this->_optInTokenInsertQuery = new OptInTokenInsertQuery();
+            $this->_optInTokenInsertQuery->setDiContainer($this->_diContainer);
+        }
+
+        return $this->_optInTokenInsertQuery;
     }
 
     public function createOptInTokenUpdateQuery()
     {
-        return new OptInTokenUpdateQuery();
+        if (is_null($this->_optInTokenUpdateQuery)) {
+            $this->_optInTokenUpdateQuery = new OptInTokenUpdateQuery();
+            $this->_optInTokenUpdateQuery->setDiContainer($this->_diContainer);
+        }
+
+        return $this->_optInTokenUpdateQuery;
     }
 }

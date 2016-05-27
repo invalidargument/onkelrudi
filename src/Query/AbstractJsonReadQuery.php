@@ -4,11 +4,16 @@ namespace RudiBieller\OnkelRudi\Query;
 
 use Buzz\Listener\BasicAuthListener;
 use RudiBieller\OnkelRudi\Config\Config;
+use Slim\Container;
 
 abstract class AbstractJsonReadQuery implements QueryInterface
 {
     protected $uri;
     protected $browser;
+    /**
+     * @var \Slim\Container
+     */
+    protected $diContainer;
 
     abstract protected function mapResult($result);
 
@@ -32,6 +37,11 @@ abstract class AbstractJsonReadQuery implements QueryInterface
     public function run()
     {
         return $this->mapResult($this->runQuery());
+    }
+
+    public function setDiContainer(Container $diContainer)
+    {
+        $this->diContainer = $diContainer;
     }
 
     protected function runQuery()
@@ -67,8 +77,8 @@ abstract class AbstractJsonReadQuery implements QueryInterface
 
     protected function addAuthListenerToBrowser()
     {
-        $wpConfig = (new Config())->getWordpressConfiguration();
-        
+        $wpConfig = $this->diContainer->config->getWordpressConfiguration();
+
         $username = $wpConfig['auth-username'];
         $password = $wpConfig['auth-password'];
 

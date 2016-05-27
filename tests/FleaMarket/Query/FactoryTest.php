@@ -2,6 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\FleaMarket\Query;
 
+use Slim\Container;
+
 class FactoryTest extends \PHPUnit_Framework_TestCase
 {
     private $_sut;
@@ -9,6 +11,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->_sut = new Factory();
+        $this->_sut->setDiContainer(new Container());
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\FleaMarket\Query;
 
+use Slim\Container;
+
 class OrganizerQueryFactory
 {
     private $_fleaMarketOrganizerDeleteQuery;
@@ -10,6 +12,13 @@ class OrganizerQueryFactory
     private $_fleaMarketOrganizerReadQuery;
     private $_fleaMarketOrganizerUpdateQuery;
 
+    private $_diContainer;
+
+    public function setDiContainer(Container $diContainer)
+    {
+        $this->_diContainer = $diContainer;
+    }
+
     /**
      * @return \RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerDeleteQuery
      */
@@ -17,6 +26,7 @@ class OrganizerQueryFactory
     {
         if (is_null($this->_fleaMarketOrganizerDeleteQuery)) {
             $this->_fleaMarketOrganizerDeleteQuery = new FleaMarketOrganizerDeleteQuery();
+            $this->_fleaMarketOrganizerDeleteQuery->setDiContainer($this->_diContainer);
         }
 
         return $this->_fleaMarketOrganizerDeleteQuery;
@@ -29,6 +39,7 @@ class OrganizerQueryFactory
     {
         if (is_null($this->_fleaMarketOrganizerInsertQuery)) {
             $this->_fleaMarketOrganizerInsertQuery = new FleaMarketOrganizerInsertQuery();
+            $this->_fleaMarketOrganizerInsertQuery->setDiContainer($this->_diContainer);
         }
 
         return $this->_fleaMarketOrganizerInsertQuery;
@@ -41,6 +52,7 @@ class OrganizerQueryFactory
     {
         if (is_null($this->_fleaMarketOrganizerReadListQuery)) {
             $this->_fleaMarketOrganizerReadListQuery = new FleaMarketOrganizerReadListQuery();
+            $this->_fleaMarketOrganizerReadListQuery->setDiContainer($this->_diContainer);
         }
 
         return $this->_fleaMarketOrganizerReadListQuery;
@@ -53,6 +65,7 @@ class OrganizerQueryFactory
     {
         if (is_null($this->_fleaMarketOrganizerReadQuery)) {
             $this->_fleaMarketOrganizerReadQuery = new FleaMarketOrganizerReadQuery();
+            $this->_fleaMarketOrganizerReadQuery->setDiContainer($this->_diContainer);
         }
 
         return $this->_fleaMarketOrganizerReadQuery;
@@ -65,6 +78,7 @@ class OrganizerQueryFactory
     {
         if (is_null($this->_fleaMarketOrganizerUpdateQuery)) {
             $this->_fleaMarketOrganizerUpdateQuery = new FleaMarketOrganizerUpdateQuery();
+            $this->_fleaMarketOrganizerUpdateQuery->setDiContainer($this->_diContainer);
         }
 
         return $this->_fleaMarketOrganizerUpdateQuery;

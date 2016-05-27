@@ -14,8 +14,10 @@ use RudiBieller\OnkelRudi\User\UserService;
 use RudiBieller\OnkelRudi\User\QueryFactory as UserQueryFactory;
 use RudiBieller\OnkelRudi\Wordpress\QueryFactory;
 use RudiBieller\OnkelRudi\Wordpress\Service as WpService;
+use Slim\PDO\Database;
 
 $config = new Config();
+$db = null;
 
 $envSettings = [
     'displayErrorDetails' => false,
@@ -47,30 +49,51 @@ $appConfiguration = [
         return $view;
     },
     // Onkel Rudi Configuration
-    'config' => $config
+    'config' => $config,
+    // Database PDO instance
+    'db' => function() use ($config, $db) {
+        if (is_null($db)) {
+            $dbSettings = $config->getDatabaseConfiguration();
+
+            $db = new Database(
+                $dbSettings['dsn'],
+                $dbSettings['user'],
+                $dbSettings['password']
+            );
+        }
+
+        return $db;
+    }
 ];
 
 $container = new \Slim\Container($appConfiguration);
 
 $app = new \Slim\App($container);
 
-
 // fleaMarkets
+$fleaMarketQueryFactory = new Factory();
+$fleaMarketQueryFactory->setDiContainer($app->getContainer());
 $service = new FleaMarketService();
-$service->setQueryFactory(new Factory());
+$service->setQueryFactory($fleaMarketQueryFactory);
 // organizers
+$organizerQueryFactory = new OrganizerQueryFactory();
+$organizerQueryFactory->setDiContainer($app->getContainer());
 $organizerService = new OrganizerService();
-$organizerService->setQueryFactory(new OrganizerQueryFactory());
+$organizerService->setQueryFactory($organizerQueryFactory);
 // users
+$userQueryFactory = new UserQueryFactory();
+$userQueryFactory->setDiContainer($app->getContainer());
 $userService = new UserService();
-$userService->setQueryFactory(new UserQueryFactory());
+$userService->setQueryFactory($userQueryFactory);
 $userService->setAuthenticationFactory(new AuthenticationFactory());
 // notifications
 $notificationService = new NotificationService();
 
 // wordpress
+$wpQueryFactory = new QueryFactory();
+$wpQueryFactory->setDiContainer($app->getContainer());
 $wpService = new WpService();
-$wpService->setQueryFactory(new QueryFactory());
+$wpService->setQueryFactory($wpQueryFactory);
 
 // controller
 $controllerFactory = new ControllerFactory($app);
