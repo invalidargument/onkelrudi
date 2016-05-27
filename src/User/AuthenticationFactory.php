@@ -2,6 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\User;
 
+use Slim\Container;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Storage\Session;
 use Zend\Session\Config\SessionConfig;
@@ -12,6 +13,13 @@ class AuthenticationFactory
     private $_authenticationService = null;
     private $_authenticationAdapter = null;
     private $_sessionStorage = null;
+
+    private $_diContainer;
+
+    public function setDiContainer(Container $diContainer)
+    {
+        $this->_diContainer = $diContainer;
+    }
 
     public function createAuthService($authAdapter, $sessionStorage)
     {
@@ -28,6 +36,7 @@ class AuthenticationFactory
     {
         if (is_null($this->_authenticationAdapter)) {
             $this->_authenticationAdapter = new DbAuthenticationAdapter();
+            $this->_authenticationAdapter->setDiContainer($this->_diContainer);
             if (!is_null($user)) {
                 $this->_authenticationAdapter
                     ->setIdentifier($user->getIdentifier())

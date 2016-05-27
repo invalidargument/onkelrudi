@@ -83,9 +83,11 @@ $organizerService->setQueryFactory($organizerQueryFactory);
 // users
 $userQueryFactory = new UserQueryFactory();
 $userQueryFactory->setDiContainer($app->getContainer());
+$authFactory = new AuthenticationFactory();
+$authFactory->setDiContainer($app->getContainer());
 $userService = new UserService();
 $userService->setQueryFactory($userQueryFactory);
-$userService->setAuthenticationFactory(new AuthenticationFactory());
+$userService->setAuthenticationFactory($authFactory);
 // notifications
 $notificationService = new NotificationService();
 
