@@ -16,7 +16,7 @@ class CreateFleaMarketAction extends AbstractHttpAction implements UserAwareInte
             $fleamarketOrganizers[] = ['id' => $organizer->getId(), 'name' => $organizer->getName()];
         }
 
-        $this->templateVariables['isTest'] = $isTest;
+        $this->templateVariables['isTest'] = $this->isTestRequest;
         $this->templateVariables['loggedIn'] = true;
         $this->templateVariables['fleamarket_organizers'] = $fleamarketOrganizers;
 

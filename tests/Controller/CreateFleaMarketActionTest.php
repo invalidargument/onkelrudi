@@ -10,6 +10,9 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
 {
     public function testActionDoesRecognizeEmptySession()
     {
+        $config = \Mockery::mock('RudiBieller\OnkelRudi\Config\Config');
+        $config->shouldReceive('getSystemConfiguration')->andReturn(array('environment' => 'dev'));
+
         $app = new App();
         $container = $app->getContainer();
         $container['view'] = function ($c) {
@@ -28,6 +31,8 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
 
             return $view;
         };
+        $container['config'] = $config;
+
         $uri = \Mockery::mock('Slim\Http\Uri');
         $uri->shouldReceive('getQuery')->andReturn('/foo/?test=false');
 
@@ -63,6 +68,9 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
 
     public function testActionSetsNeededTemplateVariables()
     {
+        $config = \Mockery::mock('RudiBieller\OnkelRudi\Config\Config');
+        $config->shouldReceive('getSystemConfiguration')->andReturn(array('environment' => 'dev'));
+
         $app = new App();
         $container = $app->getContainer();
         $container['view'] = function ($c) {
@@ -81,6 +89,8 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
 
             return $view;
         };
+        $container['config'] = $config;
+
         $uri = \Mockery::mock('Slim\Http\Uri');
         $uri->shouldReceive('getQuery')->andReturn('/foo/?test=1');
 

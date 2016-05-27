@@ -38,6 +38,8 @@ abstract class AbstractAction implements ActionInterface
     protected $result;
     protected $requestError;
 
+    protected $isTestRequest = false;
+
     abstract protected function getData();
 
     abstract protected function writeErrorResponse();
@@ -125,10 +127,10 @@ abstract class AbstractAction implements ActionInterface
 
     private function _isUnauthorizedRequest()
     {
-        $isTest = (new Config())->getSystemConfiguration()['environment'] === 'dev' &&
+        $this->isTestRequest = $this->app->getContainer()->config->getSystemConfiguration()['environment'] === 'dev' &&
             strpos($this->request->getUri()->getQuery(), 'test=1') !== false;
 
-        if (!$isTest && is_null($this->userService->getAuthenticationService()->getStorage()->read())) {
+        if (!$this->isTestRequest && is_null($this->userService->getAuthenticationService()->getStorage()->read())) {
             return true;
         }
 

@@ -15,18 +15,20 @@ use RudiBieller\OnkelRudi\User\QueryFactory as UserQueryFactory;
 use RudiBieller\OnkelRudi\Wordpress\QueryFactory;
 use RudiBieller\OnkelRudi\Wordpress\Service as WpService;
 
+$config = new Config();
+
 $envSettings = [
     'displayErrorDetails' => false,
     'cache' => 'templates/cache'
 ];
 
-if ((new Config())->getSystemConfiguration()['environment'] === 'dev') {
+if ($config->getSystemConfiguration()['environment'] === 'dev') {
     $envSettings['displayErrorDetails'] = true;
     $envSettings['cache'] = false;
 }
 
 $appConfiguration = [
-    // general Slim settings
+    // General Slim settings
     'settings' => [
         'displayErrorDetails' => $envSettings['displayErrorDetails'],
     ],
@@ -43,7 +45,9 @@ $appConfiguration = [
         ));
 
         return $view;
-    }
+    },
+    // Onkel Rudi Configuration
+    'config' => $config
 ];
 
 $container = new \Slim\Container($appConfiguration);
