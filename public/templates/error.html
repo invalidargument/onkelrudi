@@ -11,10 +11,17 @@
     <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
         <a class="pure-menu-heading" href="/public/">Onkel Rudi</a>
         <ul class="pure-menu-list">
-            <li class="pure-menu-item pure-menu-selected"><a href="/public/" class="pure-menu-link">Termine</a></li>
             {% for item in wpCategories %}
-            <li class="pure-menu-item"><a href="{{item.slug}}/kategorie/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
+            <li class="pure-menu-item"><a href="/public/{{item.slug}}/kategorie/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
             {% endfor %}
+            <li class="pure-menu-item"><a href="/public/#about" class="pure-menu-link">About</a></li>
+            <li class="pure-menu-item"><a href="/public/#impressum" class="pure-menu-link">Impressum</a></li>
+            {% if isLoggedIn == false %}
+            <li class="pure-menu-item"><a href="/public/login/" class="pure-menu-link">Login</a></li>
+            {% endif %}
+            {% if isLoggedIn == true %}
+            <li class="pure-menu-item"><a href="#" class="pure-menu-link" id="settings"><i class="fa fa-cog" title="Einstellungen"></i></a></li>
+            {% endif %}
         </ul>
     </div>
 </div>

@@ -47,7 +47,8 @@ class OptInActionTest extends \PHPUnit_Framework_TestCase
         $authenticationService->shouldReceive('getStorage')->once()->andReturn(new Session());
 
         $userService = \Mockery::mock('RudiBieller\OnkelRudi\User\UserService');
-        $userService->shouldReceive('optIn')->once()->with('123abc456')->andReturn($serviceWasAbleToOptIn);
+        $userService->shouldReceive('optIn')->once()->with('123abc456')->andReturn($serviceWasAbleToOptIn)
+            ->shouldReceive('isLoggedIn')->andReturn(false);
 
         $wordpressService = \Mockery::mock('RudiBieller\OnkelRudi\Wordpress\ServiceInterface');
         $wordpressService->shouldReceive('getAllCategories')->andReturn([]);

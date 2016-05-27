@@ -88,7 +88,8 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
         $authenticationService->shouldReceive('getStorage')->once()->andReturn(new Session());
 
         $userService = \Mockery::mock('RudiBieller\OnkelRudi\User\UserService');
-        $userService->shouldReceive('getAuthenticationService')->andReturn($authenticationService);
+        $userService->shouldReceive('getAuthenticationService')->andReturn($authenticationService)
+            ->shouldReceive('isLoggedIn')->andReturn(false);
 
         $wordpressService = \Mockery::mock('RudiBieller\OnkelRudi\Wordpress\ServiceInterface');
         $wordpressService->shouldReceive('getAllCategories')->andReturn([]);

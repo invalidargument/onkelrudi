@@ -44,9 +44,13 @@ class WordpressCategoryActionTest extends \PHPUnit_Framework_TestCase
         $wordpressService->shouldReceive('getAllCategories')->andReturn([])
             ->shouldReceive('getPosts')->once()->with(\Hamcrest\Matchers::equalTo($category))->andReturn([]);
 
+        $userService = \Mockery::mock('RudiBieller\OnkelRudi\User\UserServiceInterface');
+        $userService->shouldReceive('isLoggedIn')->andReturn(false);
+
         $action = new WordpressCategoryAction();
         $action->setApp($app);
         $action->setWordpressService($wordpressService);
+        $action->setUserService($userService);
 
         $return = $action($request, $response, array('id' => 42));
         $actual = (string)$return->getBody();

@@ -278,7 +278,12 @@
             {% endfor %}
             <li class="pure-menu-item"><a href="/public/#about" class="pure-menu-link">About</a></li>
             <li class="pure-menu-item"><a href="/public/#impressum" class="pure-menu-link">Impressum</a></li>
+            {% if isLoggedIn == false %}
             <li class="pure-menu-item"><a href="/public/login/" class="pure-menu-link">Login</a></li>
+            {% endif %}
+            {% if isLoggedIn == true %}
+            <li class="pure-menu-item"><a href="#" class="pure-menu-link" id="settings"><i class="fa fa-cog" title="Einstellungen"></i></a></li>
+            {% endif %}
         </ul>
     </div>
 </div>

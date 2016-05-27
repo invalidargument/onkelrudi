@@ -39,7 +39,11 @@ abstract class AbstractHttpAction extends AbstractAction implements HttpActionIn
                 $this->response,
                 $this->template,
                 array_merge(
-                    ['data' => $this->result, 'wpCategories' => $this->wordpressService->getAllCategories()],
+                    [
+                        'data' => $this->result,
+                        'wpCategories' => $this->wordpressService->getAllCategories(),
+                        'isLoggedIn' => $this->userService->isLoggedIn()
+                    ],
                     $this->templateVariables
                 )
             );

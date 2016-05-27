@@ -51,6 +51,9 @@ class FleaMarketDetailActionTest extends \PHPUnit_Framework_TestCase
         $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketService');
         $service->shouldReceive('getFleaMarket')->once()->with(42)->andReturn($fleaMarket);
 
+        $userService = \Mockery::mock('RudiBieller\OnkelRudi\User\UserServiceInterface');
+        $userService->shouldReceive('isLoggedIn')->andReturn(false);
+
         $wordpressService = \Mockery::mock('RudiBieller\OnkelRudi\Wordpress\ServiceInterface');
         $wordpressService->shouldReceive('getAllCategories')->andReturn([]);
 
@@ -62,6 +65,7 @@ class FleaMarketDetailActionTest extends \PHPUnit_Framework_TestCase
         $action->setService($service);
         $action->setOrganizerService($organizerService);
         $action->setWordpressService($wordpressService);
+        $action->setUserService($userService);
 
         $return = $action($request, $response, array('id' => 42));
         $actual = (string)$return->getBody();
