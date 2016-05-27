@@ -10,14 +10,6 @@ class CreateFleaMarketAction extends AbstractHttpAction implements UserAwareInte
 
     protected function getData()
     {
-        $isTest = (new Config())->getSystemConfiguration()['environment'] === 'dev' &&
-            strpos($this->request->getUri()->getQuery(), 'test=1') !== false;
-
-        if (!$isTest && is_null($this->userService->getAuthenticationService()->getStorage()->read())) {
-            $this->templateVariables['notLoggedIn'] = true;
-            return array();
-        }
-
         $fleamarketOrganizers = [];
 
         foreach ($this->organizerService->getAllOrganizers() as $organizer) {
