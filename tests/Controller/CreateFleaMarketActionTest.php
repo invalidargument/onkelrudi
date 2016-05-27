@@ -8,13 +8,17 @@ use Zend\Authentication\Storage\Session;
 
 class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
 {
-    public function testActionDoesRecognizeEmptySession()
+    private $_app;
+
+    protected function setUp()
     {
+        parent::setUp();
+
         $config = \Mockery::mock('RudiBieller\OnkelRudi\Config\Config');
         $config->shouldReceive('getSystemConfiguration')->andReturn(array('environment' => 'dev'));
 
-        $app = new App();
-        $container = $app->getContainer();
+        $this->_app = new App();
+        $container = $this->_app->getContainer();
         $container['view'] = function ($c) {
             $view = new \Slim\Views\Twig(
                 dirname(__FILE__).'/../../public/templates',
@@ -32,7 +36,10 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
             return $view;
         };
         $container['config'] = $config;
+    }
 
+    public function testActionDoesRecognizeEmptySession()
+    {
         $uri = \Mockery::mock('Slim\Http\Uri');
         $uri->shouldReceive('getQuery')->andReturn('/foo/?test=false');
 
@@ -57,7 +64,7 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
         $wordpressService->shouldReceive('getAllCategories')->andReturn([]);
 
         $action = new CreateFleaMarketAction();
-        $action->setApp($app);
+        $action->setApp($this->_app);
         $action->setUserService($userService);
         $action->setWordpressService($wordpressService);
 
@@ -68,29 +75,6 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
 
     public function testActionSetsNeededTemplateVariables()
     {
-        $config = \Mockery::mock('RudiBieller\OnkelRudi\Config\Config');
-        $config->shouldReceive('getSystemConfiguration')->andReturn(array('environment' => 'dev'));
-
-        $app = new App();
-        $container = $app->getContainer();
-        $container['view'] = function ($c) {
-            $view = new \Slim\Views\Twig(
-                dirname(__FILE__).'/../../public/templates',
-                [
-                    //'cache' => 'templates/cache'
-                    'cache' => false
-                ]
-            );
-
-            $view->addExtension(new \Slim\Views\TwigExtension(
-                $c['router'],
-                $c['request']->getUri()
-            ));
-
-            return $view;
-        };
-        $container['config'] = $config;
-
         $uri = \Mockery::mock('Slim\Http\Uri');
         $uri->shouldReceive('getQuery')->andReturn('/foo/?test=1');
 
@@ -120,7 +104,7 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
         $organizerService->shouldReceive('getAllOrganizers')->once()->andReturn($organizers);
 
         $action = new CreateFleaMarketAction();
-        $action->setApp($app);
+        $action->setApp($this->_app);
         $action->setUserService($userService);
         $action->setWordpressService($wordpressService);
         $action->setOrganizerService($organizerService);
