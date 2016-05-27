@@ -1,4 +1,5 @@
 <?php
+
 namespace RudiBieller\OnkelRudi\Query;
 
 use \Slim\PDO\Database;
