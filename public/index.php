@@ -155,6 +155,11 @@ $app->get('/opt-in/token-{token}', function ($request, $response, $args) use ($a
     return $action($request, $response, $args);
 })->setName('optin-confirmation');
 
+// USER: profile view
+$app->get('/profil/', function ($request, $response, $args) use ($controllerFactory) {
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\ProfileAction');
+    return $action($request, $response, $args);
+})->setName('profile');
 // USER: create fleamarket view
 $app->get('/flohmarkt-anlegen/', function ($request, $response, $args) use ($controllerFactory) {
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\CreateFleaMarketAction');

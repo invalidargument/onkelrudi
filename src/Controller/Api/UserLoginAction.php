@@ -38,7 +38,12 @@ class UserLoginAction extends AbstractJsonAction
             return null;
         }
 
-        $this->userService->getAuthenticationService($user)->getStorage()->write(array('authenticated' => true));
+        $this->userService->getAuthenticationService($user)->getStorage()->write(
+            array(
+                'authenticated' => true,
+                'username' => $user->getIdentifier()
+            )
+        );
 
         return true;
     }
