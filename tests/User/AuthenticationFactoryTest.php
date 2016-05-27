@@ -2,6 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\User;
 
+use Slim\Container;
 use Zend\Authentication\Storage\Session;
 
 class AuthenticationFactoryTest extends \PHPUnit_Framework_TestCase
@@ -14,6 +15,7 @@ class AuthenticationFactoryTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->_sut = new AuthenticationFactory();
+        $this->_sut->setDiContainer(new Container());
     }
 
     public function testFactoryCreatesServiceWithResolvedDependencies()
