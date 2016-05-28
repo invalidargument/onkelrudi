@@ -19,4 +19,5 @@ public/templates/cache/*
 deployment/settings.yml
 node_modules
 db476294.sql
-
+src/Content/
+tests/Content/
