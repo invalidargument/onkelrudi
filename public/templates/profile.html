@@ -46,7 +46,12 @@
     <div class="content">
         <h2 class="content-head">Hallo, Du bist angemeldet als {{data.username}}.</h2>
         <p>
-            Das ist Dein Profil.
+            {% if data.fleamarkets|length > 0 %}
+            Flohmärkte, die Du angelegt hast:
+            {% else %}
+            <!-- Du hast noch keinen Flohmarkt angelegt. <a href="/public/flohmarkt-anlegen/" title="Einen Flohmarkt anlegen">Lege direkt los!</a> -->
+            Bald kannst Du hier Deine Flohmärkte verwalten.
+            {% endif %}
         </p>
     </div>
     <div class="footer l-box is-center">

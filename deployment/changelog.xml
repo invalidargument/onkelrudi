@@ -49,6 +49,9 @@
             <column name="organizer_id" type="int">
                 <constraints nullable="false" foreignKeyName="fk_organizer_fleamarket" references="fleamarkets_organizer(id)" deleteCascade="true"/>
             </column>
+            <column name="user_id" type="varchar(255)" defaultValue="default">
+                <constraints nullable="false"/>
+            </column>
             <column name="name" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
@@ -232,11 +235,11 @@
                          schemaName="public"
                          tableName="fleamarkets_users"/>
     </changeSet>
+    <!--
 
-    <!-- map user to organizer and markets -->
-    <!-- ein user kann organizer sein, muss aber nicht -->
-    <!-- ein user kann fleamarkets anlegen und neuen organizer anlegen und sich zuweisen -->
-    <!-- ein user kann fleamarkets anlegen und neuen organizer anlegen und sich nicht zuweisen -->
+    - deleteCascade beim organizer muss false sein!
+
+    //-->
 </databaseChangeLog>
 
 
