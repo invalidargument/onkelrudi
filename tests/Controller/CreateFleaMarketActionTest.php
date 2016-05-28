@@ -37,6 +37,16 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
 
     public function testActionDoesRecognizeEmptySession()
     {
+        $this->_app->getContainer()['view'] = \Mockery::mock('Slim\Views\Twig');
+        $this->_app->getContainer()['view']
+            ->shouldReceive('render')
+            ->once()
+            ->with(
+                \Hamcrest\Matchers::anObject(),
+                'unauthorized.html',
+                \Hamcrest\Matchers::nonEmptyArray()
+            );
+        
         $uri = \Mockery::mock('Slim\Http\Uri');
         $uri->shouldReceive('getQuery')->andReturn('/foo/?test=false');
 
