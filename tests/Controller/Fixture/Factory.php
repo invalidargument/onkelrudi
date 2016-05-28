@@ -44,14 +44,13 @@ class Factory
         return $userService;
     }
 
-    public static function createTestRequest($parsedJson = [])
+    public static function createTestRequest()
     {
         $uri = \Mockery::mock('Slim\Http\Uri');
         $uri->shouldReceive('getQuery')->andReturn('/foo/?test=1');
 
         $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
-        $request->shouldReceive('getParsedBody')->once()->andReturn($parsedJson)
-            ->shouldReceive('getUri')->andReturn($uri);
+        $request->shouldReceive('getUri')->andReturn($uri);
 
         return $request;
     }
