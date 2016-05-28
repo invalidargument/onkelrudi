@@ -3,6 +3,7 @@
 namespace RudiBieller\OnkelRudi\Controller\Api;
 
 use RudiBieller\OnkelRudi\BuilderFactory;
+use RudiBieller\OnkelRudi\Controller\Fixture\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use Slim\App;
@@ -11,8 +12,7 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
 {
     public function testActionCreatesNewFleaMarket()
     {
-        $config = \Mockery::mock('RudiBieller\OnkelRudi\Config\Config');
-        $config->shouldReceive('getSystemConfiguration')->andReturn(array('environment' => 'dev'));
+        $app = Factory::createSlimAppWithStandardTestContainer();
 
         $parsedJson = [
             'name' => 'foo',
@@ -45,38 +45,10 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
         $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketService');
         $service->shouldReceive('createFleaMarket')->once()->with(\Hamcrest\Matchers::equalTo($fleaMarket))->andReturn(1);
 
-        $app = new App();
-        $container = $app->getContainer();
-        $container['view'] = function ($c) {
-            $view = new \Slim\Views\Twig(
-                dirname(__FILE__).'/../../public/templates',
-                ['cache' => false]
-            );
+        $userService = Factory::createUserServiceWithAuthenticatedUserSession();
 
-            $view->addExtension(new \Slim\Views\TwigExtension(
-                $c['router'],
-                $c['request']->getUri()
-            ));
-
-            return $view;
-        };
-        $container['config'] = $config;
-
-        $uri = \Mockery::mock('Slim\Http\Uri');
-        $uri->shouldReceive('getQuery')->andReturn('/foo/?test=1');
-
-        $session = \Mockery::mock('Zend\Authentication\Storage\Session');
-        $session->shouldReceive('read')->once()->andReturn(null);
-        $authenticationService = \Mockery::mock('Zend\Authentication\AuthenticationService');
-        $authenticationService->shouldReceive('getStorage')->once()->andReturn($session);
-
-        $userService = \Mockery::mock('RudiBieller\OnkelRudi\User\UserService');
-        $userService->shouldReceive('getAuthenticationService')->andReturn($authenticationService);
-
-        $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
-        $request->shouldReceive('getParsedBody')->once()->andReturn($parsedJson)
-            ->shouldReceive('getUri')->andReturn($uri);
-        $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
+        $request = Factory::createTestRequest($parsedJson);
+        $response = Factory::createStandardResponse();;
 
         $action = new FleaMarketCreateAction();
         $action->setApp($app)
