@@ -11,6 +11,9 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
 {
     public function testActionCreatesNewFleaMarket()
     {
+        $config = \Mockery::mock('RudiBieller\OnkelRudi\Config\Config');
+        $config->shouldReceive('getSystemConfiguration')->andReturn(array('environment' => 'dev'));
+
         $parsedJson = [
             'name' => 'foo',
             'city' => 'bar',
@@ -43,13 +46,42 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
         $service->shouldReceive('createFleaMarket')->once()->with(\Hamcrest\Matchers::equalTo($fleaMarket))->andReturn(1);
 
         $app = new App();
+        $container = $app->getContainer();
+        $container['view'] = function ($c) {
+            $view = new \Slim\Views\Twig(
+                dirname(__FILE__).'/../../public/templates',
+                ['cache' => false]
+            );
+
+            $view->addExtension(new \Slim\Views\TwigExtension(
+                $c['router'],
+                $c['request']->getUri()
+            ));
+
+            return $view;
+        };
+        $container['config'] = $config;
+
+        $uri = \Mockery::mock('Slim\Http\Uri');
+        $uri->shouldReceive('getQuery')->andReturn('/foo/?test=1');
+
+        $session = \Mockery::mock('Zend\Authentication\Storage\Session');
+        $session->shouldReceive('read')->once()->andReturn(null);
+        $authenticationService = \Mockery::mock('Zend\Authentication\AuthenticationService');
+        $authenticationService->shouldReceive('getStorage')->once()->andReturn($session);
+
+        $userService = \Mockery::mock('RudiBieller\OnkelRudi\User\UserService');
+        $userService->shouldReceive('getAuthenticationService')->andReturn($authenticationService);
+
         $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
-        $request->shouldReceive('getParsedBody')->once()->andReturn($parsedJson);
+        $request->shouldReceive('getParsedBody')->once()->andReturn($parsedJson)
+            ->shouldReceive('getUri')->andReturn($uri);
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
 
         $action = new FleaMarketCreateAction();
         $action->setApp($app)
             ->setService($service)
+            ->setUserService($userService)
             ->setBuilderFactory($builderFactory);
 
         $return = $action($request, $response, array());
