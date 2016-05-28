@@ -13,9 +13,6 @@ module.exports = function(grunt) {
                     ],
                     'build/onkelrudi/public/js/onkelrudi.js': [
                         'public/js/onkelrudi.js'
-                    ],
-                    'build/onkelrudi/public/js/cookieconsent.js': [
-                        'public/js/cookieconsent.js'
                     ]
                 }
             }
@@ -28,6 +25,9 @@ module.exports = function(grunt) {
                     ],
                     'build/onkelrudi/public/css/onkelrudi-old-ie.css': [
                         'public/css/onkelrudi-old-ie.css'
+                    ],
+                    'build/onkelrudi/public/css/cookieconsent.css': [
+                        'public/css/cookieconsent.css'
                     ]
                 }
             }
@@ -40,7 +40,7 @@ module.exports = function(grunt) {
                     minifyJS: true
                 },
                 files: {
-                    'build/onkelrudi/public/templates/admin.html': [
+                    'build/onkelrudi/public/templates/createFleaMarket.html': [
                         'public/templates/createFleaMarket.html'
                     ],
                     'build/onkelrudi/public/templates/error.html': [
@@ -55,6 +55,12 @@ module.exports = function(grunt) {
                     'build/onkelrudi/public/templates/loginRegister.html': [
                         'public/templates/loginRegister.html'
                     ],
+                    'build/onkelrudi/public/templates/profile.html': [
+                        'public/templates/profile.html'
+                    ],
+                    'build/onkelrudi/public/templates/unauthorized.html': [
+                        'public/templates/unauthorized.html'
+                    ],
                     'build/onkelrudi/public/templates/wordpressCategoryOverview.html': [
                         'public/templates/wordpressCategoryOverview.html'
                     ]
@@ -62,7 +68,7 @@ module.exports = function(grunt) {
             },
         },
         replace: {
-            adminHtmlPaths: {
+            createFleaMarketHtmlPaths: {
                 src: ['build/onkelrudi/public/templates/createFleaMarket.html'],
                 dest: 'build/onkelrudi/public/templates/createFleaMarket.html',
                 replacements: [
@@ -177,6 +183,50 @@ module.exports = function(grunt) {
             loginRegisterHtmlPaths: {
                 src: ['build/onkelrudi/public/templates/loginRegister.html'],
                 dest: 'build/onkelrudi/public/templates/loginRegister.html',
+                replacements: [
+                    {
+                        from: '/public/bower_components/pure/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/css/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/bower_components/jquery/dist/',
+                        to: '/js/'
+                    },
+                    {
+                        from: '/public/',
+                        to: '/'
+                    }
+                ]
+            },
+            profileHtmlPaths: {
+                src: ['build/onkelrudi/public/templates/profile.html'],
+                dest: 'build/onkelrudi/public/templates/profile.html',
+                replacements: [
+                    {
+                        from: '/public/bower_components/pure/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/css/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/bower_components/jquery/dist/',
+                        to: '/js/'
+                    },
+                    {
+                        from: '/public/',
+                        to: '/'
+                    }
+                ]
+            },
+            unauthorizedHtmlPaths: {
+                src: ['build/onkelrudi/public/templates/unauthorized.html'],
+                dest: 'build/onkelrudi/public/templates/unauthorized.html',
                 replacements: [
                     {
                         from: '/public/bower_components/pure/',
