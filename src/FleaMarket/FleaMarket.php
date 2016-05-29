@@ -7,6 +7,7 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
     private $_id;
     private $_uuid;
     private $_organizer;
+    private $_user;
     private $_name;
     private $_slug;
     private $_description;
@@ -35,6 +36,11 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
     public function getOrganizer()
     {
         return $this->_organizer;
+    }
+
+    public function getUser()
+    {
+        return $this->_user;
     }
 
     public function getName()

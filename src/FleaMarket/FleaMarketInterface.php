@@ -2,6 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\FleaMarket;
 
+use RudiBieller\OnkelRudi\User\UserInterface;
+
 interface FleaMarketInterface
 {
     public function getId();
@@ -9,6 +11,11 @@ interface FleaMarketInterface
     public function getUuid();
 
     public function getOrganizer();
+
+    /**
+     * @return UserInterface
+     */
+    public function getUser();
 
     public function getName();
 
