@@ -4,8 +4,9 @@ use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
+use Behat\Mink\Driver\BrowserKitDriver;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\MinkExtension\Context\MinkContext;
 use RudiBieller\OnkelRudi\Config\Config;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
@@ -19,6 +20,7 @@ use RudiBieller\OnkelRudi\User\QueryFactory;
 use RudiBieller\OnkelRudi\User\UserService;
 use RudiBieller\OnkelRudi\User\UserServiceInterface;
 use Slim\PDO\Database;
+use Symfony\Component\BrowserKit\Cookie;
 
 /**
  * Defines application features from the specific context.
@@ -207,6 +209,14 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
     {
         $user = $this->_userService->createUser($arg1, 'password');
         $this->_userService->createTestOptInToken($arg1, $arg2);
+    }
+
+    /**
+     * @Given /^I am authenticated as user$/
+     */
+    public function iAmAuthenticatedAs()
+    {
+        $this->getSession()->getDriver()->setCookie('onkelrudi', '33ehcpch1a9f8ikcg20p8bhem5');
     }
 
     private function _createFleaMarkets($num = 3, $expired = false)

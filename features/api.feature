@@ -1,3 +1,4 @@
+@api
 Feature: API v1 fleamarkets
   In order to use the API for my services
   As an API user
@@ -10,7 +11,7 @@ Feature: API v1 fleamarkets
     And the response should be json
     And the response should be
     """
-    {"data":[{"id":"1","uuid":"7fdd31e2-7a5f-51a9-bec6-314cb78f9ecf","organizer":null,"name":"Der  #0 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"},{"id":"2","uuid":"39bdc88d-31d8-592e-b77f-2281a21876f1","organizer":null,"name":"Der  #1 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"},{"id":"3","uuid":"aa135915-9622-5e7a-ab51-22d8f8eecfd1","organizer":null,"name":"Der  #2 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"}]}
+    {"data":[{"id":"1","uuid":"7fdd31e2-7a5f-51a9-bec6-314cb78f9ecf","organizer":null,"user":null,"name":"Der  #0 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"},{"id":"2","uuid":"39bdc88d-31d8-592e-b77f-2281a21876f1","organizer":null,"user":null,"name":"Der  #1 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"},{"id":"3","uuid":"aa135915-9622-5e7a-ab51-22d8f8eecfd1","organizer":null,"user":null,"name":"Der  #2 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"}]}
     """
 
   Scenario: Get a single FleaMarket by id
@@ -20,9 +21,10 @@ Feature: API v1 fleamarkets
     And the response should be json
     And the response should be
     """
-    {"data":{"id":"2","uuid":"39bdc88d-31d8-592e-b77f-2281a21876f1","organizer":{"id":"2","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"name":"Der  #1 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"}}
+    {"data":{"id":"2","uuid":"39bdc88d-31d8-592e-b77f-2281a21876f1","organizer":{"id":"2","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Der  #1 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"}}
     """
 
+  @now
   Scenario: Create a new fleamarket
     Given I have a default organizer
     And I send a "POST" request to "http://localhost/public/api/v1/fleamarkets" with body
@@ -66,7 +68,7 @@ Feature: API v1 fleamarkets
     Given I send a "GET" request to "http://localhost/public/api/v1/fleamarkets/1"
     Then the response should be
     """
-    {"data":{"id":"1","uuid":"7fdd31e2-7a5f-51a9-bec6-314cb78f9ecf","organizer":{"id":"1","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"name":"Max UPDATED","description":"Blue Pants","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"street":null,"streetNo":null,"city":null,"zipCode":"50667","location":null,"url":null}}
+    {"data":{"id":"1","uuid":"7fdd31e2-7a5f-51a9-bec6-314cb78f9ecf","organizer":{"id":"1","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Max UPDATED","description":"Blue Pants","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"street":null,"streetNo":null,"city":null,"zipCode":"50667","location":null,"url":null}}
     """
 
   Scenario: Create a new organizer
@@ -127,7 +129,7 @@ Feature: API v1 fleamarkets
   Scenario: Create a new user
     Given I send a "POST" request to "http://localhost/public/api/v1/users" with body
     """
-    {"email":"test@onkel-rudi.de","password":"testtest","password_repeat":"testtest"}
+    {"email":"info@onkel-rudi.de","password":"testtest","password_repeat":"testtest"}
     """
     Then the response code should be "200"
     And the response should be json
@@ -137,7 +139,7 @@ Feature: API v1 fleamarkets
     """
     Given I send a "POST" request to "http://localhost/public/api/v1/users" with body
     """
-    {"email":"test@onkel-rudi.de","password":"testtest","password_repeat":"testtest"}
+    {"email":"info@onkel-rudi.de","password":"testtest","password_repeat":"testtest"}
     """
     Then the response code should be "400"
     And the response should be json

@@ -1,3 +1,4 @@
+@indexPage
 Feature: Index page of onkelrudi
   In order to see enough information
   As an onkelrudi user

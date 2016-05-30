@@ -26,7 +26,7 @@ class UserCreateAction extends AbstractJsonAction
             $result = $this->userService->createUser(
                 $data['email'],
                 password_hash($data['password'], PASSWORD_DEFAULT), // TODO: should be done elsewhere, service for example
-                $this->_getType($data['register_as_organizer'])
+                $this->_getType($data)
             );
         } catch (\PDOException $e) {
             $this->_passwordsDontMatchStatusCode = 400;
@@ -70,9 +70,13 @@ class UserCreateAction extends AbstractJsonAction
         return true;
     }
 
-    private function _getType($registerAsOrganizer)
+    private function _getType($requestParameterData)
     {
-        if ($registerAsOrganizer) {
+        if (!array_key_exists('register_as_organizer', $requestParameterData)) {
+            return UserInterface::TYPE_USER;
+        }
+
+        if ($requestParameterData['register_as_organizer']) {
             return UserInterface::TYPE_ORGANIZER;
         }
         

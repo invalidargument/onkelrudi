@@ -8,6 +8,7 @@ Feature: Admin page of onkelrudi
   Scenario: Admin can create a new fleamarket with a new organizer
     Given I have a default organizer
     And I am on "/flohmarkt-anlegen/?test=1"
+    And I am authenticated as user
     Then I should see "+ Termin anlegen"
     When I fill in "fleamarket_name" with "Rudi Bieller"
     And I fill in "fleamarket_description" with "Eine Beschreibung"
@@ -38,7 +39,7 @@ Feature: Admin page of onkelrudi
     And the response should be json
     And the response should be
     """
-    {"data":{"id":"1","uuid":"bbbbcfc1-83e2-5391-ac98-bbea6210501b","organizer":{"id":"2","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"name":"Rudi Bieller","description":"Eine Beschreibung","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Richmodstr.","streetNo":"23","city":"K\u00f6ln","zipCode":"50667","location":"Meine alte Wohnung","url":"http:\/\/www.example.com"}}
+    {"data":{"id":"1","uuid":"bbbbcfc1-83e2-5391-ac98-bbea6210501b","organizer":{"id":"2","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Rudi Bieller","description":"Eine Beschreibung","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Richmodstr.","streetNo":"23","city":"K\u00f6ln","zipCode":"50667","location":"Meine alte Wohnung","url":"http:\/\/www.example.com"}}
     """
     When I send a "GET" request to "http://localhost/public/api/v1/organizers/2"
     Then the response should be
@@ -50,6 +51,7 @@ Feature: Admin page of onkelrudi
   Scenario: Admin can create a new fleamarket with an existing organizer
     Given I have a default organizer
     And I am on "/flohmarkt-anlegen/?test=1"
+    And I am authenticated as user
     Then I should see "+ Termin anlegen"
     When I fill in "fleamarket_name" with "Rudi Bieller"
     And I select "Max Power" from "fleamarket_organizer"
@@ -73,13 +75,14 @@ Feature: Admin page of onkelrudi
     And the response should be json
     And the response should be
     """
-    {"data":{"id":"1","uuid":"02129607-aa9f-5466-a416-cec4881afd58","organizer":{"id":"1","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"name":"Rudi Bieller","description":"Eine Beschreibung","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Richmodstr.","streetNo":"23","city":"K\u00f6ln","zipCode":"50667","location":"Meine alte Wohnung","url":"http:\/\/www.example.com"}}
+    {"data":{"id":"1","uuid":"02129607-aa9f-5466-a416-cec4881afd58","organizer":{"id":"1","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Rudi Bieller","description":"Eine Beschreibung","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Richmodstr.","streetNo":"23","city":"K\u00f6ln","zipCode":"50667","location":"Meine alte Wohnung","url":"http:\/\/www.example.com"}}
     """
 
   @browser
   Scenario: Admin can not create a new fleamarket when no existing organizer is selected and no new organizer provided
     #Given I have no default organizer
     Given I am on "/flohmarkt-anlegen/?test=1"
+    And I am authenticated as user
     Then I should see "+ Termin anlegen"
     When I fill in "fleamarket_name" with "Rudi Bieller"
     And I fill in "fleamarket_description" with "Eine Beschreibung"
@@ -102,6 +105,7 @@ Feature: Admin page of onkelrudi
   @browser
   Scenario: Admin is shown errormessage when not all mandatory fields are filled
     Given I am on "/flohmarkt-anlegen/?test=1"
+    And I am authenticated as user
     And I fill in "fleamarket_name" with "Rudi Bieller"
     And I press "Neuen Termin speichern - click hier!"
     And I wait for "1" seconds
