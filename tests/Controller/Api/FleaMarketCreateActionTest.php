@@ -49,7 +49,7 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
 
         $request = Factory::createTestRequest();
         $request->shouldReceive('getParsedBody')->once()->andReturn($parsedJson);
-        $response = Factory::createStandardResponse();;
+        $response = Factory::createStandardResponse();
 
         $action = new FleaMarketCreateAction();
         $action->setApp($app)
