@@ -24,7 +24,6 @@ Feature: API v1 fleamarkets
     {"data":{"id":"2","uuid":"39bdc88d-31d8-592e-b77f-2281a21876f1","organizer":{"id":"2","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Der  #1 Flohmarkt von Rudi","description":"Ein toller Flohmarkt","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"street":"Venloer","streetNo":"20000","city":"Cologne","zipCode":"5000","location":"Daheim","url":"http:\/\/www.example.com\/foo"}}
     """
 
-  @now
   Scenario: Create a new fleamarket
     Given I have a default organizer
     And I send a "POST" request to "http://localhost/public/api/v1/fleamarkets" with body
@@ -40,7 +39,7 @@ Feature: API v1 fleamarkets
     Given I send a "GET" request to "http://localhost/public/api/v1/fleamarkets/1"
     Then the response should be
     """
-    {"data":{"id":"1","uuid":"14488af0-31e8-53e7-8899-7ab4ef0cd67b","organizer":{"id":"1","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"name":"Max Power","description":"Blue Pants","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"street":null,"streetNo":null,"city":null,"zipCode":"50667","location":null,"url":null}}
+    {"data":{"id":"1","uuid":"14488af0-31e8-53e7-8899-7ab4ef0cd67b","organizer":{"id":"1","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Max Power","description":"Blue Pants","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"street":null,"streetNo":null,"city":null,"zipCode":"50667","location":null,"url":null}}
     """
 
   Scenario: Delete an existing fleamarket
