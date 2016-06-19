@@ -32,7 +32,7 @@
         "phpunit/php-invoker": "*",
         "phpunit/dbunit": ">=1.2",
         "phpunit/phpunit-selenium": ">=1.2",
-        "fabpot/php-cs-fixer": "*",
+        "friendsofphp/php-cs-fixer": "*",
         "mockery/mockery": "*",
         "behat/behat": "3.0.*@stable",
         "behat/mink": "^1.7",
