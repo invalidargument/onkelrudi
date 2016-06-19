@@ -85,6 +85,9 @@
                         $('#submitlogin').parent().append(
                             '<p class="successmessage"><i class="fa fa-check fa-lg"></i>Danke - Du hast Dich erfolgreich angemeldet!</p>'
                         );
+                        window.setTimeout(function() {
+                            window.location.href = '{{profileurl}}';
+                        }, 2000);
                     },
                     error: function (data) {
                         $('.errormessage').remove();

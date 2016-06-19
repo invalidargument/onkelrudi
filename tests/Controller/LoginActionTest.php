@@ -9,6 +9,9 @@ class LoginActionTest extends \PHPUnit_Framework_TestCase
 {
     public function testActionReturnsRequestedMarket()
     {
+        $router = \Mockery::mock('Slim\Interfaces\RouterInterface');
+        $router->shouldReceive('pathFor')->once()->with('profile')->andReturn('/profil/');
+
         $app = new App();
         $container = $app->getContainer();
         $container['view'] = function ($c) {
@@ -27,6 +30,7 @@ class LoginActionTest extends \PHPUnit_Framework_TestCase
 
             return $view;
         };
+        $container['router'] = $router;
         $body = \Mockery::mock('Slim\HttpBody');
         $body->shouldReceive('write')
             ->shouldReceive('__toString')->andReturn('String representation of the Body object');
@@ -55,5 +59,11 @@ class LoginActionTest extends \PHPUnit_Framework_TestCase
         $expected = 'String representation of the Body object';
 
         $this->assertContains($expected, $actual);
+
+        $this->assertAttributeEquals(
+            ['loggedIn' => true, 'profileurl' => '/profil/'],
+            'templateVariables',
+            $action
+        );
     }
 }

@@ -14,6 +14,8 @@ class LoginAction extends AbstractHttpAction
             $this->templateVariables['loggedIn'] = true;
         }
 
+        $this->templateVariables['profileurl'] = $this->app->getContainer()->get('router')->pathFor('profile');
+
         return array();
     }
 }
