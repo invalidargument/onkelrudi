@@ -8,7 +8,7 @@ use RudiBieller\OnkelRudi\FleaMarket\Builder;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 
-class FleaMarketCreateAction extends AbstractJsonAction implements UserAwareInterface
+class FleaMarketCreateAction extends AbstractJsonAction
 {
     protected function getData()
     {
