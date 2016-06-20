@@ -4,7 +4,7 @@ Feature: User login/register page of onkelrudi
   As an onkelrudi user
   I need to be able to create new User and login as an existing one
 
-  @browser @now
+  @browser
   Scenario Outline: User gets proper feedback when trying to create a new user
     Given I am on "/login/?test=1"
     When I fill in "register_email" with "info@onkel-rudi.de"
