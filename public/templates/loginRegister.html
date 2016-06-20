@@ -57,7 +57,7 @@
                         $('#submitregister').removeClass('button-success');
                         $('#submitregister').addClass('button-error');
                         $('#submitregister').parent().append(
-                            '<p class="errormessage"><i class="fa fa-exclamation fa-lg"></i>Es ist ein Fehler aufgetreten. ' + data.responseJSON.error/*data.statusText*/ + '.</p>'
+                            '<p class="errormessage"><i class="fa fa-exclamation fa-lg"></i>Es ist etwas schiefgegangen: ' + data.responseJSON.error/*data.statusText*/ + '.</p>'
                         );
                     },
                     dataType: 'json'
