@@ -18,6 +18,8 @@ class OptInAction extends AbstractHttpAction
             $this->templateVariables['optinfailed'] = true;
         }
 
+        $this->templateVariables['profileurl'] = $this->app->getContainer()->get('router')->pathFor('profile');
+
         return array();
     }
 }
