@@ -16,15 +16,20 @@ class UserCreateAction extends AbstractJsonAction
     {
         $data = $this->request->getParsedBody();
 
+        if (!$this->_emailIsValid($data['email'])) {
+            return null;
+        }
+
         if (!$this->_passwordIsValid($data['password'], $data['password_repeat'])) {
             return null;
         }
 
         $result = null;
+        $email = filter_var($data['email'], FILTER_VALIDATE_EMAIL);
 
         try {
             $result = $this->userService->createUser(
-                $data['email'],
+                $email,
                 password_hash($data['password'], PASSWORD_DEFAULT), // TODO: should be done elsewhere, service for example
                 $this->_getType($data)
             );
@@ -35,7 +40,7 @@ class UserCreateAction extends AbstractJsonAction
             return null;
         }
 
-        $token = $this->userService->createOptInToken($data['email']);
+        $token = $this->userService->createOptInToken($email);
         $this->templateVariables = ['token' => $token];
 
         // generate rendered mail text
@@ -48,7 +53,7 @@ class UserCreateAction extends AbstractJsonAction
                 )
             );
 
-        $this->notificationService->sendOptInNotification($data['email'], $optInText);
+        $this->notificationService->sendOptInNotification($email, $optInText);
 
         return $result;
     }
@@ -63,7 +68,18 @@ class UserCreateAction extends AbstractJsonAction
 
         if (strlen($password1) < 8) {
             $this->_passwordsDontMatchStatusCode = 400;
-            $this->_passwordsDontMatchStatusMessage = 'Passwords must have at least a length of 8 chracters';
+            $this->_passwordsDontMatchStatusMessage = 'Passwords must have a minimum length of 8 chracters';
+            return false;
+        }
+
+        return true;
+    }
+
+    private function _emailIsValid($email)
+    {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+            $this->_passwordsDontMatchStatusCode = 400;
+            $this->_passwordsDontMatchStatusMessage = 'No valid e-mail address';
             return false;
         }
 

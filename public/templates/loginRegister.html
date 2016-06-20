@@ -57,7 +57,7 @@
                         $('#submitregister').removeClass('button-success');
                         $('#submitregister').addClass('button-error');
                         $('#submitregister').parent().append(
-                            '<p class="errormessage"><i class="fa fa-bolt fa-lg"></i>Es ist ein Fehler aufgetreten. ' + data.responseJSON.error/*data.statusText*/ + '.</p>'
+                            '<p class="errormessage"><i class="fa fa-exclamation fa-lg"></i>Es ist ein Fehler aufgetreten. ' + data.responseJSON.error/*data.statusText*/ + '.</p>'
                         );
                     },
                     dataType: 'json'
@@ -95,7 +95,7 @@
                         $('#submitlogin').removeClass('button-success');
                         $('#submitlogin').addClass('button-error');
                         $('#submitlogin').parent().append(
-                            '<p class="errormessage"><i class="fa fa-bolt fa-lg"></i>Der Login ist fehlgeschlagen. ' + data.responseJSON.error/*data.statusText*/ + '.</p>'
+                            '<p class="errormessage"><i class="fa fa-exclamation fa-lg"></i>Der Login ist fehlgeschlagen. ' + data.responseJSON.error/*data.statusText*/ + '.</p>'
                         );
                     },
                     dataType: 'json'
@@ -120,7 +120,7 @@
                         $('.errormessage').remove();
                         $('.successmessage').remove();
                         $('#logout').parent().append(
-                            '<p class="errormessage"><i class="fa fa-bolt fa-lg"></i>Der Logout ist fehlgeschlagen. ' + data.responseJSON.error/*data.statusText*/ + '.</p>'
+                            '<p class="errormessage"><i class="fa fa-exclamation fa-lg"></i>Der Logout ist fehlgeschlagen. ' + data.responseJSON.error/*data.statusText*/ + '.</p>'
                         );
                     },
                     dataType: 'json'

@@ -70,10 +70,10 @@ class UserCreateActionTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataProviderTestActionChecksForPasswordRequirements
      */
-    public function testActionChecksForPasswordRequirements($password1, $password2, $responseMessage)
+    public function testActionChecksForPasswordRequirements($email, $password1, $password2, $responseMessage)
     {
         $parsedJson = [
-            'email' => 'foo@example.com',
+            'email' => $email,
             'password' => $password1,
             'password_repeat' => $password2
         ];
@@ -102,8 +102,9 @@ class UserCreateActionTest extends \PHPUnit_Framework_TestCase
     public function dataProviderTestActionChecksForPasswordRequirements()
     {
         return array(
-            array('foo', 'foo', 'Passwords must have at least a length of 8 chracters'),
-            array('foo', 'fooo', 'Passwords do not match')
+            array('foo@example.com', 'foo', 'foo', 'Passwords must have a minimum length of 8 chracters'),
+            array('foo@example.com', 'foo', 'fooo', 'Passwords do not match'),
+            array('invalid@email', 'aaaaaaaa', 'aaaaaaaa', 'No valid e-mail address')
         );
     }
 }
