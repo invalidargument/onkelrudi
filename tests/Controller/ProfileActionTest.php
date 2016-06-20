@@ -16,6 +16,9 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
         $config = \Mockery::mock('RudiBieller\OnkelRudi\Config\Config');
         $config->shouldReceive('getSystemConfiguration')->andReturn(array('environment' => 'dev'));
 
+        $router = \Mockery::mock('Slim\Interfaces\RouterInterface');
+        $router->shouldReceive('pathFor')->once()->with('login-register')->andReturn('/login/');
+
         $this->_app = new App();
         $container = $this->_app->getContainer();
         $container['view'] = function ($c) {
@@ -32,6 +35,7 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
             return $view;
         };
         $container['config'] = $config;
+        $container['router'] = $router;
     }
 
     public function testActionShowsAuthenticationMessageWhenNotLoggedIn()
@@ -121,7 +125,7 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
         $action($request, $response, array());
 
         $this->assertAttributeEquals(
-            [],
+            ['profileurl' => '/login/'],
             'templateVariables',
             $action
         );

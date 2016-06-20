@@ -21,6 +21,41 @@
     <!--[if gt IE 8]><!-->
     <link rel="stylesheet" href="/public/css/onkelrudi.css">
     <!--<![endif]-->
+
+    <script src="/public/bower_components/jquery/dist/jquery.js"></script>
+
+    <script>
+        $(function () {
+            $('#logout').on('click', function (e) {
+                e.preventDefault();
+                console.log("HAHA");
+                $.ajax({
+                    type: "POST",
+                    url: '/public/api/v1/logout',
+                    contentType: "application/json",
+                    data: {},
+                    success: function (data) {
+                        $('.errormessage').remove();
+                        $('.successmessage').remove();
+                        $('#logout').parent().append(
+                            '<p class="successmessage"><i class="fa fa-check fa-lg"></i>Dein Logout war erfolgreich!</p>'
+                        );
+                        window.setTimeout(function() {
+                            window.location.href = '{{profileurl}}';
+                        }, 2000);
+                    },
+                    error: function (data) {
+                        $('.errormessage').remove();
+                        $('.successmessage').remove();
+                        $('#logout').parent().append(
+                            '<p class="errormessage"><i class="fa fa-exclamation fa-lg"></i>Der Logout ist fehlgeschlagen. ' + data.responseJSON.error/*data.statusText*/ + '.</p>'
+                        );
+                    },
+                    dataType: 'json'
+                });
+            });
+        });
+    </script>
 </head>
 <body class="admin">
 <div class="header">
@@ -45,6 +80,9 @@
 <div class="content-wrapper">
     <div class="content">
         <h2 class="content-head">Hallo, Du bist angemeldet als {{data.username}}.</h2>
+        <p>
+            <a id="logout" href="#" title="Logout - Bei Onkel Rudi abmelden">Logout</a>
+        </p>
         <p>
             {% if data.fleamarkets|length > 0 %}
             Flohmärkte, die Du angelegt hast:
