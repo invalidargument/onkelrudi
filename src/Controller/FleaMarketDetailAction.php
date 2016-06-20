@@ -30,8 +30,9 @@ class FleaMarketDetailAction extends AbstractHttpAction
         $hasValidDate = false;
         $nextValidDateStart = $nextValidDateEnd = null;
         $today = date('Y-m-d 00:00:00');
+        $dates = $market->getDates();
 
-        foreach ($market->getDates() as $date) {
+        foreach ($dates as $date) {
             if (strtotime($date->getStart()) >= strtotime($today)) {
                 $hasValidDate = true;
                 $nextValidDateStart = $date->getStart();
@@ -43,5 +44,12 @@ class FleaMarketDetailAction extends AbstractHttpAction
         $this->templateVariables['hasValidDate'] = $hasValidDate;
         $this->templateVariables['nextValidDateStart'] = $nextValidDateStart;
         $this->templateVariables['nextValidDateEnd'] = $nextValidDateEnd;
+
+        if (!$hasValidDate) {
+            // yes, assuming every fleamarket has at least a date.
+            $lastDate = $dates[count($dates) -1];
+            $this->templateVariables['nextValidDateStart'] = $lastDate->getStart();
+            $this->templateVariables['nextValidDateEnd'] = $lastDate->getEnd();
+        }
     }
 }

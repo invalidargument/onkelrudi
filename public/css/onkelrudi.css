@@ -492,14 +492,16 @@ i.fa {
 .admin .successmessage,
 .loginregister .successmessage,
 .admin .errormessage,
-.loginregister .errormessage {
+.loginregister .errormessage,
+.fleamarketDetail .errormessage {
     font-weight: bold;
     font-style: italic;
     padding-left: 0;
     color: #009926;
 }
 .admin .errormessage,
-.loginregister .errormessage {
+.loginregister .errormessage,
+.fleamarketDetail .errormessage{
     color: #ff0000;
 }
 

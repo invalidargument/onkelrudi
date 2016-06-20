@@ -82,7 +82,7 @@ class FleaMarketDetailActionTest extends \PHPUnit_Framework_TestCase
                 [
                     new FleaMarketDate('2015-01-01 09:00:00', '2015-01-01 12:30:00')
                 ],
-                ['hasValidDate' => false, 'nextValidDateStart' => null, 'nextValidDateEnd' => null]
+                ['hasValidDate' => false, 'nextValidDateStart' => '2015-01-01 09:00:00', 'nextValidDateEnd' => '2015-01-01 12:30:00']
             ),
             array(
                 [
