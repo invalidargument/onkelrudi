@@ -31,10 +31,10 @@ class Factory
         return $app;
     }
     
-    public static function createUserServiceWithAuthenticatedUserSession()
+    public static function createUserServiceWithAuthenticatedUserSession(array $returnUserInfo = null)
     {
         $session = \Mockery::mock('Zend\Authentication\Storage\Session');
-        $session->shouldReceive('read')->once()->andReturn(null);
+        $session->shouldReceive('read')->once()->andReturn($returnUserInfo);
         $authenticationService = \Mockery::mock('Zend\Authentication\AuthenticationService');
         $authenticationService->shouldReceive('getStorage')->once()->andReturn($session);
 

@@ -2,6 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\FleaMarket;
 
+use RudiBieller\OnkelRudi\User\User;
+
 class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -22,12 +24,15 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
         $organizer = new Organizer();
         $organizer->setId(42);
 
+        $user = new User('test@onkel-rudi.de');
+
         $dates = array(new FleaMarketDate());
 
         $fleaMarket = new FleaMarket();
         $fleaMarket
             ->setUuid('uuid')
             ->setOrganizer($organizer)
+            ->setUser($user)
             ->setName('Der erste Flohmarkt von Rudi')
             ->setDescription('Ein toller Flohmarkt')
             ->setCity('Cologne')
@@ -43,6 +48,7 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('setFleaMarketService')->once()->with($this->_sut)->andReturn($query)
             ->shouldReceive('setUuid')->once()->with('uuid')->andReturn($query)
             ->shouldReceive('setOrganizerId')->once()->with('42')->andReturn($query)
+            ->shouldReceive('setUserId')->once()->with('test@onkel-rudi.de')->andReturn($query)
             ->shouldReceive('setName')->once()->with('Der erste Flohmarkt von Rudi')->andReturn($query)
             ->shouldReceive('setDescription')->once()->with('Ein toller Flohmarkt')->andReturn($query)
             ->shouldReceive('setDates')->once()->with($dates)->andReturn($query)

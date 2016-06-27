@@ -10,6 +10,7 @@ class FleaMarketInsertQuery extends AbstractInsertQuery
 {
     private $_uuid;
     private $_organizerId;
+    private $_userId;
     private $_name;
     private $_description;
     private $_dates;
@@ -46,6 +47,12 @@ class FleaMarketInsertQuery extends AbstractInsertQuery
     public function setOrganizerId($id)
     {
         $this->_organizerId = $id;
+        return $this;
+    }
+
+    public function setUserId($userId)
+    {
+        $this->_userId = $userId;
         return $this;
     }
 
@@ -115,11 +122,11 @@ class FleaMarketInsertQuery extends AbstractInsertQuery
 
         $insertStatement = $this->pdo
             ->insert(
-                array('uuid', 'organizer_id', 'name', 'description', 'street', 'streetno', 'city', 'zipcode', 'location', 'url')
+                array('uuid', 'organizer_id', 'user_id', 'name', 'description', 'street', 'streetno', 'city', 'zipcode', 'location', 'url')
             )
             ->into('fleamarkets')
             ->values(
-                array($this->getUuid(), $this->_organizerId, $this->_name, $this->_description, $this->_street, $this->_streetNo, $this->_city, $this->_zipCode, $this->_location, $this->_url)
+                array($this->getUuid(), $this->_organizerId, $this->_userId, $this->_name, $this->_description, $this->_street, $this->_streetNo, $this->_city, $this->_zipCode, $this->_location, $this->_url)
             );
 
         $fleaMarketId = $insertStatement->execute();

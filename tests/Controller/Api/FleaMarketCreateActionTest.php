@@ -6,6 +6,7 @@ use RudiBieller\OnkelRudi\BuilderFactory;
 use RudiBieller\OnkelRudi\Controller\Fixture\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
+use RudiBieller\OnkelRudi\User\User;
 use Slim\App;
 
 class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
@@ -29,6 +30,7 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
 
         $organizer = new Organizer();
         $organizer->setId(42);
+        $user = new User('test@onkel-rudi.de');
         $fleaMarket = new FleaMarket();
         $fleaMarket->setName('foo')
             ->setCity('bar')
@@ -39,13 +41,14 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
             ->setStreet('Venloer')
             ->setStreetNo(1)
             ->setUrl('foo.com')
-            ->setOrganizer($organizer);
+            ->setOrganizer($organizer)
+            ->setUser($user);
 
         $builderFactory = new BuilderFactory();
         $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketService');
         $service->shouldReceive('createFleaMarket')->once()->with(\Hamcrest\Matchers::equalTo($fleaMarket))->andReturn(1);
 
-        $userService = Factory::createUserServiceWithAuthenticatedUserSession();
+        $userService = Factory::createUserServiceWithAuthenticatedUserSession(array('username' => 'test@onkel-rudi.de'));
 
         $request = Factory::createTestRequest();
         $request->shouldReceive('getParsedBody')->once()->andReturn($parsedJson);

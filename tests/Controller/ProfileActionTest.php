@@ -17,7 +17,8 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
         $config->shouldReceive('getSystemConfiguration')->andReturn(array('environment' => 'dev'));
 
         $router = \Mockery::mock('Slim\Interfaces\RouterInterface');
-        $router->shouldReceive('pathFor')->once()->with('login-register')->andReturn('/login/');
+        $router->shouldReceive('pathFor')->once()->with('login-register')->andReturn('/login/')
+            ->shouldReceive('pathFor')->once()->with('create-fleamarket')->andReturn('/flohmarkt-anlegen/');
 
         $this->_app = new App();
         $container = $this->_app->getContainer();
@@ -125,7 +126,7 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
         $action($request, $response, array());
 
         $this->assertAttributeEquals(
-            ['profileurl' => '/login/'],
+            ['profileurl' => '/login/', 'createfleamarketurl' => '/flohmarkt-anlegen/'],
             'templateVariables',
             $action
         );

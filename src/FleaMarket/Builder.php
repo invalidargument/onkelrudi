@@ -3,6 +3,7 @@
 namespace RudiBieller\OnkelRudi\FleaMarket;
 
 use RudiBieller\OnkelRudi\AbstractBuilder;
+use RudiBieller\OnkelRudi\User\UserInterface;
 
 class Builder extends AbstractBuilder
 {
@@ -75,6 +76,12 @@ class Builder extends AbstractBuilder
     public function setUrl($url)
     {
         $this->properties['url'] = $url;
+        return $this;
+    }
+
+    public function setUser(UserInterface $user)
+    {
+        $this->properties['user'] = $user;
         return $this;
     }
 

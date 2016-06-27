@@ -27,6 +27,7 @@ class FleaMarketInsertQueryTest extends \PHPUnit_Framework_TestCase
 
         $this->_sut
             ->setOrganizerId('42')
+            ->setUserId('test@onkel-rudi.de')
             ->setName('myname')
             ->setDescription('foo')
             ->setDates($dates)
@@ -42,7 +43,7 @@ class FleaMarketInsertQueryTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('commit')->andReturn($this->_pdo)
             ->shouldReceive('insert')
                 ->once()
-                ->with(array('uuid', 'organizer_id', 'name', 'description', 'street', 'streetno', 'city', 'zipcode', 'location', 'url'))
+                ->with(array('uuid', 'organizer_id', 'user_id', 'name', 'description', 'street', 'streetno', 'city', 'zipcode', 'location', 'url'))
                 ->andReturn($this->_pdo)
             ->shouldReceive('into')
                 ->once()
@@ -50,7 +51,7 @@ class FleaMarketInsertQueryTest extends \PHPUnit_Framework_TestCase
                 ->andReturn($this->_pdo)
             ->shouldReceive('values')
                 ->once()
-            ->with(array('3a90a517-d603-580c-a1bf-5fc43438448f', '42', 'myname', 'foo', 'bar', '42', 'baz', '12345', 'somewhere', 'http://www.example.com'))
+            ->with(array('3a90a517-d603-580c-a1bf-5fc43438448f', '42', 'test@onkel-rudi.de', 'myname', 'foo', 'bar', '42', 'baz', '12345', 'somewhere', 'http://www.example.com'))
                 ->andReturn($this->_pdo)
             ->shouldReceive('execute')
                 ->once()

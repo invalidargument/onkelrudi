@@ -26,10 +26,15 @@ class FleaMarketService implements FleaMarketServiceInterface
             ? self::DEFAULT_ORGANIZER
             : $fleaMarket->getOrganizer()->getId();
 
+        $userId = is_null($fleaMarket->getUser())
+            ? 'default'
+            : $fleaMarket->getUser()->getIdentifier();
+
         $query
             ->setFleaMarketService($this)
             ->setUuid($fleaMarket->getUuid())
             ->setOrganizerId($organizerId)
+            ->setUserId($userId)
             ->setName($fleaMarket->getName())
             ->setDescription($fleaMarket->getDescription())
             ->setDates($fleaMarket->getDates())

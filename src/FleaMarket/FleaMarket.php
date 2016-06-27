@@ -2,11 +2,16 @@
 
 namespace RudiBieller\OnkelRudi\FleaMarket;
 
+use RudiBieller\OnkelRudi\User\UserInterface;
+
 class FleaMarket implements FleaMarketInterface, \JsonSerializable
 {
     private $_id;
     private $_uuid;
     private $_organizer;
+    /**
+     * @var UserInterface
+     */
     private $_user;
     private $_name;
     private $_slug;
@@ -41,6 +46,12 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
     public function getUser()
     {
         return $this->_user;
+    }
+
+    public function setUser(UserInterface $user)
+    {
+        $this->_user = $user;
+        return $this;
     }
 
     public function getName()

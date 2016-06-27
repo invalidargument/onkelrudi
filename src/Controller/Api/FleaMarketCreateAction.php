@@ -3,10 +3,10 @@
 namespace RudiBieller\OnkelRudi\Controller\Api;
 
 use RudiBieller\OnkelRudi\Controller\AbstractJsonAction;
-use RudiBieller\OnkelRudi\Controller\UserAwareInterface;
 use RudiBieller\OnkelRudi\FleaMarket\Builder;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
+use RudiBieller\OnkelRudi\User\User;
 
 class FleaMarketCreateAction extends AbstractJsonAction
 {
@@ -17,6 +17,11 @@ class FleaMarketCreateAction extends AbstractJsonAction
          */
         $builder = $this->builderFactory->create('RudiBieller\OnkelRudi\FleaMarket\Builder');
         $builder->reset();
+
+        $userInfo = $this->userService->getAuthenticationService()->getStorage()->read();
+        $builder->setUser(
+            $this->_mapUser($userInfo['username'])
+        );
 
         $data = $this->request->getParsedBody();
 
@@ -50,5 +55,10 @@ class FleaMarketCreateAction extends AbstractJsonAction
         }
 
         return $map;
+    }
+
+    private function _mapUser($identifier)
+    {
+        return new User($identifier);
     }
 }
