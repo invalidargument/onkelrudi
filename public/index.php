@@ -63,6 +63,19 @@ $appConfiguration = [
         }
 
         return $db;
+    },
+    'Logger' => function() {
+        $logger = new Monolog\Logger('logger');
+        $filename = _DIR__ . '/../log/error.log';
+        $stream = new Monolog\Handler\StreamHandler($filename, Monolog\Logger::DEBUG);
+        $fingersCrossed = new Monolog\Handler\FingersCrossedHandler(
+            $stream, Monolog\Logger::ERROR);
+        $logger->pushHandler($fingersCrossed);
+
+        return $logger;
+    },
+    'errorHandler' => function ($c) {
+        return new RudiBieller\OnkelRudi\Handler\Error($c['Logger']);
     }
 ];
 
