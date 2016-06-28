@@ -33,6 +33,11 @@ $appConfiguration = [
     // General Slim settings
     'settings' => [
         'displayErrorDetails' => $envSettings['displayErrorDetails'],
+        'logger' => [
+            'name' => 'onkelrudi-logger',
+            'level' => Monolog\Logger::DEBUG,
+            'path' => __DIR__ . '/../logs/error.log',
+        ]
     ],
     // Twig view
     'view' => function ($c) use ($envSettings) {
@@ -64,10 +69,10 @@ $appConfiguration = [
 
         return $db;
     },
-    'Logger' => function() {
-        $logger = new Monolog\Logger('logger');
-        $filename = _DIR__ . '/../log/error.log';
-        $stream = new Monolog\Handler\StreamHandler($filename, Monolog\Logger::DEBUG);
+    'Logger' => function($c) {
+        $logger = new Monolog\Logger($c['settings']['logger']['name']);
+        $filename = $c['settings']['logger']['path'];
+        $stream = new Monolog\Handler\StreamHandler($filename, $c['settings']['logger']['level']);
         $fingersCrossed = new Monolog\Handler\FingersCrossedHandler(
             $stream, Monolog\Logger::ERROR);
         $logger->pushHandler($fingersCrossed);

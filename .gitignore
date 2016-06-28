@@ -21,3 +21,4 @@ node_modules
 db476294.sql
 src/Content/
 tests/Content/
+logs/*
