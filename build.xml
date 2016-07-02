@@ -21,7 +21,6 @@
         <delete dir="${basedir}/build/pdepend"/>
         <delete dir="${basedir}/build/phpdox"/>
         <delete dir="${basedir}/build/onkelrudi"/>
-        <delete dir="${basedir}/build/api"/>
         <delete dir="${basedir}/src/cache"/>
     </target>
 
@@ -31,7 +30,6 @@
         <mkdir dir="${basedir}/build/pdepend"/>
         <mkdir dir="${basedir}/build/phpdox"/>
         <mkdir dir="${basedir}/build/onkelrudi"/>
-        <mkdir dir="${basedir}/build/api"/>
         <mkdir dir="${basedir}/src/cache"/>
     </target>
 
