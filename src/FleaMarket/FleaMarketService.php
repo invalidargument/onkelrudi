@@ -3,6 +3,7 @@
 namespace RudiBieller\OnkelRudi\FleaMarket;
 
 use RudiBieller\OnkelRudi\FleaMarket\Query\Factory;
+use RudiBieller\OnkelRudi\User\UserInterface;
 
 class FleaMarketService implements FleaMarketServiceInterface
 {
@@ -91,6 +92,18 @@ class FleaMarketService implements FleaMarketServiceInterface
             ->setFleaMarketService($this)
             ->setLimit($limit)
             ->setOffset($offset);
+
+        return $query->run();
+    }
+
+    public function getFleaMarketsByUser(UserInterface $user, $limit, $offset)
+    {
+        $query = $this->_factory->createFleaMarketReadListQuery();
+        $query
+            ->setFleaMarketService($this)
+            ->setLimit($limit)
+            ->setOffset($offset)
+            ->setUser($user);
 
         return $query->run();
     }

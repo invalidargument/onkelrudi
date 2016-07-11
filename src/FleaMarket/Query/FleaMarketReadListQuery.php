@@ -7,11 +7,17 @@ use RudiBieller\OnkelRudi\FleaMarket\FleaMarketServiceInterface;
 //use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use RudiBieller\OnkelRudi\Query\AbstractQuery;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
+use RudiBieller\OnkelRudi\User\User;
+use RudiBieller\OnkelRudi\User\UserInterface;
 
 class FleaMarketReadListQuery extends AbstractQuery
 {
     private $_offset = 0;
     private $_limit = 50;
+    /**
+     * @var UserInterface
+     */
+    private $_user;
     private $_onlyCurrentDates = false;
     private $_queryTimespan;
     /**
@@ -28,6 +34,12 @@ class FleaMarketReadListQuery extends AbstractQuery
     public function setLimit($limit)
     {
         $this->_limit = $limit;
+        return $this;
+    }
+
+    public function setUser(UserInterface $user)
+    {
+        $this->_user = $user;
         return $this;
     }
 
@@ -58,7 +70,7 @@ class FleaMarketReadListQuery extends AbstractQuery
             ->offset($this->_offset);
 
         if ($this->_onlyCurrentDates) {
-            $datesStatement->where('start', '>=', date('Y-m-d 00:00:00'));
+            $datesStatement = $datesStatement->where('start', '>=', date('Y-m-d 00:00:00'));
         }
 
         $datesData = $datesStatement->execute()->fetchAll();
@@ -73,6 +85,10 @@ class FleaMarketReadListQuery extends AbstractQuery
             ->select()
             ->from('fleamarkets')
             ->whereIn('id', $fleaMarketIds);
+
+        if ($this->_user) {
+            $selectStatement = $selectStatement->where('user_id', '=', $this->_user->getIdentifier());
+        }
 
         /**
          * @var \Slim\PDO\Statement
@@ -113,6 +129,7 @@ class FleaMarketReadListQuery extends AbstractQuery
                 ->setId($item['fleamarket_id'])
                 ->setUuid($marketData[$item['fleamarket_id']]['uuid'])
                 //->setOrganizer($organizer)
+                ->setUser(new User($marketData[$item['fleamarket_id']]['user_id']))
                 ->setName($marketData[$item['fleamarket_id']]['name'])
                 ->setSlug($slug)
                 ->setDescription($marketData[$item['fleamarket_id']]['description'])

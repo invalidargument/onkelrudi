@@ -3,6 +3,7 @@
 namespace RudiBieller\OnkelRudi\FleaMarket;
 
 use RudiBieller\OnkelRudi\User\User;
+use RudiBieller\OnkelRudi\User\UserInterface;
 
 class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -112,6 +113,24 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testGetFleaMarketsReturnsListWithMarketsByLimitAndOffset()
+    {
+        $markets = array();
+        $user = new User('test@onkel-rudi.de', 'foo', UserInterface::TYPE_USER);
+
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketReadListQuery');
+        $query
+            ->shouldReceive('setLimit')->once()->with(42)->andReturn($query)
+            ->shouldReceive('setOffset')->once()->with(23)->andReturn($query)
+            ->shouldReceive('setUser')->once()->with($user)->andReturn($query)
+            ->shouldReceive('setFleaMarketService')->andReturn($query)
+            ->shouldReceive('run')->once()->andReturn($markets);
+
+        $this->_factory->shouldReceive('createFleaMarketReadListQuery')->once()->andReturn($query);
+
+        $this->_sut->getFleaMarkets(42, 23);
+    }
+
+    public function testGetFleaMarketsByUserReturnsListWithMarketsByLimitAndOffset()
     {
         $markets = array();
 

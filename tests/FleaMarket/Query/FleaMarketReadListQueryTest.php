@@ -3,6 +3,7 @@
 namespace RudiBieller\OnkelRudi\FleaMarket\Query;
 
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
+use RudiBieller\OnkelRudi\User\User;
 
 class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
 {
@@ -34,6 +35,7 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
                 'id' => 42,
                 'uuid' => 'uuid',
                 'organizer_id' => '1',
+                'user_id' => 'info@onkel-rudi.de',
                 'name' => 'Rudi Bieller',
                 'description' => 'foo',
                 'dates' => [],
@@ -48,6 +50,7 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
                 'id' => 23,
                 'uuid' => 'uuid-uuid',
                 'organizer_id' => '1',
+                'user_id' => 'info@onkel-rudi.de',
                 'name' => 'Rudi Bieller',
                 'description' => 'foo',
                 'dates' => [],
@@ -71,8 +74,11 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
         $this->_pdo->shouldReceive('execute')->once()->andReturn($statement1);
 
         // query markets
-        $this->_pdo->shouldReceive('select->from->whereIn')->andReturn($this->_pdo);
+        $this->_pdo->shouldReceive('select->from->whereIn->where')->andReturn($this->_pdo);
         $this->_pdo->shouldReceive('execute')->once()->andReturn($statement2);
+
+        $user = new User('info@onkel-rudi.de');
+        $this->_sut->setUser($user);
 
         /**
          * @var \RudiBieller\OnkelRudi\FleaMarket\FleaMarket
