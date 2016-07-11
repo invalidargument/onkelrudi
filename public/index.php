@@ -73,8 +73,7 @@ $appConfiguration = [
         $logger = new Monolog\Logger($c['settings']['logger']['name']);
         $filename = $c['settings']['logger']['path'];
         $stream = new Monolog\Handler\StreamHandler($filename, $c['settings']['logger']['level']);
-        $fingersCrossed = new Monolog\Handler\FingersCrossedHandler(
-            $stream, Monolog\Logger::ERROR);
+        $fingersCrossed = new Monolog\Handler\FingersCrossedHandler($stream, Monolog\Logger::ERROR);
         $logger->pushHandler($fingersCrossed);
 
         return $logger;
