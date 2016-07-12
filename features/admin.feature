@@ -7,8 +7,8 @@ Feature: Admin page of onkelrudi
   @browser
   Scenario: Admin can create a new fleamarket with a new organizer
     Given I have a default organizer
-    And I am on "/flohmarkt-anlegen/?test=1"
-    And I am authenticated as user
+    And I am slowly authenticated as user
+    And I go to "/flohmarkt-anlegen/?test=1"
     Then I should see "+ Termin anlegen"
     When I fill in "fleamarket_name" with "Rudi Bieller"
     And I fill in "fleamarket_description" with "Eine Beschreibung"
@@ -50,8 +50,8 @@ Feature: Admin page of onkelrudi
   @browser
   Scenario: Admin can create a new fleamarket with an existing organizer
     Given I have a default organizer
-    And I am on "/flohmarkt-anlegen/?test=1"
-    And I am authenticated as user
+    And I am slowly authenticated as user
+    And I go to "/flohmarkt-anlegen/?test=1"
     Then I should see "+ Termin anlegen"
     When I fill in "fleamarket_name" with "Rudi Bieller"
     And I select "Max Power" from "fleamarket_organizer"

@@ -214,9 +214,21 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
     /**
      * @Given /^I am authenticated as user$/
      */
-    public function iAmAuthenticatedAs()
+    public function iAmAuthenticatedAsUser()
     {
         $this->getSession()->getDriver()->setCookie('onkelrudi', '33ehcpch1a9f8ikcg20p8bhem5');
+    }
+
+    /**
+     * @Given /^I am slowly authenticated as user$/
+     */
+    public function iAmSlowlyAuthenticatedAsUser()
+    {
+        $this->visit('/login/');
+        $this->fillField('login_email', 'test@onkel-rudi.de');
+        $this->fillField('login_password', 'aaaaaaaa');
+        $this->pressButton('Anmelden');
+        $this->iWaitForSeconds(1);
     }
 
     private function _createFleaMarkets($num = 3, $expired = false)
