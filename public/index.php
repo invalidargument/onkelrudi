@@ -128,11 +128,16 @@ $app->get('/', function ($request, $response, $args) use ($service, $wpService, 
     $fleaMarkets = $service->getAllUpcomingFleaMarkets();
     $wpCategories = $wpService->getAllCategories();
     $fleaMarketsDetailRoutes = [];
+    $monthRange = [];
     foreach($fleaMarkets as $fleaMarket) {
         $fleaMarketsDetailRoutes[$fleaMarket->getId()] = $app->getContainer()->router->pathFor('event-date', [
             'wildcard' => $fleaMarket->getSlug(),
             'id' => $fleaMarket->getId()
         ]);
+
+        foreach ($fleaMarket->getDates() as $dateItem) {
+            $monthRange[date('m-Y', strtotime($dateItem->getStart()))] = date('m-Y', strtotime($dateItem->getStart()));
+        }
     }
 
     // we need a middleware to convert links to url-compliant representation
@@ -141,6 +146,7 @@ $app->get('/', function ($request, $response, $args) use ($service, $wpService, 
             'fleamarkets' => $fleaMarkets,
             'fleamarketsDetailsRoutes' => $fleaMarketsDetailRoutes,
             'wpCategories' => $wpCategories,
+            'monthRange' => $monthRange,
             'isLoggedIn' => $userService->isLoggedIn(),
             'isTest' => (boolean)$isTest
         ]);
