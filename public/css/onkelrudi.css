@@ -92,10 +92,8 @@ a.pure-button-primary {
 
 .home-menu {
     padding: 0.5em;
-    text-align: center;
+    text-align: right;
     box-shadow: 0 1px 1px rgba(0,0,0, 0.10);
-}
-.home-menu {
     background: #62C2CC;
 }
 .pure-menu.pure-menu-fixed {
@@ -137,6 +135,10 @@ a.pure-button-primary {
 
 #settings i {
     font-size: 120%;
+}
+
+.pure-menu-link, .pure-menu-disabled, .pure-menu-heading {
+    padding: 0.5em 0.2em;
 }
 
 /*
@@ -325,6 +327,9 @@ a.pure-button-primary {
         border: none;
     }
 
+    .pure-menu-link, .pure-menu-disabled, .pure-menu-heading {
+        padding: 0.5em 0.5em;
+    }
 }
 
 /*
@@ -336,6 +341,9 @@ a.pure-button-primary {
     /* We increase the header font size even more */
     .splash-head {
         font-size: 300%;
+    }
+    .pure-menu-link, .pure-menu-disabled, .pure-menu-heading {
+        padding: 0.5em 1em;
     }
 }
 
@@ -557,10 +565,6 @@ i.fa {
 
 .fleamarketDetail .content {
     padding-top: 0;
-}
-
-.fleamarketDetail .pure-menu-item {
-    padding-right: 20px;
 }
 
 .fleamarketDetail .mt20 {
