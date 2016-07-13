@@ -161,9 +161,6 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateFleaMarket()
     {
-        $this->_factory = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\Factory');
-        $this->_sut->setQueryFactory($this->_factory);
-
         $fleaMarket = new FleaMarket();
 
         $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketUpdateQuery');
@@ -176,11 +173,31 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateDates()
     {
-        $this->markTestIncomplete('lazy!');
+        $fleaMarketId = 23;
+        $dates = array(new FleaMarketDate('2023-01-01 10:42:42', '2023-01-01 18:42:42'));
+
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\DatesInsertQuery');
+        $query->shouldReceive('setFleaMarketId')->once()->with($fleaMarketId)->andReturn($query)
+            ->shouldReceive('setDates')->once()->with($dates)->andReturn($query)
+            ->shouldReceive('run')->once();
+
+        $this->_factory->shouldReceive('createFleaMarketDatesInsertQuery')->once()->andReturn($query);
+
+        $this->_sut->createDates($fleaMarketId, $dates);
     }
 
     public function testGetDatesByFleaMarket()
     {
-        $this->markTestIncomplete('lazy!');
+        $fleaMarketId = 23;
+        $onlyCurrentDates = true;
+
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\DatesReadListQuery');
+        $query->shouldReceive('setFleaMarketId')->once()->with($fleaMarketId)->andReturn($query)
+            ->shouldReceive('setQueryOnlyCurrentDates')->once()->with($onlyCurrentDates)->andReturn($query)
+            ->shouldReceive('run')->once();
+
+        $this->_factory->shouldReceive('createFleaMarketDatesReadListQuery')->once()->andReturn($query);
+
+        $this->_sut->getDates($fleaMarketId, $onlyCurrentDates);
     }
 }
