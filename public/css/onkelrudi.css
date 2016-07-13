@@ -34,7 +34,7 @@ label {
  * These are some useful classes which I will need
  */
 .l-box {
-    padding: 1em;
+    padding: 0.2em 1em 1em 1em;
 }
 
 .l-box-lrg {
@@ -264,6 +264,13 @@ a.pure-button-primary {
     display:inline;
     text-decoration: underline;
     color: inherit;
+}
+
+.monthHeadline {
+    font-size: 100%;
+    font-weight:bold;
+    border-bottom: 2px solid #62C2CC;
+    max-width: 86%;
 }
 
 /* This is the class used for the dark-background areas. */
