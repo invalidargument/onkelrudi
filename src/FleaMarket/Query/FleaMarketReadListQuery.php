@@ -13,7 +13,7 @@ use RudiBieller\OnkelRudi\User\UserInterface;
 class FleaMarketReadListQuery extends AbstractQuery
 {
     private $_offset = 0;
-    private $_limit = 50;
+    private $_limit = 51;
     /**
      * @var UserInterface
      */
