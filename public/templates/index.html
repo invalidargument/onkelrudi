@@ -50,7 +50,21 @@
 {% autoescape 'html' %}
 <div class="content-wrapper">
     <div class="content">
-        <h2 class="content-head is-center">Die nächsten Termine für einen Kinderflohmarkt oder Babybasar</h2>
+        <form id="startMonthSelect" class="pure-form pure-form-aligned is-center">
+            <fieldset>
+                <div class="pure-control-group">
+                    <div class="pure-u-1">
+                        <h2 class="content-head">Die nächsten Flohmarkttermine</h2>
+                        <label for="monthSelect">Monat</label>
+                        <select id="monthSelect">
+                        {% for item in monthRange %}
+                        <option>{{item}}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
         <div class="pure-g">
             {% set upcomingMonth = 'null' %}
             {% set upcomingMonthDisplayed = 'null' %}

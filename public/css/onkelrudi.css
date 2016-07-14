@@ -216,13 +216,24 @@ a.pure-button-primary {
 /* This is the class used for the main content headers (<h2>) */
 .content-head {
     color:#000000;
-    font-weight: 400;
+    font-weight: 100;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin: 2em 0 1em;
+    font-size: 120%;
 }
 .ribbon .content-head {
     color: white;
+}
+
+form#startMonthSelect h2 {
+    display: inline-block;
+    margin: 0 1em 0 0;
+    text-align: right;
+    vertical-align: middle;
+}
+form#startMonthSelect label {
+    font-weight: normal;
 }
 
 /* This is the class used for the content sub-headers (<h3>) */
