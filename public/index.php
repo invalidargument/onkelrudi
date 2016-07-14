@@ -136,7 +136,7 @@ $app->get('/', function ($request, $response, $args) use ($service, $wpService, 
         ]);
 
         foreach ($fleaMarket->getDates() as $dateItem) {
-            $monthRange[date('m-Y', strtotime($dateItem->getStart()))] = date('m-Y', strtotime($dateItem->getStart()));
+            $monthRange[date('m-Y', strtotime($dateItem->getStart()))] = date('m/Y', strtotime($dateItem->getStart()));
         }
     }
 
