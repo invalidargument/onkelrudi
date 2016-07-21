@@ -8,6 +8,7 @@ nbproject
 .vagrant
 composer.lock
 deployment/settings_*
+!deployment/settings_test*
 bower_components
 cache.properties
 wordpress

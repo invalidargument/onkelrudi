@@ -1,0 +1,26 @@
+Database:
+  dsn: "mysql:host=127.0.0.1;dbname=onkelrudi-test;charset=utf8"
+  user: "test"
+  password: "root"
+
+System:
+  environment: "test"
+  domain: "localhost"
+  protocol: "http://"
+
+Wordpress:
+  auth-username: 'test'
+  auth-password: 'abc'
+  api-domain: "localhost/wordpress"
+  api-documentation: "http://v2.wp-api.org/"
+  api-base-url: "/wp-json/wp/v2/"
+  api-get-posts: "posts"
+  api-get-categories: "categories"
+
+Mail:
+  smtp-host: "test"
+  smtp-transport-security: ""
+  smtp-port: ""
+  smtp-authentication-method: ""
+  smtp-username: ""
+  smtp-password: ""
