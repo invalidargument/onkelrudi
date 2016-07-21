@@ -12,6 +12,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     private $_organizerervice;
     private $_userService;
     private $_notificationService;
+    private $_wordpressService;
 
     protected function setUp()
     {
@@ -20,27 +21,30 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->_organizerervice = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\OrganizerServiceInterface');
         $this->_userService = \Mockery::mock('RudiBieller\OnkelRudi\User\UserServiceInterface');
         $this->_notificationService = \Mockery::mock('RudiBieller\OnkelRudi\User\NotificationServiceInterface');
+        $this->_wordpressService = \Mockery::mock('RudiBieller\OnkelRudi\Wordpress\ServiceInterface');
 
         $this->_sut->setService($this->_service);
         $this->_sut->setOrganizerService($this->_organizerervice);
         $this->_sut->setUserService($this->_userService);
         $this->_sut->setNotificationService($this->_notificationService);
+        $this->_sut->setWordpressService($this->_wordpressService);
     }
 
     /**
      * @dataProvider createActionDataProvider
      */
-    public function testCreateActionByNameReturnsAction($action, $expectedType)
+    public function testCreateActionByNameReturnsAction($action)
     {
-        $action = $this->_sut->createActionByName($action);
+        $instance = $this->_sut->createActionByName($action);
 
-        $this->assertInstanceOf($expectedType, $action);
+        $this->assertInstanceOf($action, $instance);
     }
 
     public function createActionDataProvider()
     {
         return array(
-            array('RudiBieller\OnkelRudi\Controller\Api\FleaMarketAction', 'RudiBieller\OnkelRudi\Controller\Api\FleaMarketAction')
+            array('RudiBieller\OnkelRudi\Controller\Api\FleaMarketAction'),
+            array('RudiBieller\OnkelRudi\Controller\WordpressCategoryAction')
         );
     }
 
