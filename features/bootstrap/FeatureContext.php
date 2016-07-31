@@ -8,6 +8,7 @@ use Behat\Gherkin\Node\PyStringNode;
 use Behat\Mink\Driver\BrowserKitDriver;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\MinkExtension\Context\MinkContext;
+use Buzz\Listener\CookieListener;
 use RudiBieller\OnkelRudi\Config\Config;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
@@ -16,6 +17,7 @@ use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use RudiBieller\OnkelRudi\FleaMarket\OrganizerService;
 use RudiBieller\OnkelRudi\FleaMarket\Query\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\Query\OrganizerQueryFactory;
+use RudiBieller\OnkelRudi\User\AuthenticationFactory;
 use RudiBieller\OnkelRudi\User\QueryFactory;
 use RudiBieller\OnkelRudi\User\UserService;
 use RudiBieller\OnkelRudi\User\UserServiceInterface;
@@ -69,6 +71,7 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
         $curl = new \Buzz\Client\Curl();
         $curl->setOption(CURLOPT_FOLLOWLOCATION, false);
         $this->_browser = new \Buzz\Browser($curl);
+        $this->_browser->addListener(new CookieListener());
 
         $factory = new Factory();
         $factory->setDiContainer($container);
@@ -82,8 +85,11 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
 
         $userQueryFactory = new QueryFactory();
         $userQueryFactory->setDiContainer($container);
+        $authenticationFactory = new AuthenticationFactory();
+        $authenticationFactory->setDiContainer($container);
         $this->_userService = new UserService();
         $this->_userService->setQueryFactory($userQueryFactory);
+        $this->_userService->setAuthenticationFactory($authenticationFactory);
     }
 
     /** @BeforeScenario */
@@ -229,6 +235,17 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
         $this->fillField('login_password', 'aaaaaaaa');
         $this->pressButton('Anmelden');
         $this->iWaitForSeconds(1);
+    }
+
+    /**
+     * @Given /^I am authenticated as user via api$/
+     */
+    public function iAmAuthenticatedAsUserViaApi()
+    {
+        $this->iSendARequestToWithBody(
+            'POST',
+            'http://localhost/public/api/v1/login',
+            new PyStringNode(['{"email":"test@onkel-rudi.de", "password": "aaaaaaaa"}'], 0));
     }
 
     private function _createFleaMarkets($num = 3, $expired = false)
