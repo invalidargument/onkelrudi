@@ -2,6 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\Controller\Api;
 
+use RudiBieller\OnkelRudi\Config\Config;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use Slim\App;
 
@@ -13,6 +14,8 @@ class OrganizerActionTest extends \PHPUnit_Framework_TestCase
         $organizer->setId(23)->setName('Max Power');
 
         $app = new App();
+        $container = $app->getContainer();
+        $container['config'] = new Config();
         $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
 
@@ -34,6 +37,8 @@ class OrganizerActionTest extends \PHPUnit_Framework_TestCase
     public function testActionReturns404WhenNoMarketWasFound()
     {
         $app = new App();
+        $container = $app->getContainer();
+        $container['config'] = new Config();
         $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
         $response

@@ -2,6 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
+use RudiBieller\OnkelRudi\Config\Config;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 use RudiBieller\OnkelRudi\Wordpress\Category;
 use Slim\App;
@@ -32,6 +33,7 @@ class WordpressCategoryActionTest extends \PHPUnit_Framework_TestCase
 
             return $view;
         };
+        $container['config'] = new Config();
         $body = \Mockery::mock('Slim\HttpBody');
         $body->shouldReceive('write')
             ->shouldReceive('__toString')->andReturn('String representation of the Body object');

@@ -3,6 +3,7 @@
 namespace RudiBieller\OnkelRudi\Controller\Api;
 
 use RudiBieller\OnkelRudi\BuilderFactory;
+use RudiBieller\OnkelRudi\Config\Config;
 use Slim\App;
 
 class UserCreateActionTest extends \PHPUnit_Framework_TestCase
@@ -41,6 +42,7 @@ class UserCreateActionTest extends \PHPUnit_Framework_TestCase
 
             return $view;
         };
+        $container['config'] = new Config();
 
         $body = \Mockery::mock('Slim\Http\Body');
         $body->shouldReceive('write')
@@ -83,6 +85,8 @@ class UserCreateActionTest extends \PHPUnit_Framework_TestCase
         $service->shouldReceive('createUser')->once()->with('foo@example.com', 'foobarbaz')->andReturn(1);
 
         $app = new App();
+        $container = $app->getContainer();
+        $container['config'] = new Config();
         $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
         $request->shouldReceive('getParsedBody')->once()->andReturn($parsedJson);
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');

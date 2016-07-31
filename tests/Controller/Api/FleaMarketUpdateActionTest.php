@@ -3,6 +3,7 @@
 namespace RudiBieller\OnkelRudi\Controller\Api;
 
 use RudiBieller\OnkelRudi\BuilderFactory;
+use RudiBieller\OnkelRudi\Config\Config;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 use Slim\App;
 
@@ -39,6 +40,8 @@ class FleaMarketUpdateActionTest extends \PHPUnit_Framework_TestCase
         $service->shouldReceive('updateFleaMarket')->once()->with(\Hamcrest\Matchers::equalTo($fleaMarket))->andReturn(1);
 
         $app = new App();
+        $container = $app->getContainer();
+        $container['config'] = new Config();
         $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
         $request->shouldReceive('getParsedBody')->once()->andReturn($parsedJson);
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');

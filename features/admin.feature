@@ -49,8 +49,8 @@ Feature: Admin page of onkelrudi
 
   @browser
   Scenario: Admin can create a new fleamarket with an existing organizer
-    Given I have a default organizer
-    And I am slowly authenticated as user
+    Given I am slowly authenticated as user
+    And I have a default organizer
     And I go to "/flohmarkt-anlegen/?test=1"
     Then I should see "+ Termin anlegen"
     When I fill in "fleamarket_name" with "Rudi Bieller"
@@ -80,9 +80,8 @@ Feature: Admin page of onkelrudi
 
   @browser
   Scenario: Admin can not create a new fleamarket when no existing organizer is selected and no new organizer provided
-    #Given I have no default organizer
-    Given I am on "/flohmarkt-anlegen/?test=1"
-    And I am authenticated as user
+    Given I am slowly authenticated as user
+    And I am on "/flohmarkt-anlegen/?test=1"
     Then I should see "+ Termin anlegen"
     When I fill in "fleamarket_name" with "Rudi Bieller"
     And I fill in "fleamarket_description" with "Eine Beschreibung"
@@ -104,8 +103,8 @@ Feature: Admin page of onkelrudi
 
   @browser
   Scenario: Admin is shown errormessage when not all mandatory fields are filled
-    Given I am on "/flohmarkt-anlegen/?test=1"
-    And I am authenticated as user
+    Given I am slowly authenticated as user
+    And I am on "/flohmarkt-anlegen/?test=1"
     And I fill in "fleamarket_name" with "Rudi Bieller"
     And I press "Neuen Termin speichern - click hier!"
     And I wait for "1" seconds

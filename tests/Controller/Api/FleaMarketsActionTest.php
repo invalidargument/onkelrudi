@@ -2,6 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\Controller\Api;
 
+use RudiBieller\OnkelRudi\Config\Config;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 use Slim\App;
 
@@ -14,6 +15,8 @@ class FleaMarketsActionTest extends \PHPUnit_Framework_TestCase
         $markets = array($fleaMarket);
 
         $app = new App();
+        $container = $app->getContainer();
+        $container['config'] = new Config();
         $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
 

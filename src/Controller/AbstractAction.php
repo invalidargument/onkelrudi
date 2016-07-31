@@ -89,6 +89,8 @@ abstract class AbstractAction implements ActionInterface
         $this->request = $request;
         $this->response = $response;
         $this->args = $args;
+        $this->isTestRequest = $this->app->getContainer()->get('config')->getSystemConfiguration()['environment'] === 'dev' &&
+            strpos($this->request->getUri()->getQuery(), 'test=1') !== false;
 
         if ($this instanceof UserAwareInterface) {
             if ($this->_isUnauthorizedRequest()) {
@@ -127,13 +129,6 @@ abstract class AbstractAction implements ActionInterface
 
     private function _isUnauthorizedRequest()
     {
-        $this->isTestRequest = $this->app->getContainer()->config->getSystemConfiguration()['environment'] === 'dev' &&
-            strpos($this->request->getUri()->getQuery(), 'test=1') !== false;
-
-        if (!$this->isTestRequest && is_null($this->userService->getAuthenticationService()->getStorage()->read())) {
-            return true;
-        }
-
-        return false;
+         return is_null($this->userService->getAuthenticationService()->getStorage()->read());
     }
 }

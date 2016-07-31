@@ -3,6 +3,7 @@
 namespace RudiBieller\OnkelRudi\Controller\Api;
 
 use RudiBieller\OnkelRudi\BuilderFactory;
+use RudiBieller\OnkelRudi\Config\Config;
 use RudiBieller\OnkelRudi\User\User;
 use Slim\App;
 use Zend\Authentication\Result;
@@ -28,6 +29,8 @@ class UserLoginActionTest extends \PHPUnit_Framework_TestCase
         $service->shouldReceive('getAuthenticationService')->once()->with(\Hamcrest\Matchers::equalTo($user))->andReturn($authenticationService);
 
         $app = new App();
+        $container = $app->getContainer();
+        $container['config'] = new Config();
         $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
         $request->shouldReceive('getParsedBody')->once()->andReturn($parsedJson);
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');

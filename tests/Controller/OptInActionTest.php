@@ -2,6 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
+use RudiBieller\OnkelRudi\Config\Config;
 use Slim\App;
 use Zend\Authentication\Storage\Session;
 
@@ -37,6 +38,7 @@ class OptInActionTest extends \PHPUnit_Framework_TestCase
 
             return $view;
         };
+        $container['config'] = new Config();
         $container['router'] = $router;
         $body = \Mockery::mock('Slim\HttpBody');
         $body->shouldReceive('write')

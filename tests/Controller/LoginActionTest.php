@@ -2,6 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
+use RudiBieller\OnkelRudi\Config\Config;
 use Slim\App;
 use Zend\Authentication\Storage\Session;
 
@@ -31,6 +32,7 @@ class LoginActionTest extends \PHPUnit_Framework_TestCase
             return $view;
         };
         $container['router'] = $router;
+        $container['config'] = new Config();
         $body = \Mockery::mock('Slim\HttpBody');
         $body->shouldReceive('write')
             ->shouldReceive('__toString')->andReturn('String representation of the Body object');

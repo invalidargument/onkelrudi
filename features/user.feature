@@ -6,7 +6,7 @@ Feature: User login/register page of onkelrudi
 
   @browser
   Scenario Outline: User gets proper feedback when trying to create a new user
-    Given I am on "/login/?test=1"
+    Given I am on "/login/"
     When I fill in "register_email" with "info@onkel-rudi.de"
     And I fill in "register_password" with "<password1>"
     And I fill in "register_password_repeat" with "<password2>"
