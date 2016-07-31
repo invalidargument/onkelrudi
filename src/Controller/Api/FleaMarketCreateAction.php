@@ -3,12 +3,13 @@
 namespace RudiBieller\OnkelRudi\Controller\Api;
 
 use RudiBieller\OnkelRudi\Controller\AbstractJsonAction;
+use RudiBieller\OnkelRudi\Controller\UserAwareInterface;
 use RudiBieller\OnkelRudi\FleaMarket\Builder;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use RudiBieller\OnkelRudi\User\User;
 
-class FleaMarketCreateAction extends AbstractJsonAction
+class FleaMarketCreateAction extends AbstractJsonAction implements UserAwareInterface
 {
     protected function getData()
     {

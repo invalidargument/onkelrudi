@@ -45,6 +45,7 @@ Feature: API v1 fleamarkets
 
   Scenario: Delete an existing fleamarket
     Given I have some fleamarkets
+    And I am authenticated as user via api
     And I send a "DELETE" request to "http://localhost/public/api/v1/fleamarkets/1"
     Then the response code should be "200"
     And the response should be json
@@ -55,6 +56,7 @@ Feature: API v1 fleamarkets
 
   Scenario: Update an item by id with data sent in body
     Given I have some fleamarkets
+    And I am authenticated as user via api
     And I send a "PUT" request to "http://localhost/public/api/v1/fleamarkets/1" with body
     """
     {"name":"Max UPDATED", "description": "Blue Pants", "start":"2015-01-01 00:00:00", "end":"2015-12-12 00:00:00", "zipCode":"50667"}
@@ -72,7 +74,8 @@ Feature: API v1 fleamarkets
     """
 
   Scenario: Create a new organizer
-    Given I send a "POST" request to "http://localhost/public/api/v1/organizers" with body
+    Given I am authenticated as user via api
+    And I send a "POST" request to "http://localhost/public/api/v1/organizers" with body
     """
     {"name":"Max Power"}
     """
@@ -110,6 +113,7 @@ Feature: API v1 fleamarkets
 
   Scenario: Update an organizer by id
     Given I have a default organizer
+    And I am authenticated as user via api
     And I send a "PUT" request to "http://localhost/public/api/v1/organizers/1" with body
     """
     {"name":"MAX POWERRRRR!!!!","street":"fuu","streetNo":"2001","zipCode":"50001","city":"K\u00f6ln","phone":"23","url":"http:\/\/www.example.com"}
