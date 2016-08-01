@@ -5,8 +5,6 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\PyStringNode;
-use Behat\Mink\Driver\BrowserKitDriver;
-use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\MinkExtension\Context\MinkContext;
 use Buzz\Listener\CookieListener;
 use RudiBieller\OnkelRudi\Config\Config;
@@ -22,7 +20,6 @@ use RudiBieller\OnkelRudi\User\QueryFactory;
 use RudiBieller\OnkelRudi\User\UserService;
 use RudiBieller\OnkelRudi\User\UserServiceInterface;
 use Slim\PDO\Database;
-use Symfony\Component\BrowserKit\Cookie;
 
 /**
  * Defines application features from the specific context.
