@@ -4,7 +4,7 @@ Feature: Admin page of onkelrudi
   As an onkelrudi user
   I need to be able to create new Organizer and Fleamarket
 
-  @browser
+  @javascript
   Scenario: Admin can create a new fleamarket with a new organizer
     Given I have a default organizer
     And I am slowly authenticated as user
@@ -47,7 +47,7 @@ Feature: Admin page of onkelrudi
     {"data":{"id":"2","uuid":"ccd3d17a-3b2e-5991-9840-9bc0c5c2d9e2","name":"Die Flohmarkt GmbH","street":"Aachener Stra\u00dfe","streetNo":"5000","zipCode":"5000","city":"K\u00f6ln","phone":"0221 1234567890","email":"example@example.com","url":"http:\/\/www.example.com\/foo"}}
     """
 
-  @browser
+  @javascript
   Scenario: Admin can create a new fleamarket with an existing organizer
     Given I am slowly authenticated as user
     And I have a default organizer
@@ -78,7 +78,7 @@ Feature: Admin page of onkelrudi
     {"data":{"id":"1","uuid":"02129607-aa9f-5466-a416-cec4881afd58","organizer":{"id":"1","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Rudi Bieller","description":"Eine Beschreibung","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Richmodstr.","streetNo":"23","city":"K\u00f6ln","zipCode":"50667","location":"Meine alte Wohnung","url":"http:\/\/www.example.com"}}
     """
 
-  @browser
+  @javascript
   Scenario: Admin can not create a new fleamarket when no existing organizer is selected and no new organizer provided
     Given I am slowly authenticated as user
     And I am on "/flohmarkt-anlegen/?test=1"
@@ -101,7 +101,7 @@ Feature: Admin page of onkelrudi
     And I should see an ".errormessage" element
     And I should see "Bitte alle Pflichtfelder ausfüllen!"
 
-  @browser
+  @javascript
   Scenario: Admin is shown errormessage when not all mandatory fields are filled
     Given I am slowly authenticated as user
     And I am on "/flohmarkt-anlegen/?test=1"

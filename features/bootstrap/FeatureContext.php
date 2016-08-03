@@ -94,6 +94,10 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
     {
         $this->_cleanupDatabase();
         $this->_response = null;
+
+        if ($this->getSession()->getDriver() instanceof Behat\Mink\Driver\Selenium2Driver) {
+            $this->setMinkParameter('base_url', 'http://localhost:8089/public/');
+        }
     }
 
     /** @AfterScenario */

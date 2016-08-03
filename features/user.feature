@@ -4,7 +4,7 @@ Feature: User login/register page of onkelrudi
   As an onkelrudi user
   I need to be able to create new User and login as an existing one
 
-  @browser
+  @javascript
   Scenario Outline: User gets proper feedback when trying to create a new user
     Given I am on "/login/"
     When I fill in "register_email" with "info@onkel-rudi.de"
@@ -22,7 +22,7 @@ Feature: User login/register page of onkelrudi
       | foo       | foo        | .button-error    | .successmessage    | Es ist etwas schiefgegangen: Passwords must have a minimum length of 8 chracters. |
       | foobarbaz | foobarbazz | .button-error    | .successmessage    | Es ist etwas schiefgegangen: Passwords do not match. |
 
-  @browser
+  @javascript @now
   Scenario: User can use created opt-in token
     Given I have a user with email "info@onkel-rudi.de" and optin token "test-token"
     And I am on "/opt-in/token-test-token"
