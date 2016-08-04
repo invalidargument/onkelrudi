@@ -22,7 +22,7 @@ Feature: User login/register page of onkelrudi
       | foo       | foo        | .button-error    | .successmessage    | Es ist etwas schiefgegangen: Passwords must have a minimum length of 8 chracters. |
       | foobarbaz | foobarbazz | .button-error    | .successmessage    | Es ist etwas schiefgegangen: Passwords do not match. |
 
-  @javascript @now
+  @javascript
   Scenario: User can use created opt-in token
     Given I have a user with email "info@onkel-rudi.de" and optin token "test-token"
     And I am on "/opt-in/token-test-token"
