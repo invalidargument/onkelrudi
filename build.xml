@@ -21,7 +21,6 @@
         <delete dir="${basedir}/build/pdepend"/>
         <delete dir="${basedir}/build/phpdox"/>
         <delete dir="${basedir}/build/onkelrudi"/>
-        <delete dir="${basedir}/src/cache"/>
     </target>
 
     <target name="prepare" depends="clean" description="Prepare build">
@@ -30,7 +29,6 @@
         <mkdir dir="${basedir}/build/pdepend"/>
         <mkdir dir="${basedir}/build/phpdox"/>
         <mkdir dir="${basedir}/build/onkelrudi"/>
-        <mkdir dir="${basedir}/src/cache"/>
     </target>
 
     <target name="prepare-ci" depends="prepare" description="Prepare build and create needed configuration">
@@ -156,9 +154,7 @@
             </fileset>
         </copy>
         <copy todir="${basedir}/build/onkelrudi/src">
-            <fileset dir="${basedir}/src">
-                <exclude name="src/cache"/>
-            </fileset>
+            <fileset dir="${basedir}/src"/>
         </copy>
         <copy todir="${basedir}/build/onkelrudi/vendor">
             <fileset dir="${basedir}/vendor"/>
