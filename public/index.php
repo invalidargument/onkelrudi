@@ -2,6 +2,7 @@
 include_once '../vendor/autoload.php';
 
 use RudiBieller\OnkelRudi\BuilderFactory;
+use RudiBieller\OnkelRudi\Cache\CacheManagerFactory;
 use RudiBieller\OnkelRudi\Config\Config;
 use RudiBieller\OnkelRudi\FleaMarket\OrganizerService;
 use RudiBieller\OnkelRudi\FleaMarket\Query\Factory;
@@ -80,6 +81,9 @@ $appConfiguration = [
     },
     'errorHandler' => function ($c) {
         return new RudiBieller\OnkelRudi\Handler\Error($c['Logger']);
+    },
+    'CacheManager' => function($c) {
+        return (new CacheManagerFactory())->createCacheManager();
     }
 ];
 

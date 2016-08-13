@@ -2,6 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\Query;
 
+use RudiBieller\OnkelRudi\Cache\CacheManagerFactoryTest;
+use RudiBieller\OnkelRudi\CacheableInterface;
 use Slim\Container;
 use \Slim\PDO\Database;
 
@@ -23,7 +25,15 @@ abstract class AbstractQuery implements QueryInterface
     public function run()
     {
         $this->getPdo();
-        $result = $this->runQuery();
+        // if !cached, write to cache and return
+        // if cache expired, return cache, invalidate it and write it new
+        // if cached. return cached content
+        if ($this instanceof CacheableInterface) {
+            $result = $this->runQuery();
+        } else {
+            $result = $this->runQuery();
+        }
+
         return $this->mapResult($result);
     }
 
