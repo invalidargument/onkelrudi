@@ -5,21 +5,20 @@ namespace RudiBieller\OnkelRudi\Cache;
 use Illuminate\Cache\FileStore;
 use Illuminate\Cache\Repository;
 use Illuminate\Filesystem\Filesystem;
+use RudiBieller\OnkelRudi\Config\Config;
 
 class CacheManagerFactory
 {
-    const ADAPTER_TYPE_ILLUMINATE = 'Illuminate'; // retrieve from Config?!
-
-    public function createCacheManager($adapterName = self::ADAPTER_TYPE_ILLUMINATE)
+    public function createCacheManager(Config $config)
     {
-        $adapterClass = 'RudiBieller\OnkelRudi\Cache\\' . $adapterName . 'Adapter';
+        $adapterClass = 'RudiBieller\OnkelRudi\Cache\\' . $config->getSystemConfiguration()['cache-adapter'] . 'Adapter';
 
         $manager = new CacheManager();
         $adapter = new $adapterClass();
         $repository = new Repository(
             new FileStore(
                 new Filesystem(),
-                '/var/www/html/cache/'
+                $config->getSystemConfiguration()['cache-path']
             )
         );
         $adapter->setCacheStore($repository);

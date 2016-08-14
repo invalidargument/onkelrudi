@@ -7,7 +7,9 @@ System:
   environment: "dev"
   domain: "localhost"
   protocol: "http://"
-  
+  cache-adapter: "Illuminate"
+  cache-path: "/var/www/html/cache/"
+
 Wordpress:
   auth-username: 'rudi'
   auth-password: 'abc'
