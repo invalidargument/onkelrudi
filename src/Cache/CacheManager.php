@@ -23,7 +23,7 @@ class CacheManager implements CacheManagerInterface
 
     public function get($key)
     {
-        $this->_adapter->get($key);
+        return $this->_adapter->get($key);
     }
 
     public function delete($key)
@@ -33,6 +33,6 @@ class CacheManager implements CacheManagerInterface
 
     public function clear()
     {
-        throw new \Exception('Method cannot be handled, forget about it.');
+        $this->_adapter->clear();
     }
 }

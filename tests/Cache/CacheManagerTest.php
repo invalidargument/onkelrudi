@@ -40,9 +40,13 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->_cacheAdapter->shouldReceive('get')
             ->once()
-            ->with($cacheKey);
+            ->with($cacheKey)
+            ->andReturn('cached-value');
 
-        $this->_sut->get($cacheKey);
+        $this->assertSame(
+            'cached-value',
+            $this->_sut->get($cacheKey)
+        );
     }
 
     public function testDeletingOfValuesFromCache()
@@ -54,5 +58,13 @@ class CacheManagerTest extends \PHPUnit_Framework_TestCase
             ->with($cacheKey);
 
         $this->_sut->delete($cacheKey);
+    }
+
+    public function testFlushingCache()
+    {
+        $this->_cacheAdapter->shouldReceive('clear')
+            ->once();
+
+        $this->_sut->clear();
     }
 }

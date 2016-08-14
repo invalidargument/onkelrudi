@@ -2,13 +2,14 @@
 
 namespace RudiBieller\OnkelRudi\Query;
 
-use RudiBieller\OnkelRudi\Cache\CacheManagerFactoryTest;
 use RudiBieller\OnkelRudi\CacheableInterface;
 use Slim\Container;
 use \Slim\PDO\Database;
 
 abstract class AbstractQuery implements QueryInterface
 {
+    const TTL = 3600;
+
     /**
      * @var Database
      */
@@ -29,7 +30,12 @@ abstract class AbstractQuery implements QueryInterface
         // if cache expired, return cache, invalidate it and write it new
         // if cached. return cached content
         if ($this instanceof CacheableInterface) {
-            $result = $this->runQuery();
+            $result = $this->diContainer->get('CacheManager')->get($this->getCacheKey());
+
+            if (is_null($result)) {
+                $result = $this->runQuery();
+                $this->diContainer->get('CacheManager')->set($this->getCacheKey(), $result, self::TTL);
+            }
         } else {
             $result = $this->runQuery();
         }
@@ -55,6 +61,11 @@ abstract class AbstractQuery implements QueryInterface
         }
 
         return $this->pdo;
+    }
+
+    protected function getCacheKey()
+    {
+        return self::class;
     }
 
     private function _createPdoInstance()

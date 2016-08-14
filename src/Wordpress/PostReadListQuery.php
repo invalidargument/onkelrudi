@@ -2,10 +2,11 @@
 
 namespace RudiBieller\OnkelRudi\Wordpress;
 
+use RudiBieller\OnkelRudi\CacheableInterface;
 use RudiBieller\OnkelRudi\Config\Config;
 use RudiBieller\OnkelRudi\Query\AbstractJsonReadQuery;
 
-class PostReadListQuery extends AbstractJsonReadQuery
+class PostReadListQuery extends AbstractJsonReadQuery implements CacheableInterface
 {
     private $_limit;
     private $_offset;

@@ -41,6 +41,6 @@ class IlluminateAdapter implements CacheAdapterInterface
 
     public function clear()
     {
-        throw new \Exception('Method cannot be handled, forget about it.');
+        $this->_cacheStore->getStore()->flush();
     }
 }

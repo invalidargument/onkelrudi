@@ -52,4 +52,16 @@ class IlluminateAdapterTest extends \PHPUnit_Framework_TestCase
 
         $this->_sut->delete($cacheKey);
     }
+
+    public function testFlushingCache()
+    {
+        $store = \Mockery::mock('Illuminate\Cache\FileStore');
+        $store->shouldReceive('flush')
+            ->once();
+        $this->_cacheStore->shouldReceive('getStore')
+            ->once()
+            ->andReturn($store);
+
+        $this->_sut->clear();
+    }
 }
