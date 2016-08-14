@@ -27,9 +27,18 @@ class CategoryReadListQueryTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('getContent')->andReturn($categoriesJson)
             ->shouldReceive('addListener')->with(\Hamcrest\Matchers::equalTo(new \Buzz\Listener\BasicAuthListener($wpConfig['auth-username'], $wpConfig['auth-password'])));
 
+        $cacheManager = \Mockery::mock('RudiBieller\OnkelRudi\Cache\CacheManager');
+        $cacheManager->shouldReceive('get')->andReturn(null)
+            ->shouldReceive('set');
+
         $sut = new CategoryReadListQuery();
         $sut->setBrowser($browser);
-        $sut->setDiContainer(new Container(['config' => $config]));
+        $sut->setDiContainer(
+            new Container([
+                'config' => $config,
+                'CacheManager' => $cacheManager
+            ])
+        );
 
         $result = $sut->run();
 

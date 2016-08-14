@@ -43,7 +43,7 @@ abstract class AbstractJsonReadQuery implements QueryInterface
 
             if (is_null($result)) {
                 $result = $this->runQuery();
-                $this->diContainer->get('CacheManager')->set($this->getCacheKey(), $result, self::TTL);
+                $this->diContainer->get('CacheManager')->set($this->getCacheKey(), $result, $this->getTtl());
             }
         } else {
             $result = $this->runQuery();
@@ -107,6 +107,11 @@ abstract class AbstractJsonReadQuery implements QueryInterface
 
     protected function getCacheKey()
     {
-        return self::class;
+        return self::class . $this->getUri();
+    }
+
+    protected function getTtl()
+    {
+        return self::TTL;
     }
 }
