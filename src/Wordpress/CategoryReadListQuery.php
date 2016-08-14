@@ -3,16 +3,14 @@
 namespace RudiBieller\OnkelRudi\Wordpress;
 
 use RudiBieller\OnkelRudi\CacheableInterface;
-use RudiBieller\OnkelRudi\Config\Config;
 use RudiBieller\OnkelRudi\Query\AbstractJsonReadQuery;
 
 class CategoryReadListQuery extends AbstractJsonReadQuery implements CacheableInterface
 {
     protected function getUri()
     {
-        $config = new Config();
-        $wpConfig = $config->getWordpressConfiguration();
-        $systemConfig = $config->getSystemConfiguration();
+        $wpConfig = $this->diContainer->get('config')->getWordpressConfiguration();
+        $systemConfig = $this->diContainer->get('config')->getSystemConfiguration();
         
         return $systemConfig['protocol'] . $wpConfig['api-domain'] .
             $wpConfig['api-base-url'] . $wpConfig['api-get-categories'];
