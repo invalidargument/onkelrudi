@@ -133,16 +133,21 @@ $app->get('/', function ($request, $response, $args) use ($service, $wpService, 
     $wpCategories = $wpService->getAllCategories();
     $fleaMarketsDetailRoutes = [];
     $monthRange = [];
+    $zipAreaRange = [];
     foreach($fleaMarkets as $fleaMarket) {
         $fleaMarketsDetailRoutes[$fleaMarket->getId()] = $app->getContainer()->router->pathFor('event-date', [
             'wildcard' => $fleaMarket->getSlug(),
             'id' => $fleaMarket->getId()
         ]);
 
+        $zipArea = (int) substr($fleaMarket->getZipCode(), 0, 1);
+        $zipAreaRange[$zipArea] = $zipArea;
+
         foreach ($fleaMarket->getDates() as $dateItem) {
             $monthRange[date('m-Y', strtotime($dateItem->getStart()))] = date('m/Y', strtotime($dateItem->getStart()));
         }
     }
+    sort($zipAreaRange);
 
     // we need a middleware to convert links to url-compliant representation
     return $this->get('view')
@@ -151,6 +156,7 @@ $app->get('/', function ($request, $response, $args) use ($service, $wpService, 
             'fleamarketsDetailsRoutes' => $fleaMarketsDetailRoutes,
             'wpCategories' => $wpCategories,
             'monthRange' => $monthRange,
+            'zipAreaRange' => $zipAreaRange,
             'isLoggedIn' => $userService->isLoggedIn(),
             'isTest' => (boolean)$isTest
         ]);

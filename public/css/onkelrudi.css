@@ -607,3 +607,7 @@ i.fa {
 .fleamarketDetail h2.mr40 {
     margin-right: 10%;
 }
+
+.hiddenMarketSummaryBox {
+    display:none;
+}
