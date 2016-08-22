@@ -8,6 +8,7 @@ class QueryFactory implements QueryFactoryInterface
 {
     private $_categoriesReadQuery;
     private $_postsReadQuery;
+    private $_postReadQuery;
 
     private $_diContainer;
 
@@ -34,5 +35,15 @@ class QueryFactory implements QueryFactoryInterface
         }
 
         return $this->_postsReadQuery;
+    }
+
+    public function createPostReadQuery()
+    {
+        if (is_null($this->_postReadQuery)) {
+            $this->_postReadQuery = new PostReadQuery();
+            $this->_postReadQuery->setDiContainer($this->_diContainer);
+        }
+
+        return $this->_postReadQuery;
     }
 }

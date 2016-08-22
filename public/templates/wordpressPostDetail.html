@@ -12,7 +12,7 @@
         <a class="pure-menu-heading" href="/public/">Onkel Rudi</a>
         <ul class="pure-menu-list">
             {% for item in wpCategories %}
-            <li class="pure-menu-item{% if item.id == selectedCategory %} pure-menu-active{% endif %}"><a href="/public/{{item.slug}}/kategorie/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
+            <li class="pure-menu-item{% if data.id == selectedCategory %} pure-menu-active{% endif %}"><a href="/public/{{data.slug}}/kategorie/{{data.id}}" class="pure-menu-link">{{data.name}}</a></li>
             {% endfor %}
             <li class="pure-menu-item"><a href="/public/#about" class="pure-menu-link">About</a></li>
             <li class="pure-menu-item"><a href="/public/#impressum" class="pure-menu-link">Impressum</a></li>
@@ -38,19 +38,15 @@
 <div class="content-wrapper">
     <div class="content">
         <div class="pure-g">
-            {% for item in data %}
             <div class="l-box pure-u-1 pure-u-md-1-4 pure-u-lg-1-4">
-                <!-- {{wpCategories|first.name}} -->
-                <h3 class="content-head"><time datetime="{{item.date|date('c')}}">{{item.date|date("d.m.Y H:i")}}</time></h3>
+                <h3 class="content-head"><time datetime="{{data.date|date('c')}}">{{data.date|date("d.m.Y H:i")}}</time></h3>
             </div>
             <div class="l-box pure-u-1 pure-u-md-3-4 pure-u-lg-3-4">
-                <h2 class="content-head">{{item.title}}</h2>
+                <h2 class="content-head">{{data.title}}</h2>
                 <p>
-                    {{item.content|raw}}
+                    {{data.content|raw}}
                 </p>
-                <i class="fa fa-angle-double-right"></i><a href="/public/blog/{{item.slug}}/post/{{item.id}}">Vollständigen Artikel lesen</a>
             </div>
-            {% endfor %}
         </div>
     </div>
 

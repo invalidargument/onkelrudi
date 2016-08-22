@@ -171,8 +171,13 @@ $app->get('/{wildcard}/termin/{id}', function ($request, $response, $args) use (
 })->setName('event-date');
 
 // Blog Category View
-$app->get('/{wildcard}/kategorie/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
+$app->get('/blog/kategorie/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\WordpressCategoryAction');
+    $action($request, $response, $args);
+})->setName('wp-category');
+// Blog Post Detail View
+$app->get('/blog/{wildcard}/post/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\WordpressPostAction');
     $action($request, $response, $args);
 })->setName('wp-category');
 

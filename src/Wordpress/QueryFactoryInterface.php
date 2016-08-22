@@ -7,4 +7,6 @@ interface QueryFactoryInterface
     public function createCategoryReadListQuery();
 
     public function createPostReadListQuery();
+
+    public function createPostReadQuery();
 }

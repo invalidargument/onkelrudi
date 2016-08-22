@@ -26,4 +26,11 @@ class Service implements ServiceInterface
             ->setLimit($limit)
             ->run();
     }
+
+    public function getPost($id)
+    {
+        return $this->_factory->createPostReadQuery()
+            ->setId($id)
+            ->run();
+    }
 }

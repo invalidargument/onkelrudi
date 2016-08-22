@@ -31,7 +31,8 @@ class QueryFactoryTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('createCategoryReadListQuery', 'RudiBieller\OnkelRudi\Wordpress\CategoryReadListQuery'),
-            array('createPostReadListQuery', 'RudiBieller\OnkelRudi\Wordpress\PostReadListQuery')
+            array('createPostReadListQuery', 'RudiBieller\OnkelRudi\Wordpress\PostReadListQuery'),
+            array('createPostReadQuery', 'RudiBieller\OnkelRudi\Wordpress\PostReadQuery')
         );
     }
 }

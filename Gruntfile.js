@@ -63,6 +63,9 @@ module.exports = function(grunt) {
                     ],
                     'build/onkelrudi/public/templates/wordpressCategoryOverview.html': [
                         'public/templates/wordpressCategoryOverview.html'
+                    ],
+                    'build/onkelrudi/public/templates/wordpressPostDetail.html': [
+                        'public/templates/wordpressPostDetail.html'
                     ]
                 }
             },
@@ -249,6 +252,28 @@ module.exports = function(grunt) {
             wordpressCategoryHtmlPaths: {
                 src: ['build/onkelrudi/public/templates/wordpressCategoryOverview.html'],
                 dest: 'build/onkelrudi/public/templates/wordpressCategoryOverview.html',
+                replacements: [
+                    {
+                        from: '/public/bower_components/pure/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/css/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/bower_components/jquery/dist/',
+                        to: '/js/'
+                    },
+                    {
+                        from: '/public/',
+                        to: '/'
+                    }
+                ]
+            },
+            wordpressPostDetailHtmlPaths: {
+                src: ['build/onkelrudi/public/templates/wordpressPostDetail.html'],
+                dest: 'build/onkelrudi/public/templates/wordpressPostDetail.html',
                 replacements: [
                     {
                         from: '/public/bower_components/pure/',

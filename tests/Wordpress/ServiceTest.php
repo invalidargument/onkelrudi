@@ -44,4 +44,33 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $sut->getPosts($selectedCategory));
     }
+
+    /**
+     * @dataProvider dataProviderTestGetPostReturnsExpectedPostObject
+     */
+    public function testGetPostReturnsExpectedPostObject($id, $queryResult, $expectedResult)
+    {
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\Wordpress\PostReadQuery');
+        $query
+            ->shouldReceive('setId')->once()->with($id)->andReturn($query)
+            ->shouldReceive('run')->once()->andReturn($queryResult);
+
+        $factory = \Mockery::mock('RudiBieller\OnkelRudi\Wordpress\QueryFactoryInterface');
+        $factory->shouldReceive('createPostReadQuery')->once()->andReturn($query);
+
+        $sut = new Service();
+        $sut->setQueryFactory($factory);
+
+        $this->assertEquals($expectedResult, $sut->getPost($id));
+    }
+
+    public function dataProviderTestGetPostReturnsExpectedPostObject()
+    {
+        $post = new Post();
+
+        return array(
+            array(42, $post, $post),
+            array(23, null, null),
+        );
+    }
 }
