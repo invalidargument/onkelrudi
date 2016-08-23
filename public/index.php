@@ -82,8 +82,8 @@ $appConfiguration = [
     'errorHandler' => function ($c) {
         return new RudiBieller\OnkelRudi\Handler\Error($c['Logger']);
     },
-    'CacheManager' => function($c) {
-        return (new CacheManagerFactory())->createCacheManager(new Config());
+    'CacheManager' => function($c) use ($config) {
+        return (new CacheManagerFactory())->createCacheManager($config);
     }
 ];
 
