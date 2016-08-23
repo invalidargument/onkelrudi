@@ -179,7 +179,7 @@ $app->get('/blog/kategorie/{id}', function ($request, $response, $args) use ($ap
 $app->get('/blog/{wildcard}/post/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\WordpressPostAction');
     $action($request, $response, $args);
-})->setName('wp-category');
+})->setName('wp-post');
 
 // Registration/Login form
 $app->get('/login/', function ($request, $response, $args) use ($app, $controllerFactory) {
