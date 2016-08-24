@@ -124,7 +124,7 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
      */
     public function iHaveSomeFleamarketsWithinTheUpcomingTimespan()
     {
-        throw new PendingException();
+        $this->_createFleaMarkets(3, false, true);
     }
 
     /**
@@ -257,12 +257,21 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
             new PyStringNode(['{"email":"test@onkel-rudi.de", "password": "aaaaaaaa"}'], 0));
     }
 
-    private function _createFleaMarkets($num = 3, $expired = false)
+    private function _createFleaMarkets($num = 3, $expired = false, $inUpcomingTimespan = false)
     {
         if ($expired === false) {
-            $dates = [
-                new FleaMarketDate('2016-12-12 08:01:02', '2016-12-13 20:20:20')
-            ];
+            if ($inUpcomingTimespan) {
+                $dates = [
+                    new FleaMarketDate(
+                        date ('Y-m-d 08:01:02', strtotime('+1 week')),
+                        date ('Y-m-d 20:20:20', strtotime('+1 week'))
+                    )
+                ];
+            } else {
+                $dates = [
+                    new FleaMarketDate('2016-12-12 08:01:02', '2016-12-13 20:20:20')
+                ];
+            }
         } else {
             $dates = [
                 new FleaMarketDate('2015-12-12 08:01:02', '2015-12-13 20:20:20')
