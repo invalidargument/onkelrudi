@@ -75,12 +75,21 @@ class FleaMarketService implements FleaMarketServiceInterface
     /**
      * @return FleaMarket[]
      */
-    public function getAllUpcomingFleaMarkets()
+    public function getAllFleaMarketsByTimespan(\DateTimeImmutable $start = null, \DateTimeImmutable $end = null)
     {
         $query = $this->_factory->createFleaMarketReadListQuery();
 
+        if (is_null($start)) {
+            $start = new \DateTimeImmutable();
+        }
+        if (is_null($end)) {
+            $end = new \DateTimeImmutable(
+                $start->add(new \DateInterval('P1M'))->format('Y-m-t 23:59:59')
+            );
+        }
+
         $query->setFleaMarketService($this)
-            ->setQueryOnlyCurrentDates();
+            ->setQueryTimespan($start, $end);
 
         return $query->run();
     }

@@ -129,7 +129,7 @@ $controllerFactory->setWordpressService($wpService);
 // Index
 $app->get('/', function ($request, $response, $args) use ($service, $wpService, $userService, $app) {
     $isTest = strpos($request->getUri()->getQuery(), 'test=1') !== false;
-    $fleaMarkets = $service->getAllUpcomingFleaMarkets();
+    $fleaMarkets = $service->getAllFleaMarketsByTimespan();
     $wpCategories = $wpService->getAllCategories();
     $fleaMarketsDetailRoutes = [];
     $monthRange = [];

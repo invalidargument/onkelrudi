@@ -65,12 +65,27 @@ class FleaMarketReadListQuery extends AbstractQuery
         $datesStatement = $this->pdo
             ->select()
             ->from('fleamarkets_dates')
-            ->orderBy('start', 'ASC')
-            ->limit($this->_limit)
-            ->offset($this->_offset);
+            ->orderBy('start', 'ASC');
 
-        if ($this->_onlyCurrentDates) {
-            $datesStatement = $datesStatement->where('start', '>=', date('Y-m-d 00:00:00'));
+        if ($this->_hasValidQueryTimespan()) {
+            $datesStatement = $datesStatement->where(
+                'start',
+                '>=',
+                $this->_queryTimespan['start']->format('Y-m-d 00:00:00')
+            );
+            $datesStatement = $datesStatement->where(
+                'end',
+                '<=',
+                $this->_queryTimespan['end']->format('Y-m-t 23:59:59')
+            );
+        } else {
+            $datesStatement = $datesStatement
+                ->limit($this->_limit)
+                ->offset($this->_offset);
+
+            if ($this->_onlyCurrentDates) {
+                $datesStatement = $datesStatement->where('start', '>=', date('Y-m-d 00:00:00'));
+            }
         }
 
         $datesData = $datesStatement->execute()->fetchAll();
@@ -156,5 +171,14 @@ class FleaMarketReadListQuery extends AbstractQuery
         }
 
         return array_unique($ids);
+    }
+
+    private function _hasValidQueryTimespan()
+    {
+        if (is_null($this->_queryTimespan)) {
+            return false;
+        }
+
+        return (!is_null($this->_queryTimespan['start']) && !is_null($this->_queryTimespan['end']));
     }
 }

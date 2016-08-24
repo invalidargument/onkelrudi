@@ -9,7 +9,7 @@ interface FleaMarketServiceInterface extends ServiceInterface
 {
     public function getAllFleaMarkets();
 
-    public function getAllUpcomingFleaMarkets();
+    public function getAllFleaMarketsByTimespan(\DateTimeImmutable $start = null, \DateTimeImmutable $end = null);
 
     public function getFleaMarkets($limit, $offset);
 

@@ -97,19 +97,25 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
         $this->_sut->getAllFleaMarkets();
     }
 
-    public function testGetAllUpcomingReturnsListWithAllUpcomingMarketsOnly()
+    public function testGetAllByTimespanReturnsListWithAllMarketsOfGivenTimespanOnly()
     {
         $markets = array();
 
         $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketReadListQuery');
         $query
             ->shouldReceive('setFleaMarketService')->andReturn($query)
-            ->shouldReceive('setQueryOnlyCurrentDates')->andReturn($query)
+            ->shouldReceive('setQueryTimespan')
+                ->once()
+                ->with(
+                    \Hamcrest\Matchers::anInstanceOf('\DateTimeImmutable'),
+                    \Hamcrest\Matchers::anInstanceOf('\DateTimeImmutable')
+                )
+                ->andReturn($query)
             ->shouldReceive('run')->once()->andReturn($markets);
 
         $this->_factory->shouldReceive('createFleaMarketReadListQuery')->once()->andReturn($query);
 
-        $this->_sut->getAllUpcomingFleaMarkets();
+        $this->_sut->getAllFleaMarketsByTimespan();
     }
 
     public function testGetFleaMarketsReturnsListWithMarketsByLimitAndOffset()

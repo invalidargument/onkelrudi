@@ -11,7 +11,7 @@ Feature: Index page of onkelrudi
     And I should see "Impressum" in the ".pure-menu-list li:nth-of-type(3)" element
 
   Scenario: Startpage with fleamarket boxes is displayed
-    Given I have some fleamarkets
+    Given I have some fleamarkets within the upcoming timespan
     And I am on "/?test=1"
     Then I should see "Onkel Rudi" in the "h1" element
     And I should see "Der #2 Flohmarkt von Rudi" in the "div.marketSummaryBox:nth-of-type(3) h3" element

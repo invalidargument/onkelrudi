@@ -91,4 +91,34 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(42, $fleaMarkets[0]->getId());
         $this->assertEquals(23, $fleaMarkets[1]->getId());
     }
+
+    public function testQueryReadsFleaMarketsBySpecifiedInterval()
+    {
+        $start = new \DateTimeImmutable();
+        $end = new \DateTimeImmutable(
+            $start->add(new \DateInterval('P3M'))->format('Y-m-t 23:59:59')
+        );
+
+        $this->_sut->setQueryTimespan($start, $end);
+
+        $statement1 = \Mockery::mock('\PDOStatement');
+        $statement1->shouldReceive('fetchAll')->once()->andReturn([]);
+
+        // query dates
+        $this->_pdo->shouldReceive('select')->once()->andReturn($this->_pdo)
+            ->shouldReceive('from')->once()->with('fleamarkets_dates')->andReturn($this->_pdo)
+            ->shouldReceive('where')->once()->with('start', '>=', date('Y-m-d 00:00:00'))->andReturn($this->_pdo)
+            ->shouldReceive('where')->once()->with('end', '<=', date('Y-m-t 23:59:59', strtotime('+3 months')))->andReturn($this->_pdo)
+            ->shouldReceive('limit')->once()->andReturn($this->_pdo)
+            ->shouldReceive('orderBy')->once()->andReturn($this->_pdo)
+            ->shouldReceive('offset')->once()->andReturn($this->_pdo)
+            ->shouldReceive('execute')->once()->andReturn($statement1);
+
+        /**
+         * @var \RudiBieller\OnkelRudi\FleaMarket\FleaMarket
+         */
+        $fleaMarkets = $this->_sut->run();
+
+        $this->assertInternalType('array', $fleaMarkets);
+    }
 }

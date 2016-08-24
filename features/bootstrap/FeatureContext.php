@@ -120,6 +120,14 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
     }
 
     /**
+     * @Given I have some fleamarkets within the upcoming timespan
+     */
+    public function iHaveSomeFleamarketsWithinTheUpcomingTimespan()
+    {
+        throw new PendingException();
+    }
+
+    /**
      * @Given I have an expired fleamarket
      */
     public function iHaveAnExpiredFleamarket()
