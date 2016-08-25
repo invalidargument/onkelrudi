@@ -43,12 +43,16 @@ class DatesReadListQuery extends AbstractQuery
     {
         $selectStatement = $this->pdo
             ->select()
+            ->distinct()
             ->from('fleamarkets_dates')
-            ->where('fleamarket_id', '=', $this->_fleaMarketId)
             ->orderBy('start', 'ASC');
 
+        if ($this->_fleaMarketId) {
+            $selectStatement = $selectStatement->where('fleamarket_id', '=', $this->_fleaMarketId);
+        }
+
         if ($this->_onlyCurrentDates) {
-            $selectStatement->where('start', '>=', date('Y-m-d 00:00:00'));
+            $selectStatement = $selectStatement->where('start', '>=', date('Y-m-d 00:00:00'));
         }
 
         /**

@@ -32,7 +32,13 @@ interface FleaMarketServiceInterface extends ServiceInterface
 
     /**
      * @param int $fleaMarketId
+     * @param bool $onlyUpcoming
      * @return FleaMarketDate[]
      */
-    public function getDates($fleaMarketId);
+    public function getDates($fleaMarketId, $onlyUpcoming = false);
+
+    /**
+     * @return FleaMarketDate[]
+     */
+    public function getAllUpcomingDates();
 }

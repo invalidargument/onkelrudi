@@ -206,4 +206,15 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->_sut->getDates($fleaMarketId, $onlyCurrentDates);
     }
+
+    public function testGetAllUpcomingDatesReturnsListWithAllAvailableDatesInTheFuture()
+    {
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\DatesReadListQuery');
+        $query->shouldReceive('setQueryOnlyCurrentDates')->once()->with(true)->andReturn($query)
+            ->shouldReceive('run')->once();
+
+        $this->_factory->shouldReceive('createFleaMarketDatesReadListQuery')->once()->andReturn($query);
+
+        $this->_sut->getAllUpcomingDates();
+    }
 }

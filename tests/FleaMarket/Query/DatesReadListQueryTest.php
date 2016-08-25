@@ -45,6 +45,9 @@ class DatesReadListQueryTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('select')
                 ->once()
                 ->andReturn($this->_pdo)
+            ->shouldReceive('distinct')
+                ->once()
+                ->andReturn($this->_pdo)
             ->shouldReceive('from')
                 ->once()
                 ->with('fleamarkets_dates')
@@ -97,12 +100,11 @@ class DatesReadListQueryTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('select')
                 ->once()
                 ->andReturn($this->_pdo)
-            ->shouldReceive('from')
+            ->shouldReceive('distinct')
                 ->once()
                 ->andReturn($this->_pdo)
-            ->shouldReceive('where')
+            ->shouldReceive('from')
                 ->once()
-                ->with('fleamarket_id', '=', '123')
                 ->andReturn($this->_pdo)
             ->shouldReceive('where')
                 ->times($times)
@@ -118,7 +120,6 @@ class DatesReadListQueryTest extends \PHPUnit_Framework_TestCase
          * @var FleaMarketDate[]
          */
         $dates = $this->_sut
-            ->setFleaMarketId(123)
             ->run();
 
         $this->assertSame(1, count($dates));

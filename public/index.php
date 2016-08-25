@@ -131,10 +131,14 @@ $app->get('/', function ($request, $response, $args) use ($service, $wpService, 
     $isTest = strpos($request->getUri()->getQuery(), 'test=1') !== false;
     $fleaMarkets = $service->getAllFleaMarketsByTimespan();
     $wpCategories = $wpService->getAllCategories();
+    $dates = $service->getAllUpcomingDates();
     $fleaMarketsDetailRoutes = [];
     $monthRange = [];
     $zipAreaRange = [];
-    foreach($fleaMarkets as $fleaMarket) {
+    foreach ($dates as $dateItem) {
+        $monthRange[date('m-Y', strtotime($dateItem->getStart()))] = date('m/Y', strtotime($dateItem->getStart()));
+    }
+    foreach ($fleaMarkets as $fleaMarket) {
         $fleaMarketsDetailRoutes[$fleaMarket->getId()] = $app->getContainer()->router->pathFor('event-date', [
             'wildcard' => $fleaMarket->getSlug(),
             'id' => $fleaMarket->getId()
@@ -142,10 +146,6 @@ $app->get('/', function ($request, $response, $args) use ($service, $wpService, 
 
         $zipArea = (int) substr($fleaMarket->getZipCode(), 0, 1);
         $zipAreaRange[$zipArea] = $zipArea;
-
-        foreach ($fleaMarket->getDates() as $dateItem) {
-            $monthRange[date('m-Y', strtotime($dateItem->getStart()))] = date('m/Y', strtotime($dateItem->getStart()));
-        }
     }
     sort($zipAreaRange);
 

@@ -160,4 +160,13 @@ class FleaMarketService implements FleaMarketServiceInterface
 
         return $query->run();
     }
+
+    public function getAllUpcomingDates()
+    {
+        $query = $this->_factory->createFleaMarketDatesReadListQuery();
+        $query
+            ->setQueryOnlyCurrentDates(true);
+
+        return $query->run();
+    }
 }
