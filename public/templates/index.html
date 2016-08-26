@@ -18,7 +18,13 @@
 
         $(function() {
             $('#monthSelect').on('change', function(e) {
-                var scrollPosition = $('a[name="' + e.target.value + '"]').parent().offset().top -
+                var targetElement = $('a[name="' + e.target.value + '"]');
+
+                if (targetElement.length == 0) {
+                    window.location.href = '?month=' + e.target.value + '&zip=' + $('#zipRangeSelect').val();
+                }
+
+                var scrollPosition = targetElement.parent().offset().top -
                         ($('a[name="' + e.target.value + '"]').parent().height() * 2.4);
 
                 $('html, body').animate({
