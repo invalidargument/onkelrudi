@@ -127,44 +127,14 @@ $controllerFactory->setNotificationService($notificationService);
 $controllerFactory->setWordpressService($wpService);
 
 // Index
-$app->get('/', function ($request, $response, $args) use ($service, $wpService, $userService, $app) {
-    $isTest = strpos($request->getUri()->getQuery(), 'test=1') !== false;
-    $fleaMarkets = $service->getAllFleaMarketsByTimespan();
-    $wpCategories = $wpService->getAllCategories();
-    //$dates = $service->getAllUpcomingDates();
-    $fleaMarketsDetailRoutes = [];
-    $zipAreaRange = [];
-    $monthRange = [];
-    /*foreach ($dates as $dateItem) {
-        $monthRange[date('m-Y', strtotime($dateItem->getStart()))] = date('m/Y', strtotime($dateItem->getStart()));
-    }*/
-    foreach ($fleaMarkets as $fleaMarket) {
-        $fleaMarketsDetailRoutes[$fleaMarket->getId()] = $app->getContainer()->router->pathFor('event-date', [
-            'wildcard' => $fleaMarket->getSlug(),
-            'id' => $fleaMarket->getId()
-        ]);
-
-        $zipArea = (int) substr($fleaMarket->getZipCode(), 0, 1);
-        $zipAreaRange[$zipArea] = $zipArea;
-
-        foreach ($fleaMarket->getDates() as $dateItem) {
-            $monthRange[date('m-Y', strtotime($dateItem->getStart()))] = date('m/Y', strtotime($dateItem->getStart()));
-        }
-    }
-    sort($zipAreaRange);
-
-    // we need a middleware to convert links to url-compliant representation
-    return $this->get('view')
-        ->render($response, 'index.html', [
-            'fleamarkets' => $fleaMarkets,
-            'fleamarketsDetailsRoutes' => $fleaMarketsDetailRoutes,
-            'wpCategories' => $wpCategories,
-            'monthRange' => $monthRange,
-            'zipAreaRange' => $zipAreaRange,
-            'isLoggedIn' => $userService->isLoggedIn(),
-            'isTest' => (boolean)$isTest
-        ]);
+$app->get('/', function ($request, $response, $args) use ($app, $controllerFactory) {
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\IndexAction');
+    $action($request, $response, $args);
 })->setName('index');
+$app->get('/month/{month}/zip/{zip}', function ($request, $response, $args) use ($app, $controllerFactory) {
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\IndexAction');
+    $action($request, $response, $args);
+})->setName('index-paging');
 
 // FleaMarket Detail View
 $app->get('/{wildcard}/termin/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
