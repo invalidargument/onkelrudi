@@ -8,8 +8,18 @@ class IndexAction extends AbstractHttpAction
 
     protected function getData()
     {
+        $start = null;
+        $month = $this->args['month'];
+
+        if (!is_null($month)) {
+            list($m, $y) = explode('/', $month);
+            $start = new \DateTimeImmutable($y . '-' . $m . '-01 00:00:01');
+        }
+
+        $zip = $this->args['zip'];
+
         $isTest = strpos($this->request->getUri()->getQuery(), 'test=1') !== false;
-        $fleaMarkets = $this->service->getAllFleaMarketsByTimespan();
+        $fleaMarkets = $this->service->getAllFleaMarketsByTimespan($start);
         $wpCategories = $this->wordpressService->getAllCategories();
         //$dates = $service->getAllUpcomingDates();
         $fleaMarketsDetailRoutes = [];

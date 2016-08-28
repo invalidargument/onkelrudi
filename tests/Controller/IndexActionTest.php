@@ -63,7 +63,7 @@ class IndexActionTest extends \PHPUnit_Framework_TestCase
             ->setWordpressService($wordpressService)
             ->setUserService($userService);
 
-        $return = $action($request, $response, array('login_email' => 'foo@example.com', 'nonsense'));
+        $return = $action($request, $response, array('month' => '09/16', 'zip' => '50825'));
         $actual = (string)$return->getBody();
         $expected = 'String representation of the Body object';
 
