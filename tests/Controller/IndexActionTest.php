@@ -55,7 +55,8 @@ class IndexActionTest extends \PHPUnit_Framework_TestCase
         $wordpressService->shouldReceive('getAllCategories')->andReturn([]);
 
         $fleamarketService = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketService');
-        $fleamarketService->shouldReceive('getAllFleaMarketsByTimespan')->once()->andReturn([]);
+        $fleamarketService->shouldReceive('getAllFleaMarketsByTimespan')->once()->andReturn([])
+            ->shouldReceive('getAllUpcomingDates')->once()->andReturn([]);
 
         $action = new IndexAction();
         $action->setApp($app);
@@ -63,7 +64,7 @@ class IndexActionTest extends \PHPUnit_Framework_TestCase
             ->setWordpressService($wordpressService)
             ->setUserService($userService);
 
-        $return = $action($request, $response, array('month' => '09/16', 'zip' => '50825'));
+        $return = $action($request, $response, array('month' => '09-16', 'zip' => '50825'));
         $actual = (string)$return->getBody();
         $expected = 'String representation of the Body object';
 
