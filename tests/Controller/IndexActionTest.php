@@ -71,7 +71,7 @@ class IndexActionTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($expected, $actual);
 
         $this->assertAttributeEquals(
-            ['fleamarkets' => [], 'fleamarketsDetailsRoutes' => [], 'wpCategories' => [], 'monthRange' => [], 'zipAreaRange' => [], 'isLoggedIn' => false, 'isTest' => false],
+            ['fleamarkets' => [], 'fleamarketsDetailsRoutes' => [], 'wpCategories' => [], 'monthRange' => [], 'zipAreaRange' => [], 'selectedMonth' => '09/16', 'selectedZipAreaRange' => '5', 'isLoggedIn' => false, 'isTest' => false],
             'templateVariables',
             $action
         );

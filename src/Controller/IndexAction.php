@@ -44,9 +44,22 @@ class IndexAction extends AbstractHttpAction
         $this->templateVariables['wpCategories'] = $wpCategories;
         $this->templateVariables['monthRange'] = $monthRange;
         $this->templateVariables['zipAreaRange'] = $zipAreaRange;
+        $this->templateVariables['selectedMonth'] = str_replace('-', '/', $month);
+        $this->templateVariables['selectedZipAreaRange'] = $this->_getSelectedZipRange($zip);
         $this->templateVariables['isLoggedIn'] = $this->userService->isLoggedIn();
         $this->templateVariables['isTest'] = (boolean)$isTest;
+
+        //var_dump($this->templateVariables);die;
+
         return array();
     }
 
+    private function _getSelectedZipRange($zip)
+    {
+        if ($zip == 'alle') {
+            return 'alle';
+        }
+
+        return substr($zip, 0, 1);
+    }
 }

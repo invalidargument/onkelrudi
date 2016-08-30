@@ -97,14 +97,22 @@
                         <label for="monthSelect">Monat</label>
                         <select id="monthSelect">
                             {% for item in monthRange %}
-                            <option>{{item}}</option>
+                                {% set selectedM = '' %}
+                                {% if item == selectedMonth %}
+                                    {% set selectedM = ' selected' %}
+                                {% endif %}
+                            <option{{ selectedM }}>{{item}}</option>
                             {% endfor %}
                         </select>
                         <label for="zipRangeSelect">PLZ-Bereich</label>
                         <select id="zipRangeSelect">
                             <option>alle</option>
                             {% for item in zipAreaRange %}
-                            <option>{{item}}</option>
+                                {% set selectedZ = '' %}
+                                {% if item == selectedZipAreaRange %}
+                                    {% set selectedZ = ' selected' %}
+                                {% endif %}
+                            <option{{ selectedZ }}>{{item}}</option>
                             {% endfor %}
                         </select>
                     </div>
