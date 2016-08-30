@@ -34,8 +34,11 @@ class IndexAction extends AbstractHttpAction
                 'id' => $fleaMarket->getId()
             ]);
 
-            $zipArea = (int) substr($fleaMarket->getZipCode(), 0, 1);
-            $zipAreaRange[$zipArea] = $zipArea;
+            $zipCode = $fleaMarket->getZipCode();
+            if (!is_null($zipCode)) {
+                $zipArea = (int) substr($fleaMarket->getZipCode(), 0, 1);
+                $zipAreaRange[$zipArea] = $zipArea;
+            }
         }
         sort($zipAreaRange);
 
