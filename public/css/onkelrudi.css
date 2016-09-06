@@ -267,6 +267,16 @@ form#startMonthSelect label {
 /* content items that are linked */
 .content a {
     text-decoration: none;
+    color: inherit;
+}
+.blog a.more {
+    text-decoration: underline;
+}
+.blog .wp-post a {
+    text-decoration: underline;
+}
+.blog .content a:hover {
+    text-decoration: none;
 }
 .content a.block {
     display:block;
@@ -611,3 +621,4 @@ i.fa {
 .hiddenMarketSummaryBox {
     display:none;
 }
+

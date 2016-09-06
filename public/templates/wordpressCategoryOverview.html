@@ -6,7 +6,7 @@
     <meta name="description" content="Onkel Rudi - Hier findest du den Kinderflohmarkt oder Kinderbasar.">
     <title>Onkel Rudi - Finde Deinen Kinderflohmarkt oder Kinderbasar!</title>
 </head>
-<body>
+<body class="blog">
 <div class="header">
     <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
         <a class="pure-menu-heading" href="/public/">Onkel Rudi</a>
@@ -45,13 +45,13 @@
             </div>
             <div class="l-box pure-u-1 pure-u-md-3-4 pure-u-lg-3-4">
                 <h2 class="content-head">{{item.title}}</h2>
-                <p>
+                <div>
                     {{ item.content|striptags[:160] }}
                     {% if item.content|striptags|length > 160 %}
                         ...
                     {% endif %}
-                </p>
-                <i class="fa fa-angle-double-right"></i><a href="/public/blog/{{item.slug}}/post/{{item.id}}">Vollständigen Artikel lesen</a>
+                </div>
+                <i class="fa fa-angle-double-right"></i><a href="/public/blog/{{item.slug}}/post/{{item.id}}" class="more">Vollständigen Artikel lesen</a>
             </div>
             {% endfor %}
         </div>
