@@ -28,7 +28,6 @@
         $(function () {
             $('#logout').on('click', function (e) {
                 e.preventDefault();
-                console.log("HAHA");
                 $.ajax({
                     type: "POST",
                     url: '/public/api/v1/logout',
