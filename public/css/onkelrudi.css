@@ -266,8 +266,11 @@ form#startMonthSelect label {
 
 /* content items that are linked */
 .content a {
-    text-decoration: none;
+    text-decoration: underline;
     color: inherit;
+}
+.content a:hover {
+    text-decoration: none;
 }
 .blog a.more {
     text-decoration: underline;
