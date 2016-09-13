@@ -131,7 +131,7 @@ $app->get('/', function ($request, $response, $args) use ($app, $controllerFacto
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\IndexAction');
     $action($request, $response, $args);
 })->setName('index');
-$app->get('/month/{month}/zip/{zip}', function ($request, $response, $args) use ($app, $controllerFactory) {
+$app->get('/monat/{month}/plz/{zip}', function ($request, $response, $args) use ($app, $controllerFactory) {
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\IndexAction');
     $action($request, $response, $args);
 })->setName('index-paging');
