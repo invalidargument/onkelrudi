@@ -3,6 +3,7 @@
 namespace RudiBieller\OnkelRudi\Controller;
 
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
+use RudiBieller\OnkelRudi\User\User;
 use Slim\App;
 
 class ProfileActionTest extends \PHPUnit_Framework_TestCase
@@ -117,8 +118,12 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
         $organizerService = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\OrganizerService');
         $organizerService->shouldReceive('getAllOrganizers')->once()->andReturn($organizers);
 
+        $fleamarketService = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketServiceInterface');
+        $fleamarketService->shouldReceive('getFleaMarketsByUser')->andReturn([]);
+
         $action = new ProfileAction();
         $action->setApp($this->_app);
+        $action->setService($fleamarketService);
         $action->setUserService($userService);
         $action->setWordpressService($wordpressService);
         $action->setOrganizerService($organizerService);
@@ -126,12 +131,12 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
         $action($request, $response, array());
 
         $this->assertAttributeEquals(
-            ['profileurl' => '/login/', 'createfleamarketurl' => '/flohmarkt-anlegen/'],
+            ['profileurl' => '/login/', 'createfleamarketurl' => '/flohmarkt-anlegen/', 'fleamarkets' => []],
             'templateVariables',
             $action
         );
         $this->assertAttributeEquals(
-            ['username' => 'info@onkel-rudi.de'],
+            ['username' => 'info@onkel-rudi.de', 'user' => new User('info@onkel-rudi.de')],
             'result',
             $action
         );
