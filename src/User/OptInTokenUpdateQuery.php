@@ -2,7 +2,6 @@
 
 namespace RudiBieller\OnkelRudi\User;
 
-use Carbon\Carbon;
 use RudiBieller\OnkelRudi\Query\AbstractInsertQuery;
 
 class OptInTokenUpdateQuery extends AbstractInsertQuery
@@ -21,14 +20,16 @@ class OptInTokenUpdateQuery extends AbstractInsertQuery
 
     protected function runQuery()
     {
-        $dateTime = new Carbon();
+        $dateTime = new \DateTimeImmutable();
+
+        $createdLimit = $dateTime->sub(new \DateInterval('P1D'))->format('Y-m-d H:i:s');
 
         // read email from fleamarkets_optins
         $selectStatement = $this->pdo
             ->select()
             ->from('fleamarkets_optins')
             ->where('token', '=', $this->_token)
-            ->where('created', '>', $dateTime->subDay()->format('Y-m-d H:i:s'));
+            ->where('created', '>', $createdLimit);
 
         /**
          * @var \Slim\PDO\Statement
