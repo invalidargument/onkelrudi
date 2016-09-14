@@ -80,6 +80,9 @@
     <div class="content">
         <h2 class="content-head">Hallo, Du bist angemeldet als {{data.username}}.</h2>
         <div>
+            <p>
+                <i class="fa fa-angle-double-right"></i><a href="{{createfleamarketurl}}" title="Einen Flohmarkt anlegen">einen neuen Flohmarkt anlegen</a>
+            </p>
             {% if fleamarkets|length > 0 %}
             Flohmärkte, die Du angelegt hast:<br>
                 <ol>
@@ -87,9 +90,6 @@
                     <li>{{ item.name }} <time datetime="{{item.dates|first.start|date('c')}}">{{item.dates|first.start|date("d.m.Y")}} von {{item.dates|first.start|date("H:i")}} - {{item.dates|first.end|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{item.city}}</span></li>
                 {% endfor %}
                 </ol>
-            {% else %}
-            <!-- Du hast noch keinen Flohmarkt angelegt. <a href="/public/flohmarkt-anlegen/" title="Einen Flohmarkt anlegen">Lege direkt los!</a> -->
-            Los geht's, hier kannst Du <a href="{{createfleamarketurl}}" title="Einen Flohmarkt anlegen">einen neuen Flohmarkt anlegen</a>.
             {% endif %}
         </div>
         <p>
