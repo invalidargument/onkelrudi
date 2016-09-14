@@ -135,7 +135,7 @@
                     <a href="{{fleamarketsDetailsRoutes[item.id]}}" title="Alle Details zu {{item.name|e('html_attr')}}" class="block">
                     <h3 class="content-subhead content-subhead-listitem">
                         {% set iconFlag = 'fa-flag-o' %}
-                        {% if item.dates|first.start|date("Ymd") == "now"|date("Ymd") %} {% set iconFlag = 'fa-flag-checkered' %} {% endif %}
+                        {% if item.dates|first.start|date("Ymd") == "now"|date("Ymd") %} {% set iconFlag = 'fa-bullseye' %} {% endif %}
                         <i class="fa {{iconFlag}}"></i>
                         {{item.name|length > 33 ? item.name[:33] ~ '...' : item.name}}
                     </h3>
