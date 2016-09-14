@@ -58,6 +58,7 @@ class FleaMarketReadListQuery extends AbstractQuery
     public function setQueryOnlyCurrentDates($onlyCurrentDates = true)
     {
         $this->_onlyCurrentDates = $onlyCurrentDates;
+        return $this;
     }
 
     protected function runQuery()
