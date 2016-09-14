@@ -84,7 +84,7 @@
             Flohmärkte, die Du angelegt hast:<br>
                 <ol>
                 {% for item in fleamarkets %}
-                    <li> #{{ item.id }} {{ item.name }}</li>
+                    <li>{{ item.name }} <time datetime="{{item.dates|first.start|date('c')}}">{{item.dates|first.start|date("d.m.Y")}} von {{item.dates|first.start|date("H:i")}} - {{item.dates|first.end|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{item.city}}</span></li>
                 {% endfor %}
                 </ol>
             {% else %}
