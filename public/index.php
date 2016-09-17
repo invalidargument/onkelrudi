@@ -177,6 +177,11 @@ $app->get('/flohmarkt-anlegen/', function ($request, $response, $args) use ($con
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\CreateFleaMarketAction');
     return $action($request, $response, $args);
 })->setName('create-fleamarket');
+// USER: edit fleamarket view
+$app->get('/flohmarkt-bearbeiten/{id}', function ($request, $response, $args) use ($controllerFactory) {
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\EditFleaMarketAction');
+    return $action($request, $response, $args);
+})->setName('edit-fleamarket');
 
 // API routes
 $app->group('/api', function () use ($app, $controllerFactory) {

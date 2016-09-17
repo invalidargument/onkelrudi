@@ -160,7 +160,14 @@
                     }
                 );
 
+                {% if createForm %}
                 var apiUrlFleaMarkets = '/public/api/v1/fleamarkets';
+                var requestMethod = 'POST';
+                {% else %}
+                var apiUrlFleaMarkets = '/public/api/v1/fleamarkets/{{editDto.id}}';
+                var requestMethod = 'PUT';
+                {% endif %}
+
                 var postData = JSON.stringify({
                     //organizerId: $('#fleamarket_organizer').val(),
                     organizerId: createdOrganizerId,
@@ -176,17 +183,28 @@
                 });
 
                 $.ajax({
-                    type: "POST",
+                    type: requestMethod,
                     url: apiUrlFleaMarkets,
                     contentType: "application/json",
                     data: postData,
                     success: function(data) {
-                        console.log("FleaMarket created successfully!", data);
+                        console.log("FleaMarket stored successfully!", data);
+                        {% if editForm %}
+                        var url = '/public/admin/termin/{{editDto.id}}';
+                        $('#submitform').addClass('button-success');
+                        $('#submitform').parent().append(
+                            '<p class="successmessage"><i class="fa fa-check fa-lg"></i>Dein <a href="'+url+'" title="Zum aktualisierten Termin">Termin</a> wurde erfolgreich aktualisiert!</p>'
+                        );
+                        window.setTimeout(function() {
+                            window.location.href = '{{profileurl}}';
+                        }, 3000);
+                        {% else %}
                         var url = '/public/admin/termin/' + data.data;
                         $('#submitform').addClass('button-success');
                         $('#submitform').parent().append(
                             '<p class="successmessage"><i class="fa fa-check fa-lg"></i>Danke - Dein <a href="'+url+'" title="Zu Deinem neu angelegten Termin">Termin</a> wurde erfolgreich angelegt!</p>'
                         );
+                        {% endif %}
                     },
                     error: function(data) {
                         console.log("ajax error", data);
@@ -289,6 +307,9 @@
 
 <div class="content-wrapper">
     <div class="content">
+        {% if editForm %}
+        <h2 class="content-head">+ Termin bearbeiten</h2>
+        {% else %}
         <h2 class="content-head">+ Termin anlegen</h2>
         <p>
             Hier kannst Du kostenlos einen Kinderflohmarkt veröffentlichen.
@@ -300,6 +321,7 @@
             <br><br>
             Pflichtfelder sind mit (*) gekennzeichnet.
         </p>
+        {% endif %}
 
         {% if loggedIn %}
         <div class="regformbox">
@@ -318,18 +340,21 @@
                 </div>
                 {% endif %}
                 <!-- /RENDER ONLY WHEN LOGGED IN -->
+                {% if editForm %}
+                <input type="hidden" id="fleamarket_organizer" value="{{editDto.id}}">
+                {% endif %}
 
                 <div class="pure-g">
                     <div class="pure-u-1-2">
                         <label for="fleamarket_name">Name des Kinderflohmarkts (*)</label>
-                        <input id="fleamarket_name" type="text" placeholder="Wie heißt Dein Kinderflohmarkt?" class="pure-input-1">
+                        <input id="fleamarket_name" type="text" placeholder="Wie heißt Dein Kinderflohmarkt?" class="pure-input-1" value="{{editDto.name}}">
                     </div>
                 </div>
 
                 <div class="pure-g">
                     <div class="pure-u-1-2">
                         <label for="fleamarket_description">Beschreibung (*)</label>
-                        <textarea id="fleamarket_description" type="text" placeholder="Beschreibe bitte kurz Deinen Kinderflohmarkt. Wer wird dort was anbieten, wieviel Kuchen wird es geben, usw." style="height: 200px;" class="pure-input-1"></textarea>
+                        <textarea id="fleamarket_description" type="text" placeholder="Beschreibe bitte kurz Deinen Kinderflohmarkt. Wer wird dort was anbieten, wieviel Kuchen wird es geben, usw." style="height: 200px;" class="pure-input-1">{{editDto.description}}</textarea>
                     </div>
                 </div>
 
@@ -337,12 +362,23 @@
                     <div class="pure-u-1-2">
                         <section class="datesBlock">
                             <h3>Termin für den Kinderflohmarkt - Wann findet er statt? (*)</h3>
+                            {% if editForm %}
+                                {% for dateItem in editDto.dates %}
+                            <div style="padding:0;">
+                                <input name="marketDate[]" class="datepicker" type="date" placeholder="Datum (z.B. 23.05.2016)" value="{{dateItem.start|date('d.m.Y')}}">
+                                <input name="marketTimeStart[]"  class="timepicker pure-input-1-4" type="time" placeholder="Beginn (z.B. 12:00)" value="{{dateItem.start|date('H:i')}}">
+                                <input name="marketTimeEnd[]" class="timepicker pure-input-1-4" type="time" placeholder="Ende (z.B. 15:00)" value="{{dateItem.end|date('H:i')}}">
+                            </div>
+                                {% endfor %}
+                            {% endif %}
+                            {% if createForm %}
                             <div style="padding:0;">
                                 <label for="marketDate">Datum - von - bis</label><br>
                                 <input name="marketDate[]" id="marketDate" class="datepicker" type="date" placeholder="Datum (z.B. 23.05.2016)">
                                 <input name="marketTimeStart[]" id="marketTimeFrom" class="timepicker pure-input-1-4" type="time" placeholder="Beginn (z.B. 12:00)">
                                 <input name="marketTimeEnd[]" id="marketTimeTo" class="timepicker pure-input-1-4" type="time" placeholder="Ende (z.B. 15:00)">
                             </div>
+                            {% endif %}
                             <p>Es gibt mehrere Termine für diesen Flohmarkt?<br><strong class="duplicate">+ weiteren Termin hinzufügen</strong></p>
                         </section>
                     </div>
@@ -357,41 +393,41 @@
                 <div class="pure-g">
                     <div class="pure-u-1-2">
                         <label for="fleamarket_location">Veranstaltungsort (*)</label>
-                        <input id="fleamarket_location" type="text" placeholder="Wo findet der Flohmarkt statt? Z.B. KiTa Sonnenblume oder Turnhalle der Waldschule." class="pure-input-1">
+                        <input id="fleamarket_location" type="text" placeholder="Wo findet der Flohmarkt statt? Z.B. KiTa Sonnenblume oder Turnhalle der Waldschule." class="pure-input-1" value="{{editDto.location}}">
                     </div>
                 </div>
 
                 <div class="pure-g">
                     <div class="pure-u-9-24">
                         <label for="fleamarket_street">Stra&szlig;e (*)</label>
-                        <input id="fleamarket_street" type="text" placeholder="Stra&szlig;e" class="pure-input-1">
+                        <input id="fleamarket_street" type="text" placeholder="Stra&szlig;e" class="pure-input-1" value="{{editDto.street}}">
                     </div>
 
                     <div class="pure-u-3-24">
                         <label for="fleamarket_streetNo">Hausnummer (*)</label>
-                        <input id="fleamarket_streetNo" type="text" placeholder="Hausnummer" class="pure-input-1">
+                        <input id="fleamarket_streetNo" type="text" placeholder="Hausnummer" class="pure-input-1" value="{{editDto.streetNo}}">
                     </div>
                 </div>
 
                 <div class="pure-g">
                     <div class="pure-u-3-24">
                         <label for="fleamarket_zipCode">PLZ (*)</label>
-                        <input id="fleamarket_zipCode" type="text" placeholder="PLZ" class="pure-input-1">
+                        <input id="fleamarket_zipCode" type="text" placeholder="PLZ" class="pure-input-1" value="{{editDto.zipCode}}">
                     </div>
 
                     <div class="pure-u-9-24">
                         <label for="fleamarket_city">Ort (*)</label>
-                        <input id="fleamarket_city" type="text" placeholder="Ort" class="pure-input-1">
+                        <input id="fleamarket_city" type="text" placeholder="Ort" class="pure-input-1" value="{{editDto.city}}">
                     </div>
                 </div>
 
                 <div class="pure-g">
                     <div class="pure-u-1-2">
                         <label for="fleamarket_url">Website für diesen Flohmarkt</label>
-                        <input id="fleamarket_url" type="text" placeholder="Link zur Flohmarkt-Website" class="pure-input-1">
+                        <input id="fleamarket_url" type="text" placeholder="Link zur Flohmarkt-Website" class="pure-input-1" value="{{editDto.url}}">
                     </div>
                 </div>
-
+                {% if createForm %}
                 <div class="pure-g">
                     <div class="pure-u-1-2">
                         <h3>Wer veranstaltet den Kinderflohmarkt?</h3>
@@ -447,12 +483,17 @@
                         <input id="organizer_city" type="text" placeholder="Ort" class="pure-input-1">
                     </div>
                 </div>
+                {% endif %}
 
                 <div class="pure-g">
                     <div class="pure-u-1-2">
                         <button type="submit" id="submitform" class="pure-button">
                             <i class="fa fa-save fa-lg"></i>
+                            {% if editForm %}
+                            Änderungen speichern - click hier!
+                            {% else %}
                             Neuen Termin speichern - click hier!
+                            {% endif %}
                         </button>
                     </div>
                 </div>
