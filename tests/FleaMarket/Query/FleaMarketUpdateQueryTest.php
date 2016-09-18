@@ -3,6 +3,7 @@
 namespace RudiBieller\OnkelRudi\FleaMarket\Query;
 
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
+use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
 
 class FleaMarketUpdateQueryTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,16 +15,22 @@ class FleaMarketUpdateQueryTest extends \PHPUnit_Framework_TestCase
         $this->_sut = new FleaMarketUpdateQuery();
         $this->_pdo = \Mockery::mock('\Slim\PDO\Database');
         $this->_sut->setPdo($this->_pdo);
+
+        $this->_fleaMarketService = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketServiceInterface');
+        $this->_sut->setFleaMarketService($this->_fleaMarketService);
     }
 
     public function testQueryUsesGivenValuesForRunningUpdateStatement()
     {
+        $dates = array(new FleaMarketDate('2018-01-01 10:00:00', '2018-01-01 18:00:00'));
+        $this->_fleaMarketService->shouldReceive('replaceDates')->once()->with(23, $dates);
+
         $fleaMarket = new FleaMarket();
         $fleaMarket
             ->setId(23)
             ->setName('foo')
             ->setDescription('fooobaaarbaaaz')
-            ->setDates([])
+            ->setDates($dates)
             ->setStreet('foooo')
             ->setStreetNo('77')
             ->setCity('Cologne')
@@ -35,6 +42,8 @@ class FleaMarketUpdateQueryTest extends \PHPUnit_Framework_TestCase
             ->setFleaMarket($fleaMarket);
 
         $this->_pdo
+            ->shouldReceive('beginTransaction')->andReturn($this->_pdo)
+            ->shouldReceive('commit')->andReturn($this->_pdo)
             ->shouldReceive('update')
                 ->once()
                 ->with(array(
@@ -58,6 +67,7 @@ class FleaMarketUpdateQueryTest extends \PHPUnit_Framework_TestCase
                 ->andReturn($this->_pdo)
             ->shouldReceive('execute')
                 ->once();
+
         $this->_sut->run();
     }
 }

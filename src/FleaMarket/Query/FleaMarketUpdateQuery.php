@@ -1,6 +1,7 @@
 <?php
 namespace RudiBieller\OnkelRudi\FleaMarket\Query;
 
+use RudiBieller\OnkelRudi\FleaMarket\FleaMarketServiceInterface;
 use RudiBieller\OnkelRudi\Query\AbstractInsertQuery;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketInterface;
 
@@ -10,6 +11,17 @@ class FleaMarketUpdateQuery extends AbstractInsertQuery
      * @var \RudiBieller\OnkelRudi\FleaMarket\FleaMarket
      */
     private $_fleaMarket;
+    private $_fleaMarketService;
+
+    /**
+     * @param FleaMarketService $fleaMarketService
+     * @return FleaMarketUpdateQuery
+     */
+    public function setFleaMarketService(FleaMarketServiceInterface $fleaMarketService)
+    {
+        $this->_fleaMarketService = $fleaMarketService;
+        return $this;
+    }
 
     public function setFleaMarket(FleaMarketInterface $fleaMarket)
     {
@@ -19,6 +31,8 @@ class FleaMarketUpdateQuery extends AbstractInsertQuery
 
     protected function runQuery()
     {
+        $this->pdo->beginTransaction();
+
         $updateStatement = $this->pdo
             ->update(
                 array(
@@ -36,6 +50,12 @@ class FleaMarketUpdateQuery extends AbstractInsertQuery
             ->table('fleamarkets')
             ->where('id', '=', $this->_fleaMarket->getId());
 
-        return $updateStatement->execute();
+        $affected = $updateStatement->execute();
+
+        $this->_fleaMarketService->replaceDates($this->_fleaMarket->getId(), $this->_fleaMarket->getDates());
+
+        $this->pdo->commit();
+
+        return $affected;
     }
 }
