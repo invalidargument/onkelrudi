@@ -172,7 +172,11 @@ class FleaMarketService implements FleaMarketServiceInterface
 
     public function deleteDates($fleaMarketId)
     {
-        return true;
+        $query = $this->_factory->createFleaMarketDatesDeleteQuery();
+        $query
+            ->setFleaMarketId($fleaMarketId);
+
+        return $query->run();
     }
 
     public function getAllUpcomingDates()

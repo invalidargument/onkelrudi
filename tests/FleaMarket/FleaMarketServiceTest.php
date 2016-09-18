@@ -207,6 +207,19 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
         $this->_sut->getDates($fleaMarketId, $onlyCurrentDates);
     }
 
+    public function testDeleteDatesDoesDeleteDatesByFleaMarketId()
+    {
+        $fleaMarketId = 23;
+
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\DatesDeleteQuery');
+        $query->shouldReceive('setFleaMarketId')->once()->with($fleaMarketId)->andReturn($query)
+            ->shouldReceive('run')->once();
+
+        $this->_factory->shouldReceive('createFleaMarketDatesDeleteQuery')->once()->andReturn($query);
+
+        $this->_sut->deleteDates($fleaMarketId);
+    }
+
     public function testGetAllUpcomingDatesReturnsListWithAllAvailableDatesInTheFuture()
     {
         $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\DatesReadListQuery');
