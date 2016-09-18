@@ -86,6 +86,10 @@ class FleaMarketReadListQuery extends AbstractQuery
         $statement = $selectStatement->execute();
         $fleaMarketData = $statement->fetchAll();
 
+        if (count($fleaMarketData) === 0) {
+            return false;
+        }
+
         return array(
             'fleaMarkets' => $fleaMarketData,
             'dates' => $datesData
