@@ -23,7 +23,8 @@ class FleaMarketUpdateQueryTest extends \PHPUnit_Framework_TestCase
     public function testQueryUsesGivenValuesForRunningUpdateStatement()
     {
         $dates = array(new FleaMarketDate('2018-01-01 10:00:00', '2018-01-01 18:00:00'));
-        $this->_fleaMarketService->shouldReceive('replaceDates')->once()->with(23, $dates);
+        $this->_fleaMarketService->shouldReceive('deleteDates')->once()->with(23)
+            ->shouldReceive('createDates')->once()->with(23, $dates);
 
         $fleaMarket = new FleaMarket();
         $fleaMarket

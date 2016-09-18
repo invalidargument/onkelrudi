@@ -52,7 +52,8 @@ class FleaMarketUpdateQuery extends AbstractInsertQuery
 
         $affected = $updateStatement->execute();
 
-        $this->_fleaMarketService->replaceDates($this->_fleaMarket->getId(), $this->_fleaMarket->getDates());
+        $this->_fleaMarketService->deleteDates($this->_fleaMarket->getId());
+        $this->_fleaMarketService->createDates($this->_fleaMarket->getId(), $this->_fleaMarket->getDates());
 
         $this->pdo->commit();
 

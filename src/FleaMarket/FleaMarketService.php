@@ -161,15 +161,6 @@ class FleaMarketService implements FleaMarketServiceInterface
         return $query->run();
     }
 
-    public function replaceDates($fleaMarketId, array $replacements)
-    {
-        if (!$this->deleteDates($fleaMarketId)) {
-            return false;
-        }
-
-        return true;
-    }
-
     public function deleteDates($fleaMarketId)
     {
         $query = $this->_factory->createFleaMarketDatesDeleteQuery();

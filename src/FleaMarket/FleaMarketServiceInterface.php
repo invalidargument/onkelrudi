@@ -37,13 +37,6 @@ interface FleaMarketServiceInterface extends ServiceInterface
      */
     public function getDates($fleaMarketId, $onlyUpcoming = false);
 
-    /**
-     * Deletes all stored dates and stores replacements
-     * @param $fleaMarketId
-     * @param FleaMarketDate[] $replacements
-     * @return boolean
-     */
-    public function replaceDates($fleaMarketId, array $replacements);
     public function deleteDates($fleaMarketId);
 
     /**
