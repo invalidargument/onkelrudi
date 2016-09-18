@@ -37,7 +37,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             array('createFleaMarketUpdateQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketUpdateQuery'),
             array('createFleaMarketTestCaseDeleteQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketTestCaseDeleteQuery'),
             array('createFleaMarketDatesInsertQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\DatesInsertQuery'),
-            array('createFleaMarketDatesReadListQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\DatesReadListQuery')
+            array('createFleaMarketDatesReadListQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\DatesReadListQuery'),
+            array('createFleaMarketDatesDeleteQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\DatesDeleteQuery')
         );
     }
 }
