@@ -54,12 +54,13 @@ Feature: API v1 fleamarkets
     {"data":1}
     """
 
+  @now
   Scenario: Update an item by id with data sent in body
     Given I have some fleamarkets
     And I am authenticated as user via api
     And I send a "PUT" request to "http://localhost/public/api/v1/fleamarkets/1" with body
     """
-    {"name":"Max UPDATED", "description": "Blue Pants", "start":"2015-01-01 00:00:00", "end":"2015-12-12 00:00:00", "zipCode":"50667"}
+    {"name":"Max UPDATED", "description": "Blue Pants", "dates": [{"start":"2015-01-01 00:00:00", "end":"2015-12-12 00:00:00"}], "zipCode":"50667"}
     """
     Then the response code should be "200"
     And the response should be json
@@ -70,7 +71,7 @@ Feature: API v1 fleamarkets
     Given I send a "GET" request to "http://localhost/public/api/v1/fleamarkets/1"
     Then the response should be
     """
-    {"data":{"id":"1","uuid":"7fdd31e2-7a5f-51a9-bec6-314cb78f9ecf","organizer":{"id":"1","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Max UPDATED","description":"Blue Pants","dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}],"street":null,"streetNo":null,"city":null,"zipCode":"50667","location":null,"url":null}}
+    {"data":{"id":"1","uuid":"7fdd31e2-7a5f-51a9-bec6-314cb78f9ecf","organizer":{"id":"1","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Max UPDATED","description":"Blue Pants","dates":[{"start":"2015-01-01 00:00:00","end":"2015-12-12 00:00:00"}],"street":null,"streetNo":null,"city":null,"zipCode":"50667","location":null,"url":null}}
     """
 
   Scenario: Create a new organizer

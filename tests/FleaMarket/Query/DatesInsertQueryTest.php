@@ -33,15 +33,15 @@ class DatesInsertQueryTest extends \PHPUnit_Framework_TestCase
                 ->andReturn($pdo)
             ->shouldReceive('values')
                 ->once()
-                ->with(array(42, $date1->getStart(), $date1->getEnd()))
+                ->with(array(42, '2016-01-23 09:30:00', '2016-01-23 20:30:00'))
                 ->andReturn($pdo)
             ->shouldReceive('values')
                 ->once()
-                ->with(array(42, $date2->getStart(), $date2->getEnd()))
+                ->with(array(42, '2016-01-23 10:30:00', '2016-01-23 21:30:00'))
                 ->andReturn($pdo)
             ->shouldReceive('values')
                 ->once()
-                ->with(array(42, $date3->getStart(), $date3->getEnd()))
+                ->with(array(42, '2016-01-23 11:30:00', '2016-01-23 22:30:00'))
                 ->andReturn($pdo)
             ->shouldReceive('execute');
 

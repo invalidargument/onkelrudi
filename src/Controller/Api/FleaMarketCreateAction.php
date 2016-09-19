@@ -33,8 +33,6 @@ class FleaMarketCreateAction extends AbstractJsonAction implements UserAwareInte
             unset($data['organizerId']);
         }
 
-        $data['dates'] = $this->_mapDates($data['dates']);
-
         // TODO if incomplete, return error
 
         foreach ($data as $key => $value) {
@@ -45,17 +43,6 @@ class FleaMarketCreateAction extends AbstractJsonAction implements UserAwareInte
         }
 
         return $this->service->createFleaMarket($builder->build());
-    }
-
-    private function _mapDates(array $dates)
-    {
-        $map = array();
-
-        foreach ($dates as $date) {
-            $map[] = new FleaMarketDate($date['start'], $date['end']);
-        }
-
-        return $map;
     }
 
     private function _mapUser($identifier)

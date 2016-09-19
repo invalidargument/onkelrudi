@@ -130,7 +130,9 @@ class FleaMarketService implements FleaMarketServiceInterface
     public function updateFleaMarket(FleaMarketInterface $fleaMarket)
     {
         $query = $this->_factory->createFleaMarketUpdateQuery();
-        $query->setFleaMarket($fleaMarket);
+        $query
+            ->setFleaMarketService($this)
+            ->setFleaMarket($fleaMarket);
 
         return $query->run();
     }

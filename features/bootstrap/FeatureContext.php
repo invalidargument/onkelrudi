@@ -263,18 +263,18 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
             if ($inUpcomingTimespan) {
                 $dates = [
                     new FleaMarketDate(
-                        date ('Y-m-d 08:01:02', strtotime('+1 week')),
-                        date ('Y-m-d 20:20:20', strtotime('+1 week'))
+                        new \DateTimeImmutable(date ('Y-m-d 08:01:02', strtotime('+1 week'))),
+                        new \DateTimeImmutable(date ('Y-m-d 20:20:20', strtotime('+1 week')))
                     )
                 ];
             } else {
                 $dates = [
-                    new FleaMarketDate('2016-12-12 08:01:02', '2016-12-13 20:20:20')
+                    new FleaMarketDate(new \DateTimeImmutable('2016-12-12 08:01:02'), new \DateTimeImmutable('2016-12-13 20:20:20'))
                 ];
             }
         } else {
             $dates = [
-                new FleaMarketDate('2015-12-12 08:01:02', '2015-12-13 20:20:20')
+                new FleaMarketDate(new \DateTimeImmutable('2015-12-12 08:01:02'), new \DateTimeImmutable('2015-12-13 20:20:20'))
             ];
         }
 

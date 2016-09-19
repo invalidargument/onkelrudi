@@ -39,7 +39,7 @@ class Builder extends AbstractBuilder
 
     public function setDates(array $dates)
     {
-        $this->properties['dates'] = $dates;
+        $this->properties['dates'] = $this->_buildDates($dates);
         return $this;
     }
 
@@ -97,5 +97,22 @@ class Builder extends AbstractBuilder
         }
 
         return $market;
+    }
+
+    private function _buildDates(array $dates)
+    {
+        $fleaMarketDates = [];
+
+        foreach ($dates as $date) {
+            if ($date instanceof FleaMarketDate) {
+                $fleaMarketDates[] = $date;
+            } else {
+                $start = new \DateTimeImmutable($date['start']);
+                $end = new \DateTimeImmutable($date['end']);
+                $fleaMarketDates[] = new FleaMarketDate($start, $end);
+            }
+        }
+
+        return $fleaMarketDates;
     }
 }

@@ -171,6 +171,7 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
 
         $query = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketUpdateQuery');
         $query->shouldReceive('setFleaMarket')->once()->with($fleaMarket)->andReturn($query)
+            ->shouldReceive('setFleaMarketService')->once()->with($this->_sut)->andReturn($query)
             ->shouldReceive('run')->once()->andReturn(1);
         $this->_factory->shouldReceive('createFleaMarketUpdateQuery')->once()->andReturn($query);
 
