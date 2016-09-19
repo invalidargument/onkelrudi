@@ -54,7 +54,6 @@ Feature: API v1 fleamarkets
     {"data":1}
     """
 
-  @now
   Scenario: Update an item by id with data sent in body
     Given I have some fleamarkets
     And I am authenticated as user via api
