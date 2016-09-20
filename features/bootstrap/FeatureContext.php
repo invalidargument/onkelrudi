@@ -17,6 +17,7 @@ use RudiBieller\OnkelRudi\FleaMarket\Query\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\Query\OrganizerQueryFactory;
 use RudiBieller\OnkelRudi\User\AuthenticationFactory;
 use RudiBieller\OnkelRudi\User\QueryFactory;
+use RudiBieller\OnkelRudi\User\User;
 use RudiBieller\OnkelRudi\User\UserService;
 use RudiBieller\OnkelRudi\User\UserServiceInterface;
 use Slim\PDO\Database;
@@ -237,10 +238,10 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
     /**
      * @Given /^I am slowly authenticated as user$/
      */
-    public function iAmSlowlyAuthenticatedAsUser()
+    public function iAmSlowlyAuthenticatedAsUser($email = 'test@onkel-rudi.de')
     {
         $this->visit('/login/');
-        $this->fillField('login_email', 'test@onkel-rudi.de');
+        $this->fillField('login_email', $email);
         $this->fillField('login_password', 'aaaaaaaa');
         $this->pressButton('Anmelden');
         $this->iWaitForSeconds(1);
@@ -278,6 +279,8 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
             ];
         }
 
+        $user = new User('info@onkel-rudi.de');
+
         for($i=0; $i<$num; $i++) {
             $organizer = new Organizer();
             $organizer
@@ -304,7 +307,8 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
                 ->setStreetNo('20000')
                 ->setDates($dates)
                 ->setLocation('Daheim')
-                ->setUrl('http://www.example.com/foo');
+                ->setUrl('http://www.example.com/foo')
+                ->setUser($user);
 
             $this->_service->createFleaMarket($fleaMarket, $organizer);
         }
