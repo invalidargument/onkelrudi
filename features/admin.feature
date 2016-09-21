@@ -12,14 +12,14 @@ Feature: Admin page of onkelrudi
     Then I should see "+ Termin anlegen"
     When I fill in "fleamarket_name" with "Rudi Bieller"
     And I fill in "fleamarket_description" with "Eine Beschreibung"
-    And I fill in "fleamarket_location" with "Meine alte Wohnung"
-    And I fill in "fleamarket_street" with "Richmodstr."
-    And I fill in "fleamarket_streetNo" with "23"
-    And I fill in "fleamarket_zipCode" with "50667"
+    And I fill in "fleamarket_location" with "Zu Hause"
+    And I fill in "fleamarket_street" with "Hausstr."
+    And I fill in "fleamarket_streetNo" with "42"
+    And I fill in "fleamarket_zipCode" with "50000"
     And I fill in "fleamarket_city" with "Köln"
     And I fill in "fleamarket_url" with "http://www.example.com"
     And I fill in "organizer_name" with "Die Flohmarkt GmbH"
-    And I fill in "organizer_phone" with "0221 1234567890"
+    And I fill in "organizer_phone" with "0221 1424567890"
     And I fill in "organizer_email" with "example@example.com"
     And I fill in "organizer_url" with "http://www.example.com/foo"
     And I fill in "organizer_street" with "Aachener Straße"
@@ -39,12 +39,12 @@ Feature: Admin page of onkelrudi
     And the response should be json
     And the response should be
     """
-    {"data":{"id":"1","uuid":"bbbbcfc1-83e2-5391-ac98-bbea6210501b","organizer":{"id":"2","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Rudi Bieller","description":"Eine Beschreibung","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Richmodstr.","streetNo":"23","city":"K\u00f6ln","zipCode":"50667","location":"Meine alte Wohnung","url":"http:\/\/www.example.com"}}
+    {"data":{"id":"1","uuid":"ca18494a-05ba-57a9-8c1f-d980aeec9a5d","organizer":{"id":"2","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Rudi Bieller","description":"Eine Beschreibung","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Hausstr.","streetNo":"42","city":"K\u00f6ln","zipCode":"50000","location":"Zu Hause","url":"http:\/\/www.example.com"}}
     """
     When I send a "GET" request to "http://localhost/public/api/v1/organizers/2"
     Then the response should be
     """
-    {"data":{"id":"2","uuid":"ccd3d17a-3b2e-5991-9840-9bc0c5c2d9e2","name":"Die Flohmarkt GmbH","street":"Aachener Stra\u00dfe","streetNo":"5000","zipCode":"5000","city":"K\u00f6ln","phone":"0221 1234567890","email":"example@example.com","url":"http:\/\/www.example.com\/foo"}}
+    {"data":{"id":"2","uuid":"1d8a8e24-946c-57b9-be63-a730f281cc17","name":"Die Flohmarkt GmbH","street":"Aachener Stra\u00dfe","streetNo":"5000","zipCode":"5000","city":"K\u00f6ln","phone":"0221 1424567890","email":"example@example.com","url":"http:\/\/www.example.com\/foo"}}
     """
 
   @javascript
@@ -56,10 +56,10 @@ Feature: Admin page of onkelrudi
     When I fill in "fleamarket_name" with "Rudi Bieller"
     And I select "Max Power" from "fleamarket_organizer"
     And I fill in "fleamarket_description" with "Eine Beschreibung"
-    And I fill in "fleamarket_location" with "Meine alte Wohnung"
-    And I fill in "fleamarket_street" with "Richmodstr."
-    And I fill in "fleamarket_streetNo" with "23"
-    And I fill in "fleamarket_zipCode" with "50667"
+    And I fill in "fleamarket_location" with "Zu Hause"
+    And I fill in "fleamarket_street" with "Hausstr."
+    And I fill in "fleamarket_streetNo" with "42"
+    And I fill in "fleamarket_zipCode" with "50000"
     And I fill in "fleamarket_city" with "Köln"
     And I fill in "fleamarket_url" with "http://www.example.com"
     And I fill in "marketDate" with "31.01.2019"
@@ -75,7 +75,7 @@ Feature: Admin page of onkelrudi
     And the response should be json
     And the response should be
     """
-    {"data":{"id":"1","uuid":"02129607-aa9f-5466-a416-cec4881afd58","organizer":{"id":"1","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Rudi Bieller","description":"Eine Beschreibung","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Richmodstr.","streetNo":"23","city":"K\u00f6ln","zipCode":"50667","location":"Meine alte Wohnung","url":"http:\/\/www.example.com"}}
+    {"data":{"id":"1","uuid":"868f3976-d99c-5147-81e7-6113e2af50f9","organizer":{"id":"1","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Rudi Bieller","description":"Eine Beschreibung","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Hausstr.","streetNo":"42","city":"K\u00f6ln","zipCode":"50000","location":"Zu Hause","url":"http:\/\/www.example.com"}}
     """
 
   @javascript
@@ -85,10 +85,10 @@ Feature: Admin page of onkelrudi
     Then I should see "+ Termin anlegen"
     When I fill in "fleamarket_name" with "Rudi Bieller"
     And I fill in "fleamarket_description" with "Eine Beschreibung"
-    And I fill in "fleamarket_location" with "Meine alte Wohnung"
-    And I fill in "fleamarket_street" with "Richmodstr."
-    And I fill in "fleamarket_streetNo" with "23"
-    And I fill in "fleamarket_zipCode" with "50667"
+    And I fill in "fleamarket_location" with "Zu Hause"
+    And I fill in "fleamarket_street" with "Hausstr."
+    And I fill in "fleamarket_streetNo" with "42"
+    And I fill in "fleamarket_zipCode" with "50000"
     And I fill in "fleamarket_city" with "Köln"
     And I fill in "fleamarket_url" with "http://www.example.com"
     And I fill in "marketDate" with "31.01.2019"
@@ -112,3 +112,65 @@ Feature: Admin page of onkelrudi
     And I should see an ".error" element
     And I should see an ".errormessage" element
     And I should see "Bitte alle Pflichtfelder ausfüllen!"
+
+  @javascript
+  Scenario: Admin can edit only his own fleamarkets
+    Given I am slowly authenticated as user
+    And I go to "/flohmarkt-anlegen/?test=1"
+    Then I should see "+ Termin anlegen"
+    When I fill in "fleamarket_name" with "Mein Testflohmarkt"
+    And I fill in "fleamarket_description" with "Eine Beschreibung"
+    And I fill in "fleamarket_location" with "Zu Hause"
+    And I fill in "fleamarket_street" with "Hausstr."
+    And I fill in "fleamarket_streetNo" with "42"
+    And I fill in "fleamarket_zipCode" with "50000"
+    And I fill in "fleamarket_city" with "Köln"
+    And I fill in "fleamarket_url" with "http://www.example.com"
+    And I fill in "organizer_name" with "Die Flohmarkt GmbH"
+    And I fill in "organizer_phone" with "0221 1424567890"
+    And I fill in "organizer_email" with "example@example.com"
+    And I fill in "organizer_url" with "http://www.example.com/foo"
+    And I fill in "organizer_street" with "Aachener Straße"
+    And I fill in "organizer_streetNo" with "5000"
+    And I fill in "organizer_zip" with "5000"
+    And I fill in "organizer_city" with "Köln"
+    And I fill in "marketDate" with "31.01.2019"
+    And I fill in "marketTimeFrom" with "09:30"
+    And I fill in "marketTimeTo" with "18:00"
+    And I press "Neuen Termin speichern - click hier!"
+    And I wait for "1" seconds
+    Then I should see a ".button-success" element
+    And I should see "Danke - Dein Termin wurde erfolgreich angelegt!"
+    When I go to "flohmarkt-bearbeiten/1"
+    And I wait for "1" seconds
+    Then the "value" attribute of the "#fleamarket_name" element should contain "Mein Testflohmarkt"
+    And I should see "Eine Beschreibung" in the "#fleamarket_description" element
+    And the "value" attribute of the "#fleamarket_location" element should contain "Zu Hause"
+    And the "value" attribute of the "#fleamarket_street" element should contain "Hausstr."
+    And the "value" attribute of the "#fleamarket_streetNo" element should contain "42"
+    And the "value" attribute of the "#fleamarket_zipCode" element should contain "50000"
+    And the "value" attribute of the "#fleamarket_city" element should contain "Köln"
+    And the "value" attribute of the "#fleamarket_url" element should contain "http://www.example.com"
+    When I fill in "fleamarket_name" with "Mein Testflohmarkt UPDATED"
+    And I fill in "fleamarket_description" with "Eine Beschreibung UPDATED"
+    And I fill in "fleamarket_location" with "Zu Hause UPDATED"
+    And I fill in "fleamarket_street" with "Hausstr. UPDATED"
+    And I fill in "fleamarket_streetNo" with "42000"
+    And I fill in "fleamarket_zipCode" with "55555"
+    And I fill in "fleamarket_city" with "Köln UPDATED"
+    And I fill in "fleamarket_url" with "http://www.example.com/UPDATED"
+    And I press "Änderungen speichern - click hier!"
+    And I wait for "1" seconds
+    Then I should see a ".button-success" element
+    And I should see "Dein Termin wurde erfolgreich aktualisiert!"
+    When I send a "GET" request to "http://localhost/public/api/v1/fleamarkets/1"
+    Then the response code should be "200"
+    And the response should be json
+    And the response should be
+    """
+    {"data":{"id":"1","uuid":"4d0f6fcd-16e8-56c7-8f25-1e802b50fb95","organizer":{"id":"1","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Mein Testflohmarkt UPDATED","description":"Eine Beschreibung UPDATED","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Hausstr. UPDATED","streetNo":"42000","city":"K\u00f6ln UPDATED","zipCode":"55555","location":"Zu Hause UPDATED","url":"http:\/\/www.example.com\/UPDATED"}}
+    """
+    Given I am slowly authenticated as user "test2@onkel-rudi.de"
+    And I go to "/profil/"
+    Then I should not see "Mein Testflohmarkt"
+    And I should not see "Mein Testflohmarkt UPDATED"

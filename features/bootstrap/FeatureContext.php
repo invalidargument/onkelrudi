@@ -237,11 +237,12 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
 
     /**
      * @Given /^I am slowly authenticated as user$/
+     * @Given I am slowly authenticated as user :arg1
      */
-    public function iAmSlowlyAuthenticatedAsUser($email = 'test@onkel-rudi.de')
+    public function iAmSlowlyAuthenticatedAsUser($arg1 = 'test@onkel-rudi.de')
     {
         $this->visit('/login/');
-        $this->fillField('login_email', $email);
+        $this->fillField('login_email', $arg1);
         $this->fillField('login_password', 'aaaaaaaa');
         $this->pressButton('Anmelden');
         $this->iWaitForSeconds(1);
@@ -256,6 +257,14 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
             'POST',
             'http://localhost/public/api/v1/login',
             new PyStringNode(['{"email":"test@onkel-rudi.de", "password": "aaaaaaaa"}'], 0));
+    }
+
+    /**
+     * @Then the :arg1 attribute of the :arg2 element should contain :arg3
+     */
+    public function theAttributeOfTheElementShouldContain($arg1, $arg2, $arg3)
+    {
+        $this->assertSession()->elementAttributeContains('css', $arg2, $arg1, $arg3);
     }
 
     private function _createFleaMarkets($num = 3, $expired = false, $inUpcomingTimespan = false)
