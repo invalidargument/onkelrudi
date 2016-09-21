@@ -10,25 +10,26 @@ Feature: Admin page of onkelrudi
     And I am slowly authenticated as user
     And I go to "/flohmarkt-anlegen/?test=1"
     Then I should see "+ Termin anlegen"
-    When I fill in "fleamarket_name" with "Rudi Bieller"
-    And I fill in "fleamarket_description" with "Eine Beschreibung"
-    And I fill in "fleamarket_location" with "Zu Hause"
-    And I fill in "fleamarket_street" with "Hausstr."
-    And I fill in "fleamarket_streetNo" with "42"
-    And I fill in "fleamarket_zipCode" with "50000"
-    And I fill in "fleamarket_city" with "Köln"
-    And I fill in "fleamarket_url" with "http://www.example.com"
-    And I fill in "organizer_name" with "Die Flohmarkt GmbH"
-    And I fill in "organizer_phone" with "0221 1424567890"
-    And I fill in "organizer_email" with "example@example.com"
-    And I fill in "organizer_url" with "http://www.example.com/foo"
-    And I fill in "organizer_street" with "Aachener Straße"
-    And I fill in "organizer_streetNo" with "5000"
-    And I fill in "organizer_zip" with "5000"
-    And I fill in "organizer_city" with "Köln"
-    And I fill in "marketDate" with "31.01.2019"
-    And I fill in "marketTimeFrom" with "09:30"
-    And I fill in "marketTimeTo" with "18:00"
+    When I fill in the following:
+      | fleamarket_name | Rudi Bieller |
+      | fleamarket_description | Eine Beschreibung |
+      | fleamarket_location | Zu Hause |
+      | fleamarket_street | Hausstr. |
+      | fleamarket_streetNo | 42 |
+      | fleamarket_zipCode | 50000 |
+      | fleamarket_city | Köln |
+      | fleamarket_url | http://www.example.com |
+      | organizer_name | Die Flohmarkt GmbH |
+      | organizer_phone | 0221 1424567890 |
+      | organizer_email | example@example.com |
+      | organizer_url | http://www.example.com/foo |
+      | organizer_street | Aachener Straße |
+      | organizer_streetNo | 5000 |
+      | organizer_zip | 5000 |
+      | organizer_city | Köln |
+      | marketDate | 31.01.2019 |
+      | marketTimeFrom | 09:30 |
+      | marketTimeTo | 18:00 |
     And I press "Neuen Termin speichern - click hier!"
     And I wait for "1" seconds
     Then I should see a ".button-success" element
@@ -53,18 +54,19 @@ Feature: Admin page of onkelrudi
     And I have a default organizer
     And I go to "/flohmarkt-anlegen/?test=1"
     Then I should see "+ Termin anlegen"
-    When I fill in "fleamarket_name" with "Rudi Bieller"
+    When I fill in the following:
+      | fleamarket_name | Rudi Bieller |
+      | fleamarket_description | Eine Beschreibung |
+      | fleamarket_location | Zu Hause |
+      | fleamarket_street | Hausstr. |
+      | fleamarket_streetNo | 42 |
+      | fleamarket_zipCode | 50000 |
+      | fleamarket_city | Köln |
+      | fleamarket_url | http://www.example.com |
+      | marketDate | 31.01.2019 |
+      | marketTimeFrom | 09:30 |
+      | marketTimeTo | 18:00 |
     And I select "Max Power" from "fleamarket_organizer"
-    And I fill in "fleamarket_description" with "Eine Beschreibung"
-    And I fill in "fleamarket_location" with "Zu Hause"
-    And I fill in "fleamarket_street" with "Hausstr."
-    And I fill in "fleamarket_streetNo" with "42"
-    And I fill in "fleamarket_zipCode" with "50000"
-    And I fill in "fleamarket_city" with "Köln"
-    And I fill in "fleamarket_url" with "http://www.example.com"
-    And I fill in "marketDate" with "31.01.2019"
-    And I fill in "marketTimeFrom" with "09:30"
-    And I fill in "marketTimeTo" with "18:00"
     And I press "Neuen Termin speichern - click hier!"
     And I wait for "1" seconds
     Then I should see a ".button-success" element
@@ -83,17 +85,18 @@ Feature: Admin page of onkelrudi
     Given I am slowly authenticated as user
     And I am on "/flohmarkt-anlegen/?test=1"
     Then I should see "+ Termin anlegen"
-    When I fill in "fleamarket_name" with "Rudi Bieller"
-    And I fill in "fleamarket_description" with "Eine Beschreibung"
-    And I fill in "fleamarket_location" with "Zu Hause"
-    And I fill in "fleamarket_street" with "Hausstr."
-    And I fill in "fleamarket_streetNo" with "42"
-    And I fill in "fleamarket_zipCode" with "50000"
-    And I fill in "fleamarket_city" with "Köln"
-    And I fill in "fleamarket_url" with "http://www.example.com"
-    And I fill in "marketDate" with "31.01.2019"
-    And I fill in "marketTimeFrom" with "09:30"
-    And I fill in "marketTimeTo" with "18:00"
+    When I fill in the following:
+      | fleamarket_name | Rudi Bieller |
+      | fleamarket_description | Eine Beschreibung |
+      | fleamarket_location | Zu Hause |
+      | fleamarket_street | Hausstr. |
+      | fleamarket_streetNo | 42 |
+      | fleamarket_zipCode | 50000 |
+      | fleamarket_city | Köln |
+      | fleamarket_url | http://www.example.com |
+      | marketDate | 31.01.2019 |
+      | marketTimeFrom | 09:30 |
+      | marketTimeTo | 18:00 |
     And I press "Neuen Termin speichern - click hier!"
     And I wait for "1" seconds
     Then I should see a ".button-warning" element
@@ -118,25 +121,26 @@ Feature: Admin page of onkelrudi
     Given I am slowly authenticated as user
     And I go to "/flohmarkt-anlegen/?test=1"
     Then I should see "+ Termin anlegen"
-    When I fill in "fleamarket_name" with "Mein Testflohmarkt"
-    And I fill in "fleamarket_description" with "Eine Beschreibung"
-    And I fill in "fleamarket_location" with "Zu Hause"
-    And I fill in "fleamarket_street" with "Hausstr."
-    And I fill in "fleamarket_streetNo" with "42"
-    And I fill in "fleamarket_zipCode" with "50000"
-    And I fill in "fleamarket_city" with "Köln"
-    And I fill in "fleamarket_url" with "http://www.example.com"
-    And I fill in "organizer_name" with "Die Flohmarkt GmbH"
-    And I fill in "organizer_phone" with "0221 1424567890"
-    And I fill in "organizer_email" with "example@example.com"
-    And I fill in "organizer_url" with "http://www.example.com/foo"
-    And I fill in "organizer_street" with "Aachener Straße"
-    And I fill in "organizer_streetNo" with "5000"
-    And I fill in "organizer_zip" with "5000"
-    And I fill in "organizer_city" with "Köln"
-    And I fill in "marketDate" with "31.01.2019"
-    And I fill in "marketTimeFrom" with "09:30"
-    And I fill in "marketTimeTo" with "18:00"
+    When I fill in the following:
+      | fleamarket_name | Mein Testflohmarkt |
+      | fleamarket_description | Eine Beschreibung |
+      | fleamarket_location | Zu Hause |
+      | fleamarket_street | Hausstr. |
+      | fleamarket_streetNo | 42 |
+      | fleamarket_zipCode | 50000 |
+      | fleamarket_city | Köln |
+      | fleamarket_url | http://www.example.com |
+      | organizer_name | Die Flohmarkt GmbH |
+      | organizer_phone | 0221 1424567890 |
+      | organizer_email | example@example.com |
+      | organizer_url | http://www.example.com/foo |
+      | organizer_street | Aachener Straße |
+      | organizer_streetNo | 5000 |
+      | organizer_zip | 5000 |
+      | organizer_city | Köln |
+      | marketDate | 31.01.2019 |
+      | marketTimeFrom | 09:30 |
+      | marketTimeTo | 18:00 |
     And I press "Neuen Termin speichern - click hier!"
     And I wait for "1" seconds
     Then I should see a ".button-success" element
@@ -151,14 +155,15 @@ Feature: Admin page of onkelrudi
     And the "value" attribute of the "#fleamarket_zipCode" element should contain "50000"
     And the "value" attribute of the "#fleamarket_city" element should contain "Köln"
     And the "value" attribute of the "#fleamarket_url" element should contain "http://www.example.com"
-    When I fill in "fleamarket_name" with "Mein Testflohmarkt UPDATED"
-    And I fill in "fleamarket_description" with "Eine Beschreibung UPDATED"
-    And I fill in "fleamarket_location" with "Zu Hause UPDATED"
-    And I fill in "fleamarket_street" with "Hausstr. UPDATED"
-    And I fill in "fleamarket_streetNo" with "42000"
-    And I fill in "fleamarket_zipCode" with "55555"
-    And I fill in "fleamarket_city" with "Köln UPDATED"
-    And I fill in "fleamarket_url" with "http://www.example.com/UPDATED"
+    When I fill in the following:
+      | fleamarket_name | Mein Testflohmarkt UPDATED |
+      | fleamarket_description | Eine Beschreibung UPDATED |
+      | fleamarket_location | Zu Hause UPDATED |
+      | fleamarket_street | Hausstr. UPDATED |
+      | fleamarket_streetNo | 42000 |
+      | fleamarket_zipCode | 55555 |
+      | fleamarket_city | Köln UPDATED |
+      | fleamarket_url | http://www.example.com/UPDATED |
     And I press "Änderungen speichern - click hier!"
     And I wait for "1" seconds
     Then I should see a ".button-success" element
