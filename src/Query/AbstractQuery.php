@@ -26,9 +26,7 @@ abstract class AbstractQuery implements QueryInterface
     public function run()
     {
         $this->getPdo();
-        // if !cached, write to cache and return
-        // if cache expired, return cache, invalidate it and write it new
-        // if cached. return cached content
+
         if ($this instanceof CacheableInterface) {
             $result = $this->diContainer->get('CacheManager')->get($this->getCacheKey());
 

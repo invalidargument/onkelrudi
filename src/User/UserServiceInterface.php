@@ -17,4 +17,10 @@ interface UserServiceInterface
     public function optIn($token);
     
     public function isLoggedIn();
+
+    /**
+     * @param string $id
+     * @return UserInterface
+     */
+    public function getUser($id);
 }

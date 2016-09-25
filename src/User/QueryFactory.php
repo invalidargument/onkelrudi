@@ -9,6 +9,7 @@ class QueryFactory
     private $_insertQuery;
     private $_optInTokenInsertQuery;
     private $_optInTokenUpdateQuery;
+    private $_userReadQuery;
 
     private $_diContainer;
 
@@ -45,5 +46,15 @@ class QueryFactory
         }
 
         return $this->_optInTokenUpdateQuery;
+    }
+
+    public function createUserReadQuery()
+    {
+        if (is_null($this->_userReadQuery)) {
+            $this->_userReadQuery = new UserReadQuery();
+            $this->_userReadQuery->setDiContainer($this->_diContainer);
+        }
+
+        return $this->_userReadQuery;
     }
 }

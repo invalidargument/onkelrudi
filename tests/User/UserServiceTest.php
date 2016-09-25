@@ -112,4 +112,21 @@ class UserServiceTest extends \PHPUnit_Framework_TestCase
             array(null, false)
         );
     }
+
+    public function testGetUserById()
+    {
+        $user = new User('foo@example.com', null, UserInterface::TYPE_ORGANIZER, true);
+
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\User\UserReadQuery');
+        $query->shouldReceive('setIdentifier')->with('foo@example.com')->andReturn($query)
+            ->shouldReceive('run')->andReturn($user);
+
+        $queryFactory = \Mockery::mock('RudiBieller\OnkelRudi\User\QueryFactory');
+        $queryFactory->shouldReceive('createUserReadQuery')->once()->andReturn($query);
+
+        $service = new UserService();
+        $service->setQueryFactory($queryFactory);
+
+        $this->assertSame($user, $service->getUser('foo@example.com'));
+    }
 }
