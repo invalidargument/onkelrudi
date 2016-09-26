@@ -19,9 +19,8 @@ class FleaMarketCreateAction extends AbstractJsonAction implements UserAwareInte
         $builder = $this->builderFactory->create('RudiBieller\OnkelRudi\FleaMarket\Builder');
         $builder->reset();
 
-        $userInfo = $this->userService->getAuthenticationService()->getStorage()->read();
         $builder->setUser(
-            $this->_mapUser($userInfo['username'])
+            $this->userService->getAuthenticationService()->getStorage()->read()
         );
 
         $data = $this->request->getParsedBody();
@@ -43,10 +42,5 @@ class FleaMarketCreateAction extends AbstractJsonAction implements UserAwareInte
         }
 
         return $this->service->createFleaMarket($builder->build());
-    }
-
-    private function _mapUser($identifier)
-    {
-        return new User($identifier);
     }
 }

@@ -87,6 +87,8 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
 
     public function testActionSetsNeededTemplateVariables()
     {
+        $user = new User('bar@example.com');
+
         $uri = \Mockery::mock('Slim\Http\Uri');
         $uri->shouldReceive('getQuery')->andReturn('/foo/?test=1');
 
@@ -100,7 +102,7 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('write');
 
         $session = \Mockery::mock('Zend\Authentication\Storage\Session');
-        $session->shouldReceive('read')->once()->andReturn(array('username' => 'info@onkel-rudi.de'));
+        $session->shouldReceive('read')->once()->andReturn($user);
         $authenticationService = \Mockery::mock('Zend\Authentication\AuthenticationService');
         $authenticationService->shouldReceive('getStorage')->once()->andReturn($session);
 
@@ -136,7 +138,7 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
             $action
         );
         $this->assertAttributeEquals(
-            ['username' => 'info@onkel-rudi.de', 'user' => new User('info@onkel-rudi.de')],
+            $user,
             'result',
             $action
         );
