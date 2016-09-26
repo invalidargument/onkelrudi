@@ -2,7 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\User;
 
-class User implements UserInterface, \JsonSerializable
+class Organizer implements UserInterface, \JsonSerializable
 {
     private $_identifier;
     private $_password;
