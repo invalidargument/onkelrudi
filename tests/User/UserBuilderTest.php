@@ -28,4 +28,23 @@ class UserBuilderTest extends \PHPUnit_Framework_TestCase
             array('invalid', 'RudiBieller\OnkelRudi\User\User')
         );
     }
+
+    public function testResetResetsGivenValues()
+    {
+        $sut = new UserBuilder();
+        $sut
+            ->setIdentifier('foo@example.com')
+            ->setPassword('123')
+            ->setOptIn(true)
+            ->setType(UserInterface::TYPE_ADMIN);
+
+        $sut->reset();
+
+        $user = $sut->build();
+
+        $this->assertInstanceOf('RudiBieller\OnkelRudi\User\User', $user);
+        $this->assertNull($user->getIdentifier());
+        $this->assertNull($user->getPassword());
+        $this->assertFalse($user->hasOptIn());
+    }
 }

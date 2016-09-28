@@ -32,14 +32,6 @@ class User implements UserInterface, \JsonSerializable
     }
 
     /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->_type;
-    }
-
-    /**
      * @return boolean
      */
     public function hasOptIn()
@@ -50,6 +42,7 @@ class User implements UserInterface, \JsonSerializable
     public function jsonSerialize()
     {
         return [
+            'type' => 'User',
             'identifier' => $this->getIdentifier(),
             'password' => '',
             'hasOptIn' => (string) $this->hasOptIn()

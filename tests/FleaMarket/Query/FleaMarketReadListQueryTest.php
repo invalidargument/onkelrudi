@@ -4,6 +4,8 @@ namespace RudiBieller\OnkelRudi\FleaMarket\Query;
 
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
 use RudiBieller\OnkelRudi\User\User;
+use RudiBieller\OnkelRudi\User\UserBuilder;
+use Slim\Container;
 
 class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,9 +14,15 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
+        $di = new Container([
+            'UserBuilder' => function ($c) {
+                return new UserBuilder();
+            }
+        ]);
         $this->_sut = new FleaMarketReadListQuery();
         $this->_pdo = \Mockery::mock('\Slim\PDO\Database');
         $this->_sut->setPdo($this->_pdo);
+        $this->_sut->setDiContainer($di);
     }
 
     protected function tearDown()

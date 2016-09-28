@@ -16,7 +16,14 @@ class UserReadQuery extends AbstractQuery
 
     protected function mapResult($result)
     {
-        return new User($this->_identifier, null, $result['type'], $result['opt_in']);
+        $userBuilder = $this->diContainer->get('UserBuilder');
+        $userBuilder->reset();
+
+        return $userBuilder
+            ->setIdentifier($this->_identifier)
+            ->setType($result['type'])
+            ->setOptIn($result['opt_in'])
+            ->build();
     }
 
     protected function runQuery()

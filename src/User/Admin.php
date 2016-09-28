@@ -32,14 +32,6 @@ class Admin implements UserInterface, \JsonSerializable
     }
 
     /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->_type;
-    }
-
-    /**
      * @return boolean
      */
     public function hasOptIn()
@@ -50,6 +42,7 @@ class Admin implements UserInterface, \JsonSerializable
     public function jsonSerialize()
     {
         return [
+            'type' => 'Admin',
             'identifier' => $this->getIdentifier(),
             'password' => '',
             'hasOptIn' => (string) $this->hasOptIn()

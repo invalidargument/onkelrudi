@@ -4,6 +4,7 @@ namespace RudiBieller\OnkelRudi\Controller\Api;
 
 use RudiBieller\OnkelRudi\Controller\AbstractJsonAction;
 use RudiBieller\OnkelRudi\User\User;
+use RudiBieller\OnkelRudi\User\UserBuilder;
 use Zend\Authentication\Result;
 
 class UserLoginAction extends AbstractJsonAction
@@ -15,7 +16,11 @@ class UserLoginAction extends AbstractJsonAction
     {
         $data = $this->request->getParsedBody();
 
-        $user = new User($data['email'], $data['password']);
+        /**
+         * @var UserBuilder
+         */
+        $userBuilder = $this->builderFactory->create('RudiBieller\OnkelRudi\User\UserBuilder');
+        $user = $userBuilder->setIdentifier($data['email'])->setPassword($data['password'])->build();
 
         /**
          * @var \Zend\Authentication\Result
@@ -37,9 +42,6 @@ class UserLoginAction extends AbstractJsonAction
             $this->_passwordsDontMatchStatusCode = 403;
             return null;
         }
-
-        //$loadedUser = $this->userService->getUser($user->getIdentifier());
-        //var_dump($loadedUser);die;
 
         $this->userService->getAuthenticationService($user)->getStorage()->write(
             $this->userService->getUser($user->getIdentifier())

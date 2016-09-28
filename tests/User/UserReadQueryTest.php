@@ -2,6 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\User;
 
+use Slim\Container;
+
 class UserReadQueryTest extends \PHPUnit_Framework_TestCase
 {
     private $_sut;
@@ -9,9 +11,15 @@ class UserReadQueryTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
+        $di = new Container([
+            'UserBuilder' => function ($c) {
+                return new UserBuilder();
+            }
+        ]);
         $this->_sut = new UserReadQuery();
         $this->_pdo = \Mockery::mock('\Slim\PDO\Database');
         $this->_sut->setPdo($this->_pdo);
+        $this->_sut->setDiContainer($di);
     }
 
     public function testQuerySelectsAllParametersButNotThePassword()

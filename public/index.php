@@ -11,6 +11,7 @@ use RudiBieller\OnkelRudi\Controller\Factory as ControllerFactory;
 use RudiBieller\OnkelRudi\FleaMarket\Query\OrganizerQueryFactory;
 use RudiBieller\OnkelRudi\User\AuthenticationFactory;
 use RudiBieller\OnkelRudi\User\NotificationService;
+use RudiBieller\OnkelRudi\User\UserBuilder;
 use RudiBieller\OnkelRudi\User\UserService;
 use RudiBieller\OnkelRudi\User\QueryFactory as UserQueryFactory;
 use RudiBieller\OnkelRudi\Wordpress\QueryFactory;
@@ -84,6 +85,9 @@ $appConfiguration = [
     },
     'CacheManager' => function($c) use ($config) {
         return (new CacheManagerFactory())->createCacheManager($config);
+    },
+    'UserBuilder' => function ($c) {
+        return new UserBuilder();
     }
 ];
 

@@ -129,6 +129,7 @@ abstract class AbstractAction implements ActionInterface
 
     private function _isUnauthorizedRequest()
     {
+        // TODO: distinguish roles or user types
          return is_null($this->userService->getAuthenticationService()->getStorage()->read());
     }
 }

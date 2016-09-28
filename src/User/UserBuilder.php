@@ -4,9 +4,9 @@ namespace RudiBieller\OnkelRudi\User;
 
 class UserBuilder
 {
-    private $_identifier;
     private $_type;
-    private $_password = null;
+    private $_identifier;
+    private $_password;
     private $_optIn = false;
 
     public function setIdentifier($identifier)
@@ -43,5 +43,13 @@ class UserBuilder
             default:
                 return new User($this->_identifier, $this->_password, $this->_optIn);
         }
+    }
+
+    public function reset()
+    {
+        $this->_type = null;
+        $this->_identifier = null;
+        $this->_password = null;
+        $this->_optIn = false;
     }
 }

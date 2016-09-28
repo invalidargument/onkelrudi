@@ -115,15 +115,19 @@ class FleaMarketReadListQuery extends AbstractQuery
                 $marketData[$item['fleamarket_id']]['name'].'-'.$marketData[$item['fleamarket_id']]['city']
             );
 
-            //$organizer = new Organizer();
-            //$organizer->setId($marketData[$item['fleamarket_id']]['organizer_id']);
+            $userBuilder = $this->diContainer->get('UserBuilder');
+            $userBuilder->reset();
+
+            $user = $userBuilder
+                ->setIdentifier($marketData[$item['fleamarket_id']]['user_id'])
+                ->build();
 
             $fleaMarket = new FleaMarket();
             $fleaMarket
                 ->setId($item['fleamarket_id'])
                 ->setUuid($marketData[$item['fleamarket_id']]['uuid'])
                 //->setOrganizer($organizer)
-                ->setUser(new User($marketData[$item['fleamarket_id']]['user_id']))
+                ->setUser($user)
                 ->setName($marketData[$item['fleamarket_id']]['name'])
                 ->setSlug($slug)
                 ->setDescription($marketData[$item['fleamarket_id']]['description'])
