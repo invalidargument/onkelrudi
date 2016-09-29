@@ -98,6 +98,9 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(42, $fleaMarkets[0]->getId());
         $this->assertEquals(23, $fleaMarkets[1]->getId());
+
+        $this->assertInstanceOf('RudiBieller\OnkelRudi\User\UserInterface', $fleaMarkets[0]->getUser());
+        $this->assertInstanceOf('RudiBieller\OnkelRudi\FleaMarket\Organizer', $fleaMarkets[0]->getOrganizer());
     }
 
     public function testQueryReadsFleaMarketsBySpecifiedInterval()

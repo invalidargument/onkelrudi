@@ -4,10 +4,9 @@ namespace RudiBieller\OnkelRudi\FleaMarket\Query;
 use Cocur\Slugify\Slugify;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketServiceInterface;
-//use RudiBieller\OnkelRudi\FleaMarket\Organizer;
+use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use RudiBieller\OnkelRudi\Query\AbstractQuery;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
-use RudiBieller\OnkelRudi\User\User;
 use RudiBieller\OnkelRudi\User\UserInterface;
 
 class FleaMarketReadListQuery extends AbstractQuery
@@ -122,11 +121,14 @@ class FleaMarketReadListQuery extends AbstractQuery
                 ->setIdentifier($marketData[$item['fleamarket_id']]['user_id'])
                 ->build();
 
+            $organizer = new Organizer();
+            $organizer->setId($marketData[$item['fleamarket_id']]['organizer_id']);
+
             $fleaMarket = new FleaMarket();
             $fleaMarket
                 ->setId($item['fleamarket_id'])
                 ->setUuid($marketData[$item['fleamarket_id']]['uuid'])
-                //->setOrganizer($organizer)
+                ->setOrganizer($organizer)
                 ->setUser($user)
                 ->setName($marketData[$item['fleamarket_id']]['name'])
                 ->setSlug($slug)

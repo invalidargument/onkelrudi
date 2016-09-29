@@ -2,6 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
+use RudiBieller\OnkelRudi\User\Organizer;
+
 class ProfileAction extends AbstractHttpAction implements UserAwareInterface
 {
     protected $template = 'profile.html';
@@ -12,9 +14,16 @@ class ProfileAction extends AbstractHttpAction implements UserAwareInterface
 
         $myFleamarkets = $this->service->getFleaMarketsByUser($user, 20, 0);
 
+        $organizer = null;
+        if (count($myFleamarkets) > 0 && ($user instanceof Organizer)) {
+            $organizer = $this->organizerService->getOrganizer($myFleamarkets[0]->getOrganizer()->getId());
+        }
+
+
         $this->templateVariables['profileurl'] = $this->app->getContainer()->get('router')->pathFor('login-register');
         $this->templateVariables['createfleamarketurl'] = $this->app->getContainer()->get('router')->pathFor('create-fleamarket');
         $this->templateVariables['fleamarkets'] = $myFleamarkets;
+        $this->templateVariables['organizer'] = $organizer;
 
         return $user;
     }

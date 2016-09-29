@@ -78,27 +78,87 @@
 
 <div class="content-wrapper">
     <div class="content">
-        <h2 class="content-head">Hallo, Du bist angemeldet als {{data.identifier}}.</h2>
-        <div>
-            <p>
-                <i class="fa fa-angle-double-right"></i><a href="{{createfleamarketurl}}" title="Einen Flohmarkt anlegen">einen neuen Flohmarkt anlegen</a>
-            </p>
-            {% if fleamarkets|length > 0 %}
-            Von Dir angelegte Flohmärkte - Click zum Bearbeiten<br>
-                <ol>
-                {% for item in fleamarkets %}
-                    <li>
-                        <a href="/public/flohmarkt-bearbeiten/{{ item.id }}" title="Flohmarkt bearbeiten">
-                        {{ item.name }} <time datetime="{{item.dates|first.start|date('c')}}">{{item.dates|first.start|date("d.m.Y")}} von {{item.dates|first.start|date("H:i")}} - {{item.dates|first.end|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{item.city}}</span>
-                        </a>
-                    </li>
-                {% endfor %}
-                </ol>
+        <h2 class="content-head">Hallo, Du bist angemeldet als {{data.identifier}}. <i class="fa fa-angle-double-right"></i><a id="logout" href="#" title="Logout - Bei Onkel Rudi abmelden">Logout</a></h2>
+        <div class="pure-g">
+            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
+                <h2>Deine Flohmärkte</h2>
+                <p>
+                    <i class="fa fa-angle-double-right"></i><a href="{{createfleamarketurl}}" title="Einen Flohmarkt anlegen">einen neuen Flohmarkt anlegen</a>
+                </p>
+                {% if fleamarkets|length > 0 %}
+                Von Dir angelegte Flohmärkte - Click zum Bearbeiten<br>
+                    <ol>
+                    {% for item in fleamarkets %}
+                        <li>
+                            <a href="/public/flohmarkt-bearbeiten/{{ item.id }}" title="Flohmarkt bearbeiten">
+                            {{ item.name }} <time datetime="{{item.dates|first.start|date('c')}}">{{item.dates|first.start|date("d.m.Y")}} von {{item.dates|first.start|date("H:i")}} - {{item.dates|first.end|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{item.city}}</span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                    </ol>
+                {% endif %}
+            </div>
+            {% if organizer %}
+            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
+                <h2>Dein Veranstalterprofil</h2>
+                <p>Diese Angaben werden neben Deinen Flohmarktterminen erscheinen.</p>
+                <form id="newFleaMarket" method="post" class="pure-form pure-form-stacked">
+                    <div class="pure-g">
+                        <div class="pure-u-1-2">
+                            <label for="organizer_name">Dein Veranstaltername (*)</label>
+                            <input id="organizer_name" type="text" placeholder="Veranstaltername" class="pure-input-1" value="{{ organizer.name }}">
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-1-2">
+                            <label for="organizer_phone">Telefonnummer</label>
+                            <input id="organizer_phone" type="tel" placeholder="Telefonnummer" class="pure-input-1" value="{{ organizer.phone }}">
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-1-2">
+                            <label for="organizer_email">E-Mail</label>
+                            <input id="organizer_email" type="email" placeholder="E-Mail" class="pure-input-1" value="{{ organizer.email }}">
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-1-2">
+                            <label for="organizer_url">Website</label>
+                            <input id="organizer_url" type="text" placeholder="Website" class="pure-input-1" value="{{ organizer.url }}">
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-9-24">
+                            <label for="organizer_street">Stra&szlig;e</label>
+                            <input id="organizer_street" type="text" placeholder="Stra&szlig;e" class="pure-input-1" value="{{ organizer.street }}">
+                        </div>
+                        <div class="pure-u-3-24">
+                            <label for="organizer_streetNo">Hausnummer</label>
+                            <input id="organizer_streetNo" type="text" placeholder="Hausnummer" class="pure-input-1" value="{{ organizer.streetNo }}">
+                        </div>
+                    </div>
+                    <div class="pure-g">
+                        <div class="pure-u-3-24">
+                            <label for="organizer_zip">PLZ</label>
+                            <input id="organizer_zip" type="text" placeholder="PLZ" class="pure-input-1" value="{{ organizer.zipCode }}">
+                        </div>
+                        <div class="pure-u-9-24">
+                            <label for="organizer_city">Ort</label>
+                            <input id="organizer_city" type="text" placeholder="Ort" class="pure-input-1" value="{{ organizer.city }}">
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-1-2">
+                            <button type="submit" id="submitform" class="pure-button">
+                                <i class="fa fa-save fa-lg"></i> speichern
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
             {% endif %}
         </div>
-        <p>
-            <a id="logout" href="#" title="Logout - Bei Onkel Rudi abmelden">Logout</a>
-        </p>
     </div>
     <div class="footer l-box is-center">
         {{"now"|date("Y")}} onkel-rudi.de
