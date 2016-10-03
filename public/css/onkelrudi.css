@@ -416,7 +416,6 @@ form#startMonthSelect label {
 }
 a.post-category-organizer-url {
     background-color: transparent;
-    border-bottom: 1px solid #F17022;
     color:inherit;
 }
 a.post-category-organizer-url:hover {
