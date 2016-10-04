@@ -53,6 +53,45 @@
                     dataType: 'json'
                 });
             });
+
+            $('#updateOrganizerProfile').on('submit', function (e) {
+                e.preventDefault();
+                var ajaxUrl = '/public/api/v1/organizers/' + '{{ organizer.id }}';
+                var postData = JSON.stringify({
+                    name: $('#organizer_name').val(),
+                    street: $('#organizer_street').val(),
+                    streetNo: $('#organizer_streetNo').val(),
+                    zipCode: $('#organizer_zip').val(),
+                    city: $('#organizer_city').val(),
+                    phone: $('#organizer_phone').val(),
+                    email: $('#organizer_email').val(),
+                    url: $('#organizer_url').val()
+                });
+                $.ajax({
+                    type: "PUT",
+                    url: ajaxUrl,
+                    contentType: "application/json",
+                    data: postData,
+                    success: function (data) {
+                        $('.errormessage').remove();
+                        $('.successmessage').remove();
+                        $('#updateOrganizerProfile').parent().append(
+                            '<p class="successmessage"><i class="fa fa-check fa-lg"></i>Dein Profil wurde erfolgreich gespeichert!</p>'
+                        );
+                        window.setTimeout(function() {
+                            window.location.href = '{{profileurl}}';
+                        }, 2000);
+                    },
+                    error: function (data) {
+                        $('.errormessage').remove();
+                        $('.successmessage').remove();
+                        $('#updateOrganizerProfile').parent().append(
+                            '<p class="errormessage"><i class="fa fa-exclamation fa-lg"></i>Deine Angaben konnten nicht gespeichert werden. ' + data.responseJSON.error/*data.statusText*/ + '.</p>'
+                        );
+                    },
+                    dataType: 'json'
+                });
+            });
         });
     </script>
 </head>
@@ -101,8 +140,8 @@
             {% if organizer %}
             <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
                 <h2>Dein Veranstalterprofil</h2>
-                <p>Was Du hier eingibst, wird neben Deinen Flohmarktterminen erscheinen.</p>
-                <form id="newFleaMarket" method="post" class="pure-form pure-form-stacked">
+                <p>Diese Angaben werden neben all Deinen Flohmarktterminen erscheinen.</p>
+                <form id="updateOrganizerProfile" method="post" class="pure-form pure-form-stacked">
                     <div class="pure-g">
                         <div class="pure-u-1-2">
                             <label for="organizer_name">Dein Veranstaltername (*)</label>

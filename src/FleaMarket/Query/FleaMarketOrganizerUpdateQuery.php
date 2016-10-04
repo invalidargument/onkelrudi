@@ -28,6 +28,7 @@ class FleaMarketOrganizerUpdateQuery extends AbstractInsertQuery
                     'city' => $this->_organizer->getCity(),
                     'zipcode' => $this->_organizer->getZipCode(),
                     'phone' => $this->_organizer->getPhone(),
+                    'email' => $this->_organizer->getEmail(),
                     'url' => $this->_organizer->getUrl()
                 )
             )

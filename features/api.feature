@@ -116,7 +116,7 @@ Feature: API v1 fleamarkets
     And I am authenticated as user via api
     And I send a "PUT" request to "http://localhost/public/api/v1/organizers/1" with body
     """
-    {"name":"MAX POWERRRRR!!!!","street":"fuu","streetNo":"2001","zipCode":"50001","city":"K\u00f6ln","phone":"23","url":"http:\/\/www.example.com"}
+    {"name":"MAX POWERRRRR!!!!","street":"fuu","streetNo":"2001","zipCode":"50001","city":"K\u00f6ln","phone":"23","url":"http:\/\/www.example.com","email":"foo@example.com"}
     """
     Then the response code should be "200"
     And the response should be json
@@ -127,7 +127,7 @@ Feature: API v1 fleamarkets
     When I send a "GET" request to "http://localhost/public/api/v1/organizers/1"
     Then the response should be
     """
-    {"data":{"id":"1","uuid":"897b465a-3ba3-5aad-a014-0d7c443a8846","name":"MAX POWERRRRR!!!!","street":"fuu","streetNo":"2001","zipCode":"50001","city":"K\u00f6ln","phone":"23","email":"defaultorganizer@example.com","url":"http:\/\/www.example.com"}}
+    {"data":{"id":"1","uuid":"897b465a-3ba3-5aad-a014-0d7c443a8846","name":"MAX POWERRRRR!!!!","street":"fuu","streetNo":"2001","zipCode":"50001","city":"K\u00f6ln","phone":"23","email":"foo@example.com","url":"http:\/\/www.example.com"}}
     """
 
   Scenario: Create a new user

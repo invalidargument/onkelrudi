@@ -24,6 +24,7 @@ class FleaMarketOrganizerUpdateQueryTest extends \PHPUnit_Framework_TestCase
             ->setCity('Cologne')
             ->setZipCode(50667)
             ->setPhone('0221123456')
+            ->setEmail('foo@example.com')
             ->setUrl('http://www.example.com')
             ->setStreet('abc')
             ->setStreetNo('42');
@@ -41,6 +42,7 @@ class FleaMarketOrganizerUpdateQueryTest extends \PHPUnit_Framework_TestCase
                     'city' => $organizer->getCity(),
                     'zipcode' => $organizer->getZipCode(),
                     'phone' => $organizer->getPhone(),
+                    'email' => $organizer->getEmail(),
                     'url' => $organizer->getUrl()
                 ))
                 ->andReturn($this->_pdo)
