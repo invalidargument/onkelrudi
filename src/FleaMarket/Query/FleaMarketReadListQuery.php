@@ -9,6 +9,8 @@ use RudiBieller\OnkelRudi\Query\AbstractQuery;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 use RudiBieller\OnkelRudi\User\UserInterface;
 
+// TODO: definitely in need of a refactoring!
+
 class FleaMarketReadListQuery extends AbstractQuery
 {
     private $_offset = 0;
@@ -204,6 +206,12 @@ class FleaMarketReadListQuery extends AbstractQuery
             ->select()
             ->from('fleamarkets_dates')
             ->orderBy('start', 'ASC');
+
+        if ($this->_user) {
+            // what about admin?
+            $datesStatement = $datesStatement->join('fleamarkets', 'fleamarkets_dates.fleamarket_id', '=', 'fleamarkets.id')
+                ->where('user_id', '=', $this->_user->getIdentifier());
+        }
 
         $datesStatement = $this->_setTimespan($datesStatement);
         $datesStatement = $this->_setOnlyCurrentDates($datesStatement);

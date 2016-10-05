@@ -78,7 +78,7 @@ class FleaMarketReadListQueryTest extends \PHPUnit_Framework_TestCase
         $statement2->shouldReceive('fetchAll')->once()->andReturn($marketsData);
 
         // query dates
-        $this->_pdo->shouldReceive('select->from->orderBy->limit->offset')->andReturn($this->_pdo);
+        $this->_pdo->shouldReceive('select->from->orderBy->join->where->limit->offset')->andReturn($this->_pdo);
         $this->_pdo->shouldReceive('execute')->once()->andReturn($statement1);
 
         // query markets
