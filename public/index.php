@@ -21,6 +21,10 @@ use Slim\PDO\Database;
 $config = new Config();
 $db = null;
 
+if ($config->getSystemConfiguration()['environment'] === 'live') {
+    error_reporting(0);
+}
+
 $envSettings = [
     'displayErrorDetails' => false,
     'cache' => 'templates/cache'
