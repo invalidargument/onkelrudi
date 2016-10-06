@@ -11,7 +11,7 @@
     ],
     "require": {
         "slim/slim": "3.0.*",
-        "slim/pdo": "1.9.2",
+        "slim/pdo": "1.10.0",
         "slim/csrf": "*",
         "slim/twig-view": "*",
         "slim/http-cache": "0.3.*",

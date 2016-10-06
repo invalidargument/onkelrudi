@@ -34,7 +34,7 @@ class FleaMarketReadListQuery extends AbstractQuery
 
     public function setLimit($limit)
     {
-        $this->_limit = $limit;
+        $this->_limit = (int) $limit;
         return $this;
     }
 
@@ -218,8 +218,7 @@ class FleaMarketReadListQuery extends AbstractQuery
 
         if (!$this->_hasValidQueryTimespan()) {
             $datesStatement = $datesStatement
-                ->limit($this->_limit)
-                ->offset($this->_offset);
+                ->limit($this->_limit, $this->_offset);
         }
 
         $datesData = $datesStatement->execute()->fetchAll();
