@@ -48,7 +48,13 @@
     </target>
 
     <target name="composer_optimize" description="composer dump autoload">
-        <exec executable="composer" failonerror="true">
+        <exec executable="php" failonerror="true">
+            <arg value="-n" />
+            <arg value="-d" />
+            <arg value="extension=json.so" />
+            <arg value="-dextension=pdo.so" />
+            <arg value="-dextension=curl.so" />
+            <arg value="/usr/local/bin/composer" />
             <arg value="update" />
             <arg value="--no-dev" />
             <arg value="-o" />
