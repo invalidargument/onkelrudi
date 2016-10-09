@@ -22,14 +22,14 @@ class IndexAction extends AbstractHttpAction
         $fleaMarkets = $this->service->getAllFleaMarketsByTimespan($start);
         $wpCategories = $this->wordpressService->getAllCategories();
         $dates = $this->service->getAllUpcomingDates();
-        $fleaMarketsDetailRoutes = [];
+        $marketsDetailRoutes = [];
         $zipAreaRange = [];
         $monthRange = [];
         foreach ($dates as $dateItem) {
             $monthRange[date('m-Y', strtotime($dateItem->getStart()))] = date('m/Y', strtotime($dateItem->getStart()));
         }
         foreach ($fleaMarkets as $fleaMarket) {
-            $fleaMarketsDetailRoutes[$fleaMarket->getId()] = $this->app->getContainer()->router->pathFor('event-date', [
+            $marketsDetailRoutes[$fleaMarket->getId()] = $this->app->getContainer()->router->pathFor('event-date', [
                 'wildcard' => $fleaMarket->getSlug(),
                 'id' => $fleaMarket->getId()
             ]);
@@ -43,7 +43,7 @@ class IndexAction extends AbstractHttpAction
         sort($zipAreaRange);
 
         $this->templateVariables['fleamarkets'] = $fleaMarkets;
-        $this->templateVariables['fleamarketsDetailsRoutes'] = $fleaMarketsDetailRoutes;
+        $this->templateVariables['fleamarketsDetailsRoutes'] = $marketsDetailRoutes;
         $this->templateVariables['wpCategories'] = $wpCategories;
         $this->templateVariables['monthRange'] = $monthRange;
         $this->templateVariables['zipAreaRange'] = $zipAreaRange;
