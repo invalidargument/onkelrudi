@@ -2,6 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\FleaMarket;
 
+use RudiBieller\OnkelRudi\User\NotificationServiceInterface;
 use RudiBieller\OnkelRudi\User\User;
 use RudiBieller\OnkelRudi\User\UserInterface;
 
@@ -11,6 +12,10 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
      * @var FleaMarketService
      */
     private $_sut;
+    /**
+     * @var NotificationServiceInterface
+     */
+    private $_notificationService;
     private $_factory;
 
     protected function setUp()
@@ -18,10 +23,14 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
         $this->_sut = new FleaMarketService();
         $this->_factory = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\Query\Factory');
         $this->_sut->setQueryFactory($this->_factory);
+        $this->_notificationService = \Mockery::mock('RudiBieller\OnkelRudi\User\NotificationServiceInterface');
+        $this->_sut->setNotificationService($this->_notificationService);
     }
 
     public function testServiceCreatesNewFleaMarket()
     {
+        $this->_notificationService->shouldReceive('sendFleaMarketCreatedNotification')->once()->with(123);
+
         $organizer = new Organizer();
         $organizer->setId(42);
 

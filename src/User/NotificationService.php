@@ -50,7 +50,7 @@ class NotificationService implements NotificationServiceInterface
         return $this->getMailer()->send();
     }
 
-    public function sendFleaMarketCreatedNotification($email, $fleaMarketIdentifier)
+    public function sendFleaMarketCreatedNotification($fleaMarketIdentifier, $email = 'info@onkel-rudi.de')
     {
         $this->_initSettings();
 

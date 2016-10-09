@@ -99,11 +99,14 @@ $container = new \Slim\Container($appConfiguration);
 
 $app = new \Slim\App($container);
 
+// notifications
+$notificationService = new NotificationService();
 // fleaMarkets
 $fleaMarketQueryFactory = new Factory();
 $fleaMarketQueryFactory->setDiContainer($app->getContainer());
 $service = new FleaMarketService();
 $service->setQueryFactory($fleaMarketQueryFactory);
+$service->setNotificationService($notificationService);
 // organizers
 $organizerQueryFactory = new OrganizerQueryFactory();
 $organizerQueryFactory->setDiContainer($app->getContainer());
@@ -117,8 +120,6 @@ $authFactory->setDiContainer($app->getContainer());
 $userService = new UserService();
 $userService->setQueryFactory($userQueryFactory);
 $userService->setAuthenticationFactory($authFactory);
-// notifications
-$notificationService = new NotificationService();
 
 // wordpress
 $wpQueryFactory = new QueryFactory();

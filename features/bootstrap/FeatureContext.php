@@ -16,6 +16,7 @@ use RudiBieller\OnkelRudi\FleaMarket\OrganizerService;
 use RudiBieller\OnkelRudi\FleaMarket\Query\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\Query\OrganizerQueryFactory;
 use RudiBieller\OnkelRudi\User\AuthenticationFactory;
+use RudiBieller\OnkelRudi\User\NotificationService;
 use RudiBieller\OnkelRudi\User\QueryFactory;
 use RudiBieller\OnkelRudi\User\User;
 use RudiBieller\OnkelRudi\User\UserService;
@@ -71,10 +72,13 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
         $this->_browser = new \Buzz\Browser($curl);
         $this->_browser->addListener(new CookieListener());
 
+        $notificationService = new NotificationService();
+
         $factory = new Factory();
         $factory->setDiContainer($container);
         $this->_service = new FleaMarketService();
         $this->_service->setQueryFactory($factory);
+        $this->_service->setNotificationService($notificationService);
 
         $organizerQueryFactory = new OrganizerQueryFactory();
         $organizerQueryFactory->setDiContainer($container);

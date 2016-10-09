@@ -39,6 +39,6 @@ class NotificationServiceTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('smtpClose')->once()->andReturn(true);
         $sut->setMailer($mailer);
 
-        $this->assertTrue($sut->sendFleaMarketCreatedNotification('foo@bar.com', 'my message'));
+        $this->assertTrue($sut->sendFleaMarketCreatedNotification('23', 'foo@bar.com'));
     }
 }

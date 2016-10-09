@@ -3,6 +3,7 @@
 namespace RudiBieller\OnkelRudi\FleaMarket;
 
 use RudiBieller\OnkelRudi\FleaMarket\Query\Factory;
+use RudiBieller\OnkelRudi\User\NotificationServiceInterface;
 use RudiBieller\OnkelRudi\User\UserInterface;
 
 class FleaMarketService implements FleaMarketServiceInterface
@@ -14,9 +15,19 @@ class FleaMarketService implements FleaMarketServiceInterface
      */
     private $_factory;
 
+    /**
+     * @var \RudiBieller\OnkelRudi\User\NotificationServiceInterface
+     */
+    private $_notificationService;
+
     public function setQueryFactory(Factory $factory)
     {
         $this->_factory = $factory;
+    }
+
+    public function setNotificationService(NotificationServiceInterface $notificationService)
+    {
+        $this->_notificationService = $notificationService;
     }
 
     public function createFleaMarket(FleaMarketInterface $fleaMarket)
@@ -48,6 +59,8 @@ class FleaMarketService implements FleaMarketServiceInterface
 
         $fleaMarketId = $query->run();
         $fleaMarket->setId($fleaMarketId);
+
+        $this->_notificationService->sendFleaMarketCreatedNotification($fleaMarketId);
 
         return $fleaMarketId;
     }
