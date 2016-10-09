@@ -37,16 +37,47 @@ class NotificationService implements NotificationServiceInterface
 
     public function sendOptInNotification($email, $message)
     {
+        $this->_initSettings();
+
+        $this->_setUpDebug();
+
+        $this->getMailer()->setFrom('info@onkel-rudi.de', 'onkel-rudi.de');
+        $this->getMailer()->addAddress($email);
+        $this->getMailer()->isHTML(false);
+        $this->getMailer()->Subject = 'Bitte bestätige Deine Registrierung bei onkel-rudi.de!';
+        $this->getMailer()->Body = $message;
+
+        return $this->getMailer()->send();
+    }
+
+    public function sendFleaMarketCreatedNotification($email, $fleaMarketIdentifier)
+    {
+        $this->_initSettings();
+
+        $this->_setUpDebug();
+
+        $message = str_replace(
+            '[id]',
+            $fleaMarketIdentifier,
+            'http://www.onkel-rudi.de/neuerflohmarkt/termin/[id]'
+        );
+
+        $this->getMailer()->setFrom('info@onkel-rudi.de', 'onkel-rudi.de');
+        $this->getMailer()->addAddress($email);
+        $this->getMailer()->isHTML(false);
+        $this->getMailer()->Subject = 'Neuer Flohmarkttermin';
+        $this->getMailer()->Body = $message;
+
+        return $this->getMailer()->send();
+    }
+
+    private function _initSettings()
+    {
         if (is_null($this->_config)) {
             $this->_config = new Config();
         }
 
         $settings = $this->_config->getMailConfiguration();
-        $systemSettings = $this->_config->getSystemConfiguration();
-
-        if ($systemSettings['environment'] === 'debug') {
-            $this->getMailer()->SMTPDebug = 3;
-        }
 
         $this->getMailer()->isSMTP();
         $this->getMailer()->CharSet = 'UTF-8';
@@ -57,14 +88,14 @@ class NotificationService implements NotificationServiceInterface
         $this->getMailer()->AuthType = $settings['smtp-authentication-method'];
         $this->getMailer()->SMTPSecure = $settings['smtp-transport-security'];
         $this->getMailer()->Port = $settings['smtp-port'];
+    }
 
+    private function _setUpDebug()
+    {
+        $systemSettings = $this->_config->getSystemConfiguration();
 
-        $this->getMailer()->setFrom('info@onkel-rudi.de', 'onkel-rudi.de');
-        $this->getMailer()->addAddress($email);
-        $this->getMailer()->isHTML(false);
-        $this->getMailer()->Subject = 'Bitte bestätige Deine Registrierung bei onkel-rudi.de!';
-        $this->getMailer()->Body = $message;
-
-        return $this->getMailer()->send();
+        if ($systemSettings['environment'] === 'debug') {
+            $this->getMailer()->SMTPDebug = 3;
+        }
     }
 }

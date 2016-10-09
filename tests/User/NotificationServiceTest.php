@@ -23,4 +23,22 @@ class NotificationServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($sut->sendOptInNotification('foo@bar.com', 'my message'));
     }
+
+    public function testFleaMarketCreatedEmailIsSent()
+    {
+        $sut = new NotificationService();
+        $sut->setConfig(new Config('settings.yml.dist'));
+
+        $mailer = \Mockery::mock('PHPMailer');
+        $mailer
+            ->shouldReceive('isSMTP')->once()
+            ->shouldReceive('setFrom')->once()->with('info@onkel-rudi.de', 'onkel-rudi.de')
+            ->shouldReceive('addAddress')->once()->with('foo@bar.com')
+            ->shouldReceive('isHTML')->once()->with(false)
+            ->shouldReceive('send')->once()->andReturn(true)
+            ->shouldReceive('smtpClose')->once()->andReturn(true);
+        $sut->setMailer($mailer);
+
+        $this->assertTrue($sut->sendFleaMarketCreatedNotification('foo@bar.com', 'my message'));
+    }
 }
