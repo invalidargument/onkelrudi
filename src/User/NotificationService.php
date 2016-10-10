@@ -41,6 +41,10 @@ class NotificationService implements NotificationServiceInterface
 
         $this->_setUpDebug();
 
+        if (!$this->_mustSendNotification()) {
+            return true;
+        }
+
         $this->getMailer()->setFrom('info@onkel-rudi.de', 'onkel-rudi.de');
         $this->getMailer()->addAddress($email);
         $this->getMailer()->isHTML(false);
@@ -55,6 +59,10 @@ class NotificationService implements NotificationServiceInterface
         $this->_initSettings();
 
         $this->_setUpDebug();
+
+        if (!$this->_mustSendNotification()) {
+            return true;
+        }
 
         $message = str_replace(
             '[id]',
@@ -97,5 +105,12 @@ class NotificationService implements NotificationServiceInterface
         if ($systemSettings['environment'] === 'debug') {
             $this->getMailer()->SMTPDebug = 3;
         }
+    }
+
+    private function _mustSendNotification()
+    {
+        $systemSettings = $this->_config->getSystemConfiguration();
+
+        return in_array($systemSettings['environment'], ['debug', 'live']);
     }
 }
