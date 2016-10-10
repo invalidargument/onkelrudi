@@ -65,8 +65,6 @@
             {% for item in wpCategories %}
             <li class="pure-menu-item"><a href="/public/{{item.slug}}/kategorie/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
             {% endfor %}
-            <li class="pure-menu-item"><a href="/public/#about" class="pure-menu-link">About</a></li>
-            <li class="pure-menu-item"><a href="/public/#impressum" class="pure-menu-link">Impressum</a></li>
             {% if isLoggedIn == false %}
             <li class="pure-menu-item"><a href="/public/login/" class="pure-menu-link">Login</a></li>
             {% endif %}
@@ -174,7 +172,7 @@
     </div>
 
     <a name="impressum"></a>
-    <div class="content">
+    <div class="content l-box-lrg pure-g">
         <div class="pure-u-1">
             <h2 class="content-head">Impressum.</h2>
 
@@ -240,8 +238,12 @@
         </div>
     </div>
 
-    <div class="footer l-box is-center">
-        {{"now"|date("Y")}} onkel-rudi.de
+    <div class="footer l-box is-center pure-menu pure-menu-horizontal">
+        www.onkel-rudi.de
+        <ul class="pure-menu-list">
+            <li class="pure-menu-item"><a href="/public/#about" class="pure-menu-link">About</a></li>
+            <li class="pure-menu-item"><a href="/public/#impressum" class="pure-menu-link">Impressum</a></li>
+        </ul>
     </div>
 
 </div>

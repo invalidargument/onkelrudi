@@ -38,7 +38,7 @@ label {
 }
 
 .l-box-lrg {
-    padding: 2em;
+    padding: 1.4em;
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
@@ -121,7 +121,7 @@ a.pure-button-primary {
 }
 .home-menu li a:hover,
 .home-menu li a:focus,
-.pure-menu-active .pure-menu-link{
+.pure-menu-active .pure-menu-link {
     background: none;
     border: none;
     color: #E4F6F8;
@@ -129,7 +129,7 @@ a.pure-button-primary {
 }
 
 .pure-menu-active,
-.pure-menu-active .pure-menu-link{
+.pure-menu-active .pure-menu-link {
     background-color: inherit !important;
 }
 
@@ -139,6 +139,21 @@ a.pure-button-primary {
 
 .pure-menu-link, .pure-menu-disabled, .pure-menu-heading {
     padding: 0.5em 0.4em;
+}
+
+.pure-menu-link {
+    text-decoration: none;
+}
+.footer .pure-menu-link {
+    border-bottom: 2px solid transparent;
+}
+.footer .pure-menu-link:hover {
+    background-color: transparent;
+    text-decoration: none;
+    border-bottom: 2px solid #F17022;
+}
+.footer.l-box {
+    padding: 0.6em;
 }
 
 /*
@@ -220,7 +235,7 @@ a.pure-button-primary {
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin: 2em 0 1em;
-    font-size: 120%;
+    font-size: 106%;
 }
 .ribbon .content-head {
     color: white;
@@ -306,7 +321,7 @@ form#startMonthSelect label {
 }
 
 /* This is the class used for the footer */
-.footer {
+.footer, .footer a {
     /*background: #bbf28f;
     color:#505258;*/
     background: #EEF66C;
@@ -354,10 +369,14 @@ form#startMonthSelect label {
         font-size: 250%;
     }
 
+    .content-head {
+        font-size: 120%;
+    }
 
     /* We remove the border-separator assigned to .l-box-lrg */
     .l-box-lrg {
         border: none;
+        padding: 1.8em;
     }
 
     .pure-menu-link, .pure-menu-disabled, .pure-menu-heading {
@@ -386,6 +405,10 @@ form#startMonthSelect label {
 
     form#startMonthSelect label {
         width: 10em;
+    }
+
+    .l-box-lrg {
+        padding: 2em;
     }
 }
 

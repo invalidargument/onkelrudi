@@ -7,8 +7,8 @@ Feature: Index page of onkelrudi
   Scenario: Navigation is in place with wordpress content
     Given I am on "/"
     And I should see "Blog" in the ".pure-menu-list li:nth-of-type(1)" element
-    And I should see "About" in the ".pure-menu-list li:nth-of-type(2)" element
-    And I should see "Impressum" in the ".pure-menu-list li:nth-of-type(3)" element
+    And I should see "About" in the ".footer .pure-menu-list li:nth-of-type(1)" element
+    And I should see "Impressum" in the ".footer .pure-menu-list li:nth-of-type(2)" element
 
   Scenario: Startpage with fleamarket boxes is displayed
     Given I have some fleamarkets within the upcoming timespan
