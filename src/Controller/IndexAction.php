@@ -9,11 +9,11 @@ class IndexAction extends AbstractHttpAction
     protected function getData()
     {
         $start = null;
-        $month = $this->args['month'];
+        $monthArgument = $this->args['month'];
 
-        if (!is_null($month)) {
-            list($m, $y) = explode('-', $month);
-            $start = new \DateTimeImmutable($y . '-' . $m . '-01 00:00:01');
+        if (!is_null($monthArgument)) {
+            list($month, $year) = explode('-', $monthArgument);
+            $start = new \DateTimeImmutable($year . '-' . $month . '-01 00:00:01');
         }
 
         $zip = $this->args['zip'];
@@ -47,7 +47,7 @@ class IndexAction extends AbstractHttpAction
         $this->templateVariables['wpCategories'] = $wpCategories;
         $this->templateVariables['monthRange'] = $monthRange;
         $this->templateVariables['zipAreaRange'] = $zipAreaRange;
-        $this->templateVariables['selectedMonth'] = str_replace('-', '/', $month);
+        $this->templateVariables['selectedMonth'] = str_replace('-', '/', $monthArgument);
         $this->templateVariables['selectedZipAreaRange'] = $this->_getSelectedZipRange($zip);
         $this->templateVariables['isLoggedIn'] = $this->userService->isLoggedIn();
         $this->templateVariables['isTest'] = (boolean)$isTest;
