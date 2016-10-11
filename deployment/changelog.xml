@@ -47,6 +47,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="organizer_id" type="int">
+                <!-- TODO: remove delete cascade -->
                 <constraints nullable="false" foreignKeyName="fk_organizer_fleamarket" references="fleamarkets_organizer(id)" deleteCascade="true"/>
             </column>
             <column name="user_id" type="varchar(255)" defaultValue="default">
@@ -235,11 +236,19 @@
                          schemaName="public"
                          tableName="fleamarkets_users"/>
     </changeSet>
-    <!--
-
-    - deleteCascade beim organizer muss false sein!
-
-    //-->
+    <changeSet id="23" author="Rudi Bieller">
+        <createTable tableName="fleamarkets_user_to_organizer">
+            <column name="user_id" type="varchar(255)">
+                <constraints nullable="false" foreignKeyName="fk_user_to_user_organizer_map" references="fleamarkets_users(email)" deleteCascade="true"/>
+            </column>
+            <column name="organizer_id" type="int">
+                <constraints nullable="false" foreignKeyName="fk_organizer_to_user_organizer_map" references="fleamarkets_organizer(id)" deleteCascade="true"/>
+            </column>
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value="ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
+        </modifySql>
+    </changeSet>
 </databaseChangeLog>
 
 
