@@ -47,7 +47,6 @@
                 <constraints nullable="false"/>
             </column>
             <column name="organizer_id" type="int">
-                <!-- TODO: remove delete cascade -->
                 <constraints nullable="false" foreignKeyName="fk_organizer_fleamarket" references="fleamarkets_organizer(id)" deleteCascade="true"/>
             </column>
             <column name="user_id" type="varchar(255)" defaultValue="default">
@@ -249,6 +248,16 @@
             <append value="ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
         </modifySql>
     </changeSet>
+    <changeSet id="28" author="Rudi Bieller">
+        <dropForeignKeyConstraint baseTableName="fleamarkets" constraintName="fk_organizer_fleamarket"/>
+    </changeSet>
+    <changeSet id="29" author="Rudi Bieller">
+        <addForeignKeyConstraint baseColumnNames="organizer_id"
+                                 baseTableName="fleamarkets"
+                                 constraintName="fk_organizer_fleamarket"
+                                 onDelete="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fleamarkets_organizer"/>
+    </changeSet>
 </databaseChangeLog>
-
 
