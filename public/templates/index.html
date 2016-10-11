@@ -46,7 +46,7 @@
                 var elementsToShow = $('div.marketSummaryBox');
                 elementsToShow.removeClass('hiddenMarketSummaryBox');
 
-                if (e.target.value != 'alle') {
+                if (e.target.value != 'PLZ-Bereich') {
                     var zipRangeClass = 'zipRange' + e.target.value;
                     var elementsToHide = $('div.marketSummaryBox').not('[class*="' + zipRangeClass + '"]');
                     elementsToHide.addClass('hiddenMarketSummaryBox');
@@ -92,7 +92,6 @@
                 <div class="pure-control-group">
                     <div class="pure-u-1">
                         <h2 class="content-head">Die nächsten Flohmarkttermine</h2>
-                        <label for="monthSelect">Monat</label>
                         <select id="monthSelect">
                             {% for item in monthRange %}
                                 {% set selectedM = '<option>' %}
@@ -102,9 +101,8 @@
                             {{ selectedM|raw }}{{item}}</option>
                             {% endfor %}
                         </select>
-                        <label for="zipRangeSelect">PLZ-Bereich</label>
                         <select id="zipRangeSelect">
-                            <option>alle</option>
+                            <option>PLZ-Bereich</option>
                             {% for item in zipAreaRange %}
                                 {% set selectedZ = '<option>' %}
                                 {% if item == selectedZipAreaRange %}

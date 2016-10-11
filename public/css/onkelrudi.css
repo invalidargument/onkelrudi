@@ -247,11 +247,6 @@ form#startMonthSelect h2 {
     text-align: right;
     vertical-align: middle;
 }
-form#startMonthSelect label {
-    font-weight: normal;
-    width: auto;
-    display: none;
-}
 
 /* This is the class used for the content sub-headers (<h3>) */
 .content-subhead {
@@ -382,11 +377,6 @@ form#startMonthSelect label {
     .pure-menu-link, .pure-menu-disabled, .pure-menu-heading {
         padding: 0.5em 0.5em;
     }
-
-    form#startMonthSelect label {
-        width: 5em;
-        display: inline-block;
-    }
 }
 
 /*
@@ -401,10 +391,6 @@ form#startMonthSelect label {
     }
     .pure-menu-link, .pure-menu-disabled, .pure-menu-heading {
         padding: 0.5em 1em;
-    }
-
-    form#startMonthSelect label {
-        width: 10em;
     }
 
     .l-box-lrg {

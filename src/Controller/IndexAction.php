@@ -59,8 +59,8 @@ class IndexAction extends AbstractHttpAction
 
     private function _getSelectedZipRange($zip)
     {
-        if ($zip == 'alle') {
-            return 'alle';
+        if ($zip == 'PLZ-Bereich') {
+            return 'PLZ-Bereich';
         }
 
         return substr($zip, 0, 1);
