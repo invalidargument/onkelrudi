@@ -4,6 +4,7 @@ namespace RudiBieller\OnkelRudi\Controller\Api;
 
 use RudiBieller\OnkelRudi\Controller\AbstractJsonAction;
 use RudiBieller\OnkelRudi\User\NotificationService;
+use RudiBieller\OnkelRudi\User\User;
 use RudiBieller\OnkelRudi\User\UserInterface;
 
 class UserCreateAction extends AbstractJsonAction
@@ -28,11 +29,27 @@ class UserCreateAction extends AbstractJsonAction
         $email = filter_var($data['email'], FILTER_VALIDATE_EMAIL);
 
         try {
-            $result = $this->userService->createUser(
-                $email,
-                password_hash($data['password'], PASSWORD_DEFAULT), // TODO: should be done elsewhere, service for example
-                $this->_getType($data)
-            );
+            $userType = $this->_getType($data);
+
+            switch ($userType) {
+                case UserInterface::TYPE_ORGANIZER:
+                    $result = $this->userService->createOrganizerUser(
+                        $email,
+                        password_hash($data['password'], PASSWORD_DEFAULT) // TODO: should be done elsewhere, service for example
+                    );
+                    break;
+                case UserInterface::TYPE_ADMIN:
+                    $result = $this->userService->createAdminUser(
+                        $email,
+                        password_hash($data['password'], PASSWORD_DEFAULT) // TODO: should be done elsewhere, service for example
+                    );
+                    break;
+                default:
+                    $result = $this->userService->createUser(
+                        $email,
+                        password_hash($data['password'], PASSWORD_DEFAULT) // TODO: should be done elsewhere, service for example
+                    );
+            }
         } catch (\PDOException $e) {
             $this->_passwordsDontMatchStatusCode = 400;
             $this->_passwordsDontMatchStatusMessage = 'Primary identifier already exists in database';

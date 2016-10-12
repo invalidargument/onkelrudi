@@ -11,7 +11,7 @@ class UserServiceTest extends \PHPUnit_Framework_TestCase
         $query = \Mockery::mock('RudiBieller\OnkelRudi\User\InsertQuery');
         $query->shouldReceive('setIdentifier')->with('foo')->andReturn($query)
             ->shouldReceive('setPassword')->with('bar')->andReturn($query)
-            ->shouldReceive('setType')->with(null)->andReturn($query)
+            ->shouldReceive('setType')->with(UserInterface::TYPE_USER)->andReturn($query)
             ->shouldReceive('run')->andReturn(1);
 
         $queryFactory = \Mockery::mock('RudiBieller\OnkelRudi\User\QueryFactory');
@@ -21,6 +21,40 @@ class UserServiceTest extends \PHPUnit_Framework_TestCase
         $service->setQueryFactory($queryFactory);
 
         $this->assertSame(1, $service->createUser('foo', 'bar'));
+    }
+
+    public function testServiceCreatesNewAdminUser()
+    {
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\User\InsertQuery');
+        $query->shouldReceive('setIdentifier')->with('foo')->andReturn($query)
+            ->shouldReceive('setPassword')->with('bar')->andReturn($query)
+            ->shouldReceive('setType')->with(UserInterface::TYPE_ADMIN)->andReturn($query)
+            ->shouldReceive('run')->andReturn(1);
+
+        $queryFactory = \Mockery::mock('RudiBieller\OnkelRudi\User\QueryFactory');
+        $queryFactory->shouldReceive('createUserInsertQuery')->once()->andReturn($query);
+
+        $service = new UserService();
+        $service->setQueryFactory($queryFactory);
+
+        $this->assertSame(1, $service->createAdminUser('foo', 'bar'));
+    }
+
+    public function testServiceCreatesNewOrganizerUser()
+    {
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\User\InsertQuery');
+        $query->shouldReceive('setIdentifier')->with('foo')->andReturn($query)
+            ->shouldReceive('setPassword')->with('bar')->andReturn($query)
+            ->shouldReceive('setType')->with(UserInterface::TYPE_ORGANIZER)->andReturn($query)
+            ->shouldReceive('run')->andReturn(1);
+
+        $queryFactory = \Mockery::mock('RudiBieller\OnkelRudi\User\QueryFactory');
+        $queryFactory->shouldReceive('createUserInsertQuery')->once()->andReturn($query);
+
+        $service = new UserService();
+        $service->setQueryFactory($queryFactory);
+
+        $this->assertSame(1, $service->createOrganizerUser('foo', 'bar'));
     }
 
     public function testCreateOptInPersistsNewToken()

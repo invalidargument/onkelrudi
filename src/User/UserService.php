@@ -25,10 +25,26 @@ class UserService implements UserServiceInterface
         $this->_authFactory = $factory;
     }
     
-    public function createUser($identifier, $password, $type = null)
+    public function createUser($identifier, $password)
     {
         $userQuery = $this->_factory->createUserInsertQuery();
-        $userQuery->setIdentifier($identifier)->setPassword($password)->setType($type);
+        $userQuery->setIdentifier($identifier)->setPassword($password)->setType(UserInterface::TYPE_USER);
+        return $userQuery->run();
+    }
+
+    public function createOrganizerUser($identifier, $password)
+    {
+        // wenn als organizer registriert, dann einen Organizer anlegen (start transaction)
+        $userQuery = $this->_factory->createUserInsertQuery();
+        $userQuery->setIdentifier($identifier)->setPassword($password)->setType(UserInterface::TYPE_ORGANIZER);
+        return $userQuery->run();
+        // wenn als organizer registriert, dann organizer_id und user_id in mapping tabelle schreiben (commit)
+    }
+
+    public function createAdminUser($identifier, $password)
+    {
+        $userQuery = $this->_factory->createUserInsertQuery();
+        $userQuery->setIdentifier($identifier)->setPassword($password)->setType(UserInterface::TYPE_ADMIN);
         return $userQuery->run();
     }
 

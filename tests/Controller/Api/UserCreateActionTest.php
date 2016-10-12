@@ -19,7 +19,7 @@ class UserCreateActionTest extends \PHPUnit_Framework_TestCase
 
         $builderFactory = new BuilderFactory();
         $service = \Mockery::mock('RudiBieller\OnkelRudi\User\UserService');
-        $service->shouldReceive('createUser')->once()->with('foo@example.com', \Hamcrest\Matchers::startsWith('$2y$10$'), 'user')->andReturn(1)
+        $service->shouldReceive('createUser')->once()->with('foo@example.com', \Hamcrest\Matchers::startsWith('$2y$10$'))->andReturn(1)
             ->shouldReceive('createOptInToken')->once()->with('foo@example.com')->andReturn(2);
 
         $notificationService = \Mockery::mock('RudiBieller\OnkelRudi\User\NotificationServiceInterface');
