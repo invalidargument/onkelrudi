@@ -12,5 +12,7 @@ interface OrganizerServiceInterface
 
     public function deleteOrganizer(OrganizerInterface $organizer);
 
-    public function getOrganizer($id);
+    public function getOrganizer($organizerId);
+
+    public function getOrganizerByUserId($userId);
 }

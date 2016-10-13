@@ -34,6 +34,7 @@ class OrganizerQueryFactoryTest extends \PHPUnit_Framework_TestCase
             array('createFleaMarketOrganizerInsertQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerInsertQuery'),
             array('createFleaMarketOrganizerReadListQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerReadListQuery'),
             array('createFleaMarketOrganizerReadQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerReadQuery'),
+            array('createFleaMarketOrganizerByUserReadQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerByUserReadQuery'),
             array('createFleaMarketOrganizerUpdateQuery', 'RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerUpdateQuery'),
         );
     }

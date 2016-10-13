@@ -47,10 +47,18 @@ class OrganizerService implements OrganizerServiceInterface
         return $query->run();
     }
 
-    public function getOrganizer($id)
+    public function getOrganizer($organizerId)
     {
         $query = $this->_factory->createFleaMarketOrganizerReadQuery();
-        $query->setOrganizerId($id);
+        $query->setOrganizerId($organizerId);
+
+        return $query->run();
+    }
+
+    public function getOrganizerByUserId($userId)
+    {
+        $query = $this->_factory->createFleaMarketOrganizerByUserReadQuery();
+        $query->setUserId($userId);
 
         return $query->run();
     }

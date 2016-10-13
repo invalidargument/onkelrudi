@@ -10,6 +10,7 @@ class OrganizerQueryFactory
     private $_fleaMarketOrganizerInsertQuery;
     private $_fleaMarketOrganizerReadListQuery;
     private $_fleaMarketOrganizerReadQuery;
+    private $_fleaMarketOrganizerByUserReadQuery;
     private $_fleaMarketOrganizerUpdateQuery;
 
     private $_diContainer;
@@ -69,6 +70,19 @@ class OrganizerQueryFactory
         }
 
         return $this->_fleaMarketOrganizerReadQuery;
+    }
+
+    /**
+     * @return \RudiBieller\OnkelRudi\FleaMarket\Query\FleaMarketOrganizerByUserReadQuery
+     */
+    public function createFleaMarketOrganizerByUserReadQuery()
+    {
+        if (is_null($this->_fleaMarketOrganizerByUserReadQuery)) {
+            $this->_fleaMarketOrganizerByUserReadQuery = new FleaMarketOrganizerByUserReadQuery();
+            $this->_fleaMarketOrganizerByUserReadQuery->setDiContainer($this->_diContainer);
+        }
+
+        return $this->_fleaMarketOrganizerByUserReadQuery;
     }
 
     /**

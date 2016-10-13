@@ -5,11 +5,9 @@ namespace RudiBieller\OnkelRudi\Controller;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use RudiBieller\OnkelRudi\BuilderFactoryInterface;
-use RudiBieller\OnkelRudi\Config\Config;
 use RudiBieller\OnkelRudi\FleaMarket\OrganizerServiceInterface;
 use RudiBieller\OnkelRudi\ServiceInterface;
 use RudiBieller\OnkelRudi\User\NotificationServiceInterface;
-use RudiBieller\OnkelRudi\User\UserService;
 use RudiBieller\OnkelRudi\User\UserServiceInterface;
 
 abstract class AbstractAction implements ActionInterface
@@ -19,6 +17,9 @@ abstract class AbstractAction implements ActionInterface
 
     protected $app;
     protected $service;
+    /**
+     * @var OrganizerServiceInterface
+     */
     protected $organizerService;
     /**
      * @var \RudiBieller\OnkelRudi\User\UserServiceInterface

@@ -16,7 +16,7 @@ class ProfileAction extends AbstractHttpAction implements UserAwareInterface
 
         $organizer = null;
         if (count($myFleamarkets) > 0 && ($user instanceof Organizer)) {
-            $organizer = $this->organizerService->getOrganizer($myFleamarkets[0]->getOrganizer()->getId());
+            $organizer = $this->organizerService->getOrganizerByUserId($user->getIdentifier());
         }
 
         $this->templateVariables['profileurl'] = $this->app->getContainer()->get('router')->pathFor('login-register');
