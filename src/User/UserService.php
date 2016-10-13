@@ -66,8 +66,8 @@ class UserService implements UserServiceInterface
         $organizer->setName($identifier);
         $organizerId = $this->_organizerService->createOrganizer($organizer);
 
-        $userToOrganizerMappingQuery = $this->_factory->createUserToOrganizerInsertQuery();
-        $result = $userToOrganizerMappingQuery->setUserId($identifier)->setOrganizerId($organizerId)->run();
+        $userToOrganizerQuery = $this->_factory->createUserToOrganizerInsertQuery();
+        $result = $userToOrganizerQuery->setUserId($identifier)->setOrganizerId($organizerId)->run();
 
         if ($result) {
             $this->_diContainer->get('db')->commit();
