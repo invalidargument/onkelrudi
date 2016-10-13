@@ -7,10 +7,6 @@ use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 
 class FleaMarketOrganizerReadQuery extends AbstractQuery
 {
-    /**
-     * @var \RudiBieller\OnkelRudi\FleaMarket\Organizer
-     */
-    private $_organizer;
     private $_organizerId;
 
     public function setOrganizerId($id)
@@ -36,13 +32,13 @@ class FleaMarketOrganizerReadQuery extends AbstractQuery
 
     protected function mapResult($result)
     {
-        $this->_organizer = new Organizer();
+        $organizer = new Organizer();
 
         if ($result === false) {
-            return $this->_organizer;
+            return $organizer;
         }
 
-        $this->_organizer
+        $organizer
             ->setId($result['id'])
             ->setUuid($result['uuid'])
             ->setName($result['name'])
@@ -55,6 +51,6 @@ class FleaMarketOrganizerReadQuery extends AbstractQuery
             ->setEmail($result['email'])
             ->setUrl($result['url']);
 
-        return $this->_organizer;
+        return $organizer;
     }
 }
