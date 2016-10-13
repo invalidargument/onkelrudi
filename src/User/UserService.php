@@ -2,6 +2,10 @@
 
 namespace RudiBieller\OnkelRudi\User;
 
+use RudiBieller\OnkelRudi\FleaMarket\Organizer;
+use RudiBieller\OnkelRudi\FleaMarket\OrganizerServiceInterface;
+use Slim\Container;
+
 class UserService implements UserServiceInterface
 {
     /**
@@ -15,6 +19,18 @@ class UserService implements UserServiceInterface
      */
     private $_authFactory;
 
+    /**
+     * @var OrganizerServiceInterface
+     */
+    private $_organizerService;
+
+    private $_diContainer;
+
+    public function setDiContainer(Container $diContainer)
+    {
+        $this->_diContainer = $diContainer;
+    }
+
     public function setQueryFactory(QueryFactory $factory)
     {
         $this->_factory = $factory;
@@ -23,6 +39,11 @@ class UserService implements UserServiceInterface
     public function setAuthenticationFactory(AuthenticationFactory $factory)
     {
         $this->_authFactory = $factory;
+    }
+
+    public function setOrganizerService(OrganizerServiceInterface $organizerService)
+    {
+        $this->_organizerService = $organizerService;
     }
     
     public function createUser($identifier, $password)
@@ -34,11 +55,27 @@ class UserService implements UserServiceInterface
 
     public function createOrganizerUser($identifier, $password)
     {
-        // wenn als organizer registriert, dann einen Organizer anlegen (start transaction)
+        // should rather be a composite query...
+        $this->_diContainer->get('db')->beginTransaction();
+
         $userQuery = $this->_factory->createUserInsertQuery();
         $userQuery->setIdentifier($identifier)->setPassword($password)->setType(UserInterface::TYPE_ORGANIZER);
-        return $userQuery->run();
-        // wenn als organizer registriert, dann organizer_id und user_id in mapping tabelle schreiben (commit)
+        $userQuery->run();
+
+        $organizer = new Organizer();
+        $organizer->setName($identifier);
+        $organizerId = $this->_organizerService->createOrganizer($organizer);
+
+        $userToOrganizerMappingQuery = $this->_factory->createUserToOrganizerInsertQuery();
+        $result = $userToOrganizerMappingQuery->setUserId($identifier)->setOrganizerId($organizerId)->run();
+
+        if ($result) {
+            $this->_diContainer->get('db')->commit();
+            return $identifier;
+        }
+
+        $this->_diContainer->get('db')->rollback();
+        return -1;
     }
 
     public function createAdminUser($identifier, $password)

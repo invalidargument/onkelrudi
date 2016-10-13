@@ -2,6 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\User;
 
+use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use Zend\Authentication\Storage\Session;
 
 class UserServiceTest extends \PHPUnit_Framework_TestCase
@@ -42,19 +43,36 @@ class UserServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testServiceCreatesNewOrganizerUser()
     {
+        $db = \Mockery::mock('Slim\PDO\Database');
+        $db->shouldReceive('beginTransaction')->once()->andReturn(true)
+            ->shouldReceive('commit')->once()->andReturn(true);
+        $diContainer = \Mockery::mock('Slim\Container');
+        $diContainer->shouldReceive('get')->andReturn($db);
+
         $query = \Mockery::mock('RudiBieller\OnkelRudi\User\InsertQuery');
         $query->shouldReceive('setIdentifier')->with('foo')->andReturn($query)
             ->shouldReceive('setPassword')->with('bar')->andReturn($query)
             ->shouldReceive('setType')->with(UserInterface::TYPE_ORGANIZER)->andReturn($query)
-            ->shouldReceive('run')->andReturn(1);
+            ->shouldReceive('run')->andReturn(1000);
+
+        $userToOrganizerQuery = \Mockery::mock('RudiBieller\OnkelRudi\User\UserToOrganizerInsertQuery');
+        $userToOrganizerQuery->shouldReceive('setUserId')->once()->with('foo')->andReturn($userToOrganizerQuery)
+            ->shouldReceive('setOrganizerId')->once()->with(23)->andReturn($userToOrganizerQuery)
+            ->shouldReceive('run')->andReturn(1000);
 
         $queryFactory = \Mockery::mock('RudiBieller\OnkelRudi\User\QueryFactory');
-        $queryFactory->shouldReceive('createUserInsertQuery')->once()->andReturn($query);
+        $queryFactory->shouldReceive('createUserInsertQuery')->once()->andReturn($query)
+            ->shouldReceive('createUserToOrganizerInsertQuery')->once()->andReturn($userToOrganizerQuery);
+
+        $organizerService = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\OrganizerServiceInterface');
+        $organizerService->shouldReceive('createOrganizer')->once()->with(\Hamcrest\Matchers::anInstanceOf('RudiBieller\OnkelRudi\FleaMarket\OrganizerInterface'))->andReturn(23);
 
         $service = new UserService();
         $service->setQueryFactory($queryFactory);
+        $service->setOrganizerService($organizerService);
+        $service->setDiContainer($diContainer);
 
-        $this->assertSame(1, $service->createOrganizerUser('foo', 'bar'));
+        $this->assertSame('foo', $service->createOrganizerUser('foo', 'bar'));
     }
 
     public function testCreateOptInPersistsNewToken()

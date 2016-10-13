@@ -92,6 +92,8 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
         $this->_userService = new UserService();
         $this->_userService->setQueryFactory($userQueryFactory);
         $this->_userService->setAuthenticationFactory($authenticationFactory);
+        $this->_userService->setOrganizerService($this->_organizerService);
+        $this->_userService->setDiContainer($container);
     }
 
     /** @BeforeScenario */

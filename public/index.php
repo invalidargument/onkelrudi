@@ -120,6 +120,8 @@ $authFactory->setDiContainer($app->getContainer());
 $userService = new UserService();
 $userService->setQueryFactory($userQueryFactory);
 $userService->setAuthenticationFactory($authFactory);
+$userService->setOrganizerService($organizerService);
+$userService->setDiContainer($app->getContainer());
 
 // wordpress
 $wpQueryFactory = new QueryFactory();

@@ -56,6 +56,7 @@
                         $('.successmessage').remove();
                         $('#submitregister').removeClass('button-success');
                         $('#submitregister').addClass('button-error');
+                        // TODO: hier kommt responseText, kein responseJSON zurück!
                         $('#submitregister').parent().append(
                             '<p class="errormessage"><i class="fa fa-exclamation fa-lg"></i>Es ist etwas schiefgegangen: ' + data.responseJSON.error/*data.statusText*/ + '.</p>'
                         );
