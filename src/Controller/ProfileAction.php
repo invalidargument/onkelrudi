@@ -15,7 +15,7 @@ class ProfileAction extends AbstractHttpAction implements UserAwareInterface
         $myFleamarkets = $this->service->getFleaMarketsByUser($user, 20, 0);
 
         $organizer = null;
-        if (count($myFleamarkets) > 0 && ($user instanceof Organizer)) {
+        if ($user instanceof Organizer) {
             $organizer = $this->organizerService->getOrganizerByUserId($user->getIdentifier());
         }
 

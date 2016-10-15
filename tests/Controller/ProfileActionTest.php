@@ -3,7 +3,7 @@
 namespace RudiBieller\OnkelRudi\Controller;
 
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
-use RudiBieller\OnkelRudi\User\User;
+use RudiBieller\OnkelRudi\User\Organizer as OrganizerUser;
 use Slim\App;
 
 class ProfileActionTest extends \PHPUnit_Framework_TestCase
@@ -88,7 +88,7 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
 
     public function testActionSetsNeededTemplateVariables()
     {
-        $user = new User('bar@example.com');
+        $user = new OrganizerUser('bar@example.com');
 
         $uri = \Mockery::mock('Slim\Http\Uri');
         $uri->shouldReceive('getQuery')->andReturn('/foo/?test=1');
@@ -118,8 +118,11 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
         $organizer->setId(23)->setName('foobarbaz');
         $organizers = array($organizer);
 
+        $organizerUser = new OrganizerUser();
+
         $organizerService = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\OrganizerService');
-        $organizerService->shouldReceive('getAllOrganizers')->once()->andReturn($organizers);
+        $organizerService->shouldReceive('getAllOrganizers')->once()->andReturn($organizers)
+            ->shouldReceive('getOrganizerByUserId')->once()->with('bar@example.com')->andReturn($organizerUser);
 
         $fleamarketService = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketServiceInterface');
         $fleamarketService->shouldReceive('getFleaMarketsByUser')->andReturn([]);
@@ -134,7 +137,7 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
         $action($request, $response, array());
 
         $this->assertAttributeEquals(
-            ['profileurl' => '/profil/', 'createfleamarketurl' => '/flohmarkt-anlegen/', 'fleamarkets' => [], 'organizer' => null],
+            ['profileurl' => '/profil/', 'createfleamarketurl' => '/flohmarkt-anlegen/', 'fleamarkets' => [], 'organizer' => $organizerUser],
             'templateVariables',
             $action
         );
