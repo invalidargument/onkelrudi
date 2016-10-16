@@ -326,10 +326,10 @@
 
             <form id="newFleaMarket" method="post" class="pure-form pure-form-stacked">
 
-                <!-- RENDER ONLY WHEN LOGGED IN -->
+                <!-- RENDER ONLY WHEN LOGGED IN or admin??? -->
                 {% if isTest %}
                 <div class="pure-u-1-2">
-                    <label for="fleamarket_organizer">Zugeordneter Veranstalter</label>
+                    <label for="fleamarket_organizer">Diesen Veranstalter zuordnen</label>
                     <select id="fleamarket_organizer" style="width: 100%;">
                         {% for item in fleamarket_organizers %}
                         <option value="{{item.id}}">{{item.name}}</option>
@@ -337,10 +337,13 @@
                     </select>
                 </div>
                 {% endif %}
-                <!-- /RENDER ONLY WHEN LOGGED IN -->
-                {% if editForm %}
-                <input type="hidden" id="fleamarket_organizer" value="{{editDto.id}}">
+                <!-- /RENDER ONLY WHEN LOGGED IN or admin??? -->
+
+                <!-- if organizer AND edit form -->
+                {% if (editForm and organizer) %}
+                <input type="hidden" id="fleamarket_organizer" value="{{organizer.id}}">
                 {% endif %}
+                <!-- if organizer AND edit form -->
 
                 <div class="pure-g">
                     <div class="pure-u-1-2">
@@ -425,7 +428,8 @@
                         <input id="fleamarket_url" type="text" placeholder="Link zur Flohmarkt-Website" class="pure-input-1" value="{{editDto.url}}">
                     </div>
                 </div>
-                {% if createForm %}
+                <!-- only create or editing organizer -->
+                {% if (createForm or (editForm and not organizer)) %}
                 <div class="pure-g">
                     <div class="pure-u-1-2">
                         <h3>Wer veranstaltet den Kinderflohmarkt?</h3>
