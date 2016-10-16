@@ -78,7 +78,7 @@ class EditFleaMarketActionTest extends \PHPUnit_Framework_TestCase
         $action($request, $response, array('id' => 23));
 
         $this->assertAttributeEquals(
-            ['isTest' => true, 'loggedIn' => true, 'fleamarket_organizers' => array(), 'editForm' => true, 'editDto' => $fleamarket],
+            ['isTest' => true, 'loggedIn' => true, 'fleamarket_organizers' => array(), 'editForm' => true, 'editDto' => $fleamarket, 'organizer' => null],
             'templateVariables',
             $action
         );
