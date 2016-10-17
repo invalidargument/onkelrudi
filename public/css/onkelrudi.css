@@ -535,8 +535,8 @@ i.fa {
     color: #ff0000;
 }
 
-.admin .regformbox {
-    /*display: none;*/
+.loginregister .regformbox {
+    margin-top: 20px;
 }
 .admin .hint strong,
 .admin .hint a {
