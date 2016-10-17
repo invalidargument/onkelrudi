@@ -147,11 +147,11 @@ class UserService implements UserServiceInterface
         return !is_null($user);
     }
 
-    public function getUser($id)
+    public function getUser($identifier)
     {
         $query = $this->_factory->createUserReadQuery();
 
-        $query->setIdentifier($id);
+        $query->setIdentifier($identifier);
 
         return $query->run();
     }

@@ -8,5 +8,5 @@ interface ServiceInterface
 
     public function getPosts(Category $category, $offset = 0, $limit = 10);
 
-    public function getPost($id);
+    public function getPost($identifier);
 }

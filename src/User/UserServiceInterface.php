@@ -23,8 +23,8 @@ interface UserServiceInterface
     public function isLoggedIn();
 
     /**
-     * @param string $id
+     * @param string $identifier
      * @return UserInterface
      */
-    public function getUser($id);
+    public function getUser($identifier);
 }

@@ -27,10 +27,10 @@ class Service implements ServiceInterface
             ->run();
     }
 
-    public function getPost($id)
+    public function getPost($identifier)
     {
         return $this->_factory->createPostReadQuery()
-            ->setId($id)
+            ->setId($identifier)
             ->run();
     }
 }
