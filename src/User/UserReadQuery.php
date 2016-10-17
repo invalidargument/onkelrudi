@@ -8,9 +8,9 @@ class UserReadQuery extends AbstractQuery
 {
     private $_identifier;
 
-    public function setIdentifier($id)
+    public function setIdentifier($identifier)
     {
-        $this->_identifier = $id;
+        $this->_identifier = $identifier;
         return $this;
     }
 
