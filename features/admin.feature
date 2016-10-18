@@ -118,7 +118,8 @@ Feature: Admin page of onkelrudi
 
   @javascript
   Scenario: Admin can edit only his own fleamarkets
-    Given I am slowly authenticated as user
+    Given I have a default organizer
+    And I am slowly authenticated as user
     And I go to "/flohmarkt-anlegen/?test=1"
     Then I should see "+ Termin anlegen"
     When I fill in the following:
@@ -173,7 +174,7 @@ Feature: Admin page of onkelrudi
     And the response should be json
     And the response should be
     """
-    {"data":{"id":"1","uuid":"4d0f6fcd-16e8-56c7-8f25-1e802b50fb95","organizer":{"id":"1","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Mein Testflohmarkt UPDATED","description":"Eine Beschreibung UPDATED","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Hausstr. UPDATED","streetNo":"42000","city":"K\u00f6ln UPDATED","zipCode":"55555","location":"Zu Hause UPDATED","url":"http:\/\/www.example.com\/UPDATED"}}
+    {"data":{"id":"1","uuid":"a9d60f43-8d4a-5071-8a49-cc5a474d6c1e","organizer":{"id":"2","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Mein Testflohmarkt UPDATED","description":"Eine Beschreibung UPDATED","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Hausstr. UPDATED","streetNo":"42000","city":"K\u00f6ln UPDATED","zipCode":"55555","location":"Zu Hause UPDATED","url":"http:\/\/www.example.com\/UPDATED"}}
     """
     Given I am slowly authenticated as user "test2@onkel-rudi.de"
     And I go to "/profil/"
