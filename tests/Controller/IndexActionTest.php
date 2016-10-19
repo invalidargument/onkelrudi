@@ -3,6 +3,8 @@
 namespace RudiBieller\OnkelRudi\Controller;
 
 use RudiBieller\OnkelRudi\Config\Config;
+use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
+use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
 use Slim\App;
 use Slim\Http\Uri;
 use Zend\Authentication\Storage\Session;
@@ -54,9 +56,16 @@ class IndexActionTest extends \PHPUnit_Framework_TestCase
         $wordpressService = \Mockery::mock('RudiBieller\OnkelRudi\Wordpress\ServiceInterface');
         $wordpressService->shouldReceive('getAllCategories')->andReturn([]);
 
+        $fleamarketDates = [
+            new FleaMarketDate('2018-08-08 10:00:00', '2018-12-12 14:00:00')
+        ];
+        $fleamarkets = [
+            new FleaMarket()
+        ];
+
         $fleamarketService = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketService');
-        $fleamarketService->shouldReceive('getAllFleaMarketsByTimespan')->once()->andReturn([])
-            ->shouldReceive('getAllUpcomingDates')->once()->andReturn([]);
+        $fleamarketService->shouldReceive('getAllFleaMarketsByTimespan')->once()->andReturn($fleamarkets)
+            ->shouldReceive('getAllUpcomingDates')->once()->andReturn($fleamarketDates);
 
         $action = new IndexAction();
         $action->setApp($app);
@@ -71,7 +80,7 @@ class IndexActionTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($expected, $actual);
 
         $this->assertAttributeEquals(
-            ['fleamarkets' => [], 'fleamarketsDetailsRoutes' => [], 'wpCategories' => [], 'monthRange' => [], 'zipAreaRange' => [], 'selectedMonth' => '09/16', 'selectedZipAreaRange' => '5', 'isLoggedIn' => false, 'isTest' => false],
+            ['fleamarkets' => $fleamarkets, 'fleamarketsDetailsRoutes' => ['' => '/foo/'], 'wpCategories' => [], 'monthRange' => ['08-2018' => '08/2018'], 'zipAreaRange' => [], 'selectedMonth' => '09/16', 'selectedZipAreaRange' => '5', 'isLoggedIn' => false, 'isTest' => false],
             'templateVariables',
             $action
         );
