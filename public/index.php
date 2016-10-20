@@ -183,6 +183,11 @@ $app->get('/profil/', function ($request, $response, $args) use ($controllerFact
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\ProfileAction');
     return $action($request, $response, $args);
 })->setName('profile');
+$app->get('/profil/seite/{page}', function ($request, $response, $args) use ($controllerFactory) {
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\ProfileAction');
+    return $action($request, $response, $args);
+})->setName('profile-paged');
+
 // USER: create fleamarket view
 $app->get('/flohmarkt-anlegen/', function ($request, $response, $args) use ($controllerFactory) {
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\CreateFleaMarketAction');

@@ -86,7 +86,10 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeEquals([], 'templateVariables', $action);
     }
 
-    public function testActionSetsNeededTemplateVariables()
+    /**
+     * @dataProvider dataProviderTestActionSetsNeededTemplateVariables
+     */
+    public function testActionSetsNeededTemplateVariables($pageParameter, $pageProperty, $offset)
     {
         $user = new OrganizerUser('bar@example.com');
 
@@ -125,7 +128,7 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('getOrganizerByUserId')->once()->with('bar@example.com')->andReturn($organizerUser);
 
         $fleamarketService = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketServiceInterface');
-        $fleamarketService->shouldReceive('getFleaMarketsByUser')->andReturn([]);
+        $fleamarketService->shouldReceive('getFleaMarketsByUser')->once()->with($user, 20, $offset)->andReturn([]);
 
         $action = new ProfileAction();
         $action->setApp($this->_app);
@@ -134,10 +137,10 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
         $action->setWordpressService($wordpressService);
         $action->setOrganizerService($organizerService);
 
-        $action($request, $response, array());
+        $action($request, $response, array('page' => $pageParameter));
 
         $this->assertAttributeEquals(
-            ['profileurl' => '/profil/', 'createfleamarketurl' => '/flohmarkt-anlegen/', 'fleamarkets' => [], 'organizer' => $organizerUser],
+            ['profileurl' => '/profil/', 'createfleamarketurl' => '/flohmarkt-anlegen/', 'fleamarkets' => [], 'organizer' => $organizerUser, 'page' => $pageProperty],
             'templateVariables',
             $action
         );
@@ -145,6 +148,17 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
             $user,
             'result',
             $action
+        );
+    }
+
+    public function dataProviderTestActionSetsNeededTemplateVariables()
+    {
+        return array(
+            array(null, 0, 0),
+            array(0, 0, 0),
+            array(1, 1, 0),
+            array(11, 11, 10),
+            array(-1, 0, 0)
         );
     }
 }

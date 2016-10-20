@@ -12,7 +12,17 @@ class ProfileAction extends AbstractHttpAction implements UserAwareInterface
     {
         $user = $this->userService->getAuthenticationService()->getStorage()->read();
 
-        $myFleamarkets = $this->service->getFleaMarketsByUser($user, 20, 0);
+        $page = (int) $this->args['page'];
+
+        if ($page < 0) {
+            $page = 0;
+        }
+
+        $offset = $page === 0
+            ? 0
+            : $page - 1;
+
+        $myFleamarkets = $this->service->getFleaMarketsByUser($user, 20, $offset);
 
         $organizer = null;
         if ($user instanceof Organizer) {
@@ -24,6 +34,7 @@ class ProfileAction extends AbstractHttpAction implements UserAwareInterface
         $this->templateVariables['fleamarkets'] = $myFleamarkets;
         $this->templateVariables['organizer'] = $organizer;
         $this->templateVariables['profileurl'] = $this->app->getContainer()->get('router')->pathFor('profile');
+        $this->templateVariables['page'] = $page;
 
         return $user;
     }
