@@ -15,7 +15,7 @@ class Factory
         $container = $app->getContainer();
         $container['view'] = function ($c) {
             $view = new \Slim\Views\Twig(
-                dirname(__FILE__).'/../../public/templates',
+                dirname(__FILE__).'/../../../public/templates',
                 ['cache' => false]
             );
 
