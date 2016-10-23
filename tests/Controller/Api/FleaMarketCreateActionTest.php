@@ -8,7 +8,6 @@ use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use RudiBieller\OnkelRudi\User\User;
 use RudiBieller\OnkelRudi\User\UserInterface;
-use Slim\App;
 
 class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
 {
