@@ -13,6 +13,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     private $_userService;
     private $_notificationService;
     private $_wordpressService;
+    private $_icalService;
 
     protected function setUp()
     {
@@ -22,12 +23,14 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->_userService = \Mockery::mock('RudiBieller\OnkelRudi\User\UserServiceInterface');
         $this->_notificationService = \Mockery::mock('RudiBieller\OnkelRudi\User\NotificationServiceInterface');
         $this->_wordpressService = \Mockery::mock('RudiBieller\OnkelRudi\Wordpress\ServiceInterface');
+        $this->_icalService = \Mockery::mock('RudiBieller\OnkelRudi\Ical\ServiceInterface');
 
         $this->_sut->setService($this->_service);
         $this->_sut->setOrganizerService($this->_organizerervice);
         $this->_sut->setUserService($this->_userService);
         $this->_sut->setNotificationService($this->_notificationService);
         $this->_sut->setWordpressService($this->_wordpressService);
+        $this->_sut->setIcalService($this->_icalService);
     }
 
     /**
@@ -44,7 +47,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('RudiBieller\OnkelRudi\Controller\Api\FleaMarketAction'),
-            array('RudiBieller\OnkelRudi\Controller\WordpressCategoryAction')
+            array('RudiBieller\OnkelRudi\Controller\WordpressCategoryAction'),
+            array('RudiBieller\OnkelRudi\Controller\IcalAction')
         );
     }
 

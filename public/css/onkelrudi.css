@@ -633,3 +633,7 @@ i.fa {
     display:none;
 }
 
+.marketSummaryBox p {
+    margin-bottom: 2px;
+}
+

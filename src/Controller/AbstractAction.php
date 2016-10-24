@@ -5,6 +5,7 @@ namespace RudiBieller\OnkelRudi\Controller;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use RudiBieller\OnkelRudi\BuilderFactoryInterface;
+use RudiBieller\OnkelRudi\FleaMarket\FleaMarketServiceInterface;
 use RudiBieller\OnkelRudi\FleaMarket\OrganizerServiceInterface;
 use RudiBieller\OnkelRudi\ServiceInterface;
 use RudiBieller\OnkelRudi\User\NotificationServiceInterface;
@@ -16,6 +17,9 @@ abstract class AbstractAction implements ActionInterface
     const DEFAULT_ERROR_RESPONSE_MESSAGE = 'Resource not found';
 
     protected $app;
+    /**
+     * @var FleaMarketServiceInterface
+     */
     protected $service;
     /**
      * @var OrganizerServiceInterface

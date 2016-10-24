@@ -9,6 +9,7 @@ use RudiBieller\OnkelRudi\FleaMarket\Query\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketService;
 use RudiBieller\OnkelRudi\Controller\Factory as ControllerFactory;
 use RudiBieller\OnkelRudi\FleaMarket\Query\OrganizerQueryFactory;
+use RudiBieller\OnkelRudi\Ical\Service;
 use RudiBieller\OnkelRudi\User\AuthenticationFactory;
 use RudiBieller\OnkelRudi\User\NotificationService;
 use RudiBieller\OnkelRudi\User\UserBuilder;
@@ -129,6 +130,9 @@ $wpQueryFactory->setDiContainer($app->getContainer());
 $wpService = new WpService();
 $wpService->setQueryFactory($wpQueryFactory);
 
+// ical
+$icalService = new Service();
+
 // controller
 $controllerFactory = new ControllerFactory($app);
 $controllerFactory->setService($service);
@@ -136,6 +140,7 @@ $controllerFactory->setOrganizerService($organizerService);
 $controllerFactory->setUserService($userService);
 $controllerFactory->setNotificationService($notificationService);
 $controllerFactory->setWordpressService($wpService);
+$controllerFactory->setIcalService($icalService);
 
 // Index
 $app->get('/', function ($request, $response, $args) use ($app, $controllerFactory) {
@@ -147,12 +152,20 @@ $app->get('/monat/{month}/plz/{zip}', function ($request, $response, $args) use 
     $action($request, $response, $args);
 })->setName('index-paging');
 
-// FleaMarket Detail View
+// ICal create view
+$app->get('/ical//termin/{id}/datum/{date}', function ($request, $response, $args) use ($app, $controllerFactory) {
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\IcalAction');
+    return $action($request, $response, $args);
+})->setName('ical-export');
+
+// FleaMarket Detail View (with/without date)
 $app->get('/{wildcard}/termin/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketDetailAction');
     $action($request, $response, $args);
-
-    // 302 to new route with date included?!
+})->setName('event-date');
+$app->get('/{wildcard}/termin/{id}/datum/{date}', function ($request, $response, $args) use ($app, $controllerFactory) {
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketDetailAction');
+    $action($request, $response, $args);
 })->setName('event-date');
 
 // Blog Category View

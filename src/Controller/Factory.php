@@ -7,6 +7,7 @@ use RudiBieller\OnkelRudi\ServiceInterface;
 use RudiBieller\OnkelRudi\User\NotificationServiceInterface;
 use RudiBieller\OnkelRudi\User\UserServiceInterface;
 use RudiBieller\OnkelRudi\Wordpress\ServiceInterface as WordpressServiceInterface;
+use RudiBieller\OnkelRudi\Ical\ServiceInterface as IcalServiceInterface;
 
 class Factory implements FactoryInterface
 {
@@ -17,6 +18,7 @@ class Factory implements FactoryInterface
     private $_userService;
     private $_notificationService;
     private $_wpService;
+    private $_icalService;
 
     public function __construct(\Slim\App $app)
     {
@@ -48,6 +50,11 @@ class Factory implements FactoryInterface
         $this->_wpService = $service;
     }
 
+    public function setIcalService(IcalServiceInterface $service)
+    {
+        $this->_icalService = $service;
+    }
+
     public function createActionByName($name)
     {
         if (!class_exists($name)) {
@@ -66,6 +73,9 @@ class Factory implements FactoryInterface
         $instance->setNotificationService($this->_notificationService);
         if ($instance instanceof HttpActionInterface) {
             $instance->setWordpressService($this->_wpService);
+        }
+        if ($instance instanceof IcalActionInterface) {
+            $instance->setIcalService($this->_icalService);
         }
         $this->_instances[$name] = $instance;
 
