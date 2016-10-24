@@ -13,15 +13,15 @@ class Factory
 
         $app = new App();
         $container = $app->getContainer();
-        $container['view'] = function ($c) {
+        $container['view'] = function ($cArg) {
             $view = new \Slim\Views\Twig(
                 dirname(__FILE__).'/../../../public/templates',
                 ['cache' => false]
             );
 
             $view->addExtension(new \Slim\Views\TwigExtension(
-                $c['router'],
-                $c['request']->getUri()
+                $cArg['router'],
+                $cArg['request']->getUri()
             ));
 
             return $view;
@@ -35,11 +35,11 @@ class Factory
     {
         $session = \Mockery::mock('Zend\Authentication\Storage\Session');
         $session->shouldReceive('read')->once()->andReturn($returnUser);
-        $authenticationService = \Mockery::mock('Zend\Authentication\AuthenticationService');
-        $authenticationService->shouldReceive('getStorage')->once()->andReturn($session);
+        $authService = \Mockery::mock('Zend\Authentication\AuthenticationService');
+        $authService->shouldReceive('getStorage')->once()->andReturn($session);
 
         $userService = \Mockery::mock('RudiBieller\OnkelRudi\User\UserService');
-        $userService->shouldReceive('getAuthenticationService')->andReturn($authenticationService);
+        $userService->shouldReceive('getAuthenticationService')->andReturn($authService);
 
         return $userService;
     }

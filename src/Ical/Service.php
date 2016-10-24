@@ -16,9 +16,9 @@ class Service implements ServiceInterface
             ->setUseUtc(false)
             ->setUrl($fleamarket->getUrl())
             ->setLocation(
-            $fleamarket->getLocation() . ', ' . $fleamarket->getStreet() . ' ' . $fleamarket->getStreetNo() . ', ' .
-            $fleamarket->getZipCode() . ' ' . $fleamarket->getCity()
-        );
+                $fleamarket->getLocation() . ', ' . $fleamarket->getStreet() . ' ' . $fleamarket->getStreetNo() . ', ' .
+                $fleamarket->getZipCode() . ' ' . $fleamarket->getCity()
+            );
 
         foreach ($fleamarket->getDates() as $currentDate) {
             $ds = new \DateTime($currentDate->getStart());
