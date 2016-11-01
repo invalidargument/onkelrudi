@@ -153,7 +153,7 @@ $app->get('/monat/{month}/plz/{zip}', function ($request, $response, $args) use 
 })->setName('index-paging');
 
 // ICal create view
-$app->get('/ical//termin/{id}/datum/{date}', function ($request, $response, $args) use ($app, $controllerFactory) {
+$app->get('/ical/termin/{id}/datum/{date}', function ($request, $response, $args) use ($app, $controllerFactory) {
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\IcalAction');
     return $action($request, $response, $args);
 })->setName('ical-export');
@@ -204,7 +204,7 @@ $app->get('/profil/seite/{page}', function ($request, $response, $args) use ($co
 // USER: create fleamarket view
 $app->get('/flohmarkt-anlegen/', function ($request, $response, $args) use ($controllerFactory) {
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\CreateFleaMarketAction');
-    return $action($request, $response, $args);
+    return $action($request, $ricalesponse, $args);
 })->setName('create-fleamarket');
 // USER: edit fleamarket view
 $app->get('/flohmarkt-bearbeiten/{id}', function ($request, $response, $args) use ($controllerFactory) {
