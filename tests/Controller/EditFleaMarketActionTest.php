@@ -38,8 +38,12 @@ class EditFleaMarketActionTest extends \PHPUnit_Framework_TestCase
 
     public function testActionSetsNeededTemplateVariables()
     {
+        $organizer = new Organizer();
+        $organizer->setId(42);
+
         $fleamarket = new FleaMarket();
         $fleamarket->setId(23);
+        $fleamarket->setOrganizer($organizer);
 
         $session = \Mockery::mock('Zend\Authentication\Storage\Session');
         $session->shouldReceive('read')->andReturn('my session is a fucking string');
@@ -63,6 +67,9 @@ class EditFleaMarketActionTest extends \PHPUnit_Framework_TestCase
         $userService->shouldReceive('getAuthenticationService')->andReturn($authenticationService)
             ->shouldReceive('isLoggedIn')->andReturn(true);
 
+        $organizerService = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\OrganizerServiceInterface');
+        $organizerService->shouldReceive('getOrganizer')->once()->with(42)->andReturn($organizer);
+
         $wordpressService = \Mockery::mock('RudiBieller\OnkelRudi\Wordpress\ServiceInterface');
         $wordpressService->shouldReceive('getAllCategories')->andReturn([]);
 
@@ -74,11 +81,12 @@ class EditFleaMarketActionTest extends \PHPUnit_Framework_TestCase
         $action->setUserService($userService);
         $action->setWordpressService($wordpressService);
         $action->setService($fleamarketService);
+        $action->setOrganizerService($organizerService);
 
         $action($request, $response, array('id' => 23));
 
         $this->assertAttributeEquals(
-            ['isTest' => true, 'loggedIn' => true, 'fleamarket_organizers' => array(), 'editForm' => true, 'editDto' => $fleamarket, 'organizer' => null],
+            ['isTest' => true, 'loggedIn' => true, 'fleamarket_organizers' => array(), 'editForm' => true, 'editDto' => $fleamarket, 'isOrganizer' => null],
             'templateVariables',
             $action
         );

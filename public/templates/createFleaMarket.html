@@ -83,10 +83,6 @@
             };
 
             function isNewOrganizer() {
-                if ($('#organizer_name').val() != null && $('#organizer_name').val() != '') {
-                    return true;
-                }
-
                 if ($('#fleamarket_organizer').length == 0 || $('#fleamarket_organizer').val() == null) {
                     return true;
                 }
@@ -104,6 +100,9 @@
                     );
                     return false;
                 }
+
+                // TODO: we need an entry point in an action to persist market and organizer using a transaction
+                // if createForm POST, if editForm PUT to that uri
 
                 if (isNewOrganizer()) {
                     // ############# grab Organizer data ##################
@@ -126,7 +125,7 @@
                         data: postData,
                         success: function (data) {
                             console.log("Organizer created successfully.", data);
-                            createFleaMarket(data.data);
+                            persistFleaMarket(data.data);
                         },
                         error: function (data) {
                             console.log("ajax error", data);
@@ -134,11 +133,14 @@
                         dataType: 'json'
                     });
                 } else {
-                    createFleaMarket($('#fleamarket_organizer').val());
+                    persistFleaMarket($('#fleamarket_organizer').val());
                 }
             });
 
-            function createFleaMarket(createdOrganizerId) {
+            /**
+             * insert or update fleamarket
+             */
+            function persistFleaMarket(fleamarketOrganizerId) {
                 // ############# grab FleaMarket data #################
                 var startDateItems = $('[name="marketDate[]"]');
                 var startTimeItems = $('[name="marketTimeStart[]"]');
@@ -170,7 +172,7 @@
 
                 var postData = JSON.stringify({
                     //organizerId: $('#fleamarket_organizer').val(),
-                    organizerId: createdOrganizerId,
+                    organizerId: fleamarketOrganizerId,
                     name: $('#fleamarket_name').val(),
                     description: $('#fleamarket_description').val(),
                     dates: marketDates,
@@ -339,11 +341,11 @@
                 {% endif %}
                 <!-- /RENDER ONLY WHEN LOGGED IN or admin??? -->
 
-                <!-- if organizer AND edit form -->
-                {% if (editForm and organizer) %}
-                <input type="hidden" id="fleamarket_organizer" value="{{organizer.id}}">
+                <!-- edit form -->
+                {% if (editForm) %}
+                <input type="hidden" id="fleamarket_organizer" name="fleamarket_organizer" value="{{editDto.organizer.id}}">
                 {% endif %}
-                <!-- if organizer AND edit form -->
+                <!-- /edit form -->
 
                 <div class="pure-g">
                     <div class="pure-u-1-2">
@@ -429,7 +431,7 @@
                     </div>
                 </div>
                 <!-- only create or editing organizer -->
-                {% if (createForm or (editForm and not organizer)) %}
+                {% if (createForm or (editForm and not isOrganizer)) %}
                 <div class="pure-g">
                     <div class="pure-u-1-2">
                         <h3>Wer veranstaltet den Kinderflohmarkt?</h3>
@@ -439,25 +441,25 @@
                 <div class="pure-g">
                     <div class="pure-u-1-2">
                         <label for="organizer_name">Name des Veranstalters (*)</label>
-                        <input id="organizer_name" type="text" placeholder="Name des Veranstalters" class="pure-input-1">
+                        <input id="organizer_name" type="text" placeholder="Name des Veranstalters" class="pure-input-1" value="{{editDto.organizer.name}}">
                     </div>
                 </div>
                 <div class="pure-g">
                     <div class="pure-u-1-2">
                         <label for="organizer_phone">Telefonnummer</label>
-                        <input id="organizer_phone" type="tel" placeholder="Telefonnummer" class="pure-input-1">
+                        <input id="organizer_phone" type="tel" placeholder="Telefonnummer" class="pure-input-1" value="{{editDto.organizer.phone}}">
                     </div>
                 </div>
                 <div class="pure-g">
                     <div class="pure-u-1-2">
                         <label for="organizer_email">E-Mail</label>
-                        <input id="organizer_email" type="email" placeholder="E-Mail" class="pure-input-1">
+                        <input id="organizer_email" type="email" placeholder="E-Mail" class="pure-input-1" value="{{editDto.organizer.email}}">
                     </div>
                 </div>
                 <div class="pure-g">
                     <div class="pure-u-1-2">
                         <label for="organizer_url">Website</label>
-                        <input id="organizer_url" type="text" placeholder="Website" class="pure-input-1">
+                        <input id="organizer_url" type="text" placeholder="Website" class="pure-input-1" value="{{editDto.organizer.url}}">
                     </div>
                 </div>
                 <div class="pure-g">
@@ -468,21 +470,21 @@
                 <div class="pure-g">
                     <div class="pure-u-9-24">
                         <label for="organizer_street">Stra&szlig;e</label>
-                        <input id="organizer_street" type="text" placeholder="Stra&szlig;e" class="pure-input-1">
+                        <input id="organizer_street" type="text" placeholder="Stra&szlig;e" class="pure-input-1" value="{{editDto.organizer.street}}">
                     </div>
                     <div class="pure-u-3-24">
                         <label for="organizer_streetNo">Hausnummer</label>
-                        <input id="organizer_streetNo" type="text" placeholder="Hausnummer" class="pure-input-1">
+                        <input id="organizer_streetNo" type="text" placeholder="Hausnummer" class="pure-input-1" value="{{editDto.organizer.streetNo}}">
                     </div>
                 </div>
                 <div class="pure-g">
                     <div class="pure-u-3-24">
                         <label for="organizer_zip">PLZ</label>
-                        <input id="organizer_zip" type="text" placeholder="PLZ" class="pure-input-1">
+                        <input id="organizer_zip" type="text" placeholder="PLZ" class="pure-input-1" value="{{editDto.organizer.zipCode}}">
                     </div>
                     <div class="pure-u-9-24">
                         <label for="organizer_city">Ort</label>
-                        <input id="organizer_city" type="text" placeholder="Ort" class="pure-input-1">
+                        <input id="organizer_city" type="text" placeholder="Ort" class="pure-input-1" value="{{editDto.organizer.city}}">
                     </div>
                 </div>
                 {% endif %}
