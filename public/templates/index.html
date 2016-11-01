@@ -147,7 +147,7 @@
                             {% if item.zipCode %}{{item.zipCode}} {{item.city}}<br>{% endif %}
                         </p>
                     </a>
-                    <i class="fa fa-calendar"></i><a href="/public/ical//termin/{{item.id}}/datum/{{item.dates|first.start|date('d.m.Y')}}">Termin als Kalendereintrag (iCal) speichern</a>
+                    <i class="fa fa-calendar"></i><a href="/public/ical/termin/{{item.id}}/datum/{{item.dates|first.start|date('d.m.Y')}}">Termin als Kalendereintrag (iCal) speichern</a>
                 </div>
             {% endfor %}
         </div>
