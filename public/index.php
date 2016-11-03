@@ -204,7 +204,7 @@ $app->get('/profil/seite/{page}', function ($request, $response, $args) use ($co
 // USER: create fleamarket view
 $app->get('/flohmarkt-anlegen/', function ($request, $response, $args) use ($controllerFactory) {
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\CreateFleaMarketAction');
-    return $action($request, $ricalesponse, $args);
+    return $action($request, $response, $args);
 })->setName('create-fleamarket');
 // USER: edit fleamarket view
 $app->get('/flohmarkt-bearbeiten/{id}', function ($request, $response, $args) use ($controllerFactory) {

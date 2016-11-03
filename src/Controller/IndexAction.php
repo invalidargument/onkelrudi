@@ -4,19 +4,25 @@ namespace RudiBieller\OnkelRudi\Controller;
 
 class IndexAction extends AbstractHttpAction
 {
+    const DEFAULT_ZIP_AREA = 'PLZ-Bereich';
+
     protected $template = 'index.html';
 
     protected function getData()
     {
         $start = null;
-        $monthArgument = $this->args['month'];
+        $monthArgument = array_key_exists('month', $this->args)
+            ? $this->args['month']
+            : null;
 
         if (!is_null($monthArgument)) {
             list($month, $year) = explode('-', $monthArgument);
             $start = new \DateTimeImmutable($year . '-' . $month . '-01 00:00:01');
         }
 
-        $zip = $this->args['zip'];
+        $zip = array_key_exists('zip', $this->args)
+            ? $this->args['zip']
+            : self::DEFAULT_ZIP_AREA;
 
         $isTest = strpos($this->request->getUri()->getQuery(), 'test=1') !== false;
         $fleaMarkets = $this->service->getAllFleaMarketsByTimespan($start);
@@ -59,8 +65,8 @@ class IndexAction extends AbstractHttpAction
 
     private function _getSelectedZipRange($zip)
     {
-        if ($zip == 'PLZ-Bereich') {
-            return 'PLZ-Bereich';
+        if ($zip == self::DEFAULT_ZIP_AREA) {
+            return self::DEFAULT_ZIP_AREA;
         }
 
         return substr($zip, 0, 1);

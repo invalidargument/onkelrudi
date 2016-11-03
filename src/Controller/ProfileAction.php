@@ -12,7 +12,9 @@ class ProfileAction extends AbstractHttpAction implements UserAwareInterface
     {
         $user = $this->userService->getAuthenticationService()->getStorage()->read();
 
-        $page = (int) $this->args['page'];
+        $page = array_key_exists('page', $this->args)
+            ? (int) $this->args['page']
+            : 0;
 
         if ($page < 0) {
             $page = 0;
