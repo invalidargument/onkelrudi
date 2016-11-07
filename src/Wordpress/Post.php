@@ -24,9 +24,9 @@ class Post
      * @param int $id
      * @return Post
      */
-    public function setPostId($id)
+    public function setPostId($postId)
     {
-        $this->_postId = $id;
+        $this->_postId = $postId;
         return $this;
     }
 
