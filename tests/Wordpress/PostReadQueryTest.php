@@ -14,7 +14,7 @@ class PostReadQueryTest extends \PHPUnit_Framework_TestCase
 
         $post = new Post();
         $post
-            ->setId(1)
+            ->setPostId(1)
             ->setDate('2015-11-28T23:26:09')
             ->setDateModified('2015-11-28T23:26:09')
             ->setContent("<p>Willkommen zur deutschen Version von WordPress. Dies ist der erste Beitrag. Du kannst ihn bearbeiten oder löschen. Und dann starte mit dem Schreiben!</p>\n")

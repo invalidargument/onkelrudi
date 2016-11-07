@@ -4,7 +4,7 @@ namespace RudiBieller\OnkelRudi\Wordpress;
 
 class Post
 {
-    private $_id;
+    private $_postId;
     private $_date;
     private $_dateModified;
     private $_title;
@@ -15,18 +15,18 @@ class Post
     /**
      * @return int
      */
-    public function getId()
+    public function getPostId()
     {
-        return $this->_id;
+        return $this->_postId;
     }
 
     /**
      * @param int $id
      * @return Post
      */
-    public function setId($id)
+    public function setPostId($id)
     {
-        $this->_id = $id;
+        $this->_postId = $id;
         return $this;
     }
 

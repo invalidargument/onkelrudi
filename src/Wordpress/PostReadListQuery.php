@@ -67,7 +67,7 @@ class PostReadListQuery extends AbstractJsonReadQuery implements CacheableInterf
 
         foreach ($posts as $post) {
             $item = new Post();
-            $item->setId($post->id)
+            $item->setPostId($post->id)
                 ->setDate($post->date) //gmt???
                 ->setDateModified($post->modified) //gmt???
                 ->setTitle($post->title->rendered)

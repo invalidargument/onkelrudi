@@ -11,7 +11,7 @@ class WordpressPostActionTest extends \PHPUnit_Framework_TestCase
     public function testActionReturnsRequestedMarket()
     {
         $post = new Post();
-        $post->setId(23);
+        $post->setPostId(23);
 
         $app = new App();
         $container = $app->getContainer();

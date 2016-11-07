@@ -14,7 +14,7 @@ class PostReadListQueryTest extends \PHPUnit_Framework_TestCase
         
         $post = new Post();
         $post
-            ->setId(6)
+            ->setPostId(6)
             ->setDate('2015-11-29T21:24:49')
             ->setDateModified('2015-11-29T21:24:49')
             ->setContent("<p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla</p>\n")
