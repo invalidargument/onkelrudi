@@ -69,14 +69,24 @@
                 <div class="pure-g mt20">
                     <div class="pure-u-1">
                         <h2 class="splash-subhead">Alle Termine</h2>
+                        Einfach auf den Termin klicken, um ihn in Deinen Kalender zu speichern!
                         <ol class="dates-list">
                             {% for dateItem in data.dates %}
                             {% set cssClass = 'dateTime' %}
                             {% if dateItem.start|date("Ymd") == "now"|date("Ymd") %}{% set cssClass = 'dateTime today' %} {% endif %}
                             {% if "now"|date("Ymd") > dateItem.start|date("Ymd") %}{% set cssClass = 'dateTime over'%} {% endif %}
-                            <li class="{{cssClass}}">{{dateItem.start|date("d.m.Y")}}</li>
+                            <li class="{{cssClass}}">
+                                <a href="/public/ical/termin/{{data.id}}/datum/{{dateItem.start|date('d.m.Y')}}" title="Zum Kalender (iCal) hinzufügen"><i class="fa fa-calendar-plus-o"></i>{{dateItem.start|date("d.m.Y")}}</a>
+                            </li>
                             {% endfor %}
                         </ol>
+                    </div>
+                </div>
+                {% else %}
+                <div class="pure-g mt20">
+                    <div class="pure-u-1">
+                        <h2 class="splash-subhead">Diesen Termin zum Kalender hinzufügen</h2>
+                        <i class="fa fa-calendar"></i><a href="/public/ical/termin/{{data.id}}/datum/{{data.dates|first.start|date('d.m.Y')}}" title="Zum Kalender (iCal) hinzufügen">{{data.name}} am {{data.dates|first.start|date('d.m.Y')}} im Kalender speichern!</a>
                     </div>
                 </div>
                 {% endif %}
