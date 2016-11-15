@@ -10,8 +10,13 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
+        $containerConfig = [
+            'OrganizerService' => function ($c) {
+                return \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\OrganizerServiceInterface');
+            }
+        ];
         $this->_sut = new Factory();
-        $this->_sut->setDiContainer(new Container());
+        $this->_sut->setDiContainer(new Container($containerConfig));
     }
 
     /**

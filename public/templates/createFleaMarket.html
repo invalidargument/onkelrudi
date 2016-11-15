@@ -168,11 +168,25 @@
                 {% else %}
                 var apiUrlFleaMarkets = '/public/api/v1/fleamarkets/{{editDto.id}}';
                 var requestMethod = 'PUT';
+                var organizerUpdatePostData = JSON.stringify({
+                    id: $('#fleamarket_organizer').val(),
+                    name: $('#organizer_name').val(),
+                    street: $('#organizer_street').val(),
+                    streetNo: $('#organizer_streetNo').val(),
+                    zipCode: $('#organizer_zip').val(),
+                    city: $('#organizer_city').val(),
+                    phone: $('#organizer_phone').val(),
+                    email: $('#organizer_email').val(),
+                    url: $('#organizer_url').val()
+                });
                 {% endif %}
 
                 var postData = JSON.stringify({
-                    //organizerId: $('#fleamarket_organizer').val(),
+                    {% if createForm %}
                     organizerId: fleamarketOrganizerId,
+                    {% else %}
+                    organizer: organizerUpdatePostData,
+                    {% endif %}
                     name: $('#fleamarket_name').val(),
                     description: $('#fleamarket_description').val(),
                     dates: marketDates,
@@ -210,6 +224,9 @@
                     },
                     error: function(data) {
                         console.log("ajax error", data);
+                        $('#submitform').parent().append(
+                            '<p class="errormessage"><i class="fa fa-exclamation fa-lg"></i>Beim Verarbeiten der Daten ist etwas schiefgegangen. :( Bitte probiere es später erneut.</p>'
+                        );
                     },
                     dataType: 'json'
                 });
@@ -237,8 +254,6 @@
                 ];
 
                 $.each(fieldNames, function( index, value ) {
-                    console.log($('#'+value[1]).val());
-                    console.log($('#'+value[0]).val());
                     $('#'+value[1]).val(
                         $('#'+value[0]).val()
                     );

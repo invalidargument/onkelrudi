@@ -4,7 +4,9 @@ namespace RudiBieller\OnkelRudi\Controller\Api;
 
 use RudiBieller\OnkelRudi\BuilderFactory;
 use RudiBieller\OnkelRudi\Config\Config;
+use RudiBieller\OnkelRudi\Controller\Fixture\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
+use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use RudiBieller\OnkelRudi\User\User;
 use Slim\App;
 
@@ -22,8 +24,32 @@ class FleaMarketUpdateActionTest extends \PHPUnit_Framework_TestCase
             'location' => 'Cologne',
             'street' => 'Venloer',
             'streetNo' => 1,
-            'url' => 'foo.com'
+            'url' => 'foo.com',
+            'organizer' => '{"id":"192","name":"ONKEL RUDI","street":"Hauptstr.","streetNo":"42","zipCode":"50667","city":"Köln","phone":"0123456","email":"test@onkel-rudi.de","url":"http://www.onkel-rudi.de"}'
+//            'organizer' => [
+//                'id' => 192,
+//                'name' => 'Onkel Organizer',
+//                'street' => 'Hauptstr.',
+//                'streetNo' => '2000',
+//                'zipCode' => '50667',
+//                'city' => 'Köln',
+//                'phone' => '0123456',
+//                'email' => 'test@onkel-rudi.de',
+//                'url' => 'http://www.onkel-rudi.de'
+//            ]
         ];
+
+        $organizer = new Organizer();
+        $organizer->setId('192')
+            ->setName('ONKEL RUDI')
+            ->setStreet('Hauptstr.')
+            ->setStreetNo('42')
+            ->setZipCode('50667')
+            ->setCity('Köln')
+            ->setPhone('0123456')
+            ->setEmail('test@onkel-rudi.de')
+            ->setUrl('http://www.onkel-rudi.de');
+
         $fleaMarket = new FleaMarket();
         $fleaMarket->setId(1)
             ->setName('foo')
@@ -34,7 +60,8 @@ class FleaMarketUpdateActionTest extends \PHPUnit_Framework_TestCase
             ->setDates([])
             ->setStreet('Venloer')
             ->setStreetNo(1)
-            ->setUrl('foo.com');
+            ->setUrl('foo.com')
+            ->setOrganizer($organizer);
 
         $builderFactory = new BuilderFactory();
         $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketService');
@@ -51,7 +78,7 @@ class FleaMarketUpdateActionTest extends \PHPUnit_Framework_TestCase
         $app = new App();
         $container = $app->getContainer();
         $container['config'] = new Config();
-        $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
+        $request = Factory::createTestRequest();
         $request->shouldReceive('getParsedBody')->once()->andReturn($parsedJson);
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
 

@@ -20,6 +20,7 @@ class Factory
 
     public function setDiContainer(Container $diContainer)
     {
+        // TODO: resolve here instead of passing di to query.
         $this->_diContainer = $diContainer;
     }
 
@@ -83,6 +84,9 @@ class Factory
         if (is_null($this->_fleaMarketUpdateQuery)) {
             $this->_fleaMarketUpdateQuery = new FleaMarketUpdateQuery();
             $this->_fleaMarketUpdateQuery->setDiContainer($this->_diContainer);
+            $this->_fleaMarketUpdateQuery->setOrganizerService(
+                $this->_diContainer->get('OrganizerService')
+            );
         }
 
         return $this->_fleaMarketUpdateQuery;

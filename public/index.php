@@ -36,6 +36,33 @@ if ($config->getSystemConfiguration()['environment'] === 'dev') {
     $envSettings['cache'] = false;
 }
 
+// notifications
+$notificationService = new NotificationService();
+// fleaMarkets
+$fleaMarketQueryFactory = new Factory();
+$service = new FleaMarketService();
+$service->setQueryFactory($fleaMarketQueryFactory);
+$service->setNotificationService($notificationService);
+// organizers
+$organizerQueryFactory = new OrganizerQueryFactory();
+$organizerService = new OrganizerService();
+$organizerService->setQueryFactory($organizerQueryFactory);
+// users
+$userQueryFactory = new UserQueryFactory();
+$authFactory = new AuthenticationFactory();
+$userService = new UserService();
+$userService->setQueryFactory($userQueryFactory);
+$userService->setAuthenticationFactory($authFactory);
+$userService->setOrganizerService($organizerService);
+
+// wordpress
+$wpQueryFactory = new QueryFactory();
+$wpService = new WpService();
+$wpService->setQueryFactory($wpQueryFactory);
+
+// ical
+$icalService = new Service();
+
 $appConfiguration = [
     // General Slim settings
     'settings' => [
@@ -93,6 +120,9 @@ $appConfiguration = [
     },
     'UserBuilder' => function ($c) {
         return new UserBuilder();
+    },
+    'OrganizerService' => function ($c) use ($organizerService) {
+        return $organizerService;
     }
 ];
 
@@ -100,38 +130,12 @@ $container = new \Slim\Container($appConfiguration);
 
 $app = new \Slim\App($container);
 
-// notifications
-$notificationService = new NotificationService();
-// fleaMarkets
-$fleaMarketQueryFactory = new Factory();
 $fleaMarketQueryFactory->setDiContainer($app->getContainer());
-$service = new FleaMarketService();
-$service->setQueryFactory($fleaMarketQueryFactory);
-$service->setNotificationService($notificationService);
-// organizers
-$organizerQueryFactory = new OrganizerQueryFactory();
 $organizerQueryFactory->setDiContainer($app->getContainer());
-$organizerService = new OrganizerService();
-$organizerService->setQueryFactory($organizerQueryFactory);
-// users
-$userQueryFactory = new UserQueryFactory();
 $userQueryFactory->setDiContainer($app->getContainer());
-$authFactory = new AuthenticationFactory();
 $authFactory->setDiContainer($app->getContainer());
-$userService = new UserService();
-$userService->setQueryFactory($userQueryFactory);
-$userService->setAuthenticationFactory($authFactory);
-$userService->setOrganizerService($organizerService);
 $userService->setDiContainer($app->getContainer());
-
-// wordpress
-$wpQueryFactory = new QueryFactory();
 $wpQueryFactory->setDiContainer($app->getContainer());
-$wpService = new WpService();
-$wpService->setQueryFactory($wpQueryFactory);
-
-// ical
-$icalService = new Service();
 
 // controller
 $controllerFactory = new ControllerFactory($app);
@@ -141,6 +145,8 @@ $controllerFactory->setUserService($userService);
 $controllerFactory->setNotificationService($notificationService);
 $controllerFactory->setWordpressService($wpService);
 $controllerFactory->setIcalService($icalService);
+
+// ########### ROUTING ####################
 
 // Index
 $app->get('/', function ($request, $response, $args) use ($app, $controllerFactory) {
