@@ -10,6 +10,7 @@ use RudiBieller\OnkelRudi\FleaMarket\FleaMarketService;
 use RudiBieller\OnkelRudi\Controller\Factory as ControllerFactory;
 use RudiBieller\OnkelRudi\FleaMarket\Query\OrganizerQueryFactory;
 use RudiBieller\OnkelRudi\Ical\Service;
+use RudiBieller\OnkelRudi\OnkelRudi;
 use RudiBieller\OnkelRudi\User\AuthenticationFactory;
 use RudiBieller\OnkelRudi\User\NotificationService;
 use RudiBieller\OnkelRudi\User\UserBuilder;
@@ -19,22 +20,12 @@ use RudiBieller\OnkelRudi\Wordpress\QueryFactory;
 use RudiBieller\OnkelRudi\Wordpress\Service as WpService;
 use Slim\PDO\Database;
 
-$config = new Config();
+$onkelRudi = new OnkelRudi();
+
+$config = $onkelRudi->getConfig();
 $db = null;
 
-if ($config->getSystemConfiguration()['environment'] === 'live') {
-    error_reporting(0);
-}
-
-$envSettings = [
-    'displayErrorDetails' => false,
-    'cache' => 'templates/cache'
-];
-
-if ($config->getSystemConfiguration()['environment'] === 'dev') {
-    $envSettings['displayErrorDetails'] = true;
-    $envSettings['cache'] = false;
-}
+$envSettings = $onkelRudi->getEnvironmentSettings();
 
 // notifications
 $notificationService = new NotificationService();
