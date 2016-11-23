@@ -115,15 +115,25 @@
 
 <div class="content-wrapper">
     <div class="content">
-        <h2 class="content-head">Hallo, Du bist angemeldet als {{data.identifier}}. <i class="fa fa-angle-double-right"></i><a id="logout" href="#" title="Logout - Bei Onkel Rudi abmelden">Logout</a></h2>
+        <h2 class="content-head">Hallo, Du bist angemeldet als {{data.identifier}}.</h2>
         <div class="pure-g">
+            <div class="pure-u-1">
+                <h3 class="content-subhead">Aktionen</h3>
+                <a href="{{createfleamarketurl}}" title="Einen Flohmarkt anlegen" class="actionButton">
+                    <button type="submit" id="newFleamarket" class="pure-button">
+                        <i class="fa fa-plus fa-lg"></i>
+                        Neuen Flohmarkt anlegen
+                    </button>
+                </a>
+                <a id="logout" href="#" title="Logout - Bei Onkel Rudi abmelden" class="actionButton">
+                    <button type="submit" class="pure-button">
+                        Logout
+                    </button>
+                </a>
+            </div>
             <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
-                <h2>Deine Flohmärkte</h2>
-                <p>
-                    <i class="fa fa-angle-double-right"></i><a href="{{createfleamarketurl}}" title="Einen Flohmarkt anlegen">einen neuen Flohmarkt anlegen</a>
-                </p>
                 {% if fleamarkets|length > 0 %}
-                Von Dir angelegte Flohmärkte - Click zum Bearbeiten<br>
+                <h3 class="content-subhead">Hier kannst Du die von Dir angelegten Flohmärkte bearbeiten:</h3>
                     <ol>
                     {% for item in fleamarkets %}
                         <li>
@@ -137,7 +147,7 @@
             </div>
             {% if organizer %}
             <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
-                <h2>Dein Veranstalterprofil</h2>
+                <h3 class="content-subhead">Dein Veranstalterprofil:</h3>
                 <p>Diese Angaben werden neben all Deinen Flohmarktterminen erscheinen.</p>
                 <form id="updateOrganizerProfile" method="post" class="pure-form pure-form-stacked">
                     <div class="pure-g">

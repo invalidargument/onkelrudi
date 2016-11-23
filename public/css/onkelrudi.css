@@ -637,3 +637,6 @@ i.fa {
     margin-bottom: 2px;
 }
 
+a.actionButton, a.actionButton:hover {
+    text-decoration: none;
+}
