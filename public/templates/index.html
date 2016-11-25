@@ -86,31 +86,37 @@
 
 {% autoescape 'html' %}
 <div class="content-wrapper">
-    <div class="content">
-        <form id="startMonthSelect" class="pure-form pure-form-aligned is-center">
+    <div class="content pure-g">
+        <form id="startMonthSelect" class="pure-form pure-form-aligned is-center" style="width:100%;">
             <fieldset>
                 <div class="pure-control-group">
-                    <div class="pure-u-1">
+                    <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
                         <h2 class="content-head">Die nächsten Flohmarkttermine</h2>
-                        <select id="monthSelect">
-                            {% for item in monthRange %}
-                                {% set selectedM = '<option>' %}
-                                {% if item == selectedMonth %}
-                                    {% set selectedM = '<option selected>' %}
-                                {% endif %}
-                            {{ selectedM|raw }}{{item}}</option>
-                            {% endfor %}
-                        </select>
-                        <select id="zipRangeSelect">
-                            <option>PLZ-Bereich</option>
-                            {% for item in zipAreaRange %}
-                                {% set selectedZ = '<option>' %}
-                                {% if item == selectedZipAreaRange %}
-                                    {% set selectedZ = '<option selected>' %}
-                                {% endif %}
-                            {{ selectedZ|raw }}{{item}}</option>
-                            {% endfor %}
-                        </select>
+                        <span style="white-space:nowrap;">
+                            <select id="monthSelect">
+                                {% for item in monthRange %}
+                                    {% set selectedM = '<option>' %}
+                                    {% if item == selectedMonth %}
+                                        {% set selectedM = '<option selected>' %}
+                                    {% endif %}
+                                {{ selectedM|raw }}{{item}}</option>
+                                {% endfor %}
+                            </select>
+                            <select id="zipRangeSelect">
+                                <option>PLZ-Bereich</option>
+                                {% for item in zipAreaRange %}
+                                    {% set selectedZ = '<option>' %}
+                                    {% if item == selectedZipAreaRange %}
+                                        {% set selectedZ = '<option selected>' %}
+                                    {% endif %}
+                                {{ selectedZ|raw }}{{item}}</option>
+                                {% endfor %}
+                            </select>
+                        </span>
+                    </div>
+                    <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-2-5" style="text-align: right;">
+                        Du kennst oder veranstaltest einen Kinderflohmarkt?<br>
+                        <a href="/public/profil/" title="Anmelden und einen Termin veröffentlichen">Hier kannst Du ihn veröffentlichen!</a>
                     </div>
                 </div>
             </fieldset>
