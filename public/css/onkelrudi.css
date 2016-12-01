@@ -640,3 +640,7 @@ i.fa {
 a.actionButton, a.actionButton:hover {
     text-decoration: none;
 }
+
+.nowrap {
+    white-space: nowrap;
+}

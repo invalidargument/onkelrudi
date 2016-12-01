@@ -75,7 +75,7 @@
                             {% set cssClass = 'dateTime' %}
                             {% if dateItem.start|date("Ymd") == "now"|date("Ymd") %}{% set cssClass = 'dateTime today' %} {% endif %}
                             {% if "now"|date("Ymd") > dateItem.start|date("Ymd") %}{% set cssClass = 'dateTime over'%} {% endif %}
-                            <li class="{{cssClass}}">
+                            <li class="{{cssClass}} nowrap">
                                 <a href="/public/ical/termin/{{data.id}}/datum/{{dateItem.start|date('d.m.Y')}}" title="Zum Kalender (iCal) hinzufügen"><i class="fa fa-calendar-plus-o"></i>{{dateItem.start|date("d.m.Y")}}</a>
                             </li>
                             {% endfor %}
@@ -86,7 +86,7 @@
                 <div class="pure-g mt20">
                     <div class="pure-u-1">
                         <h2 class="splash-subhead">Diesen Termin zum Kalender hinzufügen</h2>
-                        <i class="fa fa-calendar"></i><a href="/public/ical/termin/{{data.id}}/datum/{{data.dates|first.start|date('d.m.Y')}}" title="Zum Kalender (iCal) hinzufügen">{{data.name}} am {{data.dates|first.start|date('d.m.Y')}} im Kalender speichern!</a>
+                        <a href="/public/ical/termin/{{data.id}}/datum/{{data.dates|first.start|date('d.m.Y')}}" title="Zum Kalender (iCal) hinzufügen"><i class="fa fa-calendar"></i>{{data.name}} am {{data.dates|first.start|date('d.m.Y')}} im Kalender speichern!</a>
                     </div>
                 </div>
                 {% endif %}
