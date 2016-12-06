@@ -20,6 +20,7 @@ class FleaMarketInsertQuery extends AbstractInsertQuery
     private $_zipCode;
     private $_location;
     private $_url;
+    private $_approved;
     private $_fleaMarketService;
 
     /**
@@ -108,6 +109,20 @@ class FleaMarketInsertQuery extends AbstractInsertQuery
         return $this;
     }
 
+    public function setApproved($approved)
+    {
+        $this->_approved = (boolean) $approved;
+    }
+
+    private function _getApproved()
+    {
+        if (!$this->_approved) {
+            return 0;
+        }
+
+        return intval($this->_approved);
+    }
+
     public function getUuid()
     {
         return Uuid::uuid5(
@@ -122,11 +137,11 @@ class FleaMarketInsertQuery extends AbstractInsertQuery
 
         $insertStatement = $this->pdo
             ->insert(
-                array('uuid', 'organizer_id', 'user_id', 'name', 'description', 'street', 'streetno', 'city', 'zipcode', 'location', 'url')
+                array('uuid', 'organizer_id', 'user_id', 'name', 'description', 'street', 'streetno', 'city', 'zipcode', 'location', 'url', 'approved')
             )
             ->into('fleamarkets')
             ->values(
-                array($this->getUuid(), $this->_organizerId, $this->_userId, $this->_name, $this->_description, $this->_street, $this->_streetNo, $this->_city, $this->_zipCode, $this->_location, $this->_url)
+                array($this->getUuid(), $this->_organizerId, $this->_userId, $this->_name, $this->_description, $this->_street, $this->_streetNo, $this->_city, $this->_zipCode, $this->_location, $this->_url, $this->_getApproved())
             );
 
         $fleaMarketId = $insertStatement->execute();
