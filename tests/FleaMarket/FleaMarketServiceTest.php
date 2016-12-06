@@ -27,7 +27,10 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
         $this->_sut->setNotificationService($this->_notificationService);
     }
 
-    public function testServiceCreatesNewFleaMarket()
+    /**
+     * @dataProvider dataProviderTestServiceCreatesNewFleaMarket
+     */
+    public function testServiceCreatesNewFleaMarket($approved, $expectedApprovedValue)
     {
         $this->_notificationService->shouldReceive('sendFleaMarketCreatedNotification')->once()->with(123);
 
@@ -68,12 +71,22 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('setCity')->once()->with('Cologne')->andReturn($query)
             ->shouldReceive('setLocation')->once()->with('Daheim')->andReturn($query)
             ->shouldReceive('setUrl')->once()->with('http://www.example.com/foo')->andReturn($query)
+            ->shouldReceive('setApproved')->once()->with($expectedApprovedValue)->andReturn($query)
             ->shouldReceive('run')->once()->andReturn('123');
         $this->_factory->shouldReceive('createFleaMarketInsertQuery')
             ->once()
             ->andReturn($query);
 
-        $this->_sut->createFleaMarket($fleaMarket, $organizer);
+        $this->_sut->createFleaMarket($fleaMarket, $expectedApprovedValue);
+    }
+
+    public function dataProviderTestServiceCreatesNewFleaMarket()
+    {
+        return array(
+            array(true, '1'),
+            array(false, '0'),
+            array(null, '0')
+        );
     }
 
     public function testDeleteFleaMarketsDeletesSelectedFleaMarket()

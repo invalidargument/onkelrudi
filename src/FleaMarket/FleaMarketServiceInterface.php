@@ -21,7 +21,7 @@ interface FleaMarketServiceInterface extends ServiceInterface
 
     public function deleteFleaMarket(FleaMarketInterface $fleaMarket);
 
-    public function createFleaMarket(FleaMarketInterface $fleaMarket);
+    public function createFleaMarket(FleaMarketInterface $fleaMarket, $approved = false);
 
     /**
      * @param int $fleaMarketId

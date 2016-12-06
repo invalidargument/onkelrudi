@@ -30,7 +30,7 @@ class FleaMarketService implements FleaMarketServiceInterface
         $this->_notificationService = $notificationService;
     }
 
-    public function createFleaMarket(FleaMarketInterface $fleaMarket)
+    public function createFleaMarket(FleaMarketInterface $fleaMarket, $approved = false)
     {
         $query = $this->_factory->createFleaMarketInsertQuery();
 
@@ -55,7 +55,8 @@ class FleaMarketService implements FleaMarketServiceInterface
             ->setCity($fleaMarket->getCity())
             ->setZipCode($fleaMarket->getZipCode())
             ->setLocation($fleaMarket->getLocation())
-            ->setUrl($fleaMarket->getUrl());
+            ->setUrl($fleaMarket->getUrl())
+            ->setApproved($approved);
 
         $fleaMarketId = $query->run();
         $fleaMarket->setId($fleaMarketId);
