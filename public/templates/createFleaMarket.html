@@ -363,21 +363,21 @@
                 <!-- /edit form -->
 
                 <div class="pure-g">
-                    <div class="pure-u-1-2">
+                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
                         <label for="fleamarket_name">Name des Kinderflohmarkts (*)</label>
                         <input id="fleamarket_name" type="text" placeholder="Wie heißt Dein Kinderflohmarkt?" class="pure-input-1" value="{{editDto.name}}">
                     </div>
                 </div>
 
                 <div class="pure-g">
-                    <div class="pure-u-1-2">
+                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
                         <label for="fleamarket_description">Beschreibung (*)</label>
                         <textarea id="fleamarket_description" type="text" placeholder="Beschreibe bitte kurz Deinen Kinderflohmarkt. Wer wird dort was anbieten, wieviel Kuchen wird es geben, usw." style="height: 200px;" class="pure-input-1">{{editDto.description}}</textarea>
                     </div>
                 </div>
 
                 <div class="pure-g">
-                    <div class="pure-u-1-2">
+                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
                         <section class="datesBlock">
                             <h3>Termin für den Kinderflohmarkt - Wann findet er statt? (*)</h3>
                             {% if editForm %}
@@ -403,13 +403,13 @@
                 </div>
 
                 <div class="pure-g">
-                    <div class="pure-u-1-2">
+                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
                         <h3>Wo findet der Kinderflohmarkt statt?</h3>
                     </div>
                 </div>
 
                 <div class="pure-g">
-                    <div class="pure-u-1-2">
+                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
                         <label for="fleamarket_location">Veranstaltungsort (*)</label>
                         <input id="fleamarket_location" type="text" placeholder="Wo findet der Flohmarkt statt? Z.B. KiTa Sonnenblume oder Turnhalle der Waldschule." class="pure-input-1" value="{{editDto.location}}">
                     </div>
@@ -422,14 +422,14 @@
                     </div>
 
                     <div class="pure-u-3-24">
-                        <label for="fleamarket_streetNo">Hausnummer (*)</label>
+                        <label for="fleamarket_streetNo" class="nowrap">Hausnummer (*)</label>
                         <input id="fleamarket_streetNo" type="text" placeholder="Hausnummer" class="pure-input-1" value="{{editDto.streetNo}}">
                     </div>
                 </div>
 
                 <div class="pure-g">
                     <div class="pure-u-3-24">
-                        <label for="fleamarket_zipCode">PLZ (*)</label>
+                        <label for="fleamarket_zipCode" class="nowrap">PLZ (*)</label>
                         <input id="fleamarket_zipCode" type="text" placeholder="PLZ" class="pure-input-1" value="{{editDto.zipCode}}">
                     </div>
 
@@ -440,7 +440,7 @@
                 </div>
 
                 <div class="pure-g">
-                    <div class="pure-u-1-2">
+                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
                         <label for="fleamarket_url">Website für diesen Flohmarkt</label>
                         <input id="fleamarket_url" type="text" placeholder="Link zur Flohmarkt-Website" class="pure-input-1" value="{{editDto.url}}">
                     </div>
@@ -448,37 +448,37 @@
                 <!-- only create or editing organizer -->
                 {% if (createForm or (editForm and not isOrganizer)) %}
                 <div class="pure-g">
-                    <div class="pure-u-1-2">
+                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
                         <h3>Wer veranstaltet den Kinderflohmarkt?</h3>
                     </div>
                 </div>
 
                 <div class="pure-g">
-                    <div class="pure-u-1-2">
+                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
                         <label for="organizer_name">Name des Veranstalters (*)</label>
                         <input id="organizer_name" type="text" placeholder="Name des Veranstalters" class="pure-input-1" value="{{editDto.organizer.name}}">
                     </div>
                 </div>
                 <div class="pure-g">
-                    <div class="pure-u-1-2">
+                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
                         <label for="organizer_phone">Telefonnummer</label>
                         <input id="organizer_phone" type="tel" placeholder="Telefonnummer" class="pure-input-1" value="{{editDto.organizer.phone}}">
                     </div>
                 </div>
                 <div class="pure-g">
-                    <div class="pure-u-1-2">
+                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
                         <label for="organizer_email">E-Mail</label>
                         <input id="organizer_email" type="email" placeholder="E-Mail" class="pure-input-1" value="{{editDto.organizer.email}}">
                     </div>
                 </div>
                 <div class="pure-g">
-                    <div class="pure-u-1-2">
+                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
                         <label for="organizer_url">Website</label>
                         <input id="organizer_url" type="text" placeholder="Website" class="pure-input-1" value="{{editDto.organizer.url}}">
                     </div>
                 </div>
                 <div class="pure-g">
-                    <div class="pure-u-1-2 hint">
+                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2 hint">
                         <strong>Die Adresse ist identisch mit der Adresse des Kinderflohmarkts?</strong> <a href="#">Adresse übernehmen!</a>
                     </div>
                 </div>
@@ -505,7 +505,7 @@
                 {% endif %}
 
                 <div class="pure-g">
-                    <div class="pure-u-1-2">
+                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
                         <button type="submit" id="submitform" class="pure-button">
                             <i class="fa fa-save fa-lg"></i>
                             {% if editForm %}
