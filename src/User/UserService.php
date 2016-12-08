@@ -2,7 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\User;
 
-use RudiBieller\OnkelRudi\FleaMarket\Organizer;
+use RudiBieller\OnkelRudi\FleaMarket\Organizer as FleamarketOrganizer;
 use RudiBieller\OnkelRudi\FleaMarket\OrganizerServiceInterface;
 use Slim\Container;
 
@@ -62,7 +62,7 @@ class UserService implements UserServiceInterface
         $userQuery->setIdentifier($identifier)->setPassword($password)->setType(UserInterface::TYPE_ORGANIZER);
         $userQuery->run();
 
-        $organizer = new Organizer();
+        $organizer = new FleamarketOrganizer();
         $organizer->setName($identifier);
         $organizerId = $this->_organizerService->createOrganizer($organizer);
 

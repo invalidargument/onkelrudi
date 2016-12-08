@@ -5,9 +5,8 @@ namespace RudiBieller\OnkelRudi\Controller\Api;
 use RudiBieller\OnkelRudi\Controller\AbstractJsonAction;
 use RudiBieller\OnkelRudi\Controller\UserAwareInterface;
 use RudiBieller\OnkelRudi\FleaMarket\Builder;
-use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
-use RudiBieller\OnkelRudi\User\User;
+use RudiBieller\OnkelRudi\User\Admin;
 
 class FleaMarketCreateAction extends AbstractJsonAction implements UserAwareInterface
 {
@@ -41,6 +40,13 @@ class FleaMarketCreateAction extends AbstractJsonAction implements UserAwareInte
             }
         }
 
-        return $this->service->createFleaMarket($builder->build());
+        $user = $this->userService->getAuthenticationService()->getStorage()->read();
+
+        $autoApprove = false;
+        if ($user instanceof Admin) {
+            $autoApprove = true;
+        }
+
+        return $this->service->createFleaMarket($builder->build(), $autoApprove);
     }
 }

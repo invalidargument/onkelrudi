@@ -6,12 +6,16 @@ use RudiBieller\OnkelRudi\BuilderFactory;
 use RudiBieller\OnkelRudi\Controller\Fixture\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
+use RudiBieller\OnkelRudi\User\Admin;
+use RudiBieller\OnkelRudi\User\Organizer as OrganizerUser;
 use RudiBieller\OnkelRudi\User\User;
-use RudiBieller\OnkelRudi\User\UserInterface;
 
 class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
 {
-    public function testActionCreatesNewFleaMarket()
+    /**
+     * @dataProvider dataProviderTestActionCreatesNewFleaMarket
+     */
+    public function testActionCreatesNewFleaMarket($user, $expectedAutoApprove)
     {
         $app = Factory::createSlimAppWithStandardTestContainer();
 
@@ -30,7 +34,6 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
 
         $organizer = new Organizer();
         $organizer->setId(42);
-        $user = new User('test@onkel-rudi.de', null, UserInterface::TYPE_ORGANIZER, true);
         $fleaMarket = new FleaMarket();
         $fleaMarket->setName('foo')
             ->setCity('bar')
@@ -46,10 +49,9 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
 
         $builderFactory = new BuilderFactory();
         $service = \Mockery::mock('RudiBieller\OnkelRudi\FleaMarket\FleaMarketService');
-        $service->shouldReceive('createFleaMarket')->once()->with(\Hamcrest\Matchers::equalTo($fleaMarket))->andReturn(1);
+        $service->shouldReceive('createFleaMarket')->once()->with(\Hamcrest\Matchers::equalTo($fleaMarket), $expectedAutoApprove)->andReturn(1);
 
-        $authenticatedUser = new User('test@onkel-rudi.de', null, UserInterface::TYPE_ORGANIZER, true);
-        $userService = Factory::createUserServiceWithAuthenticatedUserSession($authenticatedUser);
+        $userService = Factory::createUserServiceWithAuthenticatedUserSession($user);
 
         $request = Factory::createTestRequest();
         $request->shouldReceive('getParsedBody')->once()->andReturn($parsedJson);
@@ -66,5 +68,14 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
         $expected = json_encode(array('data' => 1));
 
         $this->assertJsonStringEqualsJsonString($expected, $actual);
+    }
+
+    public function dataProviderTestActionCreatesNewFleaMarket()
+    {
+        return array(
+            array(new User('test@onkel-rudi.de', null, true), false),
+            array(new OrganizerUser('test@onkel-rudi.de', null, true), false),
+            array(new Admin('test@onkel-rudi.de', null, true), true)
+        );
     }
 }

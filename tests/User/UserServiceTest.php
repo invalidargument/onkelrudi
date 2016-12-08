@@ -2,7 +2,6 @@
 
 namespace RudiBieller\OnkelRudi\User;
 
-use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use Zend\Authentication\Storage\Session;
 
 class UserServiceTest extends \PHPUnit_Framework_TestCase
