@@ -20,6 +20,7 @@ class FleaMarketReadListQuery extends AbstractQuery
      */
     private $_user;
     private $_onlyCurrentDates = false;
+    private $_onlyApprovedMarkets = false;
     private $_queryTimespan;
     /**
      * @var FleaMarketServiceInterface
@@ -62,6 +63,12 @@ class FleaMarketReadListQuery extends AbstractQuery
         return $this;
     }
 
+    public function setQueryOnlyApprovedFleamarkets($onlyApproved = false)
+    {
+        $this->_onlyApprovedMarkets = $onlyApproved;
+        return $this;
+    }
+
     protected function runQuery()
     {
         $datesData = $this->_getDatesData();
@@ -79,6 +86,10 @@ class FleaMarketReadListQuery extends AbstractQuery
 
         if ($this->_user) {
             $selectStatement = $selectStatement->where('user_id', '=', $this->_user->getIdentifier());
+        }
+
+        if ($this->_onlyApprovedMarkets) {
+            $selectStatement = $selectStatement->where('approved', '=', 1);
         }
 
         /**
