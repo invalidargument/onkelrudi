@@ -119,7 +119,10 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
         $this->_sut->getAllFleaMarkets();
     }
 
-    public function testGetAllByTimespanReturnsListWithAllMarketsOfGivenTimespanOnly()
+    /**
+     * @dataProvider dataProviderTestGetAllByTimespanReturnsListWithAllMarketsOfGivenTimespanOnly
+     */
+    public function testGetAllByTimespanReturnsListWithAllMarketsOfGivenTimespanOnly($start, $end, $onlyApproved)
     {
         $markets = array();
 
@@ -133,11 +136,20 @@ class FleaMarketServiceTest extends \PHPUnit_Framework_TestCase
                     \Hamcrest\Matchers::anInstanceOf('\DateTimeImmutable')
                 )
                 ->andReturn($query)
+            ->shouldReceive('setQueryOnlyApprovedFleamarkets')->once()->with($onlyApproved)
             ->shouldReceive('run')->once()->andReturn($markets);
 
         $this->_factory->shouldReceive('createFleaMarketReadListQuery')->once()->andReturn($query);
 
-        $this->_sut->getAllFleaMarketsByTimespan();
+        $this->_sut->getAllFleaMarketsByTimespan($start, $end, $onlyApproved);
+    }
+
+    public function dataProviderTestGetAllByTimespanReturnsListWithAllMarketsOfGivenTimespanOnly()
+    {
+        return array(
+            array(null, null, true),
+            array(null, null, false)
+        );
     }
 
     public function testGetFleaMarketsReturnsListWithMarketsByLimitAndOffset()

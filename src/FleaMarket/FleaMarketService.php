@@ -89,7 +89,7 @@ class FleaMarketService implements FleaMarketServiceInterface
     /**
      * @return FleaMarket[]
      */
-    public function getAllFleaMarketsByTimespan(\DateTimeImmutable $start = null, \DateTimeImmutable $end = null)
+    public function getAllFleaMarketsByTimespan(\DateTimeImmutable $start = null, \DateTimeImmutable $end = null, $onlyApproved = true)
     {
         $query = $this->_factory->createFleaMarketReadListQuery();
 
@@ -103,7 +103,8 @@ class FleaMarketService implements FleaMarketServiceInterface
         }
 
         $query->setFleaMarketService($this)
-            ->setQueryTimespan($start, $end);
+            ->setQueryTimespan($start, $end)
+            ->setQueryOnlyApprovedFleamarkets($onlyApproved);
 
         return $query->run();
     }
