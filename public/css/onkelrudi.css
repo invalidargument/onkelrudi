@@ -323,6 +323,10 @@ form#startMonthSelect h2 {
     color: #F17022;
 }
 
+.extra-mt {
+    margin-top: 10px;
+}
+
 /*
  * -- TABLET (AND UP) MEDIA QUERIES --
  * On tablets and other medium-sized devices, we want to customize some
@@ -376,6 +380,10 @@ form#startMonthSelect h2 {
 
     .pure-menu-link, .pure-menu-disabled, .pure-menu-heading {
         padding: 0.5em 0.5em;
+    }
+
+    .extra-mt {
+        margin-top: inherit;
     }
 }
 
