@@ -122,6 +122,11 @@ class FleaMarketReadListQuery extends AbstractQuery
         }
 
         foreach ($result['dates'] as $item) {
+
+            if (!array_key_exists($item['fleamarket_id'], $marketData)) {
+                continue;
+            }
+
             $date = new FleaMarketDate($item['start'], $item['end']);
             $slug = (new Slugify())->slugify(
                 $marketData[$item['fleamarket_id']]['name'].'-'.$marketData[$item['fleamarket_id']]['city']
