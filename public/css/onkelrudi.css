@@ -652,3 +652,12 @@ a.actionButton, a.actionButton:hover {
 .nowrap {
     white-space: nowrap;
 }
+
+::selection {
+    background: #EEF66C;
+    color: #F17022;
+}
+::-moz-selection {
+    background: #EEF66C;
+    color: #F17022;
+}
