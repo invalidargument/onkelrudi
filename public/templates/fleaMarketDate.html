@@ -76,7 +76,9 @@
                             {% if dateItem.start|date("Ymd") == "now"|date("Ymd") %}{% set cssClass = 'dateTime today' %} {% endif %}
                             {% if "now"|date("Ymd") > dateItem.start|date("Ymd") %}{% set cssClass = 'dateTime over'%} {% endif %}
                             <li class="{{cssClass}} nowrap">
-                                <a href="/public/ical/termin/{{data.id}}/datum/{{dateItem.start|date('d.m.Y')}}" title="Zum Kalender (iCal) hinzufügen"><i class="fa fa-calendar-plus-o"></i>{{dateItem.start|date("d.m.Y")}}</a>
+                                {% if "now"|date("Ymd") < dateItem.start|date("Ymd") %}<a href="/public/ical/termin/{{data.id}}/datum/{{dateItem.start|date('d.m.Y')}}" title="Zum Kalender (iCal) hinzufügen">{% endif %}
+                                    <i class="fa fa-calendar-plus-o"></i>{{dateItem.start|date("d.m.Y")}}
+                                {% if "now"|date("Ymd") < dateItem.start|date("Ymd") %}</a>{% endif %}
                             </li>
                             {% endfor %}
                         </ol>
