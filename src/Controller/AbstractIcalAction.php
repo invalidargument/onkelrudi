@@ -18,6 +18,8 @@ abstract class AbstractIcalAction extends AbstractAction implements IcalActionIn
 
     protected function writeErrorResponse()
     {
+        $this->app->getContainer()->get('Logger')->critical('General error occured calling URI: ' . $this->request->getUri());
+
         return $this->app->getContainer()->get('view')
             ->render(
                 $this->response,
