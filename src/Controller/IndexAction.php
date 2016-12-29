@@ -51,6 +51,8 @@ class IndexAction extends AbstractHttpAction
         $this->templateVariables['zipAreaRange'] = $zipAreaRange;
         $this->templateVariables['selectedMonth'] = str_replace('-', '/', $monthArgument);
         $this->templateVariables['selectedZipAreaRange'] = $this->_getSelectedZipRange($zipArgument);
+        $this->templateVariables['profileurl'] = $this->app->getContainer()->get('router')->pathFor('profile');
+        $this->templateVariables['createfleamarketurl'] = $this->app->getContainer()->get('router')->pathFor('create-fleamarket');
         $this->templateVariables['isLoggedIn'] = $this->userService->isLoggedIn();
         $this->templateVariables['isTest'] = (boolean)$isTest;
 
