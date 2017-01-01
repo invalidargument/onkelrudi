@@ -146,7 +146,7 @@ a.pure-button-primary {
 .pure-menu-active > .pure-menu-children {
     display: block;
     position: absolute;
-    margin-left: -108px;
+    margin-left: -74px;
 }
 .pure-menu-allow-hover > .pure-menu-children a,
 .pure-menu-active > .pure-menu-children a {
@@ -414,7 +414,7 @@ form#startMonthSelect h2 {
     /* horizontal dropdown menu */
     .pure-menu-allow-hover:hover > .pure-menu-children,
     .pure-menu-active > .pure-menu-children {
-        margin-left: -136px;
+        margin-left: -97px;
     }
 }
 
