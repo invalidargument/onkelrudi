@@ -2,10 +2,9 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
+use RudiBieller\OnkelRudi\Controller\Fixture\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
-use Slim\App;
-use Zend\Authentication\Storage\Session;
 
 class EditFleaMarketActionTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,22 +17,7 @@ class EditFleaMarketActionTest extends \PHPUnit_Framework_TestCase
         $config = \Mockery::mock('RudiBieller\OnkelRudi\Config\Config');
         $config->shouldReceive('getSystemConfiguration')->andReturn(array('environment' => 'dev'));
 
-        $this->_app = new App();
-        $container = $this->_app->getContainer();
-        $container['view'] = function ($c) {
-            $view = new \Slim\Views\Twig(
-                dirname(__FILE__).'/../../public/templates',
-                ['cache' => false]
-            );
-
-            $view->addExtension(new \Slim\Views\TwigExtension(
-                $c['router'],
-                $c['request']->getUri()
-            ));
-
-            return $view;
-        };
-        $container['config'] = $config;
+        $this->_app = Factory::createSlimAppWithStandardTestContainer();
     }
 
     public function testActionSetsNeededTemplateVariables()
@@ -54,7 +38,7 @@ class EditFleaMarketActionTest extends \PHPUnit_Framework_TestCase
         $body = \Mockery::mock('Slim\HttpBody');
         $body->shouldReceive('write');
 
-        $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
+        $request = Factory::createTestRequest();
         $request->shouldReceive('getUri')->andReturn($uri);
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
         $response->shouldReceive('getBody')->once()->andReturn($body)
@@ -86,7 +70,7 @@ class EditFleaMarketActionTest extends \PHPUnit_Framework_TestCase
         $action($request, $response, array('id' => 23));
 
         $this->assertAttributeEquals(
-            ['isTest' => true, 'loggedIn' => true, 'fleamarket_organizers' => array(), 'editForm' => true, 'editDto' => $fleamarket, 'isOrganizer' => null],
+            ['isTest' => true, 'loggedIn' => true, 'fleamarket_organizers' => array(), 'editForm' => true, 'editDto' => $fleamarket, 'isOrganizer' => null, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/'],
             'templateVariables',
             $action
         );

@@ -11,6 +11,9 @@ class Factory
         $config = \Mockery::mock('RudiBieller\OnkelRudi\Config\Config');
         $config->shouldReceive('getSystemConfiguration')->andReturn(array('environment' => 'dev'));
 
+        $router = \Mockery::mock('Slim\Interfaces\RouterInterface');
+        $router->shouldReceive('pathFor')->once()->andReturn('/foo/');
+
         $app = new App();
         $container = $app->getContainer();
         $container['view'] = function ($cArg) {
@@ -27,6 +30,7 @@ class Factory
             return $view;
         };
         $container['config'] = $config;
+        $container['router'] = $router;
 
         return $app;
     }

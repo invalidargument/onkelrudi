@@ -83,7 +83,7 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
 
         $action($request, $response, array());
 
-        $this->assertAttributeEquals([], 'templateVariables', $action);
+        $this->assertAttributeEquals(['profileurl' => '/profil/', 'createfleamarketurl' => '/flohmarkt-anlegen/'], 'templateVariables', $action);
     }
 
     /**

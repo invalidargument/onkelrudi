@@ -128,6 +128,31 @@ a.pure-button-primary {
     border-bottom:2px solid #E4F6F8;
 }
 
+/* horizontal dropdown menu */
+.home-menu li li {
+    background-color: #62C2CC;
+    color: #ffffff;
+}
+.home-menu li li a {
+    border-bottom: 1px solid #ffffff;
+}
+.home-menu li li a:hover,
+.home-menu li li a:focus {
+    background: #ffffff;
+    border-bottom: 1px solid #62C2CC;
+    color: #7f8c8d;
+}
+.pure-menu-allow-hover:hover > .pure-menu-children,
+.pure-menu-active > .pure-menu-children {
+    display: block;
+    position: absolute;
+    margin-left: -108px;
+}
+.pure-menu-allow-hover > .pure-menu-children a,
+.pure-menu-active > .pure-menu-children a {
+    color:#ffffff;
+}
+
 .pure-menu-active,
 .pure-menu-active .pure-menu-link {
     background-color: inherit !important;
@@ -384,6 +409,12 @@ form#startMonthSelect h2 {
 
     .extra-mt {
         margin-top: inherit;
+    }
+
+    /* horizontal dropdown menu */
+    .pure-menu-allow-hover:hover > .pure-menu-children,
+    .pure-menu-active > .pure-menu-children {
+        margin-left: -136px;
     }
 }
 

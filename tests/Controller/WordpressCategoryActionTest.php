@@ -2,11 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
-use RudiBieller\OnkelRudi\Config\Config;
-use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
+use RudiBieller\OnkelRudi\Controller\Fixture\Factory;
 use RudiBieller\OnkelRudi\Wordpress\Category;
-use Slim\App;
-use Slim\Http\Body;
 
 class WordpressCategoryActionTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,29 +12,11 @@ class WordpressCategoryActionTest extends \PHPUnit_Framework_TestCase
         $category = new Category();
         $category->setId(42);
 
-        $app = new App();
-        $container = $app->getContainer();
-        $container['view'] = function ($c) {
-            $view = new \Slim\Views\Twig(
-                dirname(__FILE__).'/../../public/templates',
-                [
-                    //'cache' => 'templates/cache'
-                    'cache' => false
-                ]
-            );
-
-            $view->addExtension(new \Slim\Views\TwigExtension(
-                $c['router'],
-                $c['request']->getUri()
-            ));
-
-            return $view;
-        };
-        $container['config'] = new Config();
+        $app = Factory::createSlimAppWithStandardTestContainer();
         $body = \Mockery::mock('Slim\HttpBody');
         $body->shouldReceive('write')
             ->shouldReceive('__toString')->andReturn('String representation of the Body object');
-        $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
+        $request = Factory::createTestRequest();
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
         $response->shouldReceive('getBody')->once()->andReturn($body)
             ->shouldReceive('write');
@@ -59,6 +38,6 @@ class WordpressCategoryActionTest extends \PHPUnit_Framework_TestCase
         $expected = 'String representation of the Body object';
 
         $this->assertContains($expected, $actual);
-        $this->assertAttributeEquals(['selectedCategory' => 42], 'templateVariables', $action);
+        $this->assertAttributeEquals(['selectedCategory' => 42, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/'], 'templateVariables', $action);
     }
 }

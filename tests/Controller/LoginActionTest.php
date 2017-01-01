@@ -2,41 +2,18 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
-use RudiBieller\OnkelRudi\Config\Config;
-use Slim\App;
+use RudiBieller\OnkelRudi\Controller\Fixture\Factory;
 use Zend\Authentication\Storage\Session;
 
 class LoginActionTest extends \PHPUnit_Framework_TestCase
 {
     public function testActionReturnsRequestedMarket()
     {
-        $router = \Mockery::mock('Slim\Interfaces\RouterInterface');
-        $router->shouldReceive('pathFor')->once()->with('profile')->andReturn('/profil/');
-
-        $app = new App();
-        $container = $app->getContainer();
-        $container['view'] = function ($c) {
-            $view = new \Slim\Views\Twig(
-                dirname(__FILE__).'/../../public/templates',
-                [
-                    //'cache' => 'templates/cache'
-                    'cache' => false
-                ]
-            );
-
-            $view->addExtension(new \Slim\Views\TwigExtension(
-                $c['router'],
-                $c['request']->getUri()
-            ));
-
-            return $view;
-        };
-        $container['router'] = $router;
-        $container['config'] = new Config();
+        $app = Factory::createSlimAppWithStandardTestContainer();
         $body = \Mockery::mock('Slim\HttpBody');
         $body->shouldReceive('write')
             ->shouldReceive('__toString')->andReturn('String representation of the Body object');
-        $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
+        $request = Factory::createTestRequest();
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
         $response->shouldReceive('getBody')->once()->andReturn($body)
             ->shouldReceive('write');
@@ -63,7 +40,7 @@ class LoginActionTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($expected, $actual);
 
         $this->assertAttributeEquals(
-            ['loggedIn' => true, 'profileurl' => '/profil/'],
+            ['loggedIn' => true, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/'],
             'templateVariables',
             $action
         );

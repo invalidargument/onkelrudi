@@ -2,8 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
+use RudiBieller\OnkelRudi\Controller\Fixture\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
-use Slim\App;
 use Zend\Authentication\Storage\Session;
 
 class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
@@ -14,25 +14,7 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $config = \Mockery::mock('RudiBieller\OnkelRudi\Config\Config');
-        $config->shouldReceive('getSystemConfiguration')->andReturn(array('environment' => 'dev'));
-
-        $this->_app = new App();
-        $container = $this->_app->getContainer();
-        $container['view'] = function ($c) {
-            $view = new \Slim\Views\Twig(
-                dirname(__FILE__).'/../../public/templates',
-                ['cache' => false]
-            );
-
-            $view->addExtension(new \Slim\Views\TwigExtension(
-                $c['router'],
-                $c['request']->getUri()
-            ));
-
-            return $view;
-        };
-        $container['config'] = $config;
+        $this->_app = Factory::createSlimAppWithStandardTestContainer();
     }
 
     public function testActionDoesRecognizeEmptySession()
@@ -77,7 +59,7 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
 
         $action($request, $response, array());
 
-        $this->assertAttributeEquals([], 'templateVariables', $action);
+        $this->assertAttributeEquals(['profileurl' => '/foo/', 'createfleamarketurl' => '/foo/'], 'templateVariables', $action);
     }
 
     public function testActionSetsNeededTemplateVariables()
@@ -120,7 +102,7 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
         $action($request, $response, array());
 
         $this->assertAttributeEquals(
-            ['isTest' => true, 'loggedIn' => true, 'fleamarket_organizers' => array(array('id' => 23, 'name' => 'foobarbaz')), 'createForm' => true],
+            ['isTest' => true, 'loggedIn' => true, 'fleamarket_organizers' => array(array('id' => 23, 'name' => 'foobarbaz')), 'createForm' => true, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/'],
             'templateVariables',
             $action
         );

@@ -21,6 +21,9 @@ abstract class AbstractHttpAction extends AbstractAction implements HttpActionIn
 
     protected function writeErrorResponse()
     {
+        $this->templateVariables['profileurl'] = $this->app->getContainer()->get('router')->pathFor('profile');
+        $this->templateVariables['createfleamarketurl'] = $this->app->getContainer()->get('router')->pathFor('create-fleamarket');
+
         $this->app->getContainer()->get('Logger')->critical('General error occured calling URI: ' . $this->request->getUri());
 
         return $this->app->getContainer()->get('view')
@@ -36,6 +39,9 @@ abstract class AbstractHttpAction extends AbstractAction implements HttpActionIn
 
     protected function writeSuccessResponse()
     {
+        $this->templateVariables['profileurl'] = $this->app->getContainer()->get('router')->pathFor('profile');
+        $this->templateVariables['createfleamarketurl'] = $this->app->getContainer()->get('router')->pathFor('create-fleamarket');
+
         return $this->app->getContainer()->get('view')
             ->render(
                 $this->response,
@@ -53,6 +59,9 @@ abstract class AbstractHttpAction extends AbstractAction implements HttpActionIn
 
     protected function writeAuthenticationRequiredResponse()
     {
+        $this->templateVariables['profileurl'] = $this->app->getContainer()->get('router')->pathFor('profile');
+        $this->templateVariables['createfleamarketurl'] = $this->app->getContainer()->get('router')->pathFor('create-fleamarket');
+
         return $this->app->getContainer()->get('view')
             ->render(
                 $this->response,

@@ -2,8 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
-use RudiBieller\OnkelRudi\Config\Config;
-use Slim\App;
+use RudiBieller\OnkelRudi\Controller\Fixture\Factory;
 use Zend\Authentication\Storage\Session;
 
 class OptInActionTest extends \PHPUnit_Framework_TestCase
@@ -17,33 +16,11 @@ class OptInActionTest extends \PHPUnit_Framework_TestCase
             'token' => '123abc456'
         ];
 
-        $router = \Mockery::mock('Slim\Interfaces\RouterInterface');
-        $router->shouldReceive('pathFor')->once()->with('profile')->andReturn('/profil/');
-
-        $app = new App();
-        $container = $app->getContainer();
-        $container['view'] = function ($c) {
-            $view = new \Slim\Views\Twig(
-                dirname(__FILE__).'/../../public/templates',
-                [
-                    //'cache' => 'templates/cache'
-                    'cache' => false
-                ]
-            );
-
-            $view->addExtension(new \Slim\Views\TwigExtension(
-                $c['router'],
-                $c['request']->getUri()
-            ));
-
-            return $view;
-        };
-        $container['config'] = new Config();
-        $container['router'] = $router;
+        $app = Factory::createSlimAppWithStandardTestContainer();
         $body = \Mockery::mock('Slim\HttpBody');
         $body->shouldReceive('write')
             ->shouldReceive('__toString')->andReturn('String representation of the Body object');
-        $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
+        $request = Factory::createTestRequest();
         $request->shouldReceive('getParsedBody')->once()->andReturn($parsedJson);
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
         $response->shouldReceive('getBody')->once()->andReturn($body)
@@ -76,8 +53,8 @@ class OptInActionTest extends \PHPUnit_Framework_TestCase
     public function dataProviderTestActionDoesOptInWhenGivenAValidToken()
     {
         return array(
-            array(true, ['optin' => true, 'profileurl' => '/profil/']),
-            array(false, ['optin' => true, 'optinfailed' => true, 'profileurl' => '/profil/'])
+            array(true, ['optin' => true, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/']),
+            array(false, ['optin' => true, 'optinfailed' => true, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/'])
         );
     }
 }

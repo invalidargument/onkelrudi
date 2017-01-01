@@ -2,12 +2,10 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
-use RudiBieller\OnkelRudi\Config\Config;
+use RudiBieller\OnkelRudi\Controller\Fixture\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
-use Slim\App;
-use Slim\Http\Body;
 
 class FleaMarketDetailActionTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,29 +21,11 @@ class FleaMarketDetailActionTest extends \PHPUnit_Framework_TestCase
             ->setOrganizer($organizer)
             ->setDates($dates);
 
-        $app = new App();
-        $container = $app->getContainer();
-        $container['view'] = function ($c) {
-            $view = new \Slim\Views\Twig(
-                dirname(__FILE__).'/../../public/templates',
-                [
-                    //'cache' => 'templates/cache'
-                    'cache' => false
-                ]
-            );
-
-            $view->addExtension(new \Slim\Views\TwigExtension(
-                $c['router'],
-                $c['request']->getUri()
-            ));
-
-            return $view;
-        };
-        $container['config'] = new Config();
+        $app = Factory::createSlimAppWithStandardTestContainer();
         $body = \Mockery::mock('Slim\HttpBody');
         $body->shouldReceive('write')
             ->shouldReceive('__toString')->andReturn('String representation of the Body object');
-        $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
+        $request = Factory::createTestRequest();
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
         $response->shouldReceive('getBody')->once()->andReturn($body)
             ->shouldReceive('write');
@@ -84,21 +64,21 @@ class FleaMarketDetailActionTest extends \PHPUnit_Framework_TestCase
                 [
                     new FleaMarketDate('2015-01-01 09:00:00', '2015-01-01 12:30:00')
                 ],
-                ['hasValidDate' => false, 'nextValidDateStart' => '2015-01-01 09:00:00', 'nextValidDateEnd' => '2015-01-01 12:30:00']
+                ['hasValidDate' => false, 'nextValidDateStart' => '2015-01-01 09:00:00', 'nextValidDateEnd' => '2015-01-01 12:30:00', 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/']
             ),
             array(
                 [
                     new FleaMarketDate('2015-01-01 09:00:00', '2015-01-01 12:30:00'),
                     new FleaMarketDate('2019-01-01 09:00:00', '2019-01-01 12:30:00')
                 ],
-                ['hasValidDate' => true, 'nextValidDateStart' => '2019-01-01 09:00:00', 'nextValidDateEnd' => '2019-01-01 12:30:00']
+                ['hasValidDate' => true, 'nextValidDateStart' => '2019-01-01 09:00:00', 'nextValidDateEnd' => '2019-01-01 12:30:00', 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/']
             ),
             array(
                 [
                     new FleaMarketDate('2019-01-01 09:00:00', '2019-01-01 12:30:00'),
                     new FleaMarketDate('2021-01-01 09:00:00', '2021-01-01 12:30:00')
                 ],
-                ['hasValidDate' => true, 'nextValidDateStart' => '2019-01-01 09:00:00', 'nextValidDateEnd' => '2019-01-01 12:30:00']
+                ['hasValidDate' => true, 'nextValidDateStart' => '2019-01-01 09:00:00', 'nextValidDateEnd' => '2019-01-01 12:30:00', 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/']
             )
         );
     }

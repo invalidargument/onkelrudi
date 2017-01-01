@@ -2,10 +2,9 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
-use RudiBieller\OnkelRudi\Config\Config;
+use RudiBieller\OnkelRudi\Controller\Fixture\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
-use Slim\App;
 use Slim\Http\Uri;
 use Zend\Authentication\Storage\Session;
 
@@ -13,30 +12,10 @@ class IndexActionTest extends \PHPUnit_Framework_TestCase
 {
     public function testActionSetsTemplateVariables()
     {
-        $router = \Mockery::mock('Slim\Interfaces\RouterInterface');
-        $router->shouldReceive('pathFor')->once()->andReturn('/foo/');
-
         $uri = new Uri('http', 'onkel-rudi.de');
 
-        $app = new App();
-        $container = $app->getContainer();
-        $container['view'] = function ($c) {
-            $view = new \Slim\Views\Twig(
-                dirname(__FILE__).'/../../public/templates',
-                [
-                    'cache' => false
-                ]
-            );
+        $app = Factory::createSlimAppWithStandardTestContainer();
 
-            $view->addExtension(new \Slim\Views\TwigExtension(
-                $c['router'],
-                $c['request']->getUri()
-            ));
-
-            return $view;
-        };
-        $container['router'] = $router;
-        $container['config'] = new Config();
         $body = \Mockery::mock('Slim\HttpBody');
         $body->shouldReceive('write')
             ->shouldReceive('__toString')->andReturn('String representation of the Body object');
