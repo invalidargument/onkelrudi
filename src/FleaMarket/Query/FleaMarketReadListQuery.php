@@ -122,7 +122,6 @@ class FleaMarketReadListQuery extends AbstractQuery
         }
 
         foreach ($result['dates'] as $item) {
-
             if (!array_key_exists($item['fleamarket_id'], $marketData)) {
                 continue;
             }
