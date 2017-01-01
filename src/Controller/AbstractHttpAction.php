@@ -23,6 +23,7 @@ abstract class AbstractHttpAction extends AbstractAction implements HttpActionIn
     {
         $this->templateVariables['profileurl'] = $this->app->getContainer()->get('router')->pathFor('profile');
         $this->templateVariables['createfleamarketurl'] = $this->app->getContainer()->get('router')->pathFor('create-fleamarket');
+        $this->templateVariables['logouturl'] = $this->app->getContainer()->get('router')->pathFor('logout');
 
         $this->app->getContainer()->get('Logger')->critical('General error occured calling URI: ' . $this->request->getUri());
 
@@ -41,6 +42,7 @@ abstract class AbstractHttpAction extends AbstractAction implements HttpActionIn
     {
         $this->templateVariables['profileurl'] = $this->app->getContainer()->get('router')->pathFor('profile');
         $this->templateVariables['createfleamarketurl'] = $this->app->getContainer()->get('router')->pathFor('create-fleamarket');
+        $this->templateVariables['logouturl'] = $this->app->getContainer()->get('router')->pathFor('logout');
 
         return $this->app->getContainer()->get('view')
             ->render(
@@ -61,6 +63,7 @@ abstract class AbstractHttpAction extends AbstractAction implements HttpActionIn
     {
         $this->templateVariables['profileurl'] = $this->app->getContainer()->get('router')->pathFor('profile');
         $this->templateVariables['createfleamarketurl'] = $this->app->getContainer()->get('router')->pathFor('create-fleamarket');
+        $this->templateVariables['logouturl'] = $this->app->getContainer()->get('router')->pathFor('logout');
 
         return $this->app->getContainer()->get('view')
             ->render(

@@ -38,6 +38,6 @@ class WordpressCategoryActionTest extends \PHPUnit_Framework_TestCase
         $expected = 'String representation of the Body object';
 
         $this->assertContains($expected, $actual);
-        $this->assertAttributeEquals(['selectedCategory' => 42, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/'], 'templateVariables', $action);
+        $this->assertAttributeEquals(['selectedCategory' => 42, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'logouturl' => '/foo/'], 'templateVariables', $action);
     }
 }

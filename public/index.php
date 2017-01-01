@@ -181,6 +181,10 @@ $app->get('/login/', function ($request, $response, $args) use ($app, $controlle
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\LoginAction');
     $action($request, $response, $args);
 })->setName('login-register');
+$app->get('/logout/', function ($request, $response, $args) use ($app, $controllerFactory) {
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\LogoutAction');
+    $action($request, $response, $args);
+})->setName('logout');
 
 // opt-in confirmation
 $app->get('/opt-in/token-{token}', function ($request, $response, $args) use ($app, $controllerFactory) {
