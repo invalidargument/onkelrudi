@@ -29,11 +29,16 @@ class FleaMarketDetailAction extends AbstractHttpAction
     {
         $hasValidDate = false;
         $nextValidDateStart = $nextValidDateEnd = null;
-        $today = date('Y-m-d 00:00:00');
+
+        if (array_key_exists('date', $this->args)) {
+            $comparisonDate = date('Y-m-d 00:00:00', strtotime($this->args['date']));
+        } else {
+            $comparisonDate = date('Y-m-d 00:00:00');
+        }
         $dates = $market->getDates();
 
         foreach ($dates as $date) {
-            if (strtotime($date->getStart()) >= strtotime($today)) {
+            if (strtotime($date->getStart()) >= strtotime($comparisonDate)) {
                 $hasValidDate = true;
                 $nextValidDateStart = $date->getStart();
                 $nextValidDateEnd = $date->getEnd();
