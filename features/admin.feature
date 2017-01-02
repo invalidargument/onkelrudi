@@ -49,38 +49,6 @@ Feature: Admin page of onkelrudi
     """
 
   @javascript
-  Scenario: Admin can create a new fleamarket with an existing organizer
-    Given I am slowly authenticated as user
-    And I have a default organizer
-    And I go to "/flohmarkt-anlegen/?test=1"
-    Then I should see "+ Termin anlegen"
-    When I fill in the following:
-      | fleamarket_name | Rudi Bieller |
-      | fleamarket_description | Eine Beschreibung |
-      | fleamarket_location | Zu Hause |
-      | fleamarket_street | Hausstr. |
-      | fleamarket_streetNo | 42 |
-      | fleamarket_zipCode | 50000 |
-      | fleamarket_city | Köln |
-      | fleamarket_url | http://www.example.com |
-      | marketDate | 31.01.2019 |
-      | marketTimeFrom | 09:30 |
-      | marketTimeTo | 18:00 |
-    And I select "Max Power" from "fleamarket_organizer"
-    And I press "Neuen Termin speichern - click hier!"
-    And I wait for "1" seconds
-    Then I should see a ".button-success" element
-    And I should not see an ".error" element
-    And I should see "Danke - Dein Termin wurde erfolgreich angelegt!"
-    When I send a "GET" request to "http://localhost/public/api/v1/fleamarkets/1"
-    Then the response code should be "200"
-    And the response should be json
-    And the response should be
-    """
-    {"data":{"id":"1","uuid":"868f3976-d99c-5147-81e7-6113e2af50f9","organizer":{"id":"1","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Rudi Bieller","description":"Eine Beschreibung","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Hausstr.","streetNo":"42","city":"K\u00f6ln","zipCode":"50000","location":"Zu Hause","url":"http:\/\/www.example.com"}}
-    """
-
-  @javascript
   Scenario: Admin can not create a new fleamarket when no existing organizer is selected and no new organizer provided
     Given I am slowly authenticated as user
     And I am on "/flohmarkt-anlegen/?test=1"

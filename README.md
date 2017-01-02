@@ -7,8 +7,8 @@
 ant phpunit
 ant behat
 
-requires Selenium locally, e.g.:
-java -jar bin/selenium-server-standalone-2.49.0.jar -Dwebdriver.chrome.driver=/Users/rudibieller/Sites/VagrantBoxes/onkelrudi/bin/chromedriver
+for behat run local Selenium.
+java -jar -Dwebdriver.chrome.driver=/Users/rudibieller/Sites/VagrantBoxes/onkelrudi/bin/chromedriver bin/selenium-server-standalone-3.0.1.jar
 ```
 
 ### Build
@@ -23,7 +23,7 @@ ant build-local
 ```
 
 ### API
-api.feature. For playing there is curl:
+api.feature.
 ```
 curl -H "Content-Type: application/json" -X POST -d '{"name":"Max POWER", "description": "Blue Pants", "start":"2015-01-01 00:00:00", "end":"2015-12-12 00:00:00", "dates":"[]", "zipCode":"50667"}' http://localhost/public/api/v1/fleamarkets
 ```
@@ -48,7 +48,7 @@ curl http://localhost/public/api/v1/fleamarkets/1  -XGET
 curl http://localhost/public/api/v1/fleamarkets/1  -XDELETE
 ```
 
-### Misc for the Vagrant box
+### Misc
 ```
 /etc/mysql/my.conf
 /var/log/apache2/error.log

@@ -349,20 +349,6 @@
         <div class="regformbox">
 
             <form id="newFleaMarket" method="post" class="pure-form pure-form-stacked">
-
-                <!-- RENDER ONLY WHEN LOGGED IN or admin??? -->
-                {% if isTest %}
-                <div class="pure-u-1-2">
-                    <label for="fleamarket_organizer">Diesen Veranstalter zuordnen</label>
-                    <select id="fleamarket_organizer" style="width: 100%;">
-                        {% for item in fleamarket_organizers %}
-                        <option value="{{item.id}}">{{item.name}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                {% endif %}
-                <!-- /RENDER ONLY WHEN LOGGED IN or admin??? -->
-
                 <!-- edit form -->
                 {% if (editForm) %}
                 <input type="hidden" id="fleamarket_organizer" name="fleamarket_organizer" value="{{editDto.organizer.id}}">
