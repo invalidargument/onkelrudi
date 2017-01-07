@@ -3,7 +3,7 @@
 apt-get update
 apt-get install -y software-properties-common python-software-properties
 add-apt-repository ppa:webupd8team/java
-add-apt-repository ppa:chris-lea/node.js
+#add-apt-repository ppa:chris-lea/node.js
 apt-get update
 
 debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password root'
@@ -11,7 +11,8 @@ debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again pa
 echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
 echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
 
-apt-get install -y curl php5 php5-curl php5-xdebug php5-mysql git ant
+apt-get install apache2 libapache2-mod-php php-gd php-curl php-xdebug php-mysql php-xml php-mbstring
+
 apt-get install -y oracle-java8-installer
 apt-get install -y oracle-java8-set-default
 
@@ -21,10 +22,6 @@ curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin
 /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
 /sbin/mkswap /var/swap.1
 /sbin/swapon /var/swap.1
-
-#chmod 0755 /var/www/html/vendor/phpunit/phpunit/phpunit
-#chmod 0755 /var/www/html/vendor/behat/behat/bin/behat
-#chmod 0755 /var/www/html/vendor/alcaeus/liquibase/liquibase
 
 apt-get install -y mysql-server libmysql-java
 

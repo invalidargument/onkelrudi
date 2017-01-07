@@ -6,7 +6,7 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <changeSet id="1" author="Rudi Bieller">
         <createTable tableName="fleamarkets_organizer">
-            <column name="id" type="int">
+            <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="uuid" type="UUID">
@@ -40,7 +40,7 @@
     </changeSet>
     <changeSet id="2" author="Rudi Bieller">
         <createTable tableName="fleamarkets">
-            <column name="id" type="int">
+            <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="uuid" type="UUID">
@@ -86,24 +86,6 @@
         <modifySql dbms="mysql">
             <append value="ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
         </modifySql>
-    </changeSet>
-    <changeSet id="3" author="Rudi Bieller">
-        <addAutoIncrement catalogName="onkelrudi"
-            columnDataType="int"
-            columnName="id"
-            incrementBy="1"
-            schemaName="public"
-            startWith="1"
-            tableName="fleamarkets_organizer"/>
-    </changeSet>
-    <changeSet id="4" author="Rudi Bieller">
-        <addAutoIncrement catalogName="onkelrudi"
-            columnDataType="int"
-            columnName="id"
-            incrementBy="1"
-            schemaName="public"
-            startWith="1"
-            tableName="fleamarkets"/>
     </changeSet>
     <changeSet id="5" author="Rudi Bieller" failOnError="false">
         <sql>INSERT INTO fleamarkets_organizer (id, name) VALUES (1, 'Rudi the Organizer');</sql>
