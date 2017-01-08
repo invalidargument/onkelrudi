@@ -84,7 +84,7 @@ Feature: Admin page of onkelrudi
     And I should see an ".errormessage" element
     And I should see "Bitte alle Pflichtfelder ausfüllen!"
 
-  @javascript @now
+  @javascript
   Scenario: Admin can edit only his own fleamarkets
     Given I have a default organizer
     And I am slowly authenticated as user
