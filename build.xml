@@ -42,6 +42,11 @@
             <arg value="extension=json.so" />
             <arg value="-dextension=pdo.so" />
             <arg value="-dextension=curl.so" />
+            <arg value="-dextension=phar.so" />
+            <arg value="-dextension=simplexml.so" />
+            <arg value="-dextension=tokenizer.so" />
+            <arg value="-dextension=dom.so" />
+            <arg value="-dextension=mbstring.so" />
             <arg value="/usr/local/bin/composer" />
             <arg value="update" />
         </exec>
@@ -54,6 +59,11 @@
             <arg value="extension=json.so" />
             <arg value="-dextension=pdo.so" />
             <arg value="-dextension=curl.so" />
+            <arg value="-dextension=phar.so" />
+            <arg value="-dextension=simplexml.so" />
+            <arg value="-dextension=tokenizer.so" />
+            <arg value="-dextension=dom.so" />
+            <arg value="-dextension=mbstring.so" />
             <arg value="/usr/local/bin/composer" />
             <arg value="update" />
             <arg value="--no-dev" />
