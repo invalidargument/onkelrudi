@@ -16,7 +16,7 @@ Feature: Index page of onkelrudi
     Then I should see "Onkel Rudi" in the "h1" element
     And I should see "Der #2 Flohmarkt von Rudi" in the "div.marketSummaryBox:nth-of-type(3) h3" element
     When I follow "Alle Details zu "
-    Then I should be on "/der-0-flohmarkt-von-rudi-cologne/termin/1/datum/09.01.2017"
+    Then the url should match "/der-0-flohmarkt-von-rudi-cologne/termin/1/datum/\d+\.\d+\.\d+"
 
   Scenario: Detailview of a single fleamarket
     Given I have some fleamarkets
