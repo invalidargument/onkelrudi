@@ -77,12 +77,24 @@ class FleaMarketUpdateQuery extends AbstractInsertQuery
         $this->_fleaMarketService->deleteDates($this->_fleaMarket->getId());
         $this->_fleaMarketService->createDates($this->_fleaMarket->getId(), $this->_fleaMarket->getDates());
 
-        if ($hasOrganizer) {
+        if ($hasOrganizer && !$this->_isEmptyOrganizer()) {
             $this->_organizerService->updateOrganizer($this->_fleaMarket->getOrganizer());
         }
 
         $this->pdo->commit();
 
         return $affected;
+    }
+
+    private function _isEmptyOrganizer()
+    {
+        return $this->_fleaMarket->getOrganizer()->getName() == ''
+            && $this->_fleaMarket->getOrganizer()->getStreet() == ''
+            && $this->_fleaMarket->getOrganizer()->getStreetNo() == ''
+            && $this->_fleaMarket->getOrganizer()->getZipCode() == ''
+            && $this->_fleaMarket->getOrganizer()->getCity() == ''
+            && $this->_fleaMarket->getOrganizer()->getPhone() == ''
+            && $this->_fleaMarket->getOrganizer()->getEmail() == ''
+            && $this->_fleaMarket->getOrganizer()->getUrl() == '';
     }
 }

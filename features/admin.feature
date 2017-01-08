@@ -40,12 +40,12 @@ Feature: Admin page of onkelrudi
     And the response should be json
     And the response should be
     """
-    {"data":{"id":"1","uuid":"ca18494a-05ba-57a9-8c1f-d980aeec9a5d","organizer":{"id":"2","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Rudi Bieller","description":"Eine Beschreibung","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Hausstr.","streetNo":"42","city":"K\u00f6ln","zipCode":"50000","location":"Zu Hause","url":"http:\/\/www.example.com"}}
+    {"data":{"id":1,"uuid":"ca18494a-05ba-57a9-8c1f-d980aeec9a5d","organizer":{"id":2,"uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Rudi Bieller","description":"Eine Beschreibung","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Hausstr.","streetNo":"42","city":"K\u00f6ln","zipCode":"50000","location":"Zu Hause","url":"http:\/\/www.example.com"}}
     """
     When I send a "GET" request to "http://localhost/public/api/v1/organizers/2"
     Then the response should be
     """
-    {"data":{"id":"2","uuid":"1d8a8e24-946c-57b9-be63-a730f281cc17","name":"Die Flohmarkt GmbH","street":"Aachener Stra\u00dfe","streetNo":"5000","zipCode":"5000","city":"K\u00f6ln","phone":"0221 1424567890","email":"example@example.com","url":"http:\/\/www.example.com\/foo"}}
+    {"data":{"id":2,"uuid":"1d8a8e24-946c-57b9-be63-a730f281cc17","name":"Die Flohmarkt GmbH","street":"Aachener Stra\u00dfe","streetNo":"5000","zipCode":"5000","city":"K\u00f6ln","phone":"0221 1424567890","email":"example@example.com","url":"http:\/\/www.example.com\/foo"}}
     """
 
   @javascript
@@ -84,13 +84,16 @@ Feature: Admin page of onkelrudi
     And I should see an ".errormessage" element
     And I should see "Bitte alle Pflichtfelder ausfüllen!"
 
-  @javascript
+  @javascript @now
   Scenario: Admin can edit only his own fleamarkets
     Given I have a default organizer
     And I am slowly authenticated as user
     And I go to "/flohmarkt-anlegen/?test=1"
     Then I should see "+ Termin anlegen"
     When I fill in the following:
+      | marketDate | 31.01.2019 |
+      | marketTimeFrom | 09:30 |
+      | marketTimeTo | 18:00 |
       | fleamarket_name | Mein Testflohmarkt |
       | fleamarket_description | Eine Beschreibung |
       | fleamarket_location | Zu Hause |
@@ -107,9 +110,6 @@ Feature: Admin page of onkelrudi
       | organizer_streetNo | 5000 |
       | organizer_zip | 5000 |
       | organizer_city | Köln |
-      | marketDate | 31.01.2019 |
-      | marketTimeFrom | 09:30 |
-      | marketTimeTo | 18:00 |
     And I press "Neuen Termin speichern - click hier!"
     And I wait for "1" seconds
     Then I should see a ".button-success" element
@@ -142,7 +142,7 @@ Feature: Admin page of onkelrudi
     And the response should be json
     And the response should be
     """
-    {"data":{"id":"1","uuid":"a9d60f43-8d4a-5071-8a49-cc5a474d6c1e","organizer":{"id":"2","uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Mein Testflohmarkt UPDATED","description":"Eine Beschreibung UPDATED","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Hausstr. UPDATED","streetNo":"42000","city":"K\u00f6ln UPDATED","zipCode":"55555","location":"Zu Hause UPDATED","url":"http:\/\/www.example.com\/UPDATED"}}
+    {"data":{"id":1,"uuid":"a9d60f43-8d4a-5071-8a49-cc5a474d6c1e","organizer":{"id":2,"uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Mein Testflohmarkt UPDATED","description":"Eine Beschreibung UPDATED","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Hausstr. UPDATED","streetNo":"42000","city":"K\u00f6ln UPDATED","zipCode":"55555","location":"Zu Hause UPDATED","url":"http:\/\/www.example.com\/UPDATED"}}
     """
     Given I am slowly authenticated as user "test2@onkel-rudi.de"
     And I go to "/profil/"
