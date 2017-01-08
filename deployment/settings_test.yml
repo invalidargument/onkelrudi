@@ -9,6 +9,7 @@ System:
   protocol: "http://"
   cache-adapter: "Illuminate"
   cache-path: "/var/www/html/cache/"
+  log-path: "/var/www/html/logs/error.log"
 
 Wordpress:
   auth-username: 'test'

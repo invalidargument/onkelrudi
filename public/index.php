@@ -61,7 +61,7 @@ $appConfiguration = [
         'logger' => [
             'name' => 'onkelrudi-logger',
             'level' => Monolog\Logger::DEBUG,
-            'path' => __DIR__ . '/../logs/error.log',
+            'path' => $config->getSystemConfiguration()['log-path']
         ]
     ],
     // Twig view
