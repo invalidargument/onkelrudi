@@ -72,6 +72,10 @@ class UserCreateAction extends AbstractJsonAction
 
         $this->notificationService->sendOptInNotification($email, $optInText);
 
+        $this->app->getContainer()->get('Logger')->info(
+            'New User with id ' . $email . ' created'
+        );
+
         return $result;
     }
 

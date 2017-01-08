@@ -44,6 +44,10 @@ class UserCreateActionTest extends \PHPUnit_Framework_TestCase
         };
         $container['config'] = new Config();
 
+        $logger = \Mockery::mock('Monolog\Logger');
+        $logger->shouldReceive('info');
+        $container['Logger'] = $logger;
+
         $body = \Mockery::mock('Slim\Http\Body');
         $body->shouldReceive('write')
             ->once()
