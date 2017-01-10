@@ -3,7 +3,6 @@
 apt-get update
 apt-get install -y software-properties-common python-software-properties
 add-apt-repository ppa:webupd8team/java
-#add-apt-repository ppa:chris-lea/node.js
 apt-get update
 
 debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password root'
