@@ -22,11 +22,11 @@ class IlluminateAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $cacheKey = 'my-key';
         $cacheValue = 'my-value';
-        $ttl = 'my-key';
+        $ttl = 3600;
 
         $this->_cacheStore->shouldReceive('put')
             ->once()
-            ->with($cacheKey, $cacheValue, $ttl);
+            ->with($cacheKey, $cacheValue, 60);
 
         $this->_sut->set($cacheKey, $cacheValue, $ttl);
     }
