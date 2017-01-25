@@ -75,21 +75,36 @@
                 {% if data.dates|length > 1 %}
                 <div class="pure-g mt20">
                     <div class="pure-u-1">
-                        <h2 class="splash-subhead">Alle Termine</h2>
+                        <h2 class="splash-subhead">Anstehende Termine</h2>
                         Einfach auf den Termin klicken, um ihn in Deinen Kalender zu speichern!
                         <ol class="dates-list">
+                            {% set hasPassedDates = 'false' %}
                             {% for dateItem in data.dates %}
-                            {% set cssClass = 'dateTime' %}
-                            {% set linkDate = '1' %}
-                            {% if dateItem.start|date("Ymd") == "now"|date("Ymd") %}{% set cssClass = 'dateTime today' %} {% endif %}
-                            {% if "now"|date("Ymd") > dateItem.start|date("Ymd") %}{% set cssClass = 'dateTime over'%}{% set linkDate = '0' %} {% endif %}
+                                {% set cssClass = 'dateTime' %}
+                                {% if dateItem.start|date("Ymd") == "now"|date("Ymd") %}{% set cssClass = 'dateTime today' %} {% endif %}
+                                {% if "now"|date("Ymd") > dateItem.start|date("Ymd") %}{% set hasPassedDates = 'true' %} {% endif %}
+                            {% if "now"|date("Ymd") < dateItem.start|date("Ymd") %}
                             <li class="{{cssClass}} nowrap">
-                                {% if linkDate == 1 %}<a href="/public/ical/termin/{{data.id}}/datum/{{dateItem.start|date('d.m.Y')}}" title="Zum Kalender (iCal) hinzufügen">{% endif %}
+                                <a href="/public/ical/termin/{{data.id}}/datum/{{dateItem.start|date('d.m.Y')}}" title="Zum Kalender (iCal) hinzufügen">
                                     <i class="fa fa-calendar-plus-o"></i>{{dateItem.start|date("d.m.Y")}}
-                                {% if linkDate == 1 %}</a>{% endif %}
+                                </a>
                             </li>
+                            {% endif %}
                             {% endfor %}
                         </ol>
+                        {% if hasPassedDates == 'true' %}
+                        <h2 class="splash-subhead">Vergangene Termine</h2>
+                        <ol class="dates-list">
+                            {% for dateItem in data.dates %}
+                                {% set cssClass = 'dateTime over' %}
+                            {% if "now"|date("Ymd") > dateItem.start|date("Ymd") %}
+                            <li class="dateTime over nowrap">
+                                <i class="fa fa-calendar-plus-o"></i>{{dateItem.start|date("d.m.Y")}}
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                        </ol>
+                        {% endif %}
                     </div>
                 </div>
                 {% else %}
