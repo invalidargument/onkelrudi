@@ -40,12 +40,10 @@ abstract class AbstractIcalAction extends AbstractAction implements IcalActionIn
             )
             ->withHeader(
                 'Content-Disposition',
-                'attachment; filename="cal.ics"'
+                'attachment; filename="flohmarkt.ics"'
             )
             ->write($this->result);
     }
-
-
 
     protected function writeAuthenticationRequiredResponse()
     {
