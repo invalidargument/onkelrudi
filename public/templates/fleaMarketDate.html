@@ -35,6 +35,9 @@
     <div class="head">
         <h1 class="splash-head">{{data.name}}</h1>
         <p class="splash-subhead">
+            {% if nextValidDateStart|date('ymd') == date('now')|date('ymd') %}
+            <span class="post-category post-category-design">HEUTE!</span><br>
+            {% endif %}
             <time datetime="{{nextValidDateStart|date('c')}}">{{nextValidDateStart|date("d.m.Y")}} von {{nextValidDateStart|date("H:i")}} - {{nextValidDateEnd|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{data.city}}</span>
         </p>
         <p class="splash-subhead">
