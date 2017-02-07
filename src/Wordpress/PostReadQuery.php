@@ -55,4 +55,9 @@ class PostReadQuery extends AbstractJsonReadQuery implements CacheableInterface
 
         return $item;
     }
+
+    protected function getTtl()
+    {
+        return self::TTL * 12;
+    }
 }

@@ -80,4 +80,9 @@ class PostReadListQuery extends AbstractJsonReadQuery implements CacheableInterf
 
         return $mappedPosts;
     }
+
+    protected function getTtl()
+    {
+        return self::TTL * 12;
+    }
 }

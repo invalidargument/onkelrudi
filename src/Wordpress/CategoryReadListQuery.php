@@ -39,4 +39,9 @@ class CategoryReadListQuery extends AbstractJsonReadQuery implements CacheableIn
 
         return $mappedCategories;
     }
+
+    protected function getTtl()
+    {
+        return self::TTL * 12;
+    }
 }
