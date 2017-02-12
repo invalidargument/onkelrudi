@@ -3,7 +3,6 @@ namespace RudiBieller\OnkelRudi\FleaMarket\Query;
 
 use Cocur\Slugify\Slugify;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketDate;
-use RudiBieller\OnkelRudi\FleaMarket\FleaMarketServiceInterface;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
 use RudiBieller\OnkelRudi\Query\AbstractQuery;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarket;
@@ -19,13 +18,8 @@ class FleaMarketReadListQuery extends AbstractQuery
      * @var UserInterface
      */
     private $_user;
-    private $_onlyCurrentDates = false;
     private $_onlyApprovedMarkets = false;
     private $_queryTimespan;
-    /**
-     * @var FleaMarketServiceInterface
-     */
-    private $_fleaMarketService;
 
     public function setOffset($offset)
     {
@@ -45,21 +39,9 @@ class FleaMarketReadListQuery extends AbstractQuery
         return $this;
     }
 
-    public function setFleaMarketService(FleaMarketServiceInterface $service)
-    {
-        $this->_fleaMarketService = $service;
-        return $this;
-    }
-
     public function setQueryTimespan(\DateTimeImmutable $start, \DateTimeImmutable $end)
     {
         $this->_queryTimespan = ['start' => $start, 'end' => $end];
-        return $this;
-    }
-
-    public function setQueryOnlyCurrentDates($onlyCurrentDates = true)
-    {
-        $this->_onlyCurrentDates = $onlyCurrentDates;
         return $this;
     }
 
@@ -202,16 +184,6 @@ class FleaMarketReadListQuery extends AbstractQuery
         return $datesStatement;
     }
 
-    private function _setOnlyCurrentDates($datesStatement)
-    {
-        if (!$this->_hasValidQueryTimespan() && $this->_onlyCurrentDates) {
-            $datesStatement = $datesStatement->where('start', '>=', date('Y-m-d 00:00:00'));
-            return $datesStatement;
-        }
-
-        return $datesStatement;
-    }
-
     /**
      * @return mixed
      */
@@ -229,7 +201,6 @@ class FleaMarketReadListQuery extends AbstractQuery
         }
 
         $datesStatement = $this->_setTimespan($datesStatement);
-        $datesStatement = $this->_setOnlyCurrentDates($datesStatement);
 
         if (!$this->_hasValidQueryTimespan()) {
             $datesStatement = $datesStatement

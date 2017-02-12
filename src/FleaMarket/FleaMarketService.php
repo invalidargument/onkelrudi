@@ -81,8 +81,6 @@ class FleaMarketService implements FleaMarketServiceInterface
     {
         $query = $this->_factory->createFleaMarketReadListQuery();
 
-        $query->setFleaMarketService($this);
-
         return $query->run();
     }
 
@@ -102,8 +100,7 @@ class FleaMarketService implements FleaMarketServiceInterface
             );
         }
 
-        $query->setFleaMarketService($this)
-            ->setQueryTimespan($start, $end)
+        $query->setQueryTimespan($start, $end)
             ->setQueryOnlyApprovedFleamarkets($onlyApproved);
 
         return $query->run();
@@ -113,7 +110,6 @@ class FleaMarketService implements FleaMarketServiceInterface
     {
         $query = $this->_factory->createFleaMarketReadListQuery();
         $query
-            ->setFleaMarketService($this)
             ->setLimit($limit)
             ->setOffset($offset);
 
@@ -124,7 +120,6 @@ class FleaMarketService implements FleaMarketServiceInterface
     {
         $query = $this->_factory->createFleaMarketReadListQuery();
         $query
-            ->setFleaMarketService($this)
             ->setLimit($limit)
             ->setOffset($offset)
             ->setUser($user);
