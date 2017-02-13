@@ -3,7 +3,6 @@ include_once '../vendor/autoload.php';
 
 use RudiBieller\OnkelRudi\BuilderFactory;
 use RudiBieller\OnkelRudi\Cache\CacheManagerFactory;
-use RudiBieller\OnkelRudi\Config\Config;
 use RudiBieller\OnkelRudi\FleaMarket\OrganizerService;
 use RudiBieller\OnkelRudi\FleaMarket\Query\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\FleaMarketService;
