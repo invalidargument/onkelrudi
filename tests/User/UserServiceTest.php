@@ -57,7 +57,7 @@ class UserServiceTest extends \PHPUnit_Framework_TestCase
         $userToOrganizerQuery = \Mockery::mock('RudiBieller\OnkelRudi\User\UserToOrganizerInsertQuery');
         $userToOrganizerQuery->shouldReceive('setUserId')->once()->with('foo')->andReturn($userToOrganizerQuery)
             ->shouldReceive('setOrganizerId')->once()->with(23)->andReturn($userToOrganizerQuery)
-            ->shouldReceive('run')->andReturn(1000);
+            ->shouldReceive('run')->andReturn(0);
 
         $queryFactory = \Mockery::mock('RudiBieller\OnkelRudi\User\QueryFactory');
         $queryFactory->shouldReceive('createUserInsertQuery')->once()->andReturn($query)
