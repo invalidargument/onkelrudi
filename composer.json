@@ -47,7 +47,9 @@
         "sebastian/phpcpd": "*",
         "squizlabs/php_codesniffer": "2.*",
         "pdepend/pdepend": "2.2.*",
-        "phpmetrics/phpmetrics": ">=1.8"
+        "phpmetrics/phpmetrics": ">=1.8",
+        "hoa/bench": "~3.0",
+        "devster/ubench": "1.2.0"
     },
     "autoload": {
         "psr-4": {
