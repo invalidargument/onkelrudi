@@ -4,6 +4,7 @@ use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\MinkExtension\Context\MinkContext;
 use Buzz\Listener\CookieListener;
@@ -231,6 +232,14 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
     {
         $user = $this->_userService->createUser($arg1, 'password');
         $this->_userService->createTestOptInToken($arg1, $arg2);
+    }
+
+    /**
+     * @When I optin my user :arg1
+     */
+    public function iOptinMyUser($arg1)
+    {
+        $this->_userService->optInTestUser($arg1);
     }
 
     /**

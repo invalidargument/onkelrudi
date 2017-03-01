@@ -46,3 +46,36 @@ Feature: User login/register page of onkelrudi
     Given I have a user with email "info@onkel-rudi.de" and optin token "test-token"
     And I am on "/opt-in/token-test-token"
     Then I should see "Dein Login wurde aktiviert, Du kannst Dich jetzt anmelden."
+
+  @javascript
+  Scenario: User can login after creating and opting in a new user
+    Given I am on "/login/"
+    When I fill in "register_email" with "info@onkel-rudi.de"
+    And I fill in "register_password" with "foobarbaz"
+    And I fill in "register_password_repeat" with "foobarbaz"
+    And I press "Neuen Benutzer anlegen"
+    And I wait for "1" seconds
+    And I optin my user "info@onkel-rudi.de"
+    And I go to "/login/"
+    And I fill in "login_email" with "info@onkel-rudi.de"
+    And I fill in "login_password" with "foobarbaz"
+    And I press "Anmelden"
+    And I wait for "1" seconds
+    Then I should see "Danke - Du hast Dich erfolgreich angemeldet!"
+
+  @javascript
+  Scenario: User can login after creating and opting in a new organizer
+    Given I am on "/login/"
+    When I fill in "register_email" with "info@onkel-rudi.de"
+    And I fill in "register_password" with "foobarbaz"
+    And I fill in "register_password_repeat" with "foobarbaz"
+    And I check "register_as_organizer"
+    And I press "Neuen Benutzer anlegen"
+    And I wait for "1" seconds
+    And I optin my user "info@onkel-rudi.de"
+    And I go to "/login/"
+    And I fill in "login_email" with "info@onkel-rudi.de"
+    And I fill in "login_password" with "foobarbaz"
+    And I press "Anmelden"
+    And I wait for "1" seconds
+    Then I should see "Danke - Du hast Dich erfolgreich angemeldet!"
