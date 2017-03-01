@@ -20,6 +20,23 @@ class OptInTokenUpdateQuery extends AbstractInsertQuery
 
     protected function runQuery()
     {
+        $optInInformation = $this->getOptInInformation();
+
+        if (!$optInInformation) {
+            return false;
+        }
+
+        // set fleamarkets_users.opt_in to 1 where email == email
+        $updateStatement = $this->pdo
+            ->update(array('opt_in' => 1))
+            ->table('fleamarkets_users')
+            ->where('email', '=', $optInInformation['email']);
+
+        return $updateStatement->execute();
+    }
+
+    protected function getOptInInformation()
+    {
         $dateTime = new \DateTimeImmutable();
 
         $createdLimit = $dateTime->sub(new \DateInterval('P1D'))->format('Y-m-d H:i:s');
@@ -36,18 +53,6 @@ class OptInTokenUpdateQuery extends AbstractInsertQuery
          */
         $statement = $selectStatement->execute();
 
-        $optInInformation = $statement->fetch(\PDO::FETCH_ASSOC);
-
-        if (!$optInInformation) {
-            return false;
-        }
-
-        // set fleamarkets_users.opt_in to 1 where email == email
-        $updateStatement = $this->pdo
-            ->update(array('opt_in' => 1))
-            ->table('fleamarkets_users')
-            ->where('email', '=', $optInInformation['email']);
-
-        return $updateStatement->execute();
+        return $statement->fetch(\PDO::FETCH_ASSOC);
     }
 }
