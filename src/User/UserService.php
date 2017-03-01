@@ -116,6 +116,13 @@ class UserService implements UserServiceInterface
         return $authService->authenticate();
     }
 
+    public function isLoggedIn()
+    {
+        $user = $this->getAuthenticationService()->getStorage()->read();
+
+        return !is_null($user);
+    }
+
     public function getAuthenticationService(UserInterface $user = null)
     {
         if (is_null(self::$_authenticationService)) {
@@ -140,11 +147,16 @@ class UserService implements UserServiceInterface
         return $optInQuery->run();
     }
 
-    public function isLoggedIn()
+    /**
+     * @inheritdoc
+     */
+    public function optInTestUser($identifier)
     {
-        $user = $this->getAuthenticationService()->getStorage()->read();
+        $optInQuery = $this->_factory->createOptInTokenTestUpdateQuery();
 
-        return !is_null($user);
+        $optInQuery->setIdentifier($identifier);
+
+        return $optInQuery->run();
     }
 
     public function getUser($identifier)

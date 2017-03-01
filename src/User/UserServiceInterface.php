@@ -19,6 +19,13 @@ interface UserServiceInterface
     public function getAuthenticationService(UserInterface $user);
 
     public function optIn($token);
+
+    /**
+     * Only for acceptance testing purposes!
+     * @param String $identifier
+     * @return int
+     */
+    public function optInTestUser($identifier);
     
     public function isLoggedIn();
 
