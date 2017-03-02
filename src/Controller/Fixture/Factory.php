@@ -61,6 +61,13 @@ class Factory
 
     public static function createStandardResponse()
     {
-        return \Mockery::mock('Psr\Http\Message\ResponseInterface');
+        $body = \Mockery::mock('Slim\HttpBody');
+        $body->shouldReceive('write');
+
+        $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
+        $response->shouldReceive('getBody')->once()->andReturn($body)
+            ->shouldReceive('write');
+
+        return $response;
     }
 }

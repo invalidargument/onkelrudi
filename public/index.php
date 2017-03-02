@@ -184,6 +184,11 @@ $app->get('/logout/', function ($request, $response, $args) use ($app, $controll
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\LogoutAction');
     $action($request, $response, $args);
 })->setName('logout');
+// change password
+$app->get('/passwort-aendern/', function ($request, $response, $args) use ($app, $controllerFactory) {
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\ChangePasswordAction');
+    $action($request, $response, $args);
+})->setName('password');
 
 // opt-in confirmation
 $app->get('/opt-in/token-{token}', function ($request, $response, $args) use ($app, $controllerFactory) {
