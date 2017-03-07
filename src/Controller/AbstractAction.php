@@ -37,6 +37,9 @@ abstract class AbstractAction implements ActionInterface
      * @var BuilderFactoryInterface
      */
     protected $builderFactory;
+    /**
+     * @var \Psr\Http\Message\ServerRequestInterface
+     */
     protected $request;
     protected $response;
     protected $args;

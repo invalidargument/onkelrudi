@@ -34,4 +34,6 @@ interface UserServiceInterface
      * @return UserInterface
      */
     public function getUser($identifier);
+
+    public function changePassword(UserInterface $user, $newPassword);
 }

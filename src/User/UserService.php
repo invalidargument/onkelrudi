@@ -167,4 +167,13 @@ class UserService implements UserServiceInterface
 
         return $query->run();
     }
+
+    public function changePassword(UserInterface $user, $newPassword)
+    {
+        $query = $this->_factory->createUserPasswordUpdateQuery();
+
+        $query->setIdentifier($user->getIdentifier())->setPassword($newPassword);
+
+        return $query->run();
+    }
 }
