@@ -203,7 +203,7 @@ class UserServiceTest extends \PHPUnit_Framework_TestCase
         $query = \Mockery::mock('RudiBieller\OnkelRudi\User\UserPasswordUpdateQuery');
         $query
             ->shouldReceive('setIdentifier')->with('foo@example.com')->andReturn($query)
-            ->shouldReceive('setPassword')->with('newPwd')->andReturn($query)
+            ->shouldReceive('setPassword')->with(\Hamcrest\Matchers::startsWith('$2y$10$'))->andReturn($query)
             ->shouldReceive('run')->andReturn(1);
 
         $queryFactory = \Mockery::mock('RudiBieller\OnkelRudi\User\QueryFactory');
