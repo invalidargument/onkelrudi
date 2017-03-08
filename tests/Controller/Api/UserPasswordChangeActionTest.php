@@ -15,17 +15,23 @@ class UserPasswordChangeActionTest extends \PHPUnit_Framework_TestCase
         $user = new User('test@example.com', 'oldPwd');
         $builderFactory = new BuilderFactory();
 
-        $service = \Mockery::mock('RudiBieller\OnkelRudi\User\UserServiceInterface');
+        $session = \Mockery::mock('Zend\Authentication\Storage\Session');
+        $session->shouldReceive('read')->once()->andReturn(new User('test@example.com'));
+        $authenticationService = \Mockery::mock('Zend\Authentication\AuthenticationService');
+        $authenticationService->shouldReceive('getStorage')->once()->andReturn($session);
+        
+        $service = \Mockery::mock('RudiBieller\OnkelRudi\User\UserService');
         $service
             ->shouldReceive('changePassword')
-            ->once()
-            ->with(\Hamcrest\Matchers::equalTo($user), 'newPwd')
-            ->andReturn(true);
+                ->once()
+                ->with(\Hamcrest\Matchers::equalTo($user), 'newPwd')
+                ->andReturn(true)
+            ->shouldReceive('getAuthenticationService')->andReturn($authenticationService);
 
         $parsedJson = [
-            'identifier_password_old' => 'oldPwd',
-            'identifier_password_new' => 'newPwd',
-            'identifier_password_new_repeated' => 'newPwd'
+            'password_old' => 'oldPwd',
+            'password_new' => 'newPwd',
+            'password_new_repeated' => 'newPwd'
         ];
 
         $app = new App();

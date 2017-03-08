@@ -300,7 +300,7 @@ $app->group('/api', function () use ($app, $controllerFactory) {
             return $action($request, $response, $args);
         });
         // POST route, for changing password
-        $app->post('/users/{id}/password/change', function ($request, $response, $args) use ($app, $controllerFactory) {
+        $app->post('/users/password/change', function ($request, $response, $args) use ($app, $controllerFactory) {
             $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\Api\UserPasswordChangeAction');
             $action->setBuilderFactory(new BuilderFactory());
             return $action($request, $response, $args);

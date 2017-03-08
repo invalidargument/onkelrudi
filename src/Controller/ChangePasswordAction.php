@@ -2,7 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
-class ChangePasswordAction extends AbstractHttpAction
+class ChangePasswordAction extends AbstractHttpAction implements UserAwareInterface
 {
     protected $template = 'password.html';
 

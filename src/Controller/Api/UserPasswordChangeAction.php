@@ -3,8 +3,9 @@
 namespace RudiBieller\OnkelRudi\Controller\Api;
 
 use RudiBieller\OnkelRudi\Controller\AbstractJsonAction;
+use RudiBieller\OnkelRudi\Controller\UserAwareInterface;
 
-class UserPasswordChangeAction extends AbstractJsonAction
+class UserPasswordChangeAction extends AbstractJsonAction implements UserAwareInterface
 {
     private $_passwordsDontMatchStatusCode;
     private $_passwordsDontMatchStatusMessage;
@@ -12,16 +13,23 @@ class UserPasswordChangeAction extends AbstractJsonAction
     protected function getData()
     {
         $data = $this->request->getParsedBody();
-        $oldPassword = $data['identifier_password_old'];
-        $newPassword = $data['identifier_password_new'];
-        $newPasswordRepeated = $data['identifier_password_new_repeated'];
-        $email = filter_var($this->args['id'], FILTER_VALIDATE_EMAIL);
+        $oldPassword = $data['password_old'];
+        $newPassword = $data['password_new'];
+        $newPasswordRepeated = $data['password_new_repeated'];
+
+        $email = $this->userService
+            ->getAuthenticationService()
+            ->getStorage()
+            ->read()
+            ->getIdentifier();
 
         if ($newPassword !== $newPasswordRepeated) {
             $this->_passwordsDontMatchStatusMessage = 'Das neue Passwort muss zwei Mal identisch eingegeben werden.';
             $this->_passwordsDontMatchStatusCode = 400;
-            return false;
+            return null;
         }
+
+        // TODO passwortlänge prüfen
 
         /**
          * @var UserBuilder
@@ -29,7 +37,13 @@ class UserPasswordChangeAction extends AbstractJsonAction
         $userBuilder = $this->builderFactory->create('RudiBieller\OnkelRudi\User\UserBuilder');
         $user = $userBuilder->setIdentifier($email)->setPassword($oldPassword)->build();
 
-        return $this->userService->changePassword($user, $newPassword);
+        $result = $this->userService->changePassword($user, $newPassword);
+
+        if (!$result) {
+            return null;
+        }
+
+        return true;
     }
 
     protected function getResponseErrorStatusCode()
