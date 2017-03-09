@@ -7,7 +7,7 @@ use RudiBieller\OnkelRudi\Controller\UserAwareInterface;
 
 class UserPasswordChangeAction extends AbstractJsonAction implements UserAwareInterface
 {
-    private $_passwordsDontMatchStatusCode;
+    private $_passwordsDontMatchStatusCode = 400;
     private $_passwordsDontMatchStatusMessage;
 
     protected function getData()
@@ -23,13 +23,16 @@ class UserPasswordChangeAction extends AbstractJsonAction implements UserAwareIn
             ->read()
             ->getIdentifier();
 
-        if ($newPassword !== $newPasswordRepeated) {
-            $this->_passwordsDontMatchStatusMessage = 'Das neue Passwort muss zwei Mal identisch eingegeben werden.';
-            $this->_passwordsDontMatchStatusCode = 400;
+        // TODO: validate current password
+        if (!$this->_currentPasswordIsValid($oldPassword)) {
+            $this->_passwordsDontMatchStatusMessage = 'Current password does not match';
             return null;
         }
 
-        // TODO passwortlänge prüfen
+        // this should go to a separate service, see also UserCreateAction
+        if (!$this->_passwordIsValid($newPassword, $newPasswordRepeated)) {
+            return null;
+        }
 
         /**
          * @var UserBuilder
@@ -54,5 +57,25 @@ class UserPasswordChangeAction extends AbstractJsonAction implements UserAwareIn
     protected function getResponseErrorStatusMessage()
     {
         return $this->_passwordsDontMatchStatusMessage;
+    }
+
+    private function _currentPasswordIsValid($currentPassword)
+    {
+        return true;
+    }
+
+    private function _passwordIsValid($password1, $password2)
+    {
+        if ($password1 !== $password2) {
+            $this->_passwordsDontMatchStatusMessage = 'New passwords do not match';
+            return false;
+        }
+
+        if (strlen($password1) < 8) {
+            $this->_passwordsDontMatchStatusMessage = 'Passwords must have a minimum length of 8 chracters';
+            return false;
+        }
+
+        return true;
     }
 }

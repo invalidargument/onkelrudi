@@ -10,9 +10,12 @@ use Slim\App;
 
 class UserPasswordChangeActionTest extends \PHPUnit_Framework_TestCase
 {
-    public function testActionCHangesPassword()
+    /**
+     * @dataProvider dataProviderTestActionChangesPassword
+     */
+    public function testActionChangesPassword($oldPassword, $newPassword, $newPassword2, $expectedResult)
     {
-        $user = new User('test@example.com', 'oldPwd');
+        $user = new User('test@example.com', $oldPassword);
         $builderFactory = new BuilderFactory();
 
         $session = \Mockery::mock('Zend\Authentication\Storage\Session');
@@ -24,14 +27,14 @@ class UserPasswordChangeActionTest extends \PHPUnit_Framework_TestCase
         $service
             ->shouldReceive('changePassword')
                 ->once()
-                ->with(\Hamcrest\Matchers::equalTo($user), 'newPwd')
+                ->with(\Hamcrest\Matchers::equalTo($user), $newPassword)
                 ->andReturn(true)
             ->shouldReceive('getAuthenticationService')->andReturn($authenticationService);
 
         $parsedJson = [
-            'password_old' => 'oldPwd',
-            'password_new' => 'newPwd',
-            'password_new_repeated' => 'newPwd'
+            'password_old' => $oldPassword,
+            'password_new' => $newPassword,
+            'password_new_repeated' => $newPassword2
         ];
 
         $app = new App();
@@ -46,10 +49,19 @@ class UserPasswordChangeActionTest extends \PHPUnit_Framework_TestCase
             ->setUserService($service)
             ->setBuilderFactory($builderFactory);
 
-        $return = $action($request, $response, array('id' => 'test@example.com'));
+        $return = $action($request, $response, array());
         $actual = (string)$return->getBody();
-        $expected = json_encode(array('data' => 1));
+        $expected = json_encode($expectedResult);
 
         $this->assertJsonStringEqualsJsonString($expected, $actual);
+    }
+
+    public function dataProviderTestActionChangesPassword()
+    {
+        return array(
+            array('oldPassword', 'newPassword', 'newPassword', array('data' => 1)),
+            array('oldPassword', 'newPass', 'newPasss', array('error' => 'New passwords do not match')),
+            array('oldPassword', 'newPass', 'newPass', array('error' => 'Passwords must have a minimum length of 8 chracters')),
+        );
     }
 }
