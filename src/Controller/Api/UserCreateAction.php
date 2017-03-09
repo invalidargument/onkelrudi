@@ -10,7 +10,7 @@ use RudiBieller\OnkelRudi\User\UserInterface;
 class UserCreateAction extends AbstractJsonAction
 {
     protected $template = 'notificationOptIn.html';
-    private $_passwordsDontMatchStatusCode;
+    private $_passwordsDontMatchStatusCode = 400;
     private $_passwordsDontMatchStatusMessage;
 
     protected function getData()
@@ -51,7 +51,6 @@ class UserCreateAction extends AbstractJsonAction
                     );
             }
         } catch (\PDOException $e) {
-            $this->_passwordsDontMatchStatusCode = 400;
             $this->_passwordsDontMatchStatusMessage = 'Primary identifier already exists in database';
 
             return null;
@@ -82,13 +81,11 @@ class UserCreateAction extends AbstractJsonAction
     private function _passwordIsValid($password1, $password2)
     {
         if ($password1 !== $password2) {
-            $this->_passwordsDontMatchStatusCode = 400;
             $this->_passwordsDontMatchStatusMessage = 'Passwords do not match';
             return false;
         }
 
         if (strlen($password1) < 8) {
-            $this->_passwordsDontMatchStatusCode = 400;
             $this->_passwordsDontMatchStatusMessage = 'Passwords must have a minimum length of 8 chracters';
             return false;
         }
@@ -99,7 +96,6 @@ class UserCreateAction extends AbstractJsonAction
     private function _emailIsValid($email)
     {
         if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-            $this->_passwordsDontMatchStatusCode = 400;
             $this->_passwordsDontMatchStatusMessage = 'No valid e-mail address';
             return false;
         }
