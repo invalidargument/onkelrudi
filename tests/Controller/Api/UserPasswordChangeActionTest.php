@@ -13,7 +13,7 @@ class UserPasswordChangeActionTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataProviderTestActionChangesPassword
      */
-    public function testActionChangesPassword($oldPassword, $newPassword, $newPassword2, $expectedResult)
+    public function testActionChangesPassword($oldPassword, $newPassword, $newPassword2, $serviceResponse, $expectedResult)
     {
         $user = new User('test@example.com', $oldPassword);
         $builderFactory = new BuilderFactory();
@@ -28,7 +28,7 @@ class UserPasswordChangeActionTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('changePassword')
                 ->once()
                 ->with(\Hamcrest\Matchers::equalTo($user), $newPassword)
-                ->andReturn(true)
+                ->andReturn($serviceResponse)
             ->shouldReceive('getAuthenticationService')->andReturn($authenticationService);
 
         $parsedJson = [
@@ -59,9 +59,10 @@ class UserPasswordChangeActionTest extends \PHPUnit_Framework_TestCase
     public function dataProviderTestActionChangesPassword()
     {
         return array(
-            array('oldPassword', 'newPassword', 'newPassword', array('data' => 1)),
-            array('oldPassword', 'newPass', 'newPasss', array('error' => 'New passwords do not match')),
-            array('oldPassword', 'newPass', 'newPass', array('error' => 'Passwords must have a minimum length of 8 chracters')),
+            array('oldPassword', 'newPassword', 'newPassword', true, array('data' => 1)),
+            array('oldPassword', 'newPassword', 'newPassword', false, array('error' => 'Error while persisting new password')),
+            array('oldPassword', 'newPass', 'newPasss', true, array('error' => 'New passwords do not match')),
+            array('oldPassword', 'newPass', 'newPass', true, array('error' => 'Passwords must have a minimum length of 8 chracters')),
         );
     }
 }

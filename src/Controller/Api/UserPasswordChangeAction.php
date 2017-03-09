@@ -43,6 +43,7 @@ class UserPasswordChangeAction extends AbstractJsonAction implements UserAwareIn
         $result = $this->userService->changePassword($user, $newPassword);
 
         if (!$result) {
+            $this->_passwordsDontMatchStatusMessage = 'Error while persisting new password';
             return null;
         }
 
