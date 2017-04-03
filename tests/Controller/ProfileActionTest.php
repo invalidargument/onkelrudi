@@ -21,6 +21,7 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
         $router->shouldReceive('pathFor')->once()->with('login-register')->andReturn('/login/')
             ->shouldReceive('pathFor')->once()->with('create-fleamarket')->andReturn('/flohmarkt-anlegen/')
             ->shouldReceive('pathFor')->once()->with('profile')->andReturn('/profil/')
+            ->shouldReceive('pathFor')->once()->with('password')->andReturn('/passwort-aendern/')
             ->shouldReceive('pathFor')->once()->with('logout')->andReturn('/logout/');
 
         $this->_app = new App();
@@ -84,7 +85,7 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
 
         $action($request, $response, array());
 
-        $this->assertAttributeEquals(['profileurl' => '/profil/', 'createfleamarketurl' => '/flohmarkt-anlegen/', 'logouturl' => '/logout/'], 'templateVariables', $action);
+        $this->assertAttributeEquals(['profileurl' => '/profil/', 'createfleamarketurl' => '/flohmarkt-anlegen/', 'changepasswordurl' => '/passwort-aendern/', 'logouturl' => '/logout/'], 'templateVariables', $action);
     }
 
     /**
@@ -141,7 +142,7 @@ class ProfileActionTest extends \PHPUnit_Framework_TestCase
         $action($request, $response, array('page' => $pageParameter));
 
         $this->assertAttributeEquals(
-            ['profileurl' => '/profil/', 'createfleamarketurl' => '/flohmarkt-anlegen/', 'fleamarkets' => [], 'organizer' => $organizerUser, 'page' => $pageProperty, 'logouturl' => '/logout/'],
+            ['profileurl' => '/profil/', 'createfleamarketurl' => '/flohmarkt-anlegen/', 'fleamarkets' => [], 'organizer' => $organizerUser, 'page' => $pageProperty, 'logouturl' => '/logout/', 'changepasswordurl' => '/passwort-aendern/'],
             'templateVariables',
             $action
         );

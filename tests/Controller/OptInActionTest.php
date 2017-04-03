@@ -53,8 +53,8 @@ class OptInActionTest extends \PHPUnit_Framework_TestCase
     public function dataProviderTestActionDoesOptInWhenGivenAValidToken()
     {
         return array(
-            array(true, ['optin' => true, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'logouturl' => '/foo/']),
-            array(false, ['optin' => true, 'optinfailed' => true, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'logouturl' => '/foo/'])
+            array(true, ['optin' => true, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'changepasswordurl' => '/foo/', 'logouturl' => '/foo/']),
+            array(false, ['optin' => true, 'optinfailed' => true, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'changepasswordurl' => '/foo/', 'logouturl' => '/foo/'])
         );
     }
 }

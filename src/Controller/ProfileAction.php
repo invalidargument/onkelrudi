@@ -32,7 +32,7 @@ class ProfileAction extends AbstractHttpAction implements UserAwareInterface
         }
 
         $this->templateVariables['profileurl'] = $this->app->getContainer()->get('router')->pathFor('login-register');
-        $this->templateVariables['createfleamarketurl'] = $this->app->getContainer()->get('router')->pathFor('create-fleamarket');
+        //$this->templateVariables['createfleamarketurl'] = $this->app->getContainer()->get('router')->pathFor('create-fleamarket');
         $this->templateVariables['fleamarkets'] = $myFleamarkets;
         $this->templateVariables['organizer'] = $organizer;
         $this->templateVariables['profileurl'] = $this->app->getContainer()->get('router')->pathFor('profile');

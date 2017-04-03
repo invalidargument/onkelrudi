@@ -40,7 +40,7 @@ class LoginActionTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($expected, $actual);
 
         $this->assertAttributeEquals(
-            ['loggedIn' => true, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'logouturl' => '/foo/'],
+            ['loggedIn' => true, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'changepasswordurl' => '/foo/', 'logouturl' => '/foo/'],
             'templateVariables',
             $action
         );

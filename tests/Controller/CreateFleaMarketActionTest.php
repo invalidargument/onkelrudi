@@ -59,7 +59,7 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
 
         $action($request, $response, array());
 
-        $this->assertAttributeEquals(['profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'logouturl' => '/foo/'], 'templateVariables', $action);
+        $this->assertAttributeEquals(['profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'changepasswordurl' => '/foo/', 'logouturl' => '/foo/'], 'templateVariables', $action);
     }
 
     public function testActionSetsNeededTemplateVariables()
@@ -102,7 +102,7 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
         $action($request, $response, array());
 
         $this->assertAttributeEquals(
-            ['isTest' => true, 'loggedIn' => true, 'fleamarket_organizers' => array(array('id' => 23, 'name' => 'foobarbaz')), 'createForm' => true, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'logouturl' => '/foo/'],
+            ['isTest' => true, 'loggedIn' => true, 'fleamarket_organizers' => array(array('id' => 23, 'name' => 'foobarbaz')), 'createForm' => true, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'changepasswordurl' => '/foo/', 'logouturl' => '/foo/'],
             'templateVariables',
             $action
         );
