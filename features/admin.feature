@@ -9,7 +9,7 @@ Feature: Admin page of onkelrudi
     Given I have a default organizer
     And I am slowly authenticated as user
     And I go to "/flohmarkt-anlegen/?test=1"
-    Then I should see "+ Termin anlegen"
+    Then I should see "Veröffentliche hier deine Flohmarkt-Termine!"
     When I fill in the following:
       | fleamarket_name | Rudi Bieller |
       | fleamarket_description | Eine Beschreibung |
@@ -52,7 +52,7 @@ Feature: Admin page of onkelrudi
   Scenario: Admin can not create a new fleamarket when no existing organizer is selected and no new organizer provided
     Given I am slowly authenticated as user
     And I am on "/flohmarkt-anlegen/?test=1"
-    Then I should see "+ Termin anlegen"
+    Then I should see "Veröffentliche hier deine Flohmarkt-Termine!"
     When I fill in the following:
       | fleamarket_name | Rudi Bieller |
       | fleamarket_description | Eine Beschreibung |
@@ -89,7 +89,7 @@ Feature: Admin page of onkelrudi
     Given I have a default organizer
     And I am slowly authenticated as user
     And I go to "/flohmarkt-anlegen/?test=1"
-    Then I should see "+ Termin anlegen"
+    Then I should see "Veröffentliche hier deine Flohmarkt-Termine!"
     When I fill in the following:
       | marketDate | 31.01.2019 |
       | marketTimeFrom | 09:30 |
