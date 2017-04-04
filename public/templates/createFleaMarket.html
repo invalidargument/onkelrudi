@@ -377,7 +377,7 @@
                             {% if editForm %}
                                 {% for dateItem in editDto.dates %}
                             <div style="padding:0;">
-                                <input name="marketDate[]" class="datepicker" type="date" placeholder="Datum (z.B. 23.05.2016)" value="{{dateItem.start|date('d.m.Y')}}">
+                                <input name="marketDate[]" class="datepicker" type="date" placeholder="Datum (z.B. 23.05.2016)" value="{{dateItem.start|date('d.m.Y')}}" data-value="{{dateItem.start|date('d.m.Y')}}">
                                 <input name="marketTimeStart[]"  class="timepicker pure-input-1-4" type="time" placeholder="Beginn (z.B. 12:00)" value="{{dateItem.start|date('H:i')}}">
                                 <input name="marketTimeEnd[]" class="timepicker pure-input-1-4" type="time" placeholder="Ende (z.B. 15:00)" value="{{dateItem.end|date('H:i')}}">
                             </div>

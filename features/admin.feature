@@ -114,7 +114,7 @@ Feature: Admin page of onkelrudi
     And I wait for "1" seconds
     Then I should see a ".button-success" element
     And I should see "Danke - Dein Termin wurde erfolgreich angelegt!"
-    When I go to "flohmarkt-bearbeiten/1"
+    When I go to "flohmarkt-bearbeiten/1?test=1"
     And I wait for "1" seconds
     Then the "value" attribute of the "#fleamarket_name" element should contain "Mein Testflohmarkt"
     And I should see "Eine Beschreibung" in the "#fleamarket_description" element
