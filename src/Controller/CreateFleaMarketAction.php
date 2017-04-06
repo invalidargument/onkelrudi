@@ -2,6 +2,8 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
+use RudiBieller\OnkelRudi\FleaMarket\OrganizerService;
+
 class CreateFleaMarketAction extends AbstractHttpAction implements UserAwareInterface
 {
     protected $template = 'createFleaMarket.html';
@@ -18,6 +20,7 @@ class CreateFleaMarketAction extends AbstractHttpAction implements UserAwareInte
         $this->templateVariables['loggedIn'] = true;
         $this->templateVariables['fleamarket_organizers'] = $fleamarketOrganizers;
         $this->templateVariables['createForm'] = true;
+        $this->templateVariables['defaultOrganizerId'] = OrganizerService::DEFAULT_ORGANIZER;
 
         return $fleamarketOrganizers;
     }

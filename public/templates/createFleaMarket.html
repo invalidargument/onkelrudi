@@ -36,6 +36,8 @@
     <script>
         $(function() {
 
+            var DEFAULT_ORGANIZER_ID = {{defaultOrganizerId}};
+
             function validateMandatoryFields() {
                 var fieldNames = [
                     'fleamarket_name',
@@ -69,7 +71,10 @@
                 });
 
                 if (!hasError) {
-                    if ($('#fleamarket_organizer').val() == null && $('#organizer_name').val() == '') {
+                    var isUnknownOrganizer = $('#organizer_name_unknown').is(':checked');
+
+                    // user is not organizer and we do not edit
+                    if (!isUnknownOrganizer && $('#fleamarket_organizer').val() == null && $('#organizer_name').val() == '') {
                         hasError = true;
                         $('label[for="organizer_name"]').addClass("error");
                     }
@@ -89,6 +94,19 @@
 
                 return false;
             };
+
+            $('#organizer_name_unknown').change(function() {
+                $('#organizer_data').toggle();
+                if (this.checked) {
+                    // hidden input is needed here - since it is only available in edit mode, we create it here via js
+                    var hiddenOrganizerId = $(
+                        '<input type="hidden" id="fleamarket_organizer" name="fleamarket_organizer" value="">'
+                    );
+                    $('#newFleaMarket').prepend(hiddenOrganizerId);
+
+                    $('#fleamarket_organizer').val(DEFAULT_ORGANIZER_ID);
+                }
+            });
 
             $('#newFleaMarket').on('submit', function(e) {
                 e.preventDefault();
@@ -437,8 +455,18 @@
                 <div class="pure-g">
                     <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
                         <h3>Wer veranstaltet den Kinderflohmarkt?</h3>
+                        <label for="organizer_name_unknown" class="pure-checkbox" style="font-weight: normal;">
+                            {% if (editForm) and (editDto.organizer.id == defaultOrganizerId) %}
+                            <input id="organizer_name_unknown" type="checkbox" checked="checked">
+                            {% else %}
+                            <input id="organizer_name_unknown" type="checkbox">
+                            {% endif %}
+                            Ich kenne den Veranstalter nicht!
+                        </label>
                     </div>
                 </div>
+
+                <section id="organizer_data">
 
                 <div class="pure-g">
                     <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
@@ -489,6 +517,9 @@
                         <input id="organizer_city" type="text" placeholder="Ort" class="pure-input-1" value="{{editDto.organizer.city}}">
                     </div>
                 </div>
+
+                </section>
+
                 {% endif %}
 
                 <div class="pure-g">

@@ -8,6 +8,7 @@ use RudiBieller\OnkelRudi\User\UserInterface;
 
 class FleaMarketService implements FleaMarketServiceInterface
 {
+    // TODO: put it where it belongs better than here... @see also OrganizerService
     const DEFAULT_ORGANIZER = 1;
 
     /**

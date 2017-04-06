@@ -4,6 +4,7 @@ namespace RudiBieller\OnkelRudi\Controller;
 
 use RudiBieller\OnkelRudi\Controller\Fixture\Factory;
 use RudiBieller\OnkelRudi\FleaMarket\Organizer;
+use RudiBieller\OnkelRudi\FleaMarket\OrganizerService;
 use Zend\Authentication\Storage\Session;
 
 class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
@@ -102,7 +103,7 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
         $action($request, $response, array());
 
         $this->assertAttributeEquals(
-            ['isTest' => true, 'loggedIn' => true, 'fleamarket_organizers' => array(array('id' => 23, 'name' => 'foobarbaz')), 'createForm' => true, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'changepasswordurl' => '/foo/', 'logouturl' => '/foo/'],
+            ['isTest' => true, 'loggedIn' => true, 'fleamarket_organizers' => array(array('id' => 23, 'name' => 'foobarbaz')), 'createForm' => true, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'changepasswordurl' => '/foo/', 'logouturl' => '/foo/', 'defaultOrganizerId' => OrganizerService::DEFAULT_ORGANIZER],
             'templateVariables',
             $action
         );

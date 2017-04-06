@@ -2,6 +2,7 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
+use RudiBieller\OnkelRudi\FleaMarket\OrganizerService;
 use RudiBieller\OnkelRudi\User\Organizer;
 
 class EditFleaMarketAction extends AbstractHttpAction implements UserAwareInterface
@@ -30,6 +31,7 @@ class EditFleaMarketAction extends AbstractHttpAction implements UserAwareInterf
         $this->templateVariables['editForm'] = true;
         $this->templateVariables['editDto'] = $fleamarket;
         $this->templateVariables['isOrganizer'] = $isOrganizer;
+        $this->templateVariables['defaultOrganizerId'] = OrganizerService::DEFAULT_ORGANIZER;
         return [];
     }
 }
