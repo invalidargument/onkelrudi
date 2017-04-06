@@ -9,7 +9,7 @@ use RudiBieller\OnkelRudi\User\UserInterface;
 class FleaMarketService implements FleaMarketServiceInterface
 {
     // TODO: put it where it belongs better than here... @see also OrganizerService
-    const DEFAULT_ORGANIZER = 1;
+    const DEFAULT_ORGANIZER = 228;
 
     /**
      * @var \RudiBieller\OnkelRudi\FleaMarket\Query\Factory

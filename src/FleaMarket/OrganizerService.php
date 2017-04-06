@@ -6,7 +6,8 @@ use RudiBieller\OnkelRudi\FleaMarket\Query\OrganizerQueryFactory;
 
 class OrganizerService implements OrganizerServiceInterface
 {
-    const DEFAULT_ORGANIZER = 1;
+    // TODO: put it where it belongs better than here... @see also FleaMarketService
+    const DEFAULT_ORGANIZER = 228;
 
     /**
      * @var \RudiBieller\OnkelRudi\FleaMarket\Query\OrganizerQueryFactory
