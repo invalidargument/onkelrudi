@@ -37,6 +37,11 @@
         $(function() {
 
             var DEFAULT_ORGANIZER_ID = {{defaultOrganizerId}};
+            {% if editForm %}
+            var IS_EDIT_FORM = true;
+            {% else %}
+            var IS_EDIT_FORM = false;
+            {% endif %}
 
             function validateMandatoryFields() {
                 var fieldNames = [
@@ -97,14 +102,25 @@
 
             $('#organizer_name_unknown').change(function() {
                 $('#organizer_data').toggle();
+
+                var oldOrganizerId = $('#fleamarket_organizer').val();
+
                 if (this.checked) {
-                    // hidden input is needed here - since it is only available in edit mode, we create it here via js
-                    var hiddenOrganizerId = $(
-                        '<input type="hidden" id="fleamarket_organizer" name="fleamarket_organizer" value="">'
-                    );
-                    $('#newFleaMarket').prepend(hiddenOrganizerId);
+                    if (IS_EDIT_FORM == false) {
+                        // hidden input is needed here - since it is only available in edit mode, we create it here via js
+                        var hiddenOrganizerId = $(
+                            '<input type="hidden" id="fleamarket_organizer" name="fleamarket_organizer" value="">'
+                        );
+                        $('#newFleaMarket').prepend(hiddenOrganizerId);
+                    }
 
                     $('#fleamarket_organizer').val(DEFAULT_ORGANIZER_ID);
+                } else {
+                    if (IS_EDIT_FORM == false) {
+                        $('#fleamarket_organizer').remove();
+                    } else {
+                        $('#fleamarket_organizer').val(oldOrganizerId);
+                    }
                 }
             });
 
