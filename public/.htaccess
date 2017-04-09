@@ -20,7 +20,7 @@ Options +FollowSymLinks
 RewriteCond %{HTTP_HOST} ^onkel-rudi.de$ [NC]
 RewriteRule ^(.*) https://www.onkel-rudi.de/$1 [L,R=301]
 RewriteCond %{HTTPS} off
-RewriteRule .* https://www.onkel-rudi.de/$1 [R=301,L]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-l
