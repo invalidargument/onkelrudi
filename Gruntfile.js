@@ -348,8 +348,12 @@ module.exports = function(grunt) {
                 dest: 'build/onkelrudi/public/.htaccess',
                 replacements: [
                     {
-                        from: '#RewriteBase /',
-                        to: 'RewriteBase /'
+                        from: '#',
+                        to: ''
+                    },
+                    {
+                        from: 'XXX',
+                        to: '#'
                     }
                 ]
             }

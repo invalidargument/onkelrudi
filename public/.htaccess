@@ -1,6 +1,6 @@
-#<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
-#Header set Expires "Fri, 15 Apr 2017 20:00:00 GMT"
-#</FilesMatch>
+#XXX<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
+#XXXHeader set Expires "Fri, 15 Apr 2017 20:00:00 GMT"
+#XXX</FilesMatch>
 
 AddOutputFilterByType DEFLATE text/plain
 AddOutputFilterByType DEFLATE text/html
@@ -14,13 +14,13 @@ AddOutputFilterByType DEFLATE application/x-javascript
 
 RewriteEngine On
 Options +FollowSymLinks
-#needed for live
+#XXXneeded for live
 #RewriteBase /
-#/needed for live
-RewriteCond %{HTTP_HOST} ^onkel-rudi.de$ [NC]
-RewriteRule ^(.*) https://www.onkel-rudi.de/$1 [L,R=301]
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+#RewriteCond %{HTTP_HOST} ^onkel-rudi.de$ [NC]
+#RewriteRule ^(.*) https://www.onkel-rudi.de/$1 [L,R=301]
+#RewriteCond %{HTTPS} off
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+#XXX/needed for live
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-l
