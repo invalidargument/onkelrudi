@@ -21,10 +21,7 @@ abstract class AbstractHttpAction extends AbstractAction implements HttpActionIn
 
     protected function writeErrorResponse()
     {
-        $this->templateVariables['profileurl'] = $this->app->getContainer()->get('router')->pathFor('profile');
-        $this->templateVariables['createfleamarketurl'] = $this->app->getContainer()->get('router')->pathFor('create-fleamarket');
-        $this->templateVariables['changepasswordurl'] = $this->app->getContainer()->get('router')->pathFor('password');
-        $this->templateVariables['logouturl'] = $this->app->getContainer()->get('router')->pathFor('logout');
+        $this->_setStandardTemplateVariables();
 
         $this->app->getContainer()->get('Logger')->critical('General error occured calling URI: ' . $this->request->getUri());
 
@@ -41,10 +38,7 @@ abstract class AbstractHttpAction extends AbstractAction implements HttpActionIn
 
     protected function writeSuccessResponse()
     {
-        $this->templateVariables['profileurl'] = $this->app->getContainer()->get('router')->pathFor('profile');
-        $this->templateVariables['createfleamarketurl'] = $this->app->getContainer()->get('router')->pathFor('create-fleamarket');
-        $this->templateVariables['changepasswordurl'] = $this->app->getContainer()->get('router')->pathFor('password');
-        $this->templateVariables['logouturl'] = $this->app->getContainer()->get('router')->pathFor('logout');
+        $this->_setStandardTemplateVariables();
 
         return $this->app->getContainer()->get('view')
             ->render(
@@ -63,10 +57,7 @@ abstract class AbstractHttpAction extends AbstractAction implements HttpActionIn
 
     protected function writeAuthenticationRequiredResponse()
     {
-        $this->templateVariables['profileurl'] = $this->app->getContainer()->get('router')->pathFor('profile');
-        $this->templateVariables['createfleamarketurl'] = $this->app->getContainer()->get('router')->pathFor('create-fleamarket');
-        $this->templateVariables['changepasswordurl'] = $this->app->getContainer()->get('router')->pathFor('password');
-        $this->templateVariables['logouturl'] = $this->app->getContainer()->get('router')->pathFor('logout');
+        $this->_setStandardTemplateVariables();
 
         return $this->app->getContainer()->get('view')
             ->render(
@@ -78,5 +69,13 @@ abstract class AbstractHttpAction extends AbstractAction implements HttpActionIn
                     'wpCategories' => $this->wordpressService->getAllCategories()
                 )
             );
+    }
+
+    private function _setStandardTemplateVariables()
+    {
+        $this->templateVariables['profileurl'] = $this->app->getContainer()->get('router')->pathFor('profile');
+        $this->templateVariables['createfleamarketurl'] = $this->app->getContainer()->get('router')->pathFor('create-fleamarket');
+        $this->templateVariables['changepasswordurl'] = $this->app->getContainer()->get('router')->pathFor('password');
+        $this->templateVariables['logouturl'] = $this->app->getContainer()->get('router')->pathFor('logout');
     }
 }
