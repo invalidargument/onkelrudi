@@ -96,7 +96,7 @@
                             {% endif %}
                             {% endfor %}
                         </ol>
-                        {% if hasPassedDates == 'true' %}
+                        {% if hasPassedDates == 'true' and displayPassedDates %}
                         <h2 class="splash-subhead">Vergangene Termine</h2>
                         <ol class="dates-list">
                             {% for dateItem in data.dates %}
