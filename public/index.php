@@ -138,6 +138,12 @@ $controllerFactory->setIcalService($icalService);
 
 // ########### ROUTING ####################
 
+// google webmaster tools
+$app->get('/googlec6fd4b4c7ece1640.html', function ($request, $response, $args) use ($app, $controllerFactory) {
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\GoogleWebmasterToolsAction');
+    $action($request, $response, $args);
+})->setName('googlewebmastertools');
+
 // Index
 $app->get('/', function ($request, $response, $args) use ($app, $controllerFactory) {
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\IndexAction');
