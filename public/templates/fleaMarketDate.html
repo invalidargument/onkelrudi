@@ -173,7 +173,7 @@
    "@context":"http://schema.org",
    "@type":"Event",
    "name":"{{data.name}}",
-   "url":"https://www.onkel-rudi.de{{currentUrl}}",
+   "url":"https://www.onkel-rudi.de{{currentUrl}}/datum/{{nextValidDateStart|date('d.m.Y')}}",
    "startDate":"{{nextValidDateStart|date('c')}}",
    "location":{
       "@type":"Place",
