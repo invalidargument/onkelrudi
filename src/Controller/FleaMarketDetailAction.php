@@ -22,6 +22,12 @@ class FleaMarketDetailAction extends AbstractHttpAction
             $this->organizerService->getOrganizer($fleaMarket->getOrganizer()->getId())
         );
 
+        $currentUrl = $this->app->getContainer()->router->pathFor('event-date', [
+            'wildcard' => $fleaMarket->getSlug(),
+            'id' => $fleaMarket->getId()
+        ]);
+        $this->templateVariables['currentUrl'] = $currentUrl;
+
         return $fleaMarket;
     }
 
