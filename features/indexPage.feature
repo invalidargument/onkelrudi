@@ -28,4 +28,4 @@ Feature: Index page of onkelrudi
     Given I have an expired fleamarket
     And I am on "/der-0-flohmarkt-von-rudi/termin/1"
     Then I should see "Der #0 Flohmarkt von Rudi"
-    And I should see "Dieser Kinderflohmarkt hat bereits stattgefunden! Wir haben aktuell keinen weiteren Termin für diesen Flohmarkt vorliegen." in the ".expired" element
+    And I should see "Dieser Kinderflohmarkt hat bereits stattgefunden! Aktuell ist kein weiterer Termin eingetragen." in the ".expired" element

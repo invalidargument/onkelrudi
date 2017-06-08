@@ -45,7 +45,7 @@
             <i class="fa fa-home"></i>{% if data.location %}{{data.location}}<br>{% endif %}
         </p>
         {% if hasValidDate == false %}
-        <p class="expired errormessage"><i class="fa fa-exclamation"></i><strong>Dieser Kinderflohmarkt hat bereits stattgefunden! Wir haben aktuell keinen weiteren Termin für diesen Flohmarkt vorliegen.</strong></p>
+            <p class="expired errormessage"><i class="fa fa-exclamation"></i><strong>Dieser Kinderflohmarkt hat bereits stattgefunden! Aktuell ist kein weiterer Termin eingetragen.</strong></p>
         {% endif %}
     </div>
     <div class="content detailView">
@@ -80,13 +80,16 @@
                 <div class="pure-g mt20">
                     <div class="pure-u-1">
                         <h2 class="splash-subhead">Anstehende Termine</h2>
+                        {% if hasValidDate == false %}
+                        <p><i class="fa fa-exclamation"></i><strong>Es ist aktuell kein anstehender Termin eingetragen.</strong></p>
+                        {% else %}
                         Einfach auf den Termin klicken, um ihn in Deinen Kalender zu speichern!
                         <ol class="dates-list">
                             {% set hasPassedDates = 'false' %}
                             {% for dateItem in data.dates %}
-                                {% set cssClass = 'dateTime' %}
-                                {% if dateItem.start|date("Ymd") == "now"|date("Ymd") %}{% set cssClass = 'dateTime today' %} {% endif %}
-                                {% if "now"|date("Ymd") > dateItem.start|date("Ymd") %}{% set hasPassedDates = 'true' %} {% endif %}
+                            {% set cssClass = 'dateTime' %}
+                            {% if dateItem.start|date("Ymd") == "now"|date("Ymd") %}{% set cssClass = 'dateTime today' %} {% endif %}
+                            {% if "now"|date("Ymd") > dateItem.start|date("Ymd") %}{% set hasPassedDates = 'true' %} {% endif %}
                             {% if dateItem.start|date("Ymd") > "now"|date("Ymd") %}
                             <li class="{{cssClass}} nowrap">
                                 <a href="/public/ical/termin/{{data.id}}/datum/{{dateItem.start|date('d.m.Y')}}" title="Zum Kalender (iCal) hinzufügen">
@@ -96,6 +99,8 @@
                             {% endif %}
                             {% endfor %}
                         </ol>
+                        {% endif %}
+
                         {% if hasPassedDates == 'true' and displayPassedDates %}
                         <h2 class="splash-subhead">Vergangene Termine</h2>
                         <ol class="dates-list">
@@ -114,8 +119,10 @@
                 {% else %}
                 <div class="pure-g mt20">
                     <div class="pure-u-1">
-                        <h2 class="splash-subhead">Diesen Termin zum Kalender hinzufügen</h2>
-                        <a href="/public/ical/termin/{{data.id}}/datum/{{data.dates|first.start|date('d.m.Y')}}" title="Zum Kalender (iCal) hinzufügen"><i class="fa fa-calendar"></i>{{data.name}} am {{data.dates|first.start|date('d.m.Y')}} im Kalender speichern!</a>
+                        {% if hasValidDate == true %}
+                            <h2 class="splash-subhead">Diesen Termin zum Kalender hinzufügen</h2>
+                            <a href="/public/ical/termin/{{data.id}}/datum/{{data.dates|first.start|date('d.m.Y')}}" title="Zum Kalender (iCal) hinzufügen"><i class="fa fa-calendar"></i>{{data.name}} am {{data.dates|first.start|date('d.m.Y')}} im Kalender speichern!</a>
+                        {% endif %}
                     </div>
                 </div>
                 {% endif %}
