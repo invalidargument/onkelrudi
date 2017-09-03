@@ -22,13 +22,13 @@
     "tests"
   ],
   "dependencies": {
-    "pure": "~0.6.0",
-    "requirejs": "~2.1.22",
+    "pure": "~1.0.0",
+    "requirejs": "~2.3.5",
     "underscore": "~1.8.3",
-    "jquery": "~2.1.4",
-    "pickadate": "3.5.6",
-    "moment": "2.11.2",
-    "mustache": "2.2.1",
-    "cookieconsent2": "1.0.10"
+    "jquery": "~2.2.4",
+    "pickadate": "~3.5.6",
+    "moment": "~2.18.1",
+    "mustache": "~2.3.0",
+    "cookieconsent2": "~1.0.10"
   }
 }
