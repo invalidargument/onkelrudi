@@ -3,16 +3,29 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Onkel Rudi - Hier findest du den Kinderflohmarkt oder Kinderbasar.">
+    <meta name="description" content="Onkel Rudi - Die Seite für den Kinderflohmarkt und Kinderbasar.">
     <title>Onkel Rudi - Finde Deinen Kinderflohmarkt oder Kinderbasar!</title>
+    <script src="/public/bower_components/jquery/dist/jquery.js"></script>
+    {% if isTest == false %}
+    <script type="text/javascript">
+        window.cookieconsent_options = {
+            "message":"Diese Seite nutzt Cookies, um die Benutzung für Dich angenehmer zu machen.",
+            "dismiss":"Alles klar, verstanden!",
+            "learnMore":"",
+            "link":"/public/#datenschutz",
+            "theme":"/public/css/cookieconsent.css"
+        };
+    </script>
+    <script type="text/javascript" src="/public/bower_components/cookieconsent2/build/cookieconsent.min.js"></script>
+    {% endif %}
 </head>
-<body class="blog">
+<body>
 <div class="header">
     <nav class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
         <a class="pure-menu-heading" href="/public/">Onkel Rudi</a>
         <ul class="pure-menu-list">
             {% for item in wpCategories %}
-            <li class="pure-menu-item{% if item.id == selectedCategory %} pure-menu-active{% endif %}"><a href="/public/{{item.slug}}/kategorie/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
+            <li class="pure-menu-item"><a href="/public/{{item.slug}}/kategorie/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
             {% endfor %}
             {% if isLoggedIn == false %}
             <li class="pure-menu-item"><a href="/public/login/" class="pure-menu-link">Login</a></li>
@@ -41,25 +54,23 @@
     </div>
 </div>
 
+{% autoescape 'html' %}
 <div class="content-wrapper">
-    <div class="content">
-        <div class="pure-g">
-            {% for item in data %}
-            <div class="l-box pure-u-1 pure-u-md-1-4 pure-u-lg-1-4">
-                <!-- {{wpCategories|first.name}} -->
-                <h3 class="content-head"><time datetime="{{item.date|date('c')}}">{{item.date|date("d.m.Y H:i")}}</time></h3>
-            </div>
-            <div class="l-box pure-u-1 pure-u-md-3-4 pure-u-lg-3-4">
-                <h2 class="content-head">{{item.title}}</h2>
-                <div>
-                    {{ item.content|striptags[:160] }}
-                    {% if item.content|striptags|length > 160 %}
-                        ...
-                    {% endif %}
-                </div>
-                <i class="fa fa-angle-double-right"></i><a href="/public/blog/{{item.slug}}/post/{{item.postId}}" class="more">Vollständigen Artikel lesen</a>
-            </div>
-            {% endfor %}
+    <div class="ribbon l-box-lrg pure-g">
+        <div class="pure-u-1">
+            <h2 class="content-head">About.</h2>
+            <p>
+                onkel-rudi.de ist eine private Seite, auf der Du Kinderflohmärkte und Babybasare finden kannst.<br>
+                Aktuell findest Du hier hauptsächlich Termine, wenn Du nach einem Kinderflohmarkt im Raum Köln suchst.
+            </p>
+            <p>
+                Wenn Du selbst einen Flohmarkt oder Babybasar veranstaltest oder einen kennst, der hier noch nicht aufgelistet ist, registriere Dich und veröffentliche ihn!<br>
+                Die Anmeldung und kostenlos und in weniger als einer Minute erledigt.
+                Wenn Du Unterstützung brauchst oder eine Frage hast, schreibe einfach eine E-Mail an <a href="mailto:info@onkel-rudi.de">info@onkel-rudi.de</a>.
+            </p>
+            <p>
+                Den Quellcode für diese Seite findest Du auf <a href="https://github.com/invalidargument/onkelrudi" title="Quellcode von onkel-rudi.de auf github">github</a> - für alle, die interessiert, wie die Seite funktioniert.
+            </p>
         </div>
     </div>
 
@@ -70,7 +81,9 @@
             <li class="pure-menu-item"><a href="/public/impressum/" class="pure-menu-link">Impressum</a></li>
         </ul>
     </nav>
+
 </div>
+{% endautoescape %}
 
 <link rel="stylesheet" href="/public/bower_components/pure/pure-min.css">
 <!--[if lte IE 8]>
