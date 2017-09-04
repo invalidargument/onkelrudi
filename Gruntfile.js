@@ -46,6 +46,12 @@ module.exports = function(grunt) {
                     'build/onkelrudi/public/templates/error.html': [
                         'public/templates/error.html'
                     ],
+                    'build/onkelrudi/public/templates/about.html': [
+                        'public/templates/about.html'
+                    ],
+                    'build/onkelrudi/public/templates/impressum.html': [
+                        'public/templates/impressum.html'
+                    ],
                     'build/onkelrudi/public/templates/fleaMarketDate.html': [
                         'public/templates/fleaMarketDate.html'
                     ],
@@ -133,6 +139,58 @@ module.exports = function(grunt) {
                     },
                     {
                         from: '/public/bower_components/jquery/dist/',
+                        to: '/js/'
+                    },
+                    {
+                        from: '/public/',
+                        to: '/'
+                    }
+                ]
+            },
+            aboutHtmlPaths: {
+                src: ['build/onkelrudi/public/templates/about.html'],
+                dest: 'build/onkelrudi/public/templates/about.html',
+                replacements: [
+                    {
+                        from: '/public/bower_components/pure/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/css/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/bower_components/jquery/dist/',
+                        to: '/js/'
+                    },
+                    {
+                        from: '/public/bower_components/cookieconsent2/build/',
+                        to: '/js/'
+                    },
+                    {
+                        from: '/public/',
+                        to: '/'
+                    }
+                ]
+            },
+            impressumHtmlPaths: {
+                src: ['build/onkelrudi/public/templates/impressum.html'],
+                dest: 'build/onkelrudi/public/templates/impressum.html',
+                replacements: [
+                    {
+                        from: '/public/bower_components/pure/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/css/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/bower_components/jquery/dist/',
+                        to: '/js/'
+                    },
+                    {
+                        from: '/public/bower_components/cookieconsent2/build/',
                         to: '/js/'
                     },
                     {
