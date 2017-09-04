@@ -692,3 +692,9 @@ a.actionButton, a.actionButton:hover {
     background: #EEF66C;
     color: #F17022;
 }
+
+
+/* cookieconsent2 */
+.cc_container .cc_btn {
+    width: auto;
+}
