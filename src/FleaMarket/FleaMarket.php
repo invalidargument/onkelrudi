@@ -103,6 +103,14 @@ class FleaMarket implements FleaMarketInterface, \JsonSerializable
 
     public function getUrl()
     {
+        if (!$this->_url) {
+            return $this->_url;
+        }
+
+        if (substr($this->_url, 0, 4) !== 'http') {
+            return 'http://' . $this->_url;
+        }
+
         return $this->_url;
     }
 
