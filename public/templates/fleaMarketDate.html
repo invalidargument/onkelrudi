@@ -71,7 +71,7 @@
                         <strong>{{data.organizer.name}}</strong><br>
                         {% if data.organizer.zipcode %}<i class="fa fa-home"></i>{{data.organizer.zipcode}} {{data.organizer.city}}<br>{% endif%}
                         {% if data.organizer.phone %}<i class="fa fa-phone"></i><span itemprop="telephone"><a href="tel:{{data.organizer.phone}}" class="post-category-organizer-url">{{data.organizer.phone}}</a></span><br>{% endif%}
-                        {% if data.organizer.email %}<i class="fa fa-inbox"></i><span itemprop="email"><a href="tel:{{data.organizer.email}}" class="post-category-organizer-url">{{data.organizer.email}}</a></span><br>{% endif%}
+                        {% if data.organizer.email %}<i class="fa fa-inbox"></i><span itemprop="email"><a href="mailto:{{data.organizer.email}}" class="post-category-organizer-url">{{data.organizer.email}}</a></span><br>{% endif%}
                         {% if data.organizer.url %}<i class="fa fa-external-link"></i><a href="{{data.organizer.url}}" target="_blank" class="post-category-organizer-url" rel="nofollow">{{data.organizer.url|length > 33 ? data.organizer.url[:33] ~ '...' : data.organizer.url}}</a>{% endif%}
                     </div>
                 </div>
