@@ -18,7 +18,7 @@ Feature: User login/register page of onkelrudi
 
     Examples:
       | password1 | password2  | expectedCssClass | unexpectedCssClass | expectedMessage |
-      | foobarbaz | foobarbaz  | .button-success  | .errormessage      | Danke - Dein Benutzer wurde erfolgreich angelegt! Bitte schaue in Dein E-Mail-Postfach und folge dem Bestätigungslink, um Deine Registrierung abzuschließen. |
+      | foobarbaz | foobarbaz  | .button-success  | .errormessage      | Danke - Dein Benutzer wurde erfolgreich angelegt! Bitte schaue in Dein E-Mail-Postfach (info@onkel-rudi.de) und folge dem Bestätigungslink, um Deine Registrierung abzuschließen. |
       | foo       | foo        | .button-error    | .successmessage    | Es ist etwas schiefgegangen: Passwords must have a minimum length of 8 chracters. |
       | foobarbaz | foobarbazz | .button-error    | .successmessage    | Es ist etwas schiefgegangen: Passwords do not match. |
 
@@ -38,7 +38,7 @@ Feature: User login/register page of onkelrudi
 
     Examples:
       | password1 | password2  | expectedCssClass | unexpectedCssClass | expectedMessage |
-      | foobarbaz | foobarbaz  | .button-success  | .errormessage      | Danke - Dein Benutzer wurde erfolgreich angelegt! Bitte schaue in Dein E-Mail-Postfach und folge dem Bestätigungslink, um Deine Registrierung abzuschließen. |
+      | foobarbaz | foobarbaz  | .button-success  | .errormessage      | Danke - Dein Benutzer wurde erfolgreich angelegt! Bitte schaue in Dein E-Mail-Postfach (info@onkel-rudi.de) und folge dem Bestätigungslink, um Deine Registrierung abzuschließen. |
       | foo       | foo        | .button-error    | .successmessage    | Es ist etwas schiefgegangen: Passwords must have a minimum length of 8 chracters. |
       | foobarbaz | foobarbazz | .button-error    | .successmessage    | Es ist etwas schiefgegangen: Passwords do not match. |
 

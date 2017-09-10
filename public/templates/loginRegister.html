@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Onkel Rudi - Der Terminkalender zu Kinderflohmarkt und Kinderbasar.">
+    <meta name="description" content="Finde einen Kinderflohmarkt bei Onkel Rudi!">
 
-    <title>Onkel Rudi - Finde Deinen Kinderflohmarkt oder Kinderbasar!</title>
+    <title>Einen Kinderflohmarkt findest Du bei Onkel Rudi!</title>
 
     <link rel="stylesheet" href="/public/bower_components/pure/pure-min.css">
     <!--[if lte IE 8]>
@@ -48,7 +48,7 @@
                         $('#submitregister').removeClass('button-error');
                         $('#submitregister').addClass('button-success');
                         $('#submitregister').parent().append(
-                            '<p class="successmessage"><i class="fa fa-check fa-lg"></i>Danke - Dein Benutzer wurde erfolgreich angelegt! Bitte schaue in Dein E-Mail-Postfach und folge dem Bestätigungslink, um Deine Registrierung abzuschließen.</p>'
+                            '<p class="successmessage"><i class="fa fa-check fa-lg"></i>Danke - Dein Benutzer wurde erfolgreich angelegt! Bitte schaue in Dein E-Mail-Postfach (' + $('#register_email').val() + ') und folge dem Bestätigungslink, um Deine Registrierung abzuschließen.</p>'
                         );
                     },
                     error: function (data) {
@@ -196,7 +196,7 @@
                         Registrierung abschließen und Deinen Benutzer aktivieren kannst.
                     </p>
                     <p>
-                        Falls Du nach einer Minute noch keine E-Mail mit einem Bestätigungslink erhalten hast, schau bitte in Deinem Spam-Ordner nach.
+                        Falls Du nach einer Minute noch keine E-Mail mit einem Bestätigungslink erhalten hast, schau bitte in Deinem Spam-Ordner nach und überprüfe, ob Du Dich eventuell bei der E-Mail vertippt hast.
                     </p>
                 </div>
             </div>
