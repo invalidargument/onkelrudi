@@ -149,10 +149,6 @@ $app->get('/', function ($request, $response, $args) use ($app, $controllerFacto
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\IndexAction');
     $action($request, $response, $args);
 })->setName('index');
-$app->get('/about/', function ($request, $response, $args) use ($app, $controllerFactory) {
-    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\AboutAction');
-    $action($request, $response, $args);
-})->setName('about');
 $app->get('/impressum/', function ($request, $response, $args) use ($app, $controllerFactory) {
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\ImpressumAction');
     $action($request, $response, $args);
