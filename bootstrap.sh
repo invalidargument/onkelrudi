@@ -11,6 +11,8 @@ echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-
 echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
 
 apt-get install apache2 libapache2-mod-php php-gd php-curl php-xdebug php-mysql php-xml php-mbstring
+apt-get install zip unzip php7.0-zip
+apt-get install ant
 
 apt-get install -y oracle-java8-installer
 apt-get install -y oracle-java8-set-default
