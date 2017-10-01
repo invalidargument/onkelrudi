@@ -170,7 +170,8 @@ a.pure-button-primary {
     text-decoration: none;
 }
 .footer .pure-menu-link {
-    border-bottom: 2px solid transparent;
+    border-bottom: 2px solid #EEF66C;
+    display:inline;
 }
 .footer .pure-menu-link:hover {
     background-color: transparent;
@@ -211,19 +212,18 @@ a.pure-button-primary {
 
 /* This is the main heading that appears on the blue section */
 .splash-head {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 200%;
+    font-weight: 300;
     color: #62C2CC;
     border: 0;
     padding: 0 1.6em;
-    font-weight: 100;
     border-radius: 5px;
     line-height: 1em;
 }
 
 /* This is the subheading that appears on the blue section */
 .splash-subhead {
-    font-size: 20px;
+    font-size: 110%;
     color: #62C2CC;
     letter-spacing: 0.05em;
     opacity: 0.8;
@@ -391,6 +391,7 @@ form#startMonthSelect h2 {
 
     .splash-head {
         font-size: 250%;
+        font-weight: 200;
     }
 
     .content-head {
@@ -427,6 +428,7 @@ form#startMonthSelect h2 {
     /* We increase the header font size even more */
     .splash-head {
         font-size: 300%;
+        font-weight: 100;
     }
     .pure-menu-link, .pure-menu-disabled, .pure-menu-heading {
         padding: 0.5em 1em;
@@ -632,7 +634,7 @@ i.fa {
 .fleamarketDetail .head {
     background: #E4F6F8;
     width: 100%;
-    margin: 0;
+    margin: -10px 0 0 0;
     padding: 20px 0;
     text-align: center;
     text-transform: uppercase;
