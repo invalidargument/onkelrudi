@@ -218,4 +218,13 @@
         <echo message="ln -sfn Quellordner Linkname"/>
         <echo message="liquibase update"/>
     </target>
+
+    <!--
+    <todo>
+        <wp-config>
+            define('UPLOADS', '../public/img');
+            configure wp without year/month folders
+        </wp-config>
+    </todo>
+    //-->
 </project>
