@@ -50,7 +50,9 @@ class PostReadQuery extends AbstractJsonReadQuery implements CacheableInterface
             ->setDateModified($post->modified) //gmt???
             ->setTitle($post->title->rendered)
             ->setExcerpt($post->excerpt->rendered)
-            ->setContent($post->content->rendered)
+            ->setContent(
+                $this->_cleanUpWordpressImageSourcePaths($post->content->rendered)
+            )
             ->setSlug($post->slug);
 
         return $item;
@@ -59,5 +61,26 @@ class PostReadQuery extends AbstractJsonReadQuery implements CacheableInterface
     protected function getTtl()
     {
         return self::TTL * 12;
+    }
+
+    private function _cleanUpWordpressImageSourcePaths($content)
+    {
+        switch ($this->diContainer->config->getSystemConfiguration()['environment']) {
+            case 'live':
+                return str_replace(
+                    'http://' . $this->diContainer->config->getWordpressConfiguration()['api-domain'] . '/../onkelrudi/current/public/',
+                    '',
+                    $content
+                );
+                break;
+
+            default:
+                return str_replace(
+                    'http://localhost:8089/wordpress/..',
+                    '',
+                    $content
+                );
+                break;
+        }
     }
 }
