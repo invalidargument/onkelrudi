@@ -351,6 +351,14 @@ form#startMonthSelect h2 {
 .extra-mt {
     margin-top: 10px;
 }
+.pure-u-1.pl {
+    padding-right:10px;
+    padding-left:10px;
+}
+.pure-u-1.pr {
+    padding-right:10px;
+    padding-left:10px;
+}
 
 /*
  * -- TABLET (AND UP) MEDIA QUERIES --
@@ -416,6 +424,13 @@ form#startMonthSelect h2 {
     .pure-menu-allow-hover:hover > .pure-menu-children,
     .pure-menu-active > .pure-menu-children {
         margin-left: -97px;
+    }
+
+    .pure-u-1.pl {
+        padding-left:20px;
+    }
+    .pure-u-1.pr {
+        padding-right:20px;
     }
 }
 
