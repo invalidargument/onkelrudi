@@ -2,12 +2,10 @@
 
 namespace RudiBieller\OnkelRudi\Controller;
 
-use RudiBieller\OnkelRudi\CacheableInterface;
-
 /**
  * @codeCoverageIgnore
  */
-class ImpressumAction extends AbstractHttpAction implements CacheableInterface
+class ImpressumAction extends AbstractHttpAction
 {
     protected $template = 'impressum.html';
 
