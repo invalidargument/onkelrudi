@@ -316,6 +316,9 @@ form#startMonthSelect h2 {
 .blog .content a:hover {
     text-decoration: none;
 }
+.wp-post a img {
+    padding: 5px 20px;
+}
 .content a.block {
     display:block;
     text-decoration: none;

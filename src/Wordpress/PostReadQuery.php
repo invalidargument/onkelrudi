@@ -65,10 +65,23 @@ class PostReadQuery extends AbstractJsonReadQuery implements CacheableInterface
 
     private function _cleanUpWordpressImageSourcePaths($content)
     {
+        $htmlDocument = new \DOMDocument();
+        $htmlDocument->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+        $elements = $htmlDocument->getElementsByTagName('img');
+        foreach ($elements as $image) {
+            /* @var $image \DOMElement */
+            $image->removeAttribute('width');
+            $image->removeAttribute('height');
+            $image->removeAttribute('class');
+        }
+
+        $content = html_entity_decode($htmlDocument->saveHTML());
+
         switch ($this->diContainer->config->getSystemConfiguration()['environment']) {
             case 'live':
                 return str_replace(
-                    'http://' . $this->diContainer->config->getWordpressConfiguration()['api-domain'] . '/../onkelrudi/current/public/',
+                    'http://' . $this->diContainer->config->getWordpressConfiguration()['api-domain'] . '/../onkelrudi/current/public',
                     '',
                     $content
                 );

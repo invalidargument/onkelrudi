@@ -17,7 +17,7 @@ class PostReadQueryTest extends \PHPUnit_Framework_TestCase
             ->setPostId(1)
             ->setDate('2015-11-28T23:26:09')
             ->setDateModified('2015-11-28T23:26:09')
-            ->setContent("<p>Willkommen zur deutschen Version von WordPress. Dies ist der erste Beitrag. Du kannst ihn bearbeiten oder löschen. Und dann starte mit dem Schreiben! /foo/bar/baz</p>\n")
+            ->setContent("<p>Willkommen zur deutschen Version von WordPress. Dies ist der erste Beitrag. <a href=\"/img/foo.jpg\"><img src=\"foo.jpg\"></a> Du kannst ihn bearbeiten oder löschen. Und dann starte mit dem Schreiben! /foo/bar/baz</p>\n")
             ->setExcerpt("<p>Willkommen zur deutschen Version von WordPress. Dies ist der erste Beitrag. Du kannst ihn bearbeiten oder löschen. Und dann starte mit dem Schreiben!</p>\n")
             ->setTitle('Hallo Welt!')
             ->setSlug('hallo-welt');
