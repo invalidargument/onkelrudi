@@ -241,5 +241,13 @@
                                  referencedColumnNames="id"
                                  referencedTableName="fleamarkets_organizer"/>
     </changeSet>
+    <changeSet id="30" author="Rudi Bieller">
+        <modifyDataType
+            catalogName="onkelrudi"
+            schemaName="public"
+            columnName="name"
+            newDataType="varchar(128)"
+            tableName="fleamarkets"/>
+    </changeSet>
 </databaseChangeLog>
 
