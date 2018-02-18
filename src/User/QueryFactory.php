@@ -12,6 +12,7 @@ class QueryFactory
     private $_optInTokenTestUpdateQuery;
     private $_userReadQuery;
     private $_userToOrganizerInsertQuery;
+    private $_userToOrganizerReadQuery;
     private $_userPasswordChangeQuery;
 
     private $_diContainer;
@@ -79,6 +80,16 @@ class QueryFactory
         }
 
         return $this->_userToOrganizerInsertQuery;
+    }
+
+    public function createUserToOrganizerReadQuery()
+    {
+        if (is_null($this->_userToOrganizerReadQuery)) {
+            $this->_userToOrganizerReadQuery = new UserToOrganizerReadQuery();
+            $this->_userToOrganizerReadQuery->setDiContainer($this->_diContainer);
+        }
+
+        return $this->_userToOrganizerReadQuery;
     }
 
     public function createUserPasswordUpdateQuery()

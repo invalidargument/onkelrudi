@@ -31,6 +31,7 @@ class QueryFactoryTest extends \PHPUnit_Framework_TestCase
             array('createOptInTokenTestUpdateQuery', 'RudiBieller\OnkelRudi\User\OptInTokenTestUpdateQuery'),
             array('createUserReadQuery', 'RudiBieller\OnkelRudi\User\UserReadQuery'),
             array('createUserToOrganizerInsertQuery', 'RudiBieller\OnkelRudi\User\UserToOrganizerInsertQuery'),
+            array('createUserToOrganizerReadQuery', 'RudiBieller\OnkelRudi\User\UserToOrganizerReadQuery'),
             array('createUserPasswordUpdateQuery', 'RudiBieller\OnkelRudi\User\UserPasswordUpdateQuery')
         );
     }
