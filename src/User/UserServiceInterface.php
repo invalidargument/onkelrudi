@@ -36,4 +36,6 @@ interface UserServiceInterface
     public function getUser($identifier);
 
     public function changePassword(UserInterface $user, $newPassword);
+
+    public function getOrganizerIdByUserId($userId);
 }

@@ -178,4 +178,13 @@ class UserService implements UserServiceInterface
 
         return $query->run();
     }
+
+    public function getOrganizerIdByUserId($userId)
+    {
+        $query = $this->_factory->createUserToOrganizerReadQuery();
+
+        $query->setIdentifier($userId);
+
+        return $query->run();
+    }
 }

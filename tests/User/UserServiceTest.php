@@ -214,4 +214,20 @@ class UserServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(1, $service->changePassword($user, 'newPwd'));
     }
+
+    public function testGetOrganizerIdByUserIdReturnsCorrectOrganizerId()
+    {
+        $result = array('organizer_id' => 42);
+        $query = \Mockery::mock('RudiBieller\OnkelRudi\User\UserToOrganizerReadQuery');
+        $query->shouldReceive('setIdentifier')->with('foo@example.com')->andReturn($query)
+            ->shouldReceive('run')->andReturn($result);
+
+        $queryFactory = \Mockery::mock('RudiBieller\OnkelRudi\User\QueryFactory');
+        $queryFactory->shouldReceive('createUserToOrganizerReadQuery')->once()->andReturn($query);
+
+        $service = new UserService();
+        $service->setQueryFactory($queryFactory);
+
+        $this->assertSame($result, $service->getOrganizerIdByUserId('foo@example.com'));
+    }
 }
