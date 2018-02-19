@@ -5,7 +5,7 @@ Feature: User with role Organizer
   I need to be able to edit my organizer profile and create/edit my fleamarkets
 
   @javascript
-  Scenario: Organizer can edit her profile and have it saved in the organizer profile of her user accordingly
+  Scenario: Organizer can go through create/update cycle for profile and fleamarket
     Given I have an Organizer User with Email "info@onkel-rudi.de"
     When I go to "/login/"
     And I fill in "login_email" with "info@onkel-rudi.de"
