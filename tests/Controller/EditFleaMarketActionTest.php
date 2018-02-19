@@ -71,7 +71,7 @@ class EditFleaMarketActionTest extends \PHPUnit_Framework_TestCase
         $action($request, $response, array('id' => 23));
 
         $this->assertAttributeEquals(
-            ['isTest' => true, 'loggedIn' => true, 'fleamarket_organizers' => array(), 'editForm' => true, 'editDto' => $fleamarket, 'isOrganizer' => null, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'changepasswordurl' => '/foo/', 'logouturl' => '/foo/', 'defaultOrganizerId' => OrganizerService::DEFAULT_ORGANIZER],
+            ['isTest' => true, 'loggedIn' => true, 'fleamarket_organizers' => array(), 'editForm' => true, 'editDto' => $fleamarket, 'isOrganizer' => null, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'changepasswordurl' => '/foo/', 'logouturl' => '/foo/', 'defaultOrganizerId' => OrganizerService::DEFAULT_ORGANIZER, 'actualOrganizerId' => 42],
             'templateVariables',
             $action
         );

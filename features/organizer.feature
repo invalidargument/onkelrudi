@@ -67,3 +67,25 @@ Feature: User with role Organizer
     """
     {"data":{"id":1,"uuid":"47f1f5ac-60dc-5105-9f35-5deddc657d92","name":"Der gro\u00dfe Organizer","street":"Hausstr.","streetNo":"42","zipCode":"50000","city":"K\u00f6ln","phone":"0221 1234567890","email":"info@onkel-rudi.de","url":"https:\/\/www.onkel-rudi.de"}}
     """
+    When I go to "flohmarkt-bearbeiten/1?test=1"
+    And I wait for "1" seconds
+    And I fill in the following:
+      | fleamarket_name | Mein Testflohmarkt UPDATED |
+      | fleamarket_description | Eine Beschreibung UPDATED |
+      | fleamarket_location | Zu Hause UPDATED |
+      | fleamarket_street | Hausstr. UPDATED |
+      | fleamarket_streetNo | 42000 |
+      | fleamarket_zipCode | 55555 |
+      | fleamarket_city | Köln UPDATED |
+      | fleamarket_url | http://www.example.com/UPDATED |
+    And I press "Änderungen speichern - click hier!"
+    And I wait for "1" seconds
+    Then I should see a ".button-success" element
+    And I should see "Dein Termin wurde erfolgreich aktualisiert!"
+    When I send a "GET" request to "http://localhost/public/api/v1/fleamarkets/1"
+    Then the response code should be "200"
+    And the response should be json
+    And the response should be
+    """
+    {"data":{"id":1,"uuid":"4d0f6fcd-16e8-56c7-8f25-1e802b50fb95","organizer":{"id":1,"uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Mein Testflohmarkt UPDATED","description":"Eine Beschreibung UPDATED","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Hausstr. UPDATED","streetNo":"42000","city":"K\u00f6ln UPDATED","zipCode":"55555","location":"Zu Hause UPDATED","url":"http:\/\/www.example.com\/UPDATED"}}
+    """

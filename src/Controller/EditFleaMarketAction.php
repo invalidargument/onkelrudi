@@ -32,6 +32,7 @@ class EditFleaMarketAction extends AbstractHttpAction implements UserAwareInterf
         $this->templateVariables['editDto'] = $fleamarket;
         $this->templateVariables['isOrganizer'] = $isOrganizer;
         $this->templateVariables['defaultOrganizerId'] = OrganizerService::DEFAULT_ORGANIZER;
+        $this->templateVariables['actualOrganizerId'] = $fleamarket->getOrganizer()->getId();
         return [];
     }
 }
