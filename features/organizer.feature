@@ -39,7 +39,6 @@ Feature: User with role Organizer
     And the "value" attribute of the "#organizer_zip" element should contain "50000"
     And the "value" attribute of the "#organizer_city" element should contain "Köln"
     When I go to "/flohmarkt-anlegen/?test=1"
-    And I wait for 10 seconds
     And I fill in the following:
       | fleamarket_name | Mein Testflohmarkt |
       | fleamarket_description | Eine Beschreibung |
@@ -68,7 +67,6 @@ Feature: User with role Organizer
     {"data":{"id":1,"uuid":"47f1f5ac-60dc-5105-9f35-5deddc657d92","name":"Der gro\u00dfe Organizer","street":"Hausstr.","streetNo":"42","zipCode":"50000","city":"K\u00f6ln","phone":"0221 1234567890","email":"info@onkel-rudi.de","url":"https:\/\/www.onkel-rudi.de"}}
     """
     When I go to "flohmarkt-bearbeiten/1?test=1"
-    And I wait for "1" seconds
     And I fill in the following:
       | fleamarket_name | Mein Testflohmarkt UPDATED |
       | fleamarket_description | Eine Beschreibung UPDATED |
