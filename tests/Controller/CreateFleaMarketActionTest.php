@@ -77,8 +77,10 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
         $response->shouldReceive('getBody')->once()->andReturn($body)
             ->shouldReceive('write');
 
+        $session = \Mockery::mock('Zend\Authentication\Storage\Session');
+        $session->shouldReceive('read')->once()->andReturn(true);
         $authenticationService = \Mockery::mock('Zend\Authentication\AuthenticationService');
-        $authenticationService->shouldReceive('getStorage')->once()->andReturn(new Session());
+        $authenticationService->shouldReceive('getStorage')->once()->andReturn($session);
 
         $userService = \Mockery::mock('RudiBieller\OnkelRudi\User\UserService');
         $userService->shouldReceive('getAuthenticationService')->andReturn($authenticationService)
@@ -103,7 +105,7 @@ class CreateFleaMarketActionTest extends \PHPUnit_Framework_TestCase
         $action($request, $response, array());
 
         $this->assertAttributeEquals(
-            ['isTest' => true, 'loggedIn' => true, 'fleamarket_organizers' => array(array('id' => 23, 'name' => 'foobarbaz')), 'createForm' => true, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'changepasswordurl' => '/foo/', 'logouturl' => '/foo/', 'defaultOrganizerId' => OrganizerService::DEFAULT_ORGANIZER],
+            ['isTest' => true, 'loggedIn' => true, 'fleamarket_organizers' => array(array('id' => 23, 'name' => 'foobarbaz')), 'createForm' => true, 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'changepasswordurl' => '/foo/', 'logouturl' => '/foo/', 'defaultOrganizerId' => OrganizerService::DEFAULT_ORGANIZER, 'isOrganizer' => false, 'actualOrganizerId' => null],
             'templateVariables',
             $action
         );
