@@ -1,4 +1,4 @@
-@user
+@userRegistration
 Feature: User login/register page of onkelrudi
   In order to login or register as a new user
   As an onkelrudi user
