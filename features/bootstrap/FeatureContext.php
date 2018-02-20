@@ -247,7 +247,7 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
      */
     public function iHaveAnOrganizerUserWithEmail($arg1, $optInToken = 'foo')
     {
-        $user = $this->_userService->createOrganizerUser($arg1, password_hash('test1234', PASSWORD_DEFAULT));
+        $user = $this->_userService->createOrganizerUser($arg1, password_hash('aaaaaaaa', PASSWORD_DEFAULT));
         $this->_userService->createTestOptInToken($arg1, $optInToken);
         $this->iOptinMyUser($arg1);
     }

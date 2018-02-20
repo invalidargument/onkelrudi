@@ -9,7 +9,7 @@ Feature: User with role Organizer
     Given I have an Organizer User with Email "info@onkel-rudi.de"
     When I go to "/login/"
     And I fill in "login_email" with "info@onkel-rudi.de"
-    And I fill in "login_password" with "test1234"
+    And I fill in "login_password" with "aaaaaaaa"
     And I press "Anmelden"
     And I wait for "1" seconds
     Then I should see "Danke - Du hast Dich erfolgreich angemeldet!"
