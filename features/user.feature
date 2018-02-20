@@ -170,12 +170,12 @@ Feature: Administration page of onkelrudi
     And I wait for "1" seconds
     Then I should see a ".button-success" element
     And I should see "Dein Termin wurde erfolgreich aktualisiert!"
-    When I send a "GET" request to "http://localhost/public/api/v1/fleamarkets/1"
+    When I send a "GET" request to "http://localhost/public/api/v1/fleamarkets"
     Then the response code should be "200"
     And the response should be json
     And the response should be
     """
-    {"data":{"id":1,"uuid":"a9d60f43-8d4a-5071-8a49-cc5a474d6c1e","organizer":{"id":2,"uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":null,"name":"Mein Testflohmarkt UPDATED","description":"Eine Beschreibung UPDATED","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Hausstr. UPDATED","streetNo":"42000","city":"K\u00f6ln UPDATED","zipCode":"55555","location":"Zu Hause UPDATED","url":"http:\/\/www.example.com\/UPDATED"}}
+    {"data":[{"id":1,"uuid":"a9d60f43-8d4a-5071-8a49-cc5a474d6c1e","organizer":{"id":2,"uuid":null,"name":null,"street":null,"streetNo":null,"zipCode":null,"city":null,"phone":null,"email":null,"url":null},"user":{"type":"User","identifier":"test@onkel-rudi.de","password":"","hasOptIn":""},"name":"Mein Testflohmarkt UPDATED","description":"Eine Beschreibung UPDATED","dates":[{"start":"2019-01-31 09:30:00","end":"2019-01-31 18:00:00"}],"street":"Hausstr. UPDATED","streetNo":"42000","city":"K\u00f6ln UPDATED","zipCode":"55555","location":"Zu Hause UPDATED","url":"http:\/\/www.example.com\/UPDATED"}]}
     """
     Given I am slowly authenticated as user "test2@onkel-rudi.de"
     And I go to "/profil/"
