@@ -6,18 +6,6 @@
     <meta name="description" content="Finde einen Kinderflohmarkt bei Onkel Rudi!">
     <title>Einen Kinderflohmarkt findest Du bei Onkel Rudi!</title>
     <script src="/public/bower_components/jquery/dist/jquery.js"></script>
-    {% if isTest == false %}
-    <script type="text/javascript">
-        window.cookieconsent_options = {
-            "message":"Diese Seite verwendet Cookies, um Dir Deinen Aufenthalt ein wenig angenehmer gestalten zu können.",
-            "dismiss":"Alles klar!",
-            "learnMore":"",
-            "link":"/public/#datenschutz",
-            "theme":"/public/css/cookieconsent.css"
-        };
-    </script>
-    <script type="text/javascript" src="/public/bower_components/cookieconsent2/build/cookieconsent.min.js"></script>
-    {% endif %}
 </head>
 <body>
 <div class="header">
@@ -156,6 +144,32 @@
 <!--[if gt IE 8]><!-->
 <link rel="stylesheet" href="/public/css/onkelrudi.css">
 <!--<![endif]-->
+
+{% if isTest == false %}
+<link rel="stylesheet" type="text/css" href="/public/bower_components/cookieconsent2/build/cookieconsent.min.css" />
+<script type="text/javascript" src="/public/bower_components/cookieconsent2/build/cookieconsent.min.js"></script>
+<script>
+    window.addEventListener("load", function(){
+        window.cookieconsent.initialise({
+            "palette": {
+                "popup": {
+                    "background": "#222222",
+                    "text": "#ffffff"
+                },
+                "button": {
+                    "background": "#62C2CC",
+                    "text": "#222222"
+                }
+            },
+            "content": {
+                "message": "<strong>Onkel Rudi verwendet Cookies.</strong> So gelingt es, Dir Deinen Aufenthalt möglichst angenehm zu gestalten.",
+                "dismiss": "Hinweis schließen",
+                "link": "Infos zu Cookies und Datenschutz",
+                "href": "/public/datenschutz"
+            }
+        })});
+</script>
+{% endif %}
 
 <script type="text/javascript">
     var _paq = _paq || [];

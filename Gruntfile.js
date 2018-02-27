@@ -46,9 +46,6 @@ module.exports = function(grunt) {
                     'build/onkelrudi/public/templates/error.html': [
                         'public/templates/error.html'
                     ],
-                    'build/onkelrudi/public/templates/about.html': [
-                        'public/templates/about.html'
-                    ],
                     'build/onkelrudi/public/templates/impressum.html': [
                         'public/templates/impressum.html'
                     ],
@@ -139,32 +136,6 @@ module.exports = function(grunt) {
                     },
                     {
                         from: '/public/bower_components/jquery/dist/',
-                        to: '/js/'
-                    },
-                    {
-                        from: '/public/',
-                        to: '/'
-                    }
-                ]
-            },
-            aboutHtmlPaths: {
-                src: ['build/onkelrudi/public/templates/about.html'],
-                dest: 'build/onkelrudi/public/templates/about.html',
-                replacements: [
-                    {
-                        from: '/public/bower_components/pure/',
-                        to: '/css/'
-                    },
-                    {
-                        from: '/public/css/',
-                        to: '/css/'
-                    },
-                    {
-                        from: '/public/bower_components/jquery/dist/',
-                        to: '/js/'
-                    },
-                    {
-                        from: '/public/bower_components/cookieconsent2/build/',
                         to: '/js/'
                     },
                     {
@@ -431,6 +402,9 @@ module.exports = function(grunt) {
         grunt.file.copy(sourceDir + 'pickadate/lib/compressed/themes/default.css', targetDir + 'css/pickadate/default.css');
         grunt.file.copy(sourceDir + 'pickadate/lib/compressed/themes/default.date.css', targetDir + 'css/pickadate/default.date.css');
         grunt.file.copy(sourceDir + 'pickadate/lib/compressed/themes/default.time.css', targetDir + 'css/pickadate/default.time.css');
+
+        /* cookieconsent2 css */
+        grunt.file.copy(sourceDir + 'cookieconsent2/build/cookieconsent.min.css', targetDir + 'css/cookieconsent.min.css');
         grunt.log.ok();
     });
 

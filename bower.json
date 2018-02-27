@@ -29,6 +29,6 @@
     "pickadate": "~3.5.6",
     "moment": "~2.20.1",
     "mustache": "~2.3.0",
-    "cookieconsent2": "~1.0.10"
+    "cookieconsent2": "~3.0.6"
   }
 }
