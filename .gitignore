@@ -24,7 +24,7 @@ src/Content/
 tests/Content/
 logs/*
 cache/*
-index.html
+/index.html
 ubuntu-xenial-16.04-cloudimg-console.log
 public/img/*
 !public/img/.gitkeep
