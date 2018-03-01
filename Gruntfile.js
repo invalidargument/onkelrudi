@@ -149,6 +149,14 @@ module.exports = function(grunt) {
                 dest: 'build/onkelrudi/public/templates/impressum.html',
                 replacements: [
                     {
+                        from: '/public/bower_components/cookieconsent2/build/cookieconsent.min.css',
+                        to: '/css/cookieconsent.min.css'
+                    },
+                    {
+                        from: '/public/bower_components/cookieconsent2/build/cookieconsent.min.js',
+                        to: '/js/cookieconsent.min.js'
+                    },
+                    {
                         from: '/public/bower_components/pure/',
                         to: '/css/'
                     },
@@ -175,6 +183,14 @@ module.exports = function(grunt) {
                 dest: 'build/onkelrudi/public/templates/fleaMarketDate.html',
                 replacements: [
                     {
+                        from: '/public/bower_components/cookieconsent2/build/cookieconsent.min.css',
+                        to: '/css/cookieconsent.min.css'
+                    },
+                    {
+                        from: '/public/bower_components/cookieconsent2/build/cookieconsent.min.js',
+                        to: '/js/cookieconsent.min.js'
+                    },
+                    {
                         from: '/public/bower_components/pure/',
                         to: '/css/'
                     },
@@ -196,6 +212,14 @@ module.exports = function(grunt) {
                 src: ['build/onkelrudi/public/templates/index.html'],
                 dest: 'build/onkelrudi/public/templates/index.html',
                 replacements: [
+                    {
+                        from: '/public/bower_components/cookieconsent2/build/cookieconsent.min.css',
+                        to: '/css/cookieconsent.min.css'
+                    },
+                    {
+                        from: '/public/bower_components/cookieconsent2/build/cookieconsent.min.js',
+                        to: '/js/cookieconsent.min.js'
+                    },
                     {
                         from: '/public/bower_components/pure/',
                         to: '/css/'
@@ -222,6 +246,14 @@ module.exports = function(grunt) {
                 src: ['build/onkelrudi/public/templates/loginRegister.html'],
                 dest: 'build/onkelrudi/public/templates/loginRegister.html',
                 replacements: [
+                    {
+                        from: '/public/bower_components/cookieconsent2/build/cookieconsent.min.css',
+                        to: '/css/cookieconsent.min.css'
+                    },
+                    {
+                        from: '/public/bower_components/cookieconsent2/build/cookieconsent.min.js',
+                        to: '/js/cookieconsent.min.js'
+                    },
                     {
                         from: '/public/bower_components/pure/',
                         to: '/css/'
@@ -333,6 +365,14 @@ module.exports = function(grunt) {
                 dest: 'build/onkelrudi/public/templates/wordpressCategoryOverview.html',
                 replacements: [
                     {
+                        from: '/public/bower_components/cookieconsent2/build/cookieconsent.min.css',
+                        to: '/css/cookieconsent.min.css'
+                    },
+                    {
+                        from: '/public/bower_components/cookieconsent2/build/cookieconsent.min.js',
+                        to: '/js/cookieconsent.min.js'
+                    },
+                    {
                         from: '/public/bower_components/pure/',
                         to: '/css/'
                     },
@@ -354,6 +394,14 @@ module.exports = function(grunt) {
                 src: ['build/onkelrudi/public/templates/wordpressPostDetail.html'],
                 dest: 'build/onkelrudi/public/templates/wordpressPostDetail.html',
                 replacements: [
+                    {
+                        from: '/public/bower_components/cookieconsent2/build/cookieconsent.min.css',
+                        to: '/css/cookieconsent.min.css'
+                    },
+                    {
+                        from: '/public/bower_components/cookieconsent2/build/cookieconsent.min.js',
+                        to: '/js/cookieconsent.min.js'
+                    },
                     {
                         from: '/public/bower_components/pure/',
                         to: '/css/'

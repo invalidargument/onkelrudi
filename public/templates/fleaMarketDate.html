@@ -159,6 +159,32 @@
 <link rel="stylesheet" href="/public/css/onkelrudi.css">
 <!--<![endif]-->
 
+{% if isTest == false %}
+<link rel="stylesheet" type="text/css" href="/public/bower_components/cookieconsent2/build/cookieconsent.min.css" />
+<script type="text/javascript" src="/public/bower_components/cookieconsent2/build/cookieconsent.min.js"></script>
+<script>
+    window.addEventListener("load", function(){
+        window.cookieconsent.initialise({
+            "palette": {
+                "popup": {
+                    "background": "#222222",
+                    "text": "#ffffff"
+                },
+                "button": {
+                    "background": "#62C2CC",
+                    "text": "#222222"
+                }
+            },
+            "content": {
+                "message": "<span>Onkel Rudi verwendet Cookies.</span> So gelingt es, Dir Deinen Aufenthalt möglichst angenehm zu gestalten.",
+                "dismiss": "Hinweis schließen",
+                "link": "Infos zu Cookies und Datenschutz",
+                "href": "/public/impressum/#datenschutz"
+            }
+        })});
+</script>
+{% endif %}
+
 <script type="text/javascript">
     var _paq = _paq || [];
     _paq.push(["setDomains", ["*.www.onkel-rudi.de"]]);

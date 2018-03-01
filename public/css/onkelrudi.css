@@ -715,7 +715,7 @@ a.actionButton, a.actionButton:hover {
 
 
 /* cookieconsent2 */
-.cc-message strong {
+.cc-message span {
     text-transform: uppercase;
     padding-right: 15px;
 }
