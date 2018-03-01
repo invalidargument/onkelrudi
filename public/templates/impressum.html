@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Finde hier einen Kinderflohmarkt oder Kinderbasar! Flohmarkttermine in deiner Nähe - Köln und Umgebung - Für heute und die kommenden Wochen.">
-    <title>Einen Kinderflohmarkt findest Du bei Onkel Rudi!</title>
+    <meta name="description" content="Finde hier ganz einfach einen Kinderflohmarkt oder Babybasar in Deiner Nähe! Termine in Köln und Umgebung - Hier gibt es alle Infos zu Terminen für heute und die kommenden Wochen.">
+    <title>Kinderflohmärkte in Köln und Umgebung - Onkel Rudi</title>
     <script src="/public/bower_components/jquery/dist/jquery.js"></script>
 </head>
 <body>
@@ -165,7 +165,11 @@
                 "message": "<strong>Onkel Rudi verwendet Cookies.</strong> So gelingt es, Dir Deinen Aufenthalt möglichst angenehm zu gestalten.",
                 "dismiss": "Hinweis schließen",
                 "link": "Infos zu Cookies und Datenschutz",
-                "href": "/public/impressum/#datenschutz"
+                "href": "/public/impressum/#datenschutz",
+                "target": "_self"
+            },
+            "elements": {
+                messagelink: '<span id="cookieconsent:desc" class="cc-message">{{message}} <a aria-label="Mehr Informationen zu Datenschutz und Cookies" role=button tabindex="0" class="cc-link" href="{{href}}" rel="noopener noreferrer nofollow">{{link}}</a></span>'
             }
         })});
 </script>
