@@ -722,3 +722,6 @@ a.actionButton, a.actionButton:hover {
     text-transform: uppercase;
     padding-right: 15px;
 }
+.cc-message {
+    font-size: 94%;
+}
