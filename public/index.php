@@ -267,6 +267,13 @@ $app->group('/api', function () use ($app, $controllerFactory) {
             return $action($request, $response, $args);
         });
 
+        // POST route, for uploading a flyer
+        $app->post('/flyer', function ($request, $response, $args) use ($app, $controllerFactory) {
+            $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\Api\FleaMarketFlyerCreateAction');
+            $action->setBuilderFactory(new BuilderFactory());
+            return $action($request, $response, $args);
+        });
+
         // ############# Organizer #############
 
         // GET list a specific Organizer

@@ -750,3 +750,18 @@ a.actionButton, a.actionButton:hover {
 .cc-link {
     padding:0;
 }
+
+/* dropzone */
+.dropzone {
+    padding:0;
+    min-height: 0;
+    border:0;
+}
+
+.dropzone .dz-message {
+    text-align: left;
+    margin: 0;
+    padding: .5em .6em;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+}

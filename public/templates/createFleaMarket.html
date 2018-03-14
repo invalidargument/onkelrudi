@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/public/bower_components/pickadate/lib/compressed/themes/default.css">
     <link rel="stylesheet" href="/public/bower_components/pickadate/lib/compressed/themes/default.date.css">
     <link rel="stylesheet" href="/public/bower_components/pickadate/lib/compressed/themes/default.time.css">
+    <link rel="stylesheet" href="/public/bower_components/dropzone/dist/min/dropzone.min.css">
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="/public/bower_components/pure/grids-responsive-old-ie-min.css">
     <![endif]-->
@@ -32,6 +33,8 @@
     <script src="/public/bower_components/pickadate/lib/compressed/picker.js"></script>
     <script src="/public/bower_components/pickadate/lib/compressed/picker.date.js"></script>
     <script src="/public/bower_components/pickadate/lib/compressed/picker.time.js"></script>
+
+    <script src="/public/bower_components/dropzone/dist/min/dropzone.min.js"></script>
 
     <script>
         $(function() {
@@ -333,6 +336,34 @@
             };
 
             initPickadate();
+
+            Dropzone.autoDiscover = false;
+            $("div#flyerUploadContainer").dropzone({
+                url: "/public/flyer",
+                addRemoveLinks: false,
+                autoProcessQueue: true,
+                paramName: "flyers", // The name that will be used to transfer the file
+                maxFilesize: 2, // MB
+                maxFiles: 2,
+                accept: function(file, done) {
+                    if (file.name == "justinbieber.jpg") {
+                        done("Naha, you don't.");
+                    }
+                    else { done(); }
+                },
+                success: function (file, response) {
+                    var imgName = response;
+                    file.previewElement.classList.add("dz-success");
+                    console.log("Successfully uploaded :" + imgName);
+                },
+                error: function (file, response) {
+                    file.previewElement.classList.add("dz-error");
+                    console.log("Error uploading :" + file, response);
+                }
+            });
+            $("div#flyerUploadContainer").on('queuecomplete', function(e){
+                console.log('queuecomplete event fired');
+            });
         });
     </script>
 </head>
@@ -376,7 +407,7 @@
         {% if loggedIn %}
         <div class="regformbox">
 
-            <form id="newFleaMarket" method="post" class="pure-form pure-form-stacked">
+            <form id="newFleaMarket" enctype="multipart/form-data" method="post" class="pure-form pure-form-stacked">
                 <!-- set hidden organizer id -->
                 {% if (isOrganizer) %}
                 <input type="hidden" id="fleamarket_organizer" name="fleamarket_organizer" value="{{actualOrganizerId}}">
@@ -466,6 +497,16 @@
                     <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
                         <label for="fleamarket_url">Website für diesen Flohmarkt</label>
                         <input id="fleamarket_url" type="text" placeholder="Link zur Flohmarkt-Website" class="pure-input-1" value="{{editDto.url}}">
+                    </div>
+                </div>
+
+                <div class="pure-g" name="mainFileUploader">
+                    <div class="dropzone pure-u-1 pure-u-md-3-4 pure-u-lg-1-2" id="flyerUploadContainer">
+                        <label for="fallbackDropzoneInput">Flyer hochladen</label>
+                        <div class="dz-message">Click hier, um einen Flyer hochzuladen - Max. zwei Bilder (Vorder- und Rückseite)</div>
+                        <div class="fallback">
+                            <input id="" name="file" type="file" multiple id="fallbackDropzoneInput" />
+                        </div>
                     </div>
                 </div>
 

@@ -29,6 +29,7 @@
     "pickadate": "~3.5.6",
     "moment": "~2.20.1",
     "mustache": "~2.3.0",
-    "cookieconsent2": "~3.0.6"
+    "cookieconsent2": "~3.0.6",
+    "dropzone": "~5.1.1"
   }
 }
