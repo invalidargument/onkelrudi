@@ -10,6 +10,7 @@ System:
   cache-adapter: "Illuminate"
   cache-path: "/var/www/html/cache/"
   log-path: "/var/www/html/logs/error.log"
+  upload-path: "/var/www/html/public/upload/"
 
 Wordpress:
   auth-username: 'test'
