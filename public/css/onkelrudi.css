@@ -362,6 +362,29 @@ form#startMonthSelect h2 {
     padding-left:10px;
 }
 
+/* cookieconsent2 */
+.cc-window.cc-banner {
+    padding: 0.4em 1.8em !important;
+}
+.cc-message span {
+    text-transform: uppercase;
+    padding-right: 8px;
+}
+.cc-message {
+    font-size: 78%;
+    margin-bottom: 0 !important;
+}
+.cc-window {
+    line-height: 1.1em !important;
+}
+.cc-btn {
+    padding: .1em .4em !important;
+    font-size: 78% !important;
+}
+.cc-link {
+    padding: 0 0 .2em 0 !important;
+}
+
 /*
  * -- TABLET (AND UP) MEDIA QUERIES --
  * On tablets and other medium-sized devices, we want to customize some
@@ -446,6 +469,18 @@ form#startMonthSelect h2 {
     .content-wrapper {
         /* These styles are required for the "scroll-over" effect */
         top: 37%;
+    }
+    .cc-message {
+        font-size: 92%;
+    }
+    .cc-window {
+        line-height: 1.5em;
+    }
+    .cc-btn {
+        padding: .4em .8em;
+    }
+    .cc-link {
+        padding: 0 0 .2em .2em !important;
     }
 }
 
@@ -734,22 +769,6 @@ a.actionButton, a.actionButton:hover {
     color: #F17022;
 }
 
-
-/* cookieconsent2 */
-.cc-window.cc-banner {
-    padding: 0.4em 1.8em !important;
-}
-.cc-message span {
-    text-transform: uppercase;
-    padding-right: 8px;
-}
-.cc-message {
-    font-size: 92%;
-    margin-bottom: 0 !important;
-}
-.cc-link {
-    padding:0;
-}
 
 /* dropzone */
 .dropzone {
