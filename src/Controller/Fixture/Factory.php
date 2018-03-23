@@ -9,10 +9,12 @@ class Factory
     public static function createSlimAppWithStandardTestContainer()
     {
         $config = \Mockery::mock('RudiBieller\OnkelRudi\Config\Config');
-        $config->shouldReceive('getSystemConfiguration')->andReturn(array('environment' => 'dev'));
+        $config->shouldReceive('getSystemConfiguration')->andReturn(array('environment' => 'dev', 'upload-path' => '/path/to/upload/'))->byDefault();
 
         $router = \Mockery::mock('Slim\Interfaces\RouterInterface');
         $router->shouldReceive('pathFor')->once()->andReturn('/foo/');
+
+        $filesystem = \Mockery::mock('Illuminate\Filesystem\Filesystem');
 
         $app = new App();
         $container = $app->getContainer();
@@ -31,6 +33,7 @@ class Factory
         };
         $container['config'] = $config;
         $container['router'] = $router;
+        $container['Filesystem'] = $filesystem;
 
         return $app;
     }

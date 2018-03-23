@@ -113,6 +113,9 @@ $appConfiguration = [
     },
     'OrganizerService' => function ($c) use ($organizerService) {
         return $organizerService;
+    },
+    'Filesystem' => function($c) {
+        return new Illuminate\Filesystem\Filesystem();
     }
 ];
 

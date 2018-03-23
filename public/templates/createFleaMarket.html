@@ -339,10 +339,10 @@
 
             Dropzone.autoDiscover = false;
             $("div#flyerUploadContainer").dropzone({
-                url: "/public/flyer",
+                url: "/public/api/v1/flyer",
                 addRemoveLinks: false,
                 autoProcessQueue: true,
-                paramName: "flyers", // The name that will be used to transfer the file
+                paramName: "flyer", // The name that will be used to transfer the file
                 maxFilesize: 2, // MB
                 maxFiles: 2,
                 accept: function(file, done) {
@@ -359,11 +359,12 @@
                 error: function (file, response) {
                     file.previewElement.classList.add("dz-error");
                     console.log("Error uploading :" + file, response);
+                },
+                queuecomplete: function(e){
+                    console.log('queuecomplete event fired');
                 }
             });
-            $("div#flyerUploadContainer").on('queuecomplete', function(e){
-                console.log('queuecomplete event fired');
-            });
+            // filenames must be generated and returned to be then applied to the new fleamarket
         });
     </script>
 </head>
