@@ -4,45 +4,33 @@ namespace RudiBieller\OnkelRudi\Controller\Api;
 
 use RudiBieller\OnkelRudi\BuilderFactory;
 use RudiBieller\OnkelRudi\Config\Config;
+use RudiBieller\OnkelRudi\Controller\Fixture\Factory;
 use Slim\App;
 
 class UserCreateActionTest extends \PHPUnit_Framework_TestCase
 {
-    public function testActionCreatesNewOrganizer()
+    /**
+     * @dataProvider dataProviderTestActionCreatesNewUser
+     */
+    public function testActionCreatesNewUser($asOrganizer, $expectedUserCreateCall)
     {
         $parsedJson = [
             'email' => 'foo@example.com',
             'password' => 'foobarbaz',
             'password_repeat' => 'foobarbaz',
-            'register_as_organizer' => false
+            'register_as_organizer' => $asOrganizer
         ];
 
         $builderFactory = new BuilderFactory();
         $service = \Mockery::mock('RudiBieller\OnkelRudi\User\UserService');
-        $service->shouldReceive('createUser')->once()->with('foo@example.com', \Hamcrest\Matchers::startsWith('$2y$10$'))->andReturn(1)
+        $service->shouldReceive($expectedUserCreateCall)->once()->with('foo@example.com', \Hamcrest\Matchers::startsWith('$2y$10$'))->andReturn(1)
             ->shouldReceive('createOptInToken')->once()->with('foo@example.com')->andReturn(2);
 
         $notificationService = \Mockery::mock('RudiBieller\OnkelRudi\User\NotificationServiceInterface');
         $notificationService->shouldReceive('sendOptInNotification')->once()->with('foo@example.com', \Hamcrest\Matchers::containsString('Um Deine Registrierung abzuschließen und Deinen Account zu aktivieren, folge bitte diesem Link'));
 
-        $app = new App();
+        $app = Factory::createSlimAppWithStandardTestContainer();
         $container = $app->getContainer();
-        $container['view'] = function ($c) {
-            $view = new \Slim\Views\Twig(
-                dirname(__FILE__).'/../../../public/templates',
-                [
-                    'cache' => false
-                ]
-            );
-
-            $view->addExtension(new \Slim\Views\TwigExtension(
-                $c['router'],
-                $c['request']->getUri()
-            ));
-
-            return $view;
-        };
-        $container['config'] = new Config();
 
         $logger = \Mockery::mock('Monolog\Logger');
         $logger->shouldReceive('info');
@@ -55,7 +43,7 @@ class UserCreateActionTest extends \PHPUnit_Framework_TestCase
                 'um Deine Anmeldung bei Onkel Rudi abzuschließen, folge bitte diesem Link',
                 'http://www.onkel-rudi.de/opt-in/token-2'
             ));
-        $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
+        $request = Factory::createTestRequest();
         $request->shouldReceive('getParsedBody')->once()->andReturn($parsedJson);
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
         $response->shouldReceive('getBody')->once()->andReturn($body);
@@ -71,6 +59,14 @@ class UserCreateActionTest extends \PHPUnit_Framework_TestCase
         $expected = json_encode(array('data' => 1));
 
         $this->assertJsonStringEqualsJsonString($expected, $actual);
+    }
+
+    public function dataProviderTestActionCreatesNewUser()
+    {
+        return array(
+            array(true, 'createOrganizerUser'),
+            array(false, 'createUser')
+        );
     }
 
     /**
@@ -91,7 +87,7 @@ class UserCreateActionTest extends \PHPUnit_Framework_TestCase
         $app = new App();
         $container = $app->getContainer();
         $container['config'] = new Config();
-        $request = \Mockery::mock('Psr\Http\Message\ServerRequestInterface');
+        $request = Factory::createTestRequest();
         $request->shouldReceive('getParsedBody')->once()->andReturn($parsedJson);
         $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
 
