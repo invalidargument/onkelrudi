@@ -244,7 +244,9 @@ a.pure-button-primary {
 }
 
 .loginregister .content-wrapper,
-.admin .content-wrapper{
+.admin .content-wrapper,
+.datenschutz .content-wrapper,
+.impressum .content-wrapper {
     top: 20px;
 }
 
@@ -699,6 +701,19 @@ i.fa {
 .loginregister p {
     font-size: 90%;
     font-style: italic;
+}
+
+#acceptDataProcessing {
+    margin-bottom: 0;
+}
+#labelAcceptDataProcessing {
+    line-height: 100%;
+    font-weight: normal;
+    margin-top: 0;
+}
+
+#submitregister, .admin #submitform {
+    margin-top: 1em;
 }
 
 /*###################*/

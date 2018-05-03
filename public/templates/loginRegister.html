@@ -184,6 +184,9 @@
                         <label for="register_as_organizer">
                             <input id="register_as_organizer" type="checkbox"> Ich will mich als Veranstalter registrieren
                         </label>
+                        <label for="acceptDataProcessing" id="labelAcceptDataProcessing">
+                            <input type="checkbox" id="acceptDataProcessing"> Mit Absenden meiner Registrierung stimme ich zu, dass meine persönlichen Daten (hier meine E-Mail-Adresse sowie mein verschlüsseltes Passwort) zum Zweck der Registrierung für &quot;onkel-rudi.de&quot; gespeichert werden.
+                        </label>
                         <button type="submit" id="submitregister" class="pure-button">
                             <i class="fa fa-user-plus fa-lg"></i>
                             Neuen Benutzer anlegen
@@ -195,6 +198,9 @@
                     </p>
                     <p>
                         Falls Du nach einer Minute noch keine E-Mail mit einem Bestätigungslink erhalten hast, schau bitte in Deinem Spam-Ordner nach und überprüfe, ob Du Dich eventuell bei der E-Mail vertippt hast.
+                    </p>
+                    <p>
+                        Informationen zum Umgang mit Deinen persönlichen Daten findest Du im Bereich <a href="/public/datenschutz/" title="Datenschutzinformationen">Datenschutz</a>.
                     </p>
                 </div>
             </div>
@@ -225,10 +231,10 @@
                 }
             },
             "content": {
-                "message": "<span>Onkel Rudi verwendet Cookies.</span> So funktioniert alles ein wenig angenehmer.",
+                "message": "<span>Onkel Rudi verwendet Cookies.</span> Durch die weitere Nutzung der Webseite stimmst Du der Verwendung von Cookies zu.",
                 "dismiss": "Hinweis schließen",
                 "link": "Infos zum Datenschutz",
-                "href": "/public/impressum/#datenschutz"
+                "href": "/public/datenschutz/"
             }
         })});
 </script>

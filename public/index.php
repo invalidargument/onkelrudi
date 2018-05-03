@@ -156,6 +156,10 @@ $app->get('/impressum/', function ($request, $response, $args) use ($app, $contr
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\ImpressumAction');
     $action($request, $response, $args);
 })->setName('impressum');
+$app->get('/datenschutz/', function ($request, $response, $args) use ($app, $controllerFactory) {
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\DatenschutzAction');
+    $action($request, $response, $args);
+})->setName('datenschutz');
 $app->get('/monat/{month}/plz/{zip}', function ($request, $response, $args) use ($app, $controllerFactory) {
     $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\IndexAction');
     $action($request, $response, $args);

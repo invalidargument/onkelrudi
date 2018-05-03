@@ -124,58 +124,69 @@
                 //-->
                 <form id="updateOrganizerProfile" method="post" class="pure-form pure-form-stacked">
                     <div class="pure-g">
-                        <div class="pure-u-1-2">
+                        <div class="pure-u-1">
                             <label for="organizer_name">Dein Veranstaltername (*)</label>
                             <input id="organizer_name" type="text" placeholder="Dieser Name wird als Veranstalter angezeigt" class="pure-input-1" value="{{ organizer.name }}">
                         </div>
                     </div>
                     <div class="pure-g">
-                        <div class="pure-u-1-2">
+                        <div class="pure-u-1">
                             <label for="organizer_phone">Telefonnummer</label>
                             <input id="organizer_phone" type="tel" placeholder="Telefonnummer" class="pure-input-1" value="{{ organizer.phone }}">
                         </div>
                     </div>
                     <div class="pure-g">
-                        <div class="pure-u-1-2">
+                        <div class="pure-u-1">
                             <label for="organizer_email">E-Mail</label>
                             <input id="organizer_email" type="email" placeholder="E-Mail" class="pure-input-1" value="{{ organizer.email }}">
                         </div>
                     </div>
                     <div class="pure-g">
-                        <div class="pure-u-1-2">
+                        <div class="pure-u-1">
                             <label for="organizer_url">Website</label>
                             <input id="organizer_url" type="text" placeholder="Website" class="pure-input-1" value="{{ organizer.url }}">
                         </div>
                     </div>
                     <div class="pure-g">
-                        <div class="pure-u-9-24">
+                        <div class="pure-u-18-24">
                             <label for="organizer_street">Stra&szlig;e</label>
                             <input id="organizer_street" type="text" placeholder="Stra&szlig;e" class="pure-input-1" value="{{ organizer.street }}">
                         </div>
-                        <div class="pure-u-3-24">
+                        <div class="pure-u-6-24">
                             <label for="organizer_streetNo">Hausnummer</label>
                             <input id="organizer_streetNo" type="text" placeholder="Hausnummer" class="pure-input-1" value="{{ organizer.streetNo }}">
                         </div>
                     </div>
                     <div class="pure-g">
-                        <div class="pure-u-3-24">
+                        <div class="pure-u-6-24">
                             <label for="organizer_zip">PLZ</label>
                             <input id="organizer_zip" type="text" placeholder="PLZ" class="pure-input-1" value="{{ organizer.zipCode }}">
                         </div>
-                        <div class="pure-u-9-24">
+                        <div class="pure-u-18-24">
                             <label for="organizer_city">Ort</label>
                             <input id="organizer_city" type="text" placeholder="Ort" class="pure-input-1" value="{{ organizer.city }}">
                         </div>
                     </div>
 
                     <div class="pure-g">
-                        <div class="pure-u-1-2">
+                        <div class="pure-u-1">
+                            <label for="acceptDataProcessing" id="labelAcceptDataProcessing">
+                                <input type="checkbox" id="acceptDataProcessing"> Mit Absenden dieses Formulars stimme ich zu, dass meine persönlichen Daten (hier mein Veranstaltername, Telefonnummer, E-Mail-Adresse, Website-URL, Adresse mit Straße, Hausnummer, Postleitzahl und Ort) zum Zweck der Nutzung auf &quot;onkel-rudi.de&quot; für die Veröffentlichung von Kinderflohmärkten, die ich veranstalte, gespeichert werden.
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="pure-g">
+                        <div class="pure-u-1">
                             <button type="submit" id="submitform" class="pure-button">
                                 <i class="fa fa-save fa-lg"></i> speichern
                             </button>
                         </div>
                     </div>
                 </form>
+                <p>
+                    Informationen zum Umgang mit Deinen persönlichen Daten findest Du im Bereich <a href="/public/datenschutz/" title="Datenschutzinformationen">Datenschutz</a>.
+                </p>
             </div>
             {% endif %}
         </div>
