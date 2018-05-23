@@ -4,10 +4,10 @@ Feature: Index page of onkelrudi
   As an onkelrudi user
   I need to be able to call the index page and see some useful information
 
-  Scenario: Navigation is in place with wordpress content
-    Given I am on "/"
-    And I should see "Blog" in the ".pure-menu-list li:nth-of-type(1)" element
-    And I should see "About/Impressum" in the ".footer .pure-menu-list li:nth-of-type(1)" element
+  #Scenario: Navigation is in place with wordpress content
+  #  Given I am on "/"
+  #  And I should see "Blog" in the ".pure-menu-list li:nth-of-type(1)" element
+  #  And I should see "About/Impressum" in the ".footer .pure-menu-list li:nth-of-type(1)" element
 
   Scenario: Startpage with fleamarket boxes is displayed
     Given I have some fleamarkets within the upcoming timespan

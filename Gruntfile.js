@@ -49,6 +49,9 @@ module.exports = function(grunt) {
                     'build/onkelrudi/public/templates/impressum.html': [
                         'public/templates/impressum.html'
                     ],
+                    'build/onkelrudi/public/templates/datenschutz.html': [
+                        'public/templates/datenschutz.html'
+                    ],
                     'build/onkelrudi/public/templates/fleaMarketDate.html': [
                         'public/templates/fleaMarketDate.html'
                     ],
@@ -147,6 +150,40 @@ module.exports = function(grunt) {
             impressumHtmlPaths: {
                 src: ['build/onkelrudi/public/templates/impressum.html'],
                 dest: 'build/onkelrudi/public/templates/impressum.html',
+                replacements: [
+                    {
+                        from: '/public/bower_components/cookieconsent2/build/cookieconsent.min.css',
+                        to: '/css/cookieconsent.min.css'
+                    },
+                    {
+                        from: '/public/bower_components/cookieconsent2/build/cookieconsent.min.js',
+                        to: '/js/cookieconsent.min.js'
+                    },
+                    {
+                        from: '/public/bower_components/pure/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/css/',
+                        to: '/css/'
+                    },
+                    {
+                        from: '/public/bower_components/jquery/dist/',
+                        to: '/js/'
+                    },
+                    {
+                        from: '/public/bower_components/cookieconsent2/build/',
+                        to: '/js/'
+                    },
+                    {
+                        from: '/public/',
+                        to: '/'
+                    }
+                ]
+            },
+            datenschutzPaths: {
+                src: ['build/onkelrudi/public/templates/datenschutz.html'],
+                dest: 'build/onkelrudi/public/templates/datenschutz.html',
                 replacements: [
                     {
                         from: '/public/bower_components/cookieconsent2/build/cookieconsent.min.css',
