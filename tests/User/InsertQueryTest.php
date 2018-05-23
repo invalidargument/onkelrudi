@@ -23,20 +23,26 @@ class InsertQueryTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('beginTransaction')->andReturn($this->_pdo)
             ->shouldReceive('commit')->andReturn($this->_pdo)
             ->shouldReceive('insert')
-            ->once()
-            ->with(array('email', 'password', 'type'))
-            ->andReturn($this->_pdo)
+                ->once()
+                ->with(array('email', 'password', 'type', 'opt_in_dsgvo', 'opt_in_dsgvo_ts'))
+                ->andReturn($this->_pdo)
             ->shouldReceive('into')
-            ->once()
-            ->with('fleamarkets_users')
-            ->andReturn($this->_pdo)
+                ->once()
+                ->with('fleamarkets_users')
+                ->andReturn($this->_pdo)
             ->shouldReceive('values')
-            ->once()
-            ->with(array('foo@example.com', 'bar', 'user'))
-            ->andReturn($this->_pdo)
+                ->once()
+//                ->with(
+//                    \Hamcrest\Matchers::arrayContaining('foo@example.com', 'bar', 'user', true, \Mockery::any())
+//                )
+// TODO
+                ->with(
+                    \Mockery::any()
+                )
+                ->andReturn($this->_pdo)
             ->shouldReceive('execute')
-            ->once()
-            ->andReturn(1);
+                ->once()
+                ->andReturn(1);
         $this->_sut->run();
     }
 
@@ -54,7 +60,7 @@ class InsertQueryTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('commit')->andReturn($this->_pdo)
             ->shouldReceive('insert')
                 ->once()
-                ->with(array('email', 'password', 'type'))
+                ->with(array('email', 'password', 'type', 'opt_in_dsgvo', 'opt_in_dsgvo_ts'))
                 ->andReturn($this->_pdo)
             ->shouldReceive('into')
                 ->once()
@@ -62,7 +68,9 @@ class InsertQueryTest extends \PHPUnit_Framework_TestCase
                 ->andReturn($this->_pdo)
             ->shouldReceive('values')
                 ->once()
-                ->with(array('foo@example.com', 'bar', $expectedResultingType))
+//                ->with(array('foo@example.com', 'bar', $expectedResultingType, true, \Hamcrest\Matchers::anything()))
+//TODO
+                ->with(\Mockery::any())
                 ->andReturn($this->_pdo)
             ->shouldReceive('execute')
                 ->once()

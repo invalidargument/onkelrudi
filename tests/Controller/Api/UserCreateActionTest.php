@@ -18,7 +18,8 @@ class UserCreateActionTest extends \PHPUnit_Framework_TestCase
             'email' => 'foo@example.com',
             'password' => 'foobarbaz',
             'password_repeat' => 'foobarbaz',
-            'register_as_organizer' => $asOrganizer
+            'register_as_organizer' => $asOrganizer,
+            'acceptDataProcessing' => true
         ];
 
         $builderFactory = new BuilderFactory();
@@ -65,6 +66,8 @@ class UserCreateActionTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(true, 'createOrganizerUser'),
+            array(true, 'createOrganizerUser'),
+            array(false, 'createUser'),
             array(false, 'createUser')
         );
     }
@@ -77,7 +80,8 @@ class UserCreateActionTest extends \PHPUnit_Framework_TestCase
         $parsedJson = [
             'email' => $email,
             'password' => $password1,
-            'password_repeat' => $password2
+            'password_repeat' => $password2,
+            'acceptDataProcessing' => true
         ];
 
         $builderFactory = new BuilderFactory();
@@ -110,5 +114,37 @@ class UserCreateActionTest extends \PHPUnit_Framework_TestCase
             array('foo@example.com', 'foo', 'fooo', 'Passwords do not match'),
             array('invalid@email', 'aaaaaaaa', 'aaaaaaaa', 'No valid e-mail address')
         );
+    }
+
+    public function testActionChecksForDsgvo()
+    {
+        $parsedJson = [
+            'email' => 'foo@example.com',
+            'password' => 'a',
+            'password_repeat' => 'a',
+            'acceptDataProcessing' => false
+        ];
+
+        $builderFactory = new BuilderFactory();
+        $service = \Mockery::mock('RudiBieller\OnkelRudi\User\UserService');
+        $service->shouldReceive('createUser')->never();
+
+        $app = new App();
+        $container = $app->getContainer();
+        $container['config'] = new Config();
+        $request = Factory::createTestRequest();
+        $request->shouldReceive('getParsedBody')->once()->andReturn($parsedJson);
+        $response = \Mockery::mock('Psr\Http\Message\ResponseInterface');
+
+        $action = new UserCreateAction();
+        $action->setApp($app)
+            ->setUserService($service)
+            ->setBuilderFactory($builderFactory);
+
+        $return = $action($request, $response, array());
+        $actual = (string)$return->getBody();
+        $expected = json_encode(array('error' => 'Datenschutzhinweis not accepted!'));
+
+        $this->assertJsonStringEqualsJsonString($expected, $actual);
     }
 }

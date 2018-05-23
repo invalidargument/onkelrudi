@@ -133,7 +133,7 @@ Feature: API v1 fleamarkets
   Scenario: Create a new user
     Given I send a "POST" request to "http://localhost/public/api/v1/users" with body
     """
-    {"email":"info@onkel-rudi.de","password":"testtest","password_repeat":"testtest"}
+    {"email":"info@onkel-rudi.de","password":"testtest","password_repeat":"testtest", "acceptDataProcessing":1}
     """
     Then the response code should be "200"
     And the response should be json
@@ -143,7 +143,7 @@ Feature: API v1 fleamarkets
     """
     Given I send a "POST" request to "http://localhost/public/api/v1/users" with body
     """
-    {"email":"info@onkel-rudi.de","password":"testtest","password_repeat":"testtest"}
+    {"email":"info@onkel-rudi.de","password":"testtest","password_repeat":"testtest", "acceptDataProcessing":1}
     """
     Then the response code should be "400"
     And the response should be json

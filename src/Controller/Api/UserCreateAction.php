@@ -17,6 +17,10 @@ class UserCreateAction extends AbstractJsonAction
     {
         $data = $this->request->getParsedBody();
 
+        if (!$this->_dsgvoAccepted($data['acceptDataProcessing'])) {
+            return null;
+        }
+
         if (!$this->_emailIsValid($data['email'])) {
             return null;
         }
@@ -97,6 +101,16 @@ class UserCreateAction extends AbstractJsonAction
     {
         if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
             $this->_passwordsDontMatchStatusMessage = 'No valid e-mail address';
+            return false;
+        }
+
+        return true;
+    }
+
+    private function _dsgvoAccepted($dsgvo)
+    {
+        if (!$dsgvo) {
+            $this->_passwordsDontMatchStatusMessage = 'Datenschutzhinweis not accepted!';
             return false;
         }
 

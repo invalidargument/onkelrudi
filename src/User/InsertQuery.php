@@ -42,13 +42,16 @@ class InsertQuery extends AbstractInsertQuery
 
     protected function runQuery()
     {
+        //$date = date('Y-m-d H:i:s');
+        $date = new \DateTime(date('Y-m-d H:i:s'));
+
         $insertStatement = $this->pdo
             ->insert(
-                array('email', 'password', 'type')
+                array('email', 'password', 'type', 'opt_in_dsgvo', 'opt_in_dsgvo_ts')
             )
             ->into('fleamarkets_users')
             ->values(
-                array($this->_identifier, $this->_password, $this->_getType())
+                array($this->_identifier, $this->_password, $this->_getType(), true, $date->format('Y-m-d H:i:s'))
             );
 
         return $insertStatement->execute();

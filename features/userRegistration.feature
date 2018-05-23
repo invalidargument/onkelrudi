@@ -10,6 +10,7 @@ Feature: User login/register page of onkelrudi
     When I fill in "register_email" with "info@onkel-rudi.de"
     And I fill in "register_password" with "<password1>"
     And I fill in "register_password_repeat" with "<password2>"
+    And I check "acceptDataProcessing"
     And I press "Neuen Benutzer anlegen"
     And I wait for "1" seconds
     Then I should see a "<expectedCssClass>" element
@@ -30,6 +31,7 @@ Feature: User login/register page of onkelrudi
     And I fill in "register_password" with "<password1>"
     And I fill in "register_password_repeat" with "<password2>"
     And I check "register_as_organizer"
+    And I check "acceptDataProcessing"
     And I press "Neuen Benutzer anlegen"
     And I wait for "1" seconds
     Then I should see a "<expectedCssClass>" element
@@ -53,6 +55,7 @@ Feature: User login/register page of onkelrudi
     When I fill in "register_email" with "info@onkel-rudi.de"
     And I fill in "register_password" with "foobarbaz"
     And I fill in "register_password_repeat" with "foobarbaz"
+    And I check "acceptDataProcessing"
     And I press "Neuen Benutzer anlegen"
     And I wait for "1" seconds
     And I optin my user "info@onkel-rudi.de"
@@ -70,6 +73,7 @@ Feature: User login/register page of onkelrudi
     And I fill in "register_password" with "foobarbaz"
     And I fill in "register_password_repeat" with "foobarbaz"
     And I check "register_as_organizer"
+    And I check "acceptDataProcessing"
     And I press "Neuen Benutzer anlegen"
     And I wait for "1" seconds
     And I optin my user "info@onkel-rudi.de"

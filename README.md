@@ -50,7 +50,7 @@ curl http://localhost/public/api/v1/fleamarkets/1  -XDELETE
 
 ### Misc
 ```
-/etc/mysql/my.conf
 /var/log/apache2/error.log
 /var/log/mysql/mysql.log
+/etc/mysql/mysql.conf.d/mysqld.cnf
 ```

@@ -249,5 +249,20 @@
             newDataType="varchar(128)"
             tableName="fleamarkets"/>
     </changeSet>
+    <changeSet id="31" author="Rudi Bieller">
+        <addColumn catalogName="onkelrudi"
+                   schemaName="public"
+                   tableName="fleamarkets_users">
+            <column name="opt_in_dsgvo" type="boolean" defaultValueBoolean="false"/>
+        </addColumn>
+    </changeSet>
+    <!-- alter table fleamarkets_users modify column opt_in_dsgvo boolean; -->
+    <changeSet id="32" author="Rudi Bieller">
+        <addColumn catalogName="onkelrudi"
+                   schemaName="public"
+                   tableName="fleamarkets_users">
+            <column name="opt_in_dsgvo_ts" type="DATETIME"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
 
