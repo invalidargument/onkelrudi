@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Hier findest Du Details zu {{data.name}} in {{data.city}} am {{nextValidDateStart|date('d.m.Y')}}">
+    <meta name="description" content="Alle Infos zu {{data.name}} in {{data.city}} am {{nextValidDateStart|date('d.m.Y')}}">
     <title>{{data.name}} in {{data.city}} am {{nextValidDateStart|date("d.m.Y")}} - Alle Details bei Onkel Rudi!</title>
 </head>
 <body class="fleamarketDetail">
@@ -12,7 +12,7 @@
         <a class="pure-menu-heading" href="/public/">Onkel Rudi</a>
         <ul class="pure-menu-list">
             {% for item in wpCategories %}
-            <li class="pure-menu-item"><a href="/public/{{item.slug}}/kategorie/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
+            <!-- <li class="pure-menu-item"><a href="/public/{{item.slug}}/kategorie/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li> -->
             {% endfor %}
             {% if isLoggedIn == false %}
             <li class="pure-menu-item"><a href="/public/login/" class="pure-menu-link">Login</a></li>
@@ -136,9 +136,9 @@
     </div>
 
     <nav class="footer l-box is-center pure-menu pure-menu-horizontal">
-        www.onkel-rudi.de
         <ul class="pure-menu-list">
             <li class="pure-menu-item"><a href="/public/impressum/" class="pure-menu-link">About/Impressum</a></li>
+            <li class="pure-menu-item"><a href="/public/datenschutz/" class="pure-menu-link">Datenschutz</a></li>
         </ul>
     </nav>
 
