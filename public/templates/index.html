@@ -139,8 +139,8 @@
                 <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-3 marketSummaryBox zipRange{{item.zipCode[:1]}}">
                     <a href="{{fleamarketsDetailsRoutes[item.id]}}/datum/{{item.dates|first.start|date('d.m.Y')}}" title="Alle Details zu {{item.name|e('html_attr')}}" class="block">
                         <h3 class="content-subhead content-subhead-listitem">
-                            {% set iconFlag = 'fa-flag-o' %}
-                            {% if item.dates|first.start|date("Ymd") == "now"|date("Ymd") %} {% set iconFlag = 'fa-bullseye' %} {% endif %}
+                            {% set iconFlag = 'fa-flag-checkered' %}
+                            {% if item.dates|first.start|date("Ymd") == "now"|date("Ymd") %} {% set iconFlag = 'fas fa-bullseye' %} {% endif %}
                             <i class="fa {{iconFlag}}"></i>
                             {{item.name|length > 33 ? item.name[:33] ~ '...' : item.name}}
                         </h3>
@@ -156,7 +156,7 @@
                             {% if item.zipCode %}{{item.zipCode}} {{item.city}}<br>{% endif %}
                         </p>
                     </a>
-                    <i class="fa fa-calendar"></i><a href="/public/ical/termin/{{item.id}}/datum/{{item.dates|first.start|date('d.m.Y')}}">Termin als Kalendereintrag (iCal) speichern</a>
+                    <i class="far fa-calendar-plus"></i> <a href="/public/ical/termin/{{item.id}}/datum/{{item.dates|first.start|date('d.m.Y')}}">Termin als Kalendereintrag (iCal) speichern</a>
                 </div>
             {% endfor %}
         </div>
@@ -179,7 +179,7 @@
 <!--[if gt IE 8]><!-->
 <link rel="stylesheet" href="/public/bower_components/pure/grids-responsive-min.css">
 <!--<![endif]-->
-<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
 <!--[if lte IE 8]>
 <link rel="stylesheet" href="/public/css/onkelrudi-old-ie.css">
 <![endif]-->

@@ -93,7 +93,7 @@
                             {% if dateItem.start|date("Ymd") > "now"|date("Ymd") %}
                             <li class="{{cssClass}} nowrap">
                                 <a href="/public/ical/termin/{{data.id}}/datum/{{dateItem.start|date('d.m.Y')}}" title="Zum Kalender (iCal) hinzufügen">
-                                    <i class="fa fa-calendar-plus-o"></i>{{dateItem.start|date("d.m.Y")}}
+                                    <i class="far fa-calendar-plus"></i> {{dateItem.start|date("d.m.Y")}}
                                 </a>
                             </li>
                             {% endif %}
@@ -108,7 +108,7 @@
                                 {% set cssClass = 'dateTime over' %}
                             {% if "now"|date("Ymd") > dateItem.start|date("Ymd") %}
                             <li class="dateTime over nowrap">
-                                <i class="fa fa-calendar-plus-o"></i>{{dateItem.start|date("d.m.Y")}}
+                                <i class="fa fa-calendar-plus-o"></i> {{dateItem.start|date("d.m.Y")}}
                             </li>
                             {% endif %}
                             {% endfor %}
@@ -151,7 +151,7 @@
 <!--[if gt IE 8]><!-->
 <link rel="stylesheet" href="/public/bower_components/pure/grids-responsive-min.css">
 <!--<![endif]-->
-<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
 <!--[if lte IE 8]>
 <link rel="stylesheet" href="/public/css/onkelrudi-old-ie.css">
 <![endif]-->
