@@ -116,7 +116,7 @@ Feature: API v1 fleamarkets
     And I am authenticated as user via api
     And I send a "PUT" request to "http://localhost/public/api/v1/organizers/1" with body
     """
-    {"name":"MAX POWERRRRR!!!!","street":"fuu","streetNo":"2001","zipCode":"50001","city":"K\u00f6ln","phone":"23","url":"http:\/\/www.example.com","email":"foo@example.com"}
+    {"name":"MAX POWERRRRR!!!!","street":"fuu","streetNo":"2001","zipCode":"50001","city":"K\u00f6ln","phone":"23","url":"http:\/\/www.example.com","email":"foo@example.com", "acceptDataProcessing":1}
     """
     Then the response code should be "200"
     And the response should be json

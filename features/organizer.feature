@@ -26,6 +26,7 @@ Feature: User with role Organizer
       | organizer_streetNo | 42 |
       | organizer_zip | 50000 |
       | organizer_city | Köln |
+    And I check "acceptDataProcessing"
     And I press "speichern"
     And I wait for "1" seconds
     Then I should see a ".successmessage" element

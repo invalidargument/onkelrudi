@@ -37,7 +37,8 @@
                     city: $('#organizer_city').val(),
                     phone: $('#organizer_phone').val(),
                     email: $('#organizer_email').val(),
-                    url: $('#organizer_url').val()
+                    url: $('#organizer_url').val(),
+                    acceptDataProcessing: $('#acceptDataProcessing').prop('checked')
                 });
                 $.ajax({
                     type: "PUT",

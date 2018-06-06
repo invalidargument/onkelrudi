@@ -20,7 +20,8 @@ class OrganizerUpdateActionTest extends \PHPUnit_Framework_TestCase
             'zipCode' => '12345',
             'city' => 'bar',
             'phone' => '0221 2345',
-            'url' => 'foo.com'
+            'url' => 'foo.com',
+            'acceptDataProcessing' => true
         ];
         $organizer = new Organizer();
         $organizer->setId(1)
@@ -62,5 +63,10 @@ class OrganizerUpdateActionTest extends \PHPUnit_Framework_TestCase
         $expected = json_encode(array('data' => 1));
 
         $this->assertJsonStringEqualsJsonString($expected, $actual);
+    }
+
+    public function testActionDoesNotAllowMissingDsgvoAcceptance()
+    {
+        $this->markTestIncomplete('TODO DSGVO');
     }
 }

@@ -19,6 +19,8 @@ class FleaMarketOrganizerUpdateQuery extends AbstractInsertQuery
 
     protected function runQuery()
     {
+        $date = new \DateTime(date('Y-m-d H:i:s'));
+
         $updateStatement = $this->pdo
             ->update(
                 array(
@@ -29,7 +31,9 @@ class FleaMarketOrganizerUpdateQuery extends AbstractInsertQuery
                     'zipcode' => $this->_organizer->getZipCode(),
                     'phone' => $this->_organizer->getPhone(),
                     'email' => $this->_organizer->getEmail(),
-                    'url' => $this->_organizer->getUrl()
+                    'url' => $this->_organizer->getUrl(),
+                    'opt_in_dsgvo' => true,
+                    'opt_in_dsgvo_ts' => $date->format('Y-m-d H:i:s')
                 )
             )
             ->table('fleamarkets_organizer')
