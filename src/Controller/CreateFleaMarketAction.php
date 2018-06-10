@@ -19,11 +19,13 @@ class CreateFleaMarketAction extends AbstractHttpAction implements UserAwareInte
 
         $isOrganizer = false;
         $organizerId = null;
+        $organizer = null;
         $user = $this->userService->getAuthenticationService()->getStorage()->read();
 
         if ($user instanceof Organizer) {
             $isOrganizer = true;
             $organizerId = $this->userService->getOrganizerIdByUserId($user->getIdentifier());
+            $organizer = $this->organizerService->getOrganizerByUserId($user->getIdentifier());
         }
 
         $this->templateVariables['isTest'] = $this->isTestRequest;
@@ -33,6 +35,7 @@ class CreateFleaMarketAction extends AbstractHttpAction implements UserAwareInte
         $this->templateVariables['isOrganizer'] = $isOrganizer;
         $this->templateVariables['defaultOrganizerId'] = OrganizerService::DEFAULT_ORGANIZER;
         $this->templateVariables['actualOrganizerId'] = $organizerId;
+        $this->templateVariables['organizerData'] = $organizer;
 
         return $fleamarketOrganizers;
     }

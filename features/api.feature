@@ -29,7 +29,7 @@ Feature: API v1 fleamarkets
     And I am authenticated as user via api
     And I send a "POST" request to "http://localhost/public/api/v1/fleamarkets" with body
     """
-    {"name":"Max Power", "description": "Blue Pants", "dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}], "start":"2015-01-01 00:00:00", "end":"2015-12-12 00:00:00", "zipCode":"50667"}
+    {"name":"Max Power", "description": "Blue Pants", "dates":[{"start":"2016-12-12 08:01:02","end":"2016-12-13 20:20:20"}], "start":"2015-01-01 00:00:00", "end":"2015-12-12 00:00:00", "zipCode":"50667", "acceptDataProcessing":1}
     """
     Then the response code should be "200"
     And the response should be json

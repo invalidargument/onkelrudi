@@ -29,7 +29,8 @@ class FleaMarketCreateActionTest extends \PHPUnit_Framework_TestCase
             'street' => 'Venloer',
             'streetNo' => 1,
             'url' => 'foo.com',
-            'organizerId' => 42
+            'organizerId' => 42,
+            'acceptDataProcessing' => true
         ];
 
         $organizer = new Organizer();

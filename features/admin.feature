@@ -29,6 +29,7 @@ Feature: Administration page of onkelrudi
       | organizer_streetNo | 5000 |
       | organizer_zip | 5000 |
       | organizer_city | Köln |
+    And I check "acceptDataProcessing"
     And I press "Neuen Termin speichern - click hier!"
     And I wait for "1" seconds
     Then I should see a ".button-success" element
@@ -48,6 +49,7 @@ Feature: Administration page of onkelrudi
       | fleamarket_zipCode | 50000 |
       | fleamarket_city | Köln |
       | fleamarket_url | http://www.example.com |
+    And I check "acceptDataProcessing"
     And I press "Neuen Termin speichern - click hier!"
     And I wait for "1" seconds
     Then I should see a ".button-success" element
@@ -67,6 +69,7 @@ Feature: Administration page of onkelrudi
       | fleamarket_city | Köln |
       | fleamarket_url | http://www.example.com |
       | organizer_name | Der Admin Organizer |
+    And I check "acceptDataProcessing"
     And I press "Neuen Termin speichern - click hier!"
     And I wait for "1" seconds
     Then I should see a ".button-success" element

@@ -133,15 +133,17 @@ class FleaMarketInsertQuery extends AbstractInsertQuery
 
     protected function runQuery()
     {
+        $date = new \DateTime(date('Y-m-d H:i:s'));
+
         $this->pdo->beginTransaction();
 
         $insertStatement = $this->pdo
             ->insert(
-                array('uuid', 'organizer_id', 'user_id', 'name', 'description', 'street', 'streetno', 'city', 'zipcode', 'location', 'url', 'approved')
+                array('uuid', 'organizer_id', 'user_id', 'name', 'description', 'street', 'streetno', 'city', 'zipcode', 'location', 'url', 'approved', 'opt_in_dsgvo', 'opt_in_dsgvo_ts')
             )
             ->into('fleamarkets')
             ->values(
-                array($this->getUuid(), $this->_organizerId, $this->_userId, $this->_name, $this->_description, $this->_street, $this->_streetNo, $this->_city, $this->_zipCode, $this->_location, $this->_url, $this->_getApproved())
+                array($this->getUuid(), $this->_organizerId, $this->_userId, $this->_name, $this->_description, $this->_street, $this->_streetNo, $this->_city, $this->_zipCode, $this->_location, $this->_url, $this->_getApproved(), true, $date->format('Y-m-d H:i:s'))
             );
 
         $fleaMarketId = $insertStatement->execute();

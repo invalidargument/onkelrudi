@@ -30,6 +30,7 @@ Feature: Administration page of onkelrudi
       | marketDate | 31.01.2019 |
       | marketTimeFrom | 09:30 |
       | marketTimeTo | 18:00 |
+    And I check "acceptDataProcessing"
     And I press "Neuen Termin speichern - click hier!"
     And I wait for "1" seconds
     Then I should see a ".button-success" element
@@ -144,6 +145,7 @@ Feature: Administration page of onkelrudi
       | organizer_streetNo | 5000 |
       | organizer_zip | 5000 |
       | organizer_city | Köln |
+    And I check "acceptDataProcessing"
     And I press "Neuen Termin speichern - click hier!"
     And I wait for "1" seconds
     Then I should see a ".button-success" element

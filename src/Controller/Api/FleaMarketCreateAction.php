@@ -10,6 +10,9 @@ use RudiBieller\OnkelRudi\User\Admin;
 
 class FleaMarketCreateAction extends AbstractJsonAction implements UserAwareInterface
 {
+    private $_dsgvoNotAcceptedMessageStatusCode = 400;
+    private $_dsgvoNotAcceptedMessage = 'Datenschutzhinweis not accepted!';
+
     protected function getData()
     {
         /**
@@ -23,6 +26,10 @@ class FleaMarketCreateAction extends AbstractJsonAction implements UserAwareInte
         );
 
         $data = $this->request->getParsedBody();
+
+        if (!$this->_dsgvoAccepted($data)) {
+            return null;
+        }
 
         if (array_key_exists('organizerId', $data)) {
             $organizer = new Organizer();
@@ -48,5 +55,20 @@ class FleaMarketCreateAction extends AbstractJsonAction implements UserAwareInte
         }
 
         return $this->service->createFleaMarket($builder->build(), $autoApprove);
+    }
+
+    private function _dsgvoAccepted($requestVars)
+    {
+        return (boolean) $requestVars['acceptDataProcessing'];
+    }
+
+    protected function getResponseErrorStatusCode()
+    {
+        return $this->_dsgvoNotAcceptedMessageStatusCode;
+    }
+
+    protected function getResponseErrorStatusMessage()
+    {
+        return $this->_dsgvoNotAcceptedMessage;
     }
 }

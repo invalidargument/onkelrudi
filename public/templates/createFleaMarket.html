@@ -232,7 +232,9 @@
                     zipCode: $('#fleamarket_zipCode').val(),
                     city: $('#fleamarket_city').val(),
                     location: $('#fleamarket_location').val(),
-                    url: $('#fleamarket_url').val()
+                    url: $('#fleamarket_url').val(),
+                    acceptDataProcessing: $('#acceptDataProcessing').prop('checked')
+
                 });
 
                 $.ajax({
@@ -406,8 +408,11 @@
         {% endif %}
 
         {% if loggedIn %}
-        <div class="regformbox">
 
+        <div class="pure-g">
+            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
+
+        <div class="regformbox">
             <form id="newFleaMarket" enctype="multipart/form-data" method="post" class="pure-form pure-form-stacked">
                 <!-- set hidden organizer id -->
                 {% if (isOrganizer) %}
@@ -418,21 +423,21 @@
                 <!-- /set hidden organizer id -->
 
                 <div class="pure-g">
-                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
+                    <div class="pure-u-1">
                         <label for="fleamarket_name">Name des Kinderflohmarkts (*)</label>
                         <input id="fleamarket_name" type="text" placeholder="Wie heißt Dein Kinderflohmarkt?" class="pure-input-1" value="{{editDto.name}}">
                     </div>
                 </div>
 
                 <div class="pure-g">
-                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
+                    <div class="pure-u-1">
                         <label for="fleamarket_description">Beschreibung (*)</label>
                         <textarea id="fleamarket_description" placeholder="Beschreibe bitte kurz Deinen Kinderflohmarkt. Wer wird dort was anbieten, wieviel Kuchen wird es geben, usw." style="height: 200px;" class="pure-input-1">{{editDto.description}}</textarea>
                     </div>
                 </div>
 
                 <div class="pure-g">
-                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
+                    <div class="pure-u-1">
                         <section class="datesBlock">
                             <h3>Termin für den Kinderflohmarkt - Wann findet er statt? (*)</h3>
                             {% if editForm %}
@@ -458,51 +463,51 @@
                 </div>
 
                 <div class="pure-g">
-                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
+                    <div class="pure-u-1">
                         <h3>Wo findet der Kinderflohmarkt statt?</h3>
                     </div>
                 </div>
 
                 <div class="pure-g">
-                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
+                    <div class="pure-u-1">
                         <label for="fleamarket_location">Veranstaltungsort (*)</label>
                         <input id="fleamarket_location" type="text" placeholder="Wo findet der Flohmarkt statt? Z.B. KiTa Sonnenblume oder Turnhalle der Waldschule." class="pure-input-1" value="{{editDto.location}}">
                     </div>
                 </div>
 
                 <div class="pure-g">
-                    <div class="pure-u-9-24">
+                    <div class="pure-u-18-24">
                         <label for="fleamarket_street">Stra&szlig;e (*)</label>
                         <input id="fleamarket_street" type="text" placeholder="Stra&szlig;e" class="pure-input-1" value="{{editDto.street}}">
                     </div>
 
-                    <div class="pure-u-3-24">
+                    <div class="pure-u-6-24">
                         <label for="fleamarket_streetNo" class="nowrap">Hausnummer (*)</label>
                         <input id="fleamarket_streetNo" type="text" placeholder="Hausnummer" class="pure-input-1" value="{{editDto.streetNo}}">
                     </div>
                 </div>
 
                 <div class="pure-g">
-                    <div class="pure-u-3-24">
+                    <div class="pure-u-6-24">
                         <label for="fleamarket_zipCode" class="nowrap">PLZ (*)</label>
                         <input id="fleamarket_zipCode" type="text" placeholder="PLZ" class="pure-input-1" value="{{editDto.zipCode}}">
                     </div>
 
-                    <div class="pure-u-9-24">
+                    <div class="pure-u-18-24">
                         <label for="fleamarket_city">Ort (*)</label>
                         <input id="fleamarket_city" type="text" placeholder="Ort" class="pure-input-1" value="{{editDto.city}}">
                     </div>
                 </div>
 
                 <div class="pure-g">
-                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
+                    <div class="pure-u-1">
                         <label for="fleamarket_url">Website für diesen Flohmarkt</label>
                         <input id="fleamarket_url" type="text" placeholder="Link zur Flohmarkt-Website" class="pure-input-1" value="{{editDto.url}}">
                     </div>
                 </div>
 
                 <div class="pure-g" name="mainFileUploader">
-                    <div class="dropzone pure-u-1 pure-u-md-3-4 pure-u-lg-1-2" id="flyerUploadContainer">
+                    <div class="dropzone pure-u-1" id="flyerUploadContainer">
                         <label for="fallbackDropzoneInput">Flyer hochladen</label>
                         <div class="dz-message">Click hier, um einen Flyer hochzuladen - Max. zwei Bilder (Vorder- und Rückseite)</div>
                         <div class="fallback">
@@ -514,7 +519,7 @@
                 <!-- only create or editing organizer -->
                 {% if (not isOrganizer) %}
                 <div class="pure-g">
-                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
+                    <div class="pure-u-1">
                         <h3>Wer veranstaltet den Kinderflohmarkt?</h3>
                         <label for="organizer_name_unknown" class="pure-checkbox" style="font-weight: normal;">
                             {% if (editForm) and (editDto.organizer.id == defaultOrganizerId) %}
@@ -530,25 +535,25 @@
                 <section id="organizer_data">
 
                 <div class="pure-g">
-                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
+                    <div class="pure-u-1">
                         <label for="organizer_name">Name des Veranstalters (*)</label>
                         <input id="organizer_name" type="text" placeholder="Name des Veranstalters" class="pure-input-1" value="{{editDto.organizer.name}}">
                     </div>
                 </div>
                 <div class="pure-g">
-                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
+                    <div class="pure-u-1">
                         <label for="organizer_phone">Telefonnummer</label>
                         <input id="organizer_phone" type="tel" placeholder="Telefonnummer" class="pure-input-1" value="{{editDto.organizer.phone}}">
                     </div>
                 </div>
                 <div class="pure-g">
-                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
+                    <div class="pure-u-1">
                         <label for="organizer_email">E-Mail</label>
                         <input id="organizer_email" type="email" placeholder="E-Mail" class="pure-input-1" value="{{editDto.organizer.email}}">
                     </div>
                 </div>
                 <div class="pure-g">
-                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
+                    <div class="pure-u-1">
                         <label for="organizer_url">Website</label>
                         <input id="organizer_url" type="text" placeholder="Website" class="pure-input-1" value="{{editDto.organizer.url}}">
                     </div>
@@ -583,8 +588,16 @@
 
                 {% endif %}
 
+                <div class="pure-g"{% if (isOrganizer) %} style="margin-top:20px;"{% endif %}>
+                    <div class="pure-u-1">
+                        <label for="acceptDataProcessing" id="labelAcceptDataProcessing">
+                            <input type="checkbox" id="acceptDataProcessing"> Mit Absenden dieses Formulars stimme ich zu, dass meine persönlichen Daten (hier Name, Beschreibung und Termine des Flohmarkts, außerdem der Veranstaltungsort mit Adresse - Straße, Hausnummer, Postleitzahl und Ort - und die Webseiten-URL sowie eventuell hochgeladene Flyer als Bilddatei) zum Zweck der Nutzung auf &quot;onkel-rudi.de&quot; für die Veröffentlichung des Kinderflohmarktes, den ich veranstalte, gespeichert werden.
+                        </label>
+                    </div>
+                </div>
+
                 <div class="pure-g">
-                    <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-1-2">
+                    <div class="pure-u-1">
                         <button type="submit" id="submitform" class="pure-button">
                             <i class="fa fa-save fa-lg"></i>
                             {% if editForm %}
@@ -596,6 +609,21 @@
                     </div>
                 </div>
             </form>
+        </div>
+
+            </div>
+            <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
+                {% if (isOrganizer) %}
+                <i class="fas fa-exclamation"></i> Dein <a href="/public/profil/" title="Hier Dein Veranstalterprofil editieren">Veranstalterprofil</a> erscheint bei jedem Flohmarkt, den du anlegst.
+                <h2 class="splash-subhead">Deine Angaben zum Veranstalterprofil</h2>
+                <strong>Veranstaltername:</strong> {{organizerData.name}}<br>
+                <strong>Weitere Angaben:</strong><br>
+                {% if organizerData.zipcode %}<i class="fa fa-home"></i>{{organizerData.zipcode}} {{organizerData.city}}<br>{% endif%}
+                {% if organizerData.phone %}<i class="fa fa-phone"></i><span itemprop="telephone"><a href="tel:{{organizerData.phone}}" class="post-category-organizer-url">{{organizerData.phone}}</a></span><br>{% endif%}
+                {% if organizerData.email %}<i class="fa fa-inbox"></i><span itemprop="email"><a href="mailto:{{organizerData.email}}" class="post-category-organizer-url">{{organizerData.email}}</a></span><br>{% endif%}
+                {% if organizerData.url %}<i class="fa fa-external-link"></i><a href="{{organizerData.url}}" target="_blank" class="post-category-organizer-url" rel="nofollow">{{organizerData.url|length > 33 ? organizerData.url[:33] ~ '...' : organizerData.url}}</a>{% endif%}
+                {% endif %}
+            </div>
         </div>
         {% endif %}
     </div>
