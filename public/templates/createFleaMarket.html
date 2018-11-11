@@ -383,7 +383,7 @@
         <a class="pure-menu-heading" href="/public/">Onkel Rudi</a>
         <ul class="pure-menu-list">
             {% for item in wpCategories %}
-            <li class="pure-menu-item"><a href="/public/{{item.slug}}/kategorie/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li>
+            <!-- <li class="pure-menu-item"><a href="/public/{{item.slug}}/kategorie/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li> -->
             {% endfor %}
             {% if isLoggedIn == false %}
             <li class="pure-menu-item"><a href="/public/login/" class="pure-menu-link">Login</a></li>
@@ -571,21 +571,21 @@
                     </div>
                 </div>
                 <div class="pure-g">
-                    <div class="pure-u-9-24">
+                    <div class="pure-u-18-24">
                         <label for="organizer_street">Stra&szlig;e</label>
                         <input id="organizer_street" type="text" placeholder="Stra&szlig;e" class="pure-input-1" value="{{editDto.organizer.street}}">
                     </div>
-                    <div class="pure-u-3-24">
+                    <div class="pure-u-6-24">
                         <label for="organizer_streetNo">Hausnummer</label>
                         <input id="organizer_streetNo" type="text" placeholder="Hausnummer" class="pure-input-1" value="{{editDto.organizer.streetNo}}">
                     </div>
                 </div>
                 <div class="pure-g">
-                    <div class="pure-u-3-24">
+                    <div class="pure-u-6-24">
                         <label for="organizer_zip">PLZ</label>
                         <input id="organizer_zip" type="text" placeholder="PLZ" class="pure-input-1" value="{{editDto.organizer.zipCode}}">
                     </div>
-                    <div class="pure-u-9-24">
+                    <div class="pure-u-18-24">
                         <label for="organizer_city">Ort</label>
                         <input id="organizer_city" type="text" placeholder="Ort" class="pure-input-1" value="{{editDto.organizer.city}}">
                     </div>
