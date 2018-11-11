@@ -9,6 +9,8 @@ class FleaMarketFlyerCreateAction extends AbstractJsonAction implements UserAwar
 {
     private $_errorMessage = 'Error uploading file';
     private $_errorCode = 200;
+    private $_validExtensions = array();
+    private $_validMimetypes = array();
 
     protected function getData()
     {
@@ -73,5 +75,12 @@ class FleaMarketFlyerCreateAction extends AbstractJsonAction implements UserAwar
     private function _isDevEnvironment()
     {
         return $this->app->getContainer()->get('config')->getSystemConfiguration()['environment'] === 'dev';
+    }
+
+    private function _isImage()
+    {
+        // check if file is an image
+        // use getimagesize() to validate
+        // if not, send to trash
     }
 }

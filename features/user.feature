@@ -66,6 +66,7 @@ Feature: Administration page of onkelrudi
       | organizer_streetNo | 5555 |
       | organizer_zip | 666666 |
       | organizer_city | Köln UPDATED |
+    And I check "acceptDataProcessing"
     And I press "Änderungen speichern - click hier!"
     And I wait for "1" seconds
     Then I should see a ".button-success" element
@@ -168,6 +169,7 @@ Feature: Administration page of onkelrudi
       | fleamarket_zipCode | 55555 |
       | fleamarket_city | Köln UPDATED |
       | fleamarket_url | http://www.example.com/UPDATED |
+    And I check "acceptDataProcessing"
     And I press "Änderungen speichern - click hier!"
     And I wait for "1" seconds
     Then I should see a ".button-success" element

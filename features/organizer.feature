@@ -78,6 +78,7 @@ Feature: User with role Organizer
       | fleamarket_zipCode | 55555 |
       | fleamarket_city | Köln UPDATED |
       | fleamarket_url | http://www.example.com/UPDATED |
+    And I check "acceptDataProcessing"
     And I press "Änderungen speichern - click hier!"
     And I wait for "1" seconds
     Then I should see a ".button-success" element

@@ -78,6 +78,13 @@
                     }
                 });
 
+                if (!$('#acceptDataProcessing').prop('checked')) {
+                    hasError = true;
+                    $('label[for="acceptDataProcessing"]').addClass("error");
+                } else {
+                    $('label[for="acceptDataProcessing"]').removeClass("error");
+                }
+
                 if (!hasError) {
                     var isUnknownOrganizer = $('#organizer_name_unknown').is(':checked');
 
