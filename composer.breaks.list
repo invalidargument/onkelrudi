@@ -1,0 +1,8 @@
+https://github.com/kriswallsmith/Buzz/commit/4977b7d44dbef49cdc641f14be6512fdcfe32f12
+Seit dieser Version funktioniert die Auth nach Wordpress nicht mehr.
+https://github.com/kriswallsmith/Buzz/commit/4fca675724445d4037b257893eeed538c7dda5d6
+
+Zend framework Session und Authentication können aktualisiert werden.
+
+Monolog geht kaputt, wenn > 1.20.0
+

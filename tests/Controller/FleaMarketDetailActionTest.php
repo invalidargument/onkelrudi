@@ -69,16 +69,16 @@ class FleaMarketDetailActionTest extends \PHPUnit_Framework_TestCase
             array(
                 [
                     new FleaMarketDate('2015-01-01 09:00:00', '2015-01-01 12:30:00'),
-                    new FleaMarketDate('2019-01-01 09:00:00', '2019-01-01 12:30:00')
+                    new FleaMarketDate('2021-01-01 09:00:00', '2021-01-01 12:30:00')
                 ],
-                ['hasValidDate' => true, 'nextValidDateStart' => '2019-01-01 09:00:00', 'nextValidDateEnd' => '2019-01-01 12:30:00', 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'changepasswordurl' => '/foo/', 'logouturl' => '/foo/', 'currentUrl' => '/foo/']
+                ['hasValidDate' => true, 'nextValidDateStart' => '2021-01-01 09:00:00', 'nextValidDateEnd' => '2021-01-01 12:30:00', 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'changepasswordurl' => '/foo/', 'logouturl' => '/foo/', 'currentUrl' => '/foo/']
             ),
             array(
                 [
-                    new FleaMarketDate('2019-01-01 09:00:00', '2019-01-01 12:30:00'),
+                    new FleaMarketDate('2028-01-01 09:00:00', '2028-01-01 12:30:00'),
                     new FleaMarketDate('2021-01-01 09:00:00', '2021-01-01 12:30:00')
                 ],
-                ['hasValidDate' => true, 'nextValidDateStart' => '2019-01-01 09:00:00', 'nextValidDateEnd' => '2019-01-01 12:30:00', 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'changepasswordurl' => '/foo/', 'logouturl' => '/foo/', 'currentUrl' => '/foo/']
+                ['hasValidDate' => true, 'nextValidDateStart' => '2028-01-01 09:00:00', 'nextValidDateEnd' => '2028-01-01 12:30:00', 'profileurl' => '/foo/', 'createfleamarketurl' => '/foo/', 'changepasswordurl' => '/foo/', 'logouturl' => '/foo/', 'currentUrl' => '/foo/']
             )
         );
     }

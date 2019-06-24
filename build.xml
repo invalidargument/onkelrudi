@@ -13,7 +13,7 @@
         depends="prepare-ci, lint, composer, phploc, phpmd, phpcpd, phpcs-ci, phpunit, pdepend"/>
 
     <target name="build-local"
-        depends="prepare, lint, composer, liquibase, phploc, phpmd, phpcpd, phpcs, phpunit, pdepend, behat, archive"/>
+        depends="prepare, lint, composer, archive"/>
 
     <target name="clean" description="Cleanup artifacts">
         <delete dir="${basedir}/build/coverage"/>

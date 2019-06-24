@@ -153,11 +153,11 @@ $app->get('/', function ($request, $response, $args) use ($app, $controllerFacto
     $action($request, $response, $args);
 })->setName('index');
 $app->get('/impressum/', function ($request, $response, $args) use ($app, $controllerFactory) {
-    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\ImpressumAction');
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\IndexAction');
     $action($request, $response, $args);
 })->setName('impressum');
 $app->get('/datenschutz/', function ($request, $response, $args) use ($app, $controllerFactory) {
-    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\DatenschutzAction');
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\IndexAction');
     $action($request, $response, $args);
 })->setName('datenschutz');
 $app->get('/monat/{month}/plz/{zip}', function ($request, $response, $args) use ($app, $controllerFactory) {
@@ -173,37 +173,37 @@ $app->get('/ical/termin/{id}/datum/{date}', function ($request, $response, $args
 
 // FleaMarket Detail View (with/without date)
 $app->get('/{wildcard}/termin/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
-    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketDetailAction');
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\IndexAction');
     $action($request, $response, $args);
 })->setName('event-date');
 $app->get('/{wildcard}/termin/{id}/datum/{date}', function ($request, $response, $args) use ($app, $controllerFactory) {
-    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\FleaMarketDetailAction');
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\IndexAction');
     $action($request, $response, $args);
 })->setName('event-date');
 
 // Blog Category View
 $app->get('/blog/kategorie/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
-    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\WordpressCategoryAction');
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\IndexAction');
     $action($request, $response, $args);
 })->setName('wp-category');
 // Blog Post Detail View
 $app->get('/blog/{wildcard}/post/{id}', function ($request, $response, $args) use ($app, $controllerFactory) {
-    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\WordpressPostAction');
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\IndexAction');
     $action($request, $response, $args);
 })->setName('wp-post');
 
 // Registration/Login form
 $app->get('/login/', function ($request, $response, $args) use ($app, $controllerFactory) {
-    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\LoginAction');
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\IndexAction');
     $action($request, $response, $args);
 })->setName('login-register');
 $app->get('/logout/', function ($request, $response, $args) use ($app, $controllerFactory) {
-    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\LogoutAction');
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\IndexAction');
     $action($request, $response, $args);
 })->setName('logout');
 // change password
 $app->get('/passwort-aendern/', function ($request, $response, $args) use ($app, $controllerFactory) {
-    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\ChangePasswordAction');
+    $action = $controllerFactory->createActionByName('RudiBieller\OnkelRudi\Controller\IndexAction');
     $action($request, $response, $args);
 })->setName('password');
 

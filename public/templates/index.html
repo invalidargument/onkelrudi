@@ -3,230 +3,55 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Hier findest Du einen Kinderflohmarkt oder Babybasar in Deiner Nähe! Termine in Köln und Umgebung - Hier gibt es alle Infos zu Flohmärkten für heute und die kommenden Tage.">
-    <title>Kinderflohmärkte in Köln und Umgebung - Onkel Rudi</title>
+    <meta name="description" content="Experiment beendet.">
+    <title>Schön war's!</title>
+    <link rel="stylesheet" href="/public/bower_components/pure/pure-min.css">
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="/public/bower_components/pure/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="/public/bower_components/pure/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="/public/css/onkelrudi-old-ie.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="/public/css/onkelrudi.css">
+    <!--<![endif]-->
+
     <script src="/public/bower_components/jquery/dist/jquery.js"></script>
-    {% if isTest == false %}
-    <script type="text/javascript">
-        function scrollToDate(dateString) {
-            var targetElement = $('a[name="' + dateString + '"]');
-            var scrollPosition = targetElement.parent().offset().top -
-                (targetElement.parent().height() * 2.4);
-
-            $('html, body').animate({
-                scrollTop: scrollPosition
-            }, 750);
-        };
-
-        $(function() {
-            $('#monthSelect').on('change', function(e) {
-                var targetElement = $('a[name="' + e.target.value + '"]');
-
-                if (targetElement && targetElement.length == 0) {
-                    var selectedMonth = e.target.value;
-                    selectedMonth = selectedMonth.replace('/', '-');
-                    window.location.href = '/public/monat/' + selectedMonth + '/plz/' + $('#zipRangeSelect').val();
-                    return;
-                }
-
-                scrollToDate(e.target.value);
-            });
-        });
-
-        $(function() {
-            $('#zipRangeSelect').on('change', function(e) {
-                var elementsToShow = $('div.marketSummaryBox');
-                elementsToShow.removeClass('hiddenMarketSummaryBox');
-
-                if (e.target.value != 'PLZ-Bereich') {
-                    var zipRangeClass = 'zipRange' + e.target.value;
-                    var elementsToHide = $('div.marketSummaryBox').not('[class*="' + zipRangeClass + '"]');
-                    elementsToHide.addClass('hiddenMarketSummaryBox');
-                }
-            });
-        });
-    </script>
-    {% endif %}
 </head>
 <body>
-<div class="header">
-    <nav class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-        <a class="pure-menu-heading" href="/public/">Onkel Rudi</a>
-        <ul class="pure-menu-list">
-            {% for item in wpCategories %}
-            <!-- <li class="pure-menu-item"><a href="/public/{{item.slug}}/kategorie/{{item.id}}" class="pure-menu-link">{{item.name}}</a></li> -->
-            {% endfor %}
-            {% if isLoggedIn == false %}
-            <li class="pure-menu-item"><a href="/public/login/" class="pure-menu-link">Login</a></li>
-            {% endif %}
-            {% if isLoggedIn == true %}
-            <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-                <a href="#" class="pure-menu-link" id="settings" aria-haspopup="true"><i class="fa fa-user" title="Deine Profileinstellungen"></i></a>
-                <ul class="pure-menu-children" role="menu" aria-labelledby="settings" aria-hidden="true">
-                    <li class="pure-menu-item"><a href="{{profileurl}}" class="pure-menu-link">Meine Flohmärkte</a></li>
-                    <li class="pure-menu-item"><a href="{{createfleamarketurl}}" class="pure-menu-link">Flohmarkt eintragen</a></li>
-                    <li class="pure-menu-item"><a href="{{changepasswordurl}}" class="pure-menu-link">Passwort ändern</a></li>
-                    <li class="pure-menu-item"><a href="{{logouturl}}" class="pure-menu-link" id="logout">Logout</a></li>
-                </ul>
-            </li>
-            {% endif %}
-        </ul>
-    </nav>
-</div>
-
-<div class="splash-container">
-    <div class="splash">
-        <h1 class="splash-head">Onkel Rudi</h1>
-        <p class="splash-subhead">
-            Du suchst einen Kinderflohmarkt? Hier findest Du ihn!
-        </p>
-    </div>
-
-    <!--
-    Hier könnten die Suchfelder rein und der Text, der jetzt drin ist, raus.
-    //-->
-</div>
-
-{% autoescape 'html' %}
-<div class="content-wrapper">
-    <div class="content">
-        <form id="startMonthSelect" class="pure-g pure-form pure-form-aligned is-center" style="width:100%;">
-            <fieldset style="width:100%;">
-                <div class="pure-control-group">
-                    <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
-                        <h2 class="content-head">Die nächsten Flohmarkttermine</h2>
-                        <span style="white-space:nowrap;">
-                            <select id="monthSelect">
-                                {% for item in monthRange %}
-                                    {% set selectedM = '<option>' %}
-                                    {% if item == selectedMonth %}
-                                        {% set selectedM = '<option selected>' %}
-                                    {% endif %}
-                                {{ selectedM|raw }}{{item}}</option>
-                                {% endfor %}
-                            </select>
-                            <select id="zipRangeSelect">
-                                <option>PLZ-Bereich</option>
-                                {% for item in zipAreaRange %}
-                                    {% set selectedZ = '<option>' %}
-                                    {% if item == selectedZipAreaRange %}
-                                        {% set selectedZ = '<option selected>' %}
-                                    {% endif %}
-                                {{ selectedZ|raw }}{{item}}</option>
-                                {% endfor %}
-                            </select>
-                        </span>
-                    </div>
-                    <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-2-5 extra-mt" style="text-align: center;">
-                        <span class="post-category-design">Mach mit und
-                            <a href="/public/login/" title="Anmelden und einen Termin veröffentlichen">veröffentliche Deinen Kinderflohmarkt!</a></span>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-        <div class="pure-g">
-            {% set upcomingMonth = 'null' %}
-            {% set upcomingMonthDisplayed = 'null' %}
-
-            {% for item in fleamarkets %}
-
-                {% set upcomingMonth = item.dates|first.start|date('m/Y') %}
-                {% if upcomingMonth != upcomingMonthDisplayed %}
-                    {% set upcomingMonthDisplayed = upcomingMonth %}
-                    <h3 class="pure-u-1 monthHeadline"><a name="{{upcomingMonth}}">{{upcomingMonth}}</a></h3>
-                {% endif %}
-
-                <div class="l-box pure-u-1 pure-u-md-1-2 pure-u-lg-1-3 marketSummaryBox zipRange{{item.zipCode[:1]}}">
-                    <a href="{{fleamarketsDetailsRoutes[item.id]}}/datum/{{item.dates|first.start|date('d.m.Y')}}" title="Alle Details zu {{item.name|e('html_attr')}}" class="block">
-                        <h3 class="content-subhead content-subhead-listitem">
-                            {% set iconFlag = 'fa-flag-checkered' %}
-                            {% if item.dates|first.start|date("Ymd") == "now"|date("Ymd") %} {% set iconFlag = 'fas fa-bullseye' %} {% endif %}
-                            <i class="fa {{iconFlag}}"></i>
-                            {{item.name|length > 33 ? item.name[:33] ~ '...' : item.name}}
-                        </h3>
-                        <p>
-                            <time datetime="{{item.dates|first.start|date('c')}}">{{item.dates|first.start|date("d.m.Y")}} von {{item.dates|first.start|date("H:i")}} - {{item.dates|first.end|date("H:i")}} Uhr</time> in <span class="post-category post-category-design">{{item.city}}</span>
-                        </p>
-                        <p>
-                            {{item.description|length > 253 ? item.description[:253] ~ '...' : item.description}}
-                        </p>
-                        <p>
-                            {% if item.location %}{{item.location}}<br>{% endif %}
-                            {% if item.street %}{{item.street}} {{item.streetNo}}<br>{% endif %}
-                            {% if item.zipCode %}{{item.zipCode}} {{item.city}}<br>{% endif %}
-                        </p>
-                    </a>
-                    <i class="far fa-calendar-plus"></i> <a href="/public/ical/termin/{{item.id}}/datum/{{item.dates|first.start|date('d.m.Y')}}">Termin als Kalendereintrag (iCal) speichern</a>
-                </div>
-            {% endfor %}
+    <div class="content-wrapper">
+        <div class="content">
+        <p>Schön war's. Leider fehlt mir die Zeit und Muße, hier weiter zu machen.</p>
+        <p>Alle Daten sind DSGVO-konform gelöscht.</p>
+        <p>Kontakt: info@onkel-rudi.de</p>
         </div>
     </div>
-
-    <nav class="footer l-box is-center pure-menu pure-menu-horizontal">
-        <ul class="pure-menu-list">
-            <li class="pure-menu-item"><a href="/public/impressum/" class="pure-menu-link">About/Impressum</a></li>
-            <li class="pure-menu-item"><a href="/public/datenschutz/" class="pure-menu-link">Datenschutz</a></li>
-        </ul>
-    </nav>
-
-</div>
-{% endautoescape %}
-
-<link rel="stylesheet" href="/public/bower_components/pure/pure-min.css">
-<!--[if lte IE 8]>
-<link rel="stylesheet" href="/public/bower_components/pure/grids-responsive-old-ie-min.css">
-<![endif]-->
-<!--[if gt IE 8]><!-->
-<link rel="stylesheet" href="/public/bower_components/pure/grids-responsive-min.css">
-<!--<![endif]-->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
-<!--[if lte IE 8]>
-<link rel="stylesheet" href="/public/css/onkelrudi-old-ie.css">
-<![endif]-->
-<!--[if gt IE 8]><!-->
-<link rel="stylesheet" href="/public/css/onkelrudi.css">
-<!--<![endif]-->
-
-{% if isTest == false %}
-<link rel="stylesheet" type="text/css" href="/public/bower_components/cookieconsent2/build/cookieconsent.min.css" />
-<script type="text/javascript" src="/public/bower_components/cookieconsent2/build/cookieconsent.min.js"></script>
-<script>
-    window.addEventListener("load", function(){
-        window.cookieconsent.initialise({
-            "palette": {
-                "popup": {
-                    "background": "#222222",
-                    "text": "#ffffff"
-                },
-                "button": {
-                    "background": "#62C2CC",
-                    "text": "#222222"
-                }
-            },
-            "content": {
-                "message": "<span>Onkel Rudi verwendet Cookies.</span> Durch die weitere Nutzung der Webseite stimmst Du der Verwendung von Cookies zu.",
-                "dismiss": "Hinweis schließen",
-                "link": "Infos zum Datenschutz",
-                "href": "/public/datenschutz/"
-            }
-        })});
-</script>
-{% endif %}
-
-<script type="text/javascript">
-    var _paq = _paq || [];
-    _paq.push(["setDomains", ["*.www.onkel-rudi.de"]]);
-    _paq.push(['trackPageView']);
-    _paq.push(['enableLinkTracking']);
-    (function() {
-        var u="//s.onkel-rudi.de/";
-        _paq.push(['setTrackerUrl', u+'piwik.php']);
-        _paq.push(['setSiteId', 1]);
-        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-    })();
-</script>
-<noscript><p><img src="//s.onkel-rudi.de/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
-
+    {% if isTest == false %}
+    <link rel="stylesheet" type="text/css" href="/public/bower_components/cookieconsent2/build/cookieconsent.min.css" />
+    <script type="text/javascript" src="/public/bower_components/cookieconsent2/build/cookieconsent.min.js"></script>
+    <script>
+        window.addEventListener("load", function(){
+            window.cookieconsent.initialise({
+                    "palette": {
+                        "popup": {
+                                "background": "#222222",
+                                    "text": "#ffffff"
+                            },
+                        "button": {
+                                "background": "#62C2CC",
+                                    "text": "#222222"
+                            }
+                    },
+                "content": {
+                        "message": "<span>Onkel Rudi verwendet Cookies.</span> Durch die weitere Nutzung der Webseite stimmst Du der Verwendung von Cookies zu.",
+                            "dismiss": "Hinweis schließen"
+                    }
+            })});
+        </script>
+    -{% endif %}
 </body>
 </html>
